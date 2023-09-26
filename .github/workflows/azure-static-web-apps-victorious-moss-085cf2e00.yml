@@ -35,6 +35,8 @@ jobs:
 
       # Jekyll サイトをビルドします。
       - name: Build Jekyll site
+        env:
+          JEKYLL_ENV: production
         run: |
           cd jekyll-serif-theme/src
           bundle exec jekyll build
