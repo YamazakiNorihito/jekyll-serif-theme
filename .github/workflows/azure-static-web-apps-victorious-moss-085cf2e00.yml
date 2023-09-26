@@ -19,16 +19,19 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.7
+          ruby-version: 3.2.2
 
       # Jekyllと依存関係をインストールします。
       - name: Install Jekyll and dependencies
         env:
           JEKYLL_VERSION: 3.8.0
+          RUBYGEMS_VERSION: 2.7.6
+          BUNDLER_VERSION: 1.16.1
         run: |
-          gem install bundler -v 2.3.26
-          gem install rouge -v 3.30.0
+          gem install bundler
+          gem install rouge
           gem install jekyll
+          cd jekyll-serif-theme/src
           bundle install
 
       # Jekyll サイトをビルドします。
