@@ -31,7 +31,7 @@ jobs:
           gem install bundler
           gem install rouge
           gem install jekyll
-          cd jekyll-serif-theme/src
+          cd src
           bundle install
 
       # Jekyll サイトをビルドします。
@@ -39,7 +39,7 @@ jobs:
         env:
           JEKYLL_ENV: production
         run: |
-          cd jekyll-serif-theme/src
+          cd src
           bundle exec jekyll build
 
       # Azure にビルドされたサイトをデプロイします。
@@ -50,6 +50,6 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_VICTORIOUS_MOSS_085CF2E00 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "jekyll-serif-theme/src/_site"
+          app_location: "src/_site"
           api_location: ""
           output_location: "/"
