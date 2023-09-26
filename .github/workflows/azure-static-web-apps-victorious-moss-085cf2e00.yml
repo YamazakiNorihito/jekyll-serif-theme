@@ -3,15 +3,11 @@ name: Build Jekyll and Deploy to Azure Static Web Apps CI/CD
 on:
   push:
     branches:
-      - master
-  pull_request:
-    types: [opened, synchronize, reopened]
-    branches:
-      - master
+      - master # ここで、pushイベントはmasterブランチに制限されます。
 
 jobs:
   build_and_deploy_job:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    if: github.event_name == 'push' # ここで、イベント名が'push'であるかどうかを確認します。
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
@@ -23,14 +19,16 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.5.1 # 3.8.0は存在しないバージョンです, 3.0など正しいバージョンを指定してください。
+          ruby-version: 2.7
 
       # Jekyllと依存関係をインストールします。
       - name: Install Jekyll and dependencies
         env:
           JEKYLL_VERSION: 3.8.0
         run: |
-          gem install bundler jekyll
+          gem install bundler -v 2.3.26
+          gem install rouge -v 3.30.0
+          gem install jekyll
           bundle install
 
       # Jekyll サイトをビルドします。
@@ -49,6 +47,6 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_VICTORIOUS_MOSS_085CF2E00 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "jekyll-serif-theme/src/_site" # ビルドされたJekyll サイトの位置を修正
+          app_location: "jekyll-serif-theme/src/_site"
           api_location: ""
           output_location: "/"
