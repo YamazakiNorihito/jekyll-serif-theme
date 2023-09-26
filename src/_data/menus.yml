@@ -1,0 +1,15 @@
+main:
+  - name: "技術"
+    url: "/tech/"
+    weight: 2
+  - name: "日記"
+    url: "/learning/"
+    weight: 3
+  - name: "About"
+    url: "/about/"
+    weight: 4
+
+footer:
+  - name: "Home"
+    url: "/"
+    weight: 1
