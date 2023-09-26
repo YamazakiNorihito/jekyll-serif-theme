@@ -31,6 +31,7 @@ jobs:
           gem install bundler
           gem install rouge
           gem install jekyll
+          cd jekyll-serif-theme/src
           bundle install
 
       # Jekyll サイトをビルドします。
