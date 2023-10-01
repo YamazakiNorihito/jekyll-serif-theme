@@ -1,13 +1,13 @@
 ---
-title: Jekyll Serif Theme
+title: だらけた日記
 layout: home
-description: Jekyll Serif contains content types for a typical business website. The theme is fully responsive, blazing fast and artfully illustrated.
+description: だらけた日記は、テクノロジーや日常生活に関する情報や学びを共有するためのユニークなプラットフォームです。最新のテクノロジートレンドから日常の知恵まで、多様なトピックを探求しています。
 intro_image: "images/illustrations/pointing.svg"
 intro_image_absolute: true
 intro_image_hide_on_mobile: true
 show_call_box: true
 ---
 
-# Serif - A Jekyll Business Theme.
+# 技術と日常 - あなたの知識を広げるための場所。
 
-Serif contains content types for a typical business website. The theme is fully responsive, blazing fast and artfully illustrated.
+だらけた日記は、テクノロジーや日常生活に関する学びを情報を共有するためのサイトです。
