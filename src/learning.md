@@ -1,12 +1,12 @@
 ---
-title: Learning  
+title: だらだら日記  
 layout: learnings
-description: Learning  
+description: だらだら、結論のないことを書いていく 
 permalink: "/learning/"
 intro_image_absolute: true
 intro_image_hide_on_mobile: false
 ---
 
-# Meet The Learning
+# 日記
 
-Our learning of qualified accountants and financial consultants can help your business at any stage of its growth.  
+思ったこと、感じたこと、考えていること、もやもやしていること、なんでもいいから、だらだらと書いていく。
