@@ -7,15 +7,12 @@ linkedinurl: ""
 weight: 7
 ---
 
-##### 学習教材
-# 学習教材
+# `3.2.2. Processing the authorization response`における`redirect_uri`の理解
 
-- **日本語**: [OAuth徹底入門](https://www.amazon.co.jp/OAuth%E5%BE%B9%E5%BA%95%E5%85%A5%E9%96%80-%E3%82%BB%E3%82%AD%E3%83%A5%E3%82%A2%E3%81%AA%E8%AA%8D%E5%8F%AF%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E9%81%A9%E7%94%A8%E3%81%99%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E5%8E%9F%E5%89%87%E3%81%A8%E5%AE%9F%E8%B7%B5-Justin-Richer/dp/4798159298)
-- **英語**: [OAuth 2 in Action](https://www.manning.com/books/oauth-2-in-action)
+初めてこのセクションを読んだ際、`redirect_uri`に関するコメントの意味が理解できませんでした。ので、ちょっと調べてみました。
 
-##### コードのコメント
-
-`3.2.2. Processing the authorization response`のセクションに関するコメント：
+本文中のコメント：
+> As an aside, why do we include the redirect_uri in this call? We’re not redirecting anything, after all. According to the OAuth specification, if the redirect URI is specified in the authorization request, that same URI must also be included in the token request. This practice prevents an attacker from using a compromised redirect URI with an otherwise well-meaning client by injecting an authorization code from one session into another. We’ll look at the server-side implementation of this check in chapter 9.
 
 ```javascript
 var form_data = qs.stringify({
@@ -25,20 +22,19 @@ var form_data = qs.stringify({
 });
 ```
 
-> As an aside, why do we include the redirect_uri in this call? We’re not redirecting anything, after all. According to the OAuth specification, if the redirect URI is specified in the authorization request, that same URI must also be included in the token request. This practice prevents an attacker from using a compromised redirect URI with an otherwise well-meaning client by injecting an authorization code from one session into another. We’ll look at the server-side implementation of this check in chapter 9.
-> 
-> We also need to send a few headers to tell the server that this is an HTTP form-encoded request, as well as authenticate our client using HTTP Basic. The Authorization header in HTTP Basic is a base64 encoded string made by concatenating the username and password together, separated by a single colon (:) character. OAuth 2.0 tells us to use the client ID as the username and the client secret as the password, but with each of these being URL encoded first.[1] We’ve given you a simple utility function to handle the details of the HTTP Basic encoding.
+## 調査内容
 
-##### 調査内容
+### redirect_uriの役割
 
-###### redirect_uriの役割
+リダイレクトURIをこの呼び出しに含める理由は、OAuthの仕様に基づくものです。認可リクエストでリダイレクトURIが指定されている場合、トークンリクエストにも同じURIを指定する必要があります。この手段は、攻撃者が意図的なクライアントと共に危険なリダイレクトURIを使用し、あるセッションから別のセッションへ認可コードを注入するのを防ぐためのものです。
 
-リダイレクトURIをこの呼び出しに含める理由は、OAuthの仕様に基づくものです。認可リクエストでリダイレクトURIが指定されている場合、トークンリクエストにもその同じURIを含める必要があります。この方法は、攻撃者が意図的なクライアントとともに危険なリダイレクトURIを使用して、あるセッションから別のセッションに認可コードを注入するのを防ぐためのものです。
+### redirect_uriの本質
 
-###### HTTPヘッダーの送信
+OAuth 2.0の認証フローにおいて、`redirect_uri`は認証完了後のユーザーのリダイレクト先を指定するURLです。しかし、なぜトークンリクエストで`redirect_uri`を再度指定するのかというと、それはセキュリティ上の理由からです。この手順により、攻撃者が不正なコードやトークンを注入することを防ぎます。
 
-サーバーにHTTPフォームエンコードリクエストであることを伝えるためのヘッダーを送信する必要があります。さらに、HTTP Basicを使用してクライアントを認証する必要があります。OAuth 2.0は、クライアントIDをユーザー名として、クライアントシークレットをパスワードとして使用するように指示していますが、これらのそれぞれを最初にURLエンコードする必要があります。
 
-###### redirect_uriの役割とは？
 
-OAuth 2.0の認証フローにおいて、`redirect_uri`は「認証が完了した後にユーザーをどこに戻すか」を指定するためのURLです。しかし、トークンリクエストの際にも`redirect_uri`を再度指定する理由は、セキュリティ上のものです。これにより、攻撃者が不正なコードやトークンを注入するのを防ぐことができます。
+## 学習教材
+
+- **日本語**: [OAuth徹底入門](https://www.amazon.co.jp/OAuth%E5%BE%B9%E5%BA%95%E5%85%A5%E9%96%80-%E3%82%BB%E3%82%AD%E3%83%A5%E3%82%A2%E3%81%AA%E8%AA%8D%E5%8F%AF%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E9%81%A9%E7%94%A8%E3%81%99%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E5%8E%9F%E5%89%87%E3%81%A8%E5%AE%9F%E8%B7%B5-Justin-Richer/dp/4798159298)
+- **英語**: [OAuth 2 in Action](https://www.manning.com/books/oauth-2-in-action)
