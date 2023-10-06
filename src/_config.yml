@@ -35,6 +35,10 @@ defaults:
 sass:
   style: compressed
 
+timezone: Asia/Tokyo
+
+future: true
+
 plugins:
   - jekyll-environment-variables
 
