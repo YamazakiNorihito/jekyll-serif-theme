@@ -24,7 +24,7 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - ./data:/opt/jboss/keycloak/standalone/data
+      - ./data:/opt/keycloak/data
 
 volumes:
   data:
