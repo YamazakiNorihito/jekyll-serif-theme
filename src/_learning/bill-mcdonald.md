@@ -1,6 +1,6 @@
 ---
 title: "初心表明"
-date: 2023-10-04T07:32:00+09:00
+date: 2023-10-04T07:32:00
 #image: "images/team/nonsap-visuals-kMJp7620W6U-unsplash.jpg"
 jobtitle: "Graphic Designer"
 linkedinurl: ""

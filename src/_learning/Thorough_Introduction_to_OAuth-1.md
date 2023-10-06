@@ -1,6 +1,6 @@
 ---
 title: "OAuth徹底入門(1)"
-date: 2023-10-05T08:19:00+09:00
+date: 2023-10-05T08:19:00
 #image: "images/team/nonsap-visuals-kMJp7620W6U-unsplash.jpg"
 jobtitle: "Client Callbackのredirect_uriの役割"
 linkedinurl: ""
