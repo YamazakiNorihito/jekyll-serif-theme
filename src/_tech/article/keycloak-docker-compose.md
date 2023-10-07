@@ -5,6 +5,7 @@ weight: 4
 categories:
   - tech
   - docker
+  - oauth
 ---
 
 #### 1. docker-compose.yaml
