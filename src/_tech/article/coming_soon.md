@@ -8,7 +8,6 @@ categories:
   - github
   - golange
   - nodesj
-  - openai
 ---
 
 coming soon
