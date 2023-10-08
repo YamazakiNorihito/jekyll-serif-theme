@@ -1,6 +1,6 @@
 ---
 title: "効率的なNode.js開発: concurrentlyでの同時実行とnodemonによる自動再起動"
-date: 2023-10-06T20:23:00
+date: 2023-10-09T06:27:00
 #image: "images/team/nonsap-visuals-kMJp7620W6U-unsplash.jpg"
 jobtitle: "Ｎodejsで複数のアプリケーションを同時に実行する方法"
 linkedinurl: ""
