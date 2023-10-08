@@ -1,5 +1,5 @@
 ---
-title: "OAuth認証フローのシーケンス図"
+title: "OAuth 2.0承認フレームワークのシーケンス図"
 date: 2023-10-08T10:00:00
 weight: 4
 mermaid: true
