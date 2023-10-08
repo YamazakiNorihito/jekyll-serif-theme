@@ -3,7 +3,7 @@ title: "OAuth徹底入門(3)"
 date: 2023-10-09T7:00:00
 #image: "images/team/nonsap-visuals-kMJp7620W6U-unsplash.jpg"
 jobtitle: "OAuthのコンポーネントの役割"
-linkedinurl: ""
+linkedinurl: "/tech/article/OAuth-%20Sequence_Diagram/"
 weight: 7
 ---
 
