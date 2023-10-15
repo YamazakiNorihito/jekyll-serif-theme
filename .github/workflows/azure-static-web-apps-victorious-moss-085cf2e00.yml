@@ -40,7 +40,7 @@ jobs:
           JEKYLL_ENV: production
         run: |
           cd src
-          bundle exec jekyll build
+          bundle exec jekyll build --config _config.yml,_config.prod.yml
 
       # Azure にビルドされたサイトをデプロイします。
       - name: Build And Deploy
