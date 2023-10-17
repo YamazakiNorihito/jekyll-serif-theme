@@ -6,6 +6,6 @@ services:
     command: >
       bash -c "bundle exec jekyll serve --host 0.0.0.0 --force_polling --trace"
     ports:
-      - "4000:4000"
+      - "4030:4000"
     volumes:
       - "./src:/srv/jekyll"

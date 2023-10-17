@@ -1,6 +1,6 @@
 ---
 layout: category
-title: "Go"
-category: golange
+title: "Android"
+category: android
 is_category_index: true
 ---
