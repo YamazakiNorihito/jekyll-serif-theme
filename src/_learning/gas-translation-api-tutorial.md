@@ -9,6 +9,7 @@ weight: 7
 
 参考サイトはGETメソッドで作っていましたが、
 GETだと送信できるTEXTの量に制限があるのでPOSTにしたZ！
+公開方法は、参考サイトを見てください。
 
 ```javascript
 function doPost(e) {
