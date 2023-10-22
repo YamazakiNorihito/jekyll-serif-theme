@@ -33,7 +33,7 @@ categories:
 
 ```json
 {
-"name": "著者の名前"
+   "name":"著者の名前"
 }
 ```
 - **バリデーション**: 
@@ -64,8 +64,8 @@ categories:
 
 ```json
 {
-"title": "書籍のタイトル",
-"authorId": 著者のID
+   "title":"書籍のタイトル",
+   "authorId":"著者のID"
 }
 ```
 
