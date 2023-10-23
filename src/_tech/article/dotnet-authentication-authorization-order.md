@@ -5,7 +5,7 @@ weight: 4
 categories:
   - tech
   - oauth
-  - csharp
+  - dotnet
 ---
 
 # ASP.NET Core: `UseAuthentication` と `UseAuthorization` の順序の重要性
