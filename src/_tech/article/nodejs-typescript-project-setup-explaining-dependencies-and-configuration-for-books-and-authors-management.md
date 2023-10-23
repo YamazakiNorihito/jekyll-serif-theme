@@ -1,5 +1,5 @@
 ---
-title: "Node.jsとTypeScriptのプロジェクト構築: 依存関係と設定の解説"
+title: "Node.jsとTypeScriptのプロジェクト構築: 本と作者の管理プロジェクトの依存関係と設定の解説"
 date: 2023-10-23T06:45:00
 weight: 4
 categories:

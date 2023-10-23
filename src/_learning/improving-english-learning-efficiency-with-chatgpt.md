@@ -1,5 +1,5 @@
 ---
-title: "英語の学び方"
+title: "英語の学習効率を向上させるためのChatGPTの活用方法"
 date: 2023-10-11T05:17:00
 #image: "images/team/nonsap-visuals-kMJp7620W6U-unsplash.jpg"
 jobtitle: "英語を読めるまでになるには"
