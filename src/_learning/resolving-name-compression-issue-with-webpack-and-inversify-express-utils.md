@@ -144,6 +144,7 @@ Metadata: [
 ES5までのJavaScript環境では、クラスはコンストラクタ関数として扱われ、ログに関数として出力されるのが一般的でした。
 しかし、ES6からは新しいクラス構文が導入され、ログの出力形式も変わりました。
 この違いを理解することで、上記の問題がどのように発生するのかの背景をより深く理解できます。
+（[TypeScriptでのクラス定義がES6とES5でどのようにコンパイルされるか](/learning/typescript-class-compilation-es6-vs-es5)少し詳しく書きました。）
 
 ```javascript
 // targetがes6以降の場合
