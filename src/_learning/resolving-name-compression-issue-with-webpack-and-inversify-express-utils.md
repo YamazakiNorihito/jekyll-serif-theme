@@ -148,11 +148,11 @@ ES5までのJavaScript環境では、クラスはコンストラクタ関数と�
 
 ```javascript
 // targetがes6以降の場合
-function MyClass() {}
-console.log(MyClass); // 出力: [Function: MyClass]
+class MyNewClass {}
+console.log(MyNewClass); // 出力: [class MyNewClass]
 ```
 ```javascript
 // targetがes5以前の場合
-class MyNewClass {}
-console.log(MyNewClass); // 出力: [class MyNewClass]
+function MyClass() {}
+console.log(MyClass); // 出力: [Function: MyClass]
 ```
