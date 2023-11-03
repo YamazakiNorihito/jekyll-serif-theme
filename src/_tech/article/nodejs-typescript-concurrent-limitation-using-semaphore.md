@@ -145,5 +145,62 @@ public async deleteWorkRecords(req: Request, res: Response): Promise<void> {
 ```
 
 
+### 環境情報
 
+```json
+// package.json
+{
+  "name": "workday",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node ./src/app.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^4.17.20",
+    "@types/node": "^20.8.9",
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "method-override": "^3.0.0",
+    "polly-js": "^1.8.3",
+    "redis": "^4.6.10",
+    "reflect-metadata": "^0.1.13",
+    "sequelize": "^6.33.0",
+    "sqlite3": "^5.1.6",
+    "ts-node": "^10.9.1",
+    "tsyringe": "^4.8.0",
+    "typescript": "^5.2.2"
+  },
+  "devDependencies": {
+    "@types/ejs": "^3.1.4",
+    "@types/method-override": "^0.0.34"
+  }
+}
 
+```
+
+```json
+// tsconfig.json
+{
+    "compilerOptions": {
+      "target": "ES2022",
+      "module": "commonjs",
+      "outDir": "./dist",
+      "rootDir": "./src",
+      "strict": true,
+      "esModuleInterop": true,
+      "noImplicitAny" : true,
+      "sourceMap": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+    }
+}
+```
