@@ -1,6 +1,6 @@
 ---
 title: "IdentitySeverのテンプレートisuiで吐き出された内容をみていく Part1"
-date: 2023-11-06T07:00:00
+date: 2023-11-07T07:00:00
 weight: 4
 categories:
   - tech
