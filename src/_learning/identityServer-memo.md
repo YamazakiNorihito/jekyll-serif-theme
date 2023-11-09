@@ -13,5 +13,5 @@ IdentityServerのめもをかきとめるといっても
 
 - [カスタムストレージと連携する方法](https://docs.duendesoftware.com/identityserver/v6/data/configuration/)
 - [DI Extension Methods](https://docs.duendesoftware.com/identityserver/v6/reference/di/#configuration-stores)
-- [identityserverのソース](https://github.com/DuendeSoftware/IdentityServer/tree/main)
+- [identityserverのソース](https://github.com/D..uendeSoftware/IdentityServer/tree/main)
 
