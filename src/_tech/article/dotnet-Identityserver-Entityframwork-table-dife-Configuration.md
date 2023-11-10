@@ -67,6 +67,9 @@ erDiagram
     ApiScopes ||--o{ ApiScopeProperties : cascade
 ```
 
+
+Clients数が多いので分割
+*Clients分割1*
 ```mermaid
 erDiagram
     Clients {
@@ -92,6 +95,20 @@ erDiagram
         int Id PK
         int ClientId FK
     }
+
+    Clients ||--o{ ClientClaims : cascade
+    Clients ||--o{ ClientCorsOrigins : cascade
+    Clients ||--o{ ClientGrantTypes : cascade
+    Clients ||--o{ ClientIdPRestrictions : cascade
+    Clients ||--o{ ClientPostLogoutRedirectUris : cascade
+```
+
+*Clients分割2*
+```mermaid
+erDiagram
+    Clients {
+        int Id PK
+    }
     ClientProperties {
         int Id PK
         int ClientId FK
@@ -109,11 +126,6 @@ erDiagram
         int ClientId FK
     }
 
-    Clients ||--o{ ClientClaims : cascade
-    Clients ||--o{ ClientCorsOrigins : cascade
-    Clients ||--o{ ClientGrantTypes : cascade
-    Clients ||--o{ ClientIdPRestrictions : cascade
-    Clients ||--o{ ClientPostLogoutRedirectUris : cascade
     Clients ||--o{ ClientProperties : cascade
     Clients ||--o{ ClientRedirectUris : cascade
     Clients ||--o{ ClientScopes : cascade
