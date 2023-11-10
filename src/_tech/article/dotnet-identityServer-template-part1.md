@@ -6,6 +6,7 @@ categories:
   - tech
   - oauth
   - csharp
+  - dotnet
 ---
 
 /src/IdentityServer/Pages/Account/Create/Index.cshtml.cs を見ていく
