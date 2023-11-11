@@ -24,12 +24,6 @@ categories:
 チュートリアルでDIしている数が、４つしかなかったので、たぶん`Duende.IdentityServer.EntityFramework`を使わなくても
 永続ストレージに保存しながらAuthServerが実装できるんじゃないかとおもった。
 
-```csharp
-builder.Services.AddIdentityServer()
-    .AddInMemoryIdentityResources(Config.IdentityResources)
-    .AddInMemoryApiScopes(Config.ApiScopes)
-    .AddInMemoryClients(Config.Clients)
-```
 
 ## 実装
 
