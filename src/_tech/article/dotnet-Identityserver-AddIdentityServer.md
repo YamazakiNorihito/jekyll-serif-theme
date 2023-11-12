@@ -39,3 +39,7 @@ public static IIdentityServerBuilder AddIdentityServer(this IServiceCollection s
     return builder;
 }
 ```
+
+
+### [AddRequiredPlatformServices](https://github.dev/DuendeSoftware/IdentityServer/blob/4ac7e461091b549ab0a79eb037c68f59a94e74a9/src/IdentityServer/Configuration/DependencyInjection/BuilderExtensions/Core.cs#L50-L51)
+
