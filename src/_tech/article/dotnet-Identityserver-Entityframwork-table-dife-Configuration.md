@@ -174,139 +174,6 @@ erDiagram
 | IX_ApiResources_Name                                   | [Name]   | Apiリソースの名前に関する一意のインデックス |
 
 
-## ApiScopes テーブル
-
-| 列名                   | データ型        | 必須 | 説明                           |
-|------------------------|-----------------|------|--------------------------------|
-| Id                     | int             | Yes  | ユニークな識別子               |
-| Enabled                | bit             | Yes  | 有効/無効のフラグ              |
-| Name                   | nvarchar(200)   | Yes  | 名前                           |
-| DisplayName            | nvarchar(200)   | No   | 表示名                         |
-| Description            | nvarchar(1000)  | No   | 説明                           |
-| Required               | bit             | Yes  | 必須かどうかのフラグ            |
-| Emphasize              | bit             | Yes  | 強調表示するかどうかのフラグ   |
-| ShowInDiscoveryDocument| bit             | Yes  | 発見文書に表示するかどうかのフラグ |
-| Created                | datetime2       | Yes  | 作成日時                       |
-| Updated                | datetime2       | No   | 更新日時                       |
-| LastAccessed           | datetime2       | No   | 最終アクセス日時               |
-| NonEditable            | bit             | Yes  | 編集不可のフラグ                |
-
-主キー制約: PK_ApiScopes (Id)
-
-| インデックス名                                          | 列       | 説明                                  |
-|-------------------------------------------------------|----------|---------------------------------------|
-| IX_ApiScopes_Name                                     | [Name]   | Apiスコープの名前に関する一意のインデックス |
-
-
-## Clients テーブル
-
-| 列名                                  | データ型                | 必須 | 説明                           |
-|---------------------------------------|-------------------------|------|--------------------------------|
-| Id                                    | int                     | Yes  | ユニークな識別子               |
-| Enabled                               | bit                     | Yes  | 有効/無効のフラグ              |
-| ClientId                              | nvarchar(200)           | Yes  | クライアントID                 |
-| ProtocolType                          | nvarchar(200)           | Yes  | プロトコルの種類               |
-| RequireClientSecret                   | bit                     | Yes  | クライアントシークレットが必要かどうかのフラグ |
-| ClientName                            | nvarchar(200)           | No   | クライアントの名前             |
-| Description                           | nvarchar(1000)          | No   | 説明                           |
-| ClientUri                             | nvarchar(2000)          | No   | クライアントのURI              |
-| LogoUri                               | nvarchar(2000)          | No   | ロゴのURI                      |
-| RequireConsent                        | bit                     | Yes  | 同意が必要かどうかのフラグ     |
-| AllowRememberConsent                  | bit                     | Yes  | 同意の記憶を許可するかどうかのフラグ |
-| AlwaysIncludeUserClaimsInIdToken      | bit                     | Yes  | 常にユーザークレームをIdトークンに含めるかどうかのフラグ |
-| RequirePkce                           | bit                     | Yes  | PKCEが必要かどうかのフラグ     |
-| AllowPlainTextPkce                    | bit                     | Yes  | 平文のPKCEを許可するかどうかのフラグ |
-| RequireRequestObject                  | bit                     | Yes  | リクエストオブジェクトが必要かどうかのフラグ |
-| AllowAccessTokensViaBrowser           | bit                     | Yes  | ブラウザ経由でアクセストークンを許可するかどうかのフラグ |
-| RequireDPoP                           | bit                     | Yes  | DPoPが必要かどうかのフラグ     |
-| DPoPValidationMode                    | int                     | Yes  | DPoPの検証モード               |
-| DPoPClockSkew                         | time                    | Yes  | DPoPのクロックスキュー           |
-| FrontChannelLogoutUri                 | nvarchar(2000)          | No   | フロントチャネルのログアウトURI |
-| FrontChannelLogoutSessionRequired     | bit                     | Yes  | フロントチャネルのログアウトセッションが必要かどうかのフラグ |
-| BackChannelLogoutUri                  | nvarchar(2000)          | No   | バックチャネルのログアウトURI  |
-| BackChannelLogoutSessionRequired      | bit                     | Yes  | バックチャネルのログアウトセッションが必要かどうかのフラグ |
-| AllowOfflineAccess                    | bit                     | Yes  | オフラインアクセスを許可するかどうかのフラグ |
-| IdentityTokenLifetime                 | int                     | Yes  | Identity Tokenの有効期限     |
-| AllowedIdentityTokenSigningAlgorithms | nvarchar(100)           | No   | 許可されたIdentity Token署名アルゴリズム |
-| AccessTokenLifetime                   | int                     | Yes  | アクセストークンの有効期限     |
-| AuthorizationCodeLifetime             | int                     | Yes  | 認可コードの有効期限           |
-| ConsentLifetime                       | int                     | No   | 同意の有効期限                 |
-| AbsoluteRefreshTokenLifetime          | int                     | Yes  | 絶対的なリフレッシュトークンの有効期限 |
-| SlidingRefreshTokenLifetime           | int                     | Yes  | スライディングリフレッシュトークンの有効期限 |
-| RefreshTokenUsage                     | int                     | Yes  | リフレッシュトークンの使用方法 |
-| UpdateAccessTokenClaimsOnRefresh      | bit                     | Yes  | リフレッシュ時にアクセストークンのクレームを更新するかどうかのフラグ |
-| RefreshTokenExpiration                | int                     | Yes  | リフレッシュトークンの有効期限 |
-| AccessTokenType                       | int                     | Yes  | アクセストークンのタイプ       |
-| EnableLocalLogin                      | bit                     | Yes  | ローカルログインを許可するかどうかのフラグ |
-| IncludeJwtId                          | bit                     | Yes  | JWT IDを含めるかどうかのフラグ   |
-| AlwaysSendClientClaims                | bit                     | Yes  | 常にクライアントクレームを送信するかどうかのフラグ |
-| ClientClaimsPrefix                    | nvarchar(200)           | No   | クライアントクレームの接頭辞   |
-| PairWiseSubjectSalt                   | nvarchar(200)           | No   | ペアワイズサブジェクトソルト   |
-| InitiateLoginUri                      | nvarchar(2000)          | No   | ログインの開始URI               |
-| UserSsoLifetime                       | int                     | No   | ユーザーSSOの有効期限           |
-| UserCodeType                          | nvarchar(100)           | No   | ユーザーコードのタイプ         |
-| DeviceCodeLifetime                    | int                     | Yes  | デバイスコードの有効期限       |
-| CibaLifetime                          | int                     | No   | CIBAの有効期限                 |
-| PollingInterval                       | int                     | No   | ポーリング間隔                 |
-| CoordinateLifetimeWithUserSession     | bit                     | No   | ユーザーセッションとの有効期間を調整するかどうかのフラグ |
-| Created                               | datetime2               | Yes  | 作成日時                       |
-| Updated                               | datetime2               | No   | 更新日時                       |
-| LastAccessed                          | datetime2               | No   | 最終アクセス日時               |
-| NonEditable                           | bit                     | Yes  | 編集不可のフラグ                |
-| PushedAuthorizationLifetime           | int                     | No   | Pushed Authorizationの有効期限 |
-| RequirePushedAuthorization            | bit                     | Yes  | Pushed Authorizationが必要かどうかのフラグ |
-
-主キー制約: PK_Clients (Id)
-
-| インデックス名                                          | 列        | 説明                                  |
-|-------------------------------------------------------|-----------|---------------------------------------|
-| IX_Clients_ClientId                                   | [ClientId]| クライアントのIDに関する一意のインデックス |
-
-## IdentityProviders テーブル
-
-| 列名          | データ型        | 必須 | 説明                           |
-|---------------|-----------------|------|--------------------------------|
-| Id            | int             | Yes  | ユニークな識別子               |
-| Scheme        | nvarchar(200)   | Yes  | スキーム                       |
-| DisplayName   | nvarchar(200)   | No   | 表示名                         |
-| Enabled       | bit             | Yes  | 有効/無効のフラグ              |
-| Type          | nvarchar(20)    | Yes  | タイプ                         |
-| Properties    | nvarchar(max)   | No   | プロパティ                     |
-| Created       | datetime2       | Yes  | 作成日時                       |
-| Updated       | datetime2       | No   | 更新日時                       |
-| LastAccessed  | datetime2       | No   | 最終アクセス日時               |
-| NonEditable   | bit             | Yes  | 編集不可のフラグ                |
-
-主キー制約: PK_IdentityProviders (Id)
-
-| インデックス名                                          | 列       | 説明                                |
-|-------------------------------------------------------|----------|-------------------------------------|
-| IX_IdentityProviders_Scheme                           | [Scheme] | アイデンティティプロバイダのスキームに関する一意のインデックス |
-
-
-## IdentityResources テーブル
-
-| 列名                  | データ型        | 必須 | 説明                           |
-|-----------------------|-----------------|------|--------------------------------|
-| Id                    | int             | Yes  | ユニークな識別子               |
-| Enabled               | bit             | Yes  | 有効/無効のフラグ              |
-| Name                  | nvarchar(200)   | Yes  | 名前                           |
-| DisplayName           | nvarchar(200)   | No   | 表示名                         |
-| Description           | nvarchar(1000)  | No   | 説明                           |
-| Required              | bit             | Yes  | 必須かどうかのフラグ            |
-| Emphasize             | bit             | Yes  | 強調表示するかどうかのフラグ   |
-| ShowInDiscoveryDocument| bit             | Yes  | 発見文書に表示するかどうかのフラグ |
-| Created               | datetime2       | Yes  | 作成日時                       |
-| Updated               | datetime2       | No   | 更新日時                       |
-| NonEditable           | bit             | Yes  | 編集不可のフラグ                |
-
-主キー制約: PK_IdentityResources (Id)
-
-| インデックス名                                          | 列       | 説明                                  |
-|-------------------------------------------------------|----------|---------------------------------------|
-| IX_IdentityResources_Name                             | [Name]   | アイデンティティリソースの名前に関する一意のインデックス |
-
-
 ## ApiResourceClaims テーブル
 
 | 列名          | データ型        | 必須 | 説明                           |
@@ -375,6 +242,31 @@ erDiagram
 |-------------------------------------------------------|------------------|---------------------------------------|
 | IX_ApiResourceSecrets_ApiResourceId                    | [ApiResourceId] | Apiリソースのシークレットに関するインデックス |
 
+
+## ApiScopes テーブル
+
+| 列名                   | データ型        | 必須 | 説明                           |
+|------------------------|-----------------|------|--------------------------------|
+| Id                     | int             | Yes  | ユニークな識別子               |
+| Enabled                | bit             | Yes  | 有効/無効のフラグ              |
+| Name                   | nvarchar(200)   | Yes  | 名前                           |
+| DisplayName            | nvarchar(200)   | No   | 表示名                         |
+| Description            | nvarchar(1000)  | No   | 説明                           |
+| Required               | bit             | Yes  | 必須かどうかのフラグ            |
+| Emphasize              | bit             | Yes  | 強調表示するかどうかのフラグ   |
+| ShowInDiscoveryDocument| bit             | Yes  | 発見文書に表示するかどうかのフラグ |
+| Created                | datetime2       | Yes  | 作成日時                       |
+| Updated                | datetime2       | No   | 更新日時                       |
+| LastAccessed           | datetime2       | No   | 最終アクセス日時               |
+| NonEditable            | bit             | Yes  | 編集不可のフラグ                |
+
+主キー制約: PK_ApiScopes (Id)
+
+| インデックス名                                          | 列       | 説明                                  |
+|-------------------------------------------------------|----------|---------------------------------------|
+| IX_ApiScopes_Name                                     | [Name]   | Apiスコープの名前に関する一意のインデックス |
+
+
 ## ApiScopeClaims テーブル
 
 | 列名     | データ型        | 必須 | 説明                           |
@@ -407,6 +299,71 @@ erDiagram
 |-------------------------------------------------------|-------------------|----------------------------------|
 | IX_ApiScopeProperties_ScopeId_Key                     | [ScopeId], [Key]   | Apiスコープのプロパティに関する一意のインデックス |
 
+## Clients テーブル
+
+| 列名                                  | データ型                | 必須 | 説明                           |
+|---------------------------------------|-------------------------|------|--------------------------------|
+| Id                                    | int                     | Yes  | ユニークな識別子               |
+| Enabled                               | bit                     | Yes  | 有効/無効のフラグ              |
+| ClientId                              | nvarchar(200)           | Yes  | クライアントID                 |
+| ProtocolType                          | nvarchar(200)           | Yes  | プロトコルの種類               |
+| RequireClientSecret                   | bit                     | Yes  | クライアントシークレットが必要かどうかのフラグ |
+| ClientName                            | nvarchar(200)           | No   | クライアントの名前             |
+| Description                           | nvarchar(1000)          | No   | 説明                           |
+| ClientUri                             | nvarchar(2000)          | No   | クライアントのURI              |
+| LogoUri                               | nvarchar(2000)          | No   | ロゴのURI                      |
+| RequireConsent                        | bit                     | Yes  | 同意が必要かどうかのフラグ     |
+| AllowRememberConsent                  | bit                     | Yes  | 同意の記憶を許可するかどうかのフラグ |
+| AlwaysIncludeUserClaimsInIdToken      | bit                     | Yes  | 常にユーザークレームをIdトークンに含めるかどうかのフラグ |
+| RequirePkce                           | bit                     | Yes  | PKCEが必要かどうかのフラグ     |
+| AllowPlainTextPkce                    | bit                     | Yes  | 平文のPKCEを許可するかどうかのフラグ |
+| RequireRequestObject                  | bit                     | Yes  | リクエストオブジェクトが必要かどうかのフラグ |
+| AllowAccessTokensViaBrowser           | bit                     | Yes  | ブラウザ経由でアクセストークンを許可するかどうかのフラグ |
+| RequireDPoP                           | bit                     | Yes  | DPoPが必要かどうかのフラグ     |
+| DPoPValidationMode                    | int                     | Yes  | DPoPの検証モード               |
+| DPoPClockSkew                         | time                    | Yes  | DPoPのクロックスキュー           |
+| FrontChannelLogoutUri                 | nvarchar(2000)          | No   | フロントチャネルのログアウトURI |
+| FrontChannelLogoutSessionRequired     | bit                     | Yes  | フロントチャネルのログアウトセッションが必要かどうかのフラグ |
+| BackChannelLogoutUri                  | nvarchar(2000)          | No   | バックチャネルのログアウトURI  |
+| BackChannelLogoutSessionRequired      | bit                     | Yes  | バックチャネルのログアウトセッションが必要かどうかのフラグ |
+| AllowOfflineAccess                    | bit                     | Yes  | オフラインアクセスを許可するかどうかのフラグ |
+| IdentityTokenLifetime                 | int                     | Yes  | Identity Tokenの有効期限     |
+| AllowedIdentityTokenSigningAlgorithms | nvarchar(100)           | No   | 許可されたIdentity Token署名アルゴリズム |
+| AccessTokenLifetime                   | int                     | Yes  | アクセストークンの有効期限     |
+| AuthorizationCodeLifetime             | int                     | Yes  | 認可コードの有効期限           |
+| ConsentLifetime                       | int                     | No   | 同意の有効期限                 |
+| AbsoluteRefreshTokenLifetime          | int                     | Yes  | 絶対的なリフレッシュトークンの有効期限 |
+| SlidingRefreshTokenLifetime           | int                     | Yes  | スライディングリフレッシュトークンの有効期限 |
+| RefreshTokenUsage                     | int                     | Yes  | リフレッシュトークンの使用方法 |
+| UpdateAccessTokenClaimsOnRefresh      | bit                     | Yes  | リフレッシュ時にアクセストークンのクレームを更新するかどうかのフラグ |
+| RefreshTokenExpiration                | int                     | Yes  | リフレッシュトークンの有効期限 |
+| AccessTokenType                       | int                     | Yes  | アクセストークンのタイプ       |
+| EnableLocalLogin                      | bit                     | Yes  | ローカルログインを許可するかどうかのフラグ |
+| IncludeJwtId                          | bit                     | Yes  | JWT IDを含めるかどうかのフラグ   |
+| AlwaysSendClientClaims                | bit                     | Yes  | 常にクライアントクレームを送信するかどうかのフラグ |
+| ClientClaimsPrefix                    | nvarchar(200)           | No   | クライアントクレームの接頭辞   |
+| PairWiseSubjectSalt                   | nvarchar(200)           | No   | ペアワイズサブジェクトソルト   |
+| InitiateLoginUri                      | nvarchar(2000)          | No   | ログインの開始URI               |
+| UserSsoLifetime                       | int                     | No   | ユーザーSSOの有効期限           |
+| UserCodeType                          | nvarchar(100)           | No   | ユーザーコードのタイプ         |
+| DeviceCodeLifetime                    | int                     | Yes  | デバイスコードの有効期限       |
+| CibaLifetime                          | int                     | No   | CIBAの有効期限                 |
+| PollingInterval                       | int                     | No   | ポーリング間隔                 |
+| CoordinateLifetimeWithUserSession     | bit                     | No   | ユーザーセッションとの有効期間を調整するかどうかのフラグ |
+| Created                               | datetime2               | Yes  | 作成日時                       |
+| Updated                               | datetime2               | No   | 更新日時                       |
+| LastAccessed                          | datetime2               | No   | 最終アクセス日時               |
+| NonEditable                           | bit                     | Yes  | 編集不可のフラグ                |
+| PushedAuthorizationLifetime           | int                     | No   | Pushed Authorizationの有効期限 |
+| RequirePushedAuthorization            | bit                     | Yes  | Pushed Authorizationが必要かどうかのフラグ |
+
+主キー制約: PK_Clients (Id)
+
+| インデックス名                                          | 列        | 説明                                  |
+|-------------------------------------------------------|-----------|---------------------------------------|
+| IX_Clients_ClientId                                   | [ClientId]| クライアントのIDに関する一意のインデックス |
+
+
 ## ClientClaims テーブル
 
 | 列名     | データ型        | 必須 | 説明                           |
@@ -437,6 +394,29 @@ erDiagram
 | インデックス名                                          | 列                    | 説明                                |
 |-------------------------------------------------------|-----------------------|-------------------------------------|
 | IX_ClientCorsOrigins_ClientId_Origin                  | [ClientId], [Origin] | クライアントのCORSオリジンに関する一意のインデックス |
+
+
+## IdentityProviders テーブル
+
+| 列名          | データ型        | 必須 | 説明                           |
+|---------------|-----------------|------|--------------------------------|
+| Id            | int             | Yes  | ユニークな識別子               |
+| Scheme        | nvarchar(200)   | Yes  | スキーム                       |
+| DisplayName   | nvarchar(200)   | No   | 表示名                         |
+| Enabled       | bit             | Yes  | 有効/無効のフラグ              |
+| Type          | nvarchar(20)    | Yes  | タイプ                         |
+| Properties    | nvarchar(max)   | No   | プロパティ                     |
+| Created       | datetime2       | Yes  | 作成日時                       |
+| Updated       | datetime2       | No   | 更新日時                       |
+| LastAccessed  | datetime2       | No   | 最終アクセス日時               |
+| NonEditable   | bit             | Yes  | 編集不可のフラグ                |
+
+主キー制約: PK_IdentityProviders (Id)
+
+| インデックス名                                          | 列       | 説明                                |
+|-------------------------------------------------------|----------|-------------------------------------|
+| IX_IdentityProviders_Scheme                           | [Scheme] | アイデンティティプロバイダのスキームに関する一意のインデックス |
+
 
 ## ClientGrantTypes テーブル
 
@@ -550,6 +530,30 @@ erDiagram
 |-------------------------------------------------------|-------------------|----------------------------------|
 | IX_ClientSecrets_ClientId                             | [ClientId]        | クライアントのシークレットに関するインデックス |
 
+
+## IdentityResources テーブル
+
+| 列名                  | データ型        | 必須 | 説明                           |
+|-----------------------|-----------------|------|--------------------------------|
+| Id                    | int             | Yes  | ユニークな識別子               |
+| Enabled               | bit             | Yes  | 有効/無効のフラグ              |
+| Name                  | nvarchar(200)   | Yes  | 名前                           |
+| DisplayName           | nvarchar(200)   | No   | 表示名                         |
+| Description           | nvarchar(1000)  | No   | 説明                           |
+| Required              | bit             | Yes  | 必須かどうかのフラグ            |
+| Emphasize             | bit             | Yes  | 強調表示するかどうかのフラグ   |
+| ShowInDiscoveryDocument| bit             | Yes  | 発見文書に表示するかどうかのフラグ |
+| Created               | datetime2       | Yes  | 作成日時                       |
+| Updated               | datetime2       | No   | 更新日時                       |
+| NonEditable           | bit             | Yes  | 編集不可のフラグ                |
+
+主キー制約: PK_IdentityResources (Id)
+
+| インデックス名                                          | 列       | 説明                                  |
+|-------------------------------------------------------|----------|---------------------------------------|
+| IX_IdentityResources_Name                             | [Name]   | アイデンティティリソースの名前に関する一意のインデックス |
+
+
 ## IdentityResourceClaims テーブル
 
 | 列名              | データ型      | 必須 | 説明                       |
@@ -580,3 +584,8 @@ erDiagram
 | インデックス名                                          | 列                        | 説明                             |
 |-------------------------------------------------------|---------------------------|----------------------------------|
 | IX_IdentityResourceProperties_IdentityResourceId_Key  | [IdentityResourceId], [Key]  | アイデンティティリソースのプロパティに関する一意のインデックス |
+
+
+
+[IdentityServer – IdentityResource vs. ApiResource vs. ApiScope](https://nestenius.se/2023/02/02/identityserver-identityresource-vs-apiresource-vs-apiscope/)
+
