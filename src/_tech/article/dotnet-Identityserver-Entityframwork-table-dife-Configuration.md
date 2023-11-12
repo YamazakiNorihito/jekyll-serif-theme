@@ -584,8 +584,3 @@ erDiagram
 | インデックス名                                          | 列                        | 説明                             |
 |-------------------------------------------------------|---------------------------|----------------------------------|
 | IX_IdentityResourceProperties_IdentityResourceId_Key  | [IdentityResourceId], [Key]  | アイデンティティリソースのプロパティに関する一意のインデックス |
-
-
-
-[IdentityServer – IdentityResource vs. ApiResource vs. ApiScope](https://nestenius.se/2023/02/02/identityserver-identityresource-vs-apiresource-vs-apiscope/)
-
