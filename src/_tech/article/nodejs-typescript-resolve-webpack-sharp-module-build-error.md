@@ -48,7 +48,6 @@ Node.jsの[ネイティブモジュール](https://js.studio-kingdom.com/webpack
 これにより、サーバーサイドやデスクトップアプリケーションでよく使用されるネイティブモジュールを、
 Webアプリケーション内で利用することが可能になります。
 
-
 ### 環境設定
 *package.json*
 ```javascript
