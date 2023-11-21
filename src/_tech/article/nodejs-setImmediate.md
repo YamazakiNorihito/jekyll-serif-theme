@@ -1,6 +1,6 @@
 ---
 
-title: "大量データをStreamに処理するすごいぞsetImmediate"
+title: "大量データのストリーム処理におけるsetImmediateの活用法"
 date: 2023-11-04T07:00:00
 weight: 4
 categories:
@@ -9,6 +9,7 @@ categories:
   - typescript
 ---
 
+## 
 大量データをメモリを大量に使わずに処理するのに最適なFunctionを見つけました。
 それは `setImmediate`です。（[ドキュメント](https://nodejs.org/en/learn/asynchronous-work/understanding-setimmediate)
 
