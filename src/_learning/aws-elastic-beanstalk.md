@@ -8,7 +8,7 @@ weight: 7
 ---
 
 
-[AWS Elastic Beanstalk](https://aws.amazon.com/jp/elasticbeanstalk/)というのを見つけた。
+[AWS Elastic Beanstalk](https://aws.amazon.com/jp/elasticbeanstalk/)(ビーン・ストーク)というのを見つけた。
  Expressを使って開発WebアプリケーションをそのままDeployできそうな
  雰囲気
 
