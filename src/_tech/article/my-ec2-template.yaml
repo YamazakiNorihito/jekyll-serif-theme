@@ -1,0 +1,45 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: EC2 instance with custom UserData.
+Metadata:
+  AWS::Region: ap-northeast-1  # ここにリージョンを指定します。
+Resources:
+  S3ToEC2DownloadCloudformation:
+    Type: AWS::EC2::Instance
+    Metadata:
+      AWS::CloudFormation::Init:
+        config:
+          commands:
+            01_create_dir:
+              command: "mkdir -p /yamazaki1"
+            02_copy_file:
+              command: "aws s3 cp s3://nyamazaki-credentials-bucket/ff-api-server-firebase-adminsdk-nki15-5a868d3dda.json /yamazaki1/ff-api-server-firebase-adminsdk-nki15-5a868d3dda.json"
+    Properties:
+      InstanceType: t2.micro
+      ImageId: ami-0b5c74e235ed808b9  # 適切なAMI IDに置き換えてください。
+      KeyName: workdayKeyPeir2
+      IamInstanceProfile: "S3ToEC2DownloadRole2"
+      SecurityGroupIds: 
+        - sg-08054815e2b4cc74c  # 既存のセキュリティグループID
+      Tags:
+        - Key: Name
+          Value: s3ec2testioc
+      UserData:
+        Fn::Base64: !Sub |
+          MIME-Version: 1.0
+          Content-Type: multipart/mixed; boundary="//"
+
+          --//
+          Content-Type: text/cloud-config; charset="us-ascii"
+
+          #cloud-config
+          cloud_final_modules:
+          - [scripts-user, always]
+
+          --//
+          Content-Type: text/x-shellscript; charset="us-ascii"
+
+          #!/bin/bash
+          # Install the files and packages from the metadata
+          # https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/cfn-init.html
+          /opt/aws/bin/  -v --stack ${AWS::StackName} --resource S3ToEC2DownloadCloudformation --region ${AWS::Region}
+          --//--
