@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: EC2 instance with custom UserData.
 Metadata:
-  AWS::Region: ap-northeast-1  # ここにリージョンを指定します。
+  AWS::Region: ap-northeast-1
 Resources:
   S3ToEC2DownloadCloudformation:
     Type: AWS::EC2::Instance
