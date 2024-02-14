@@ -88,6 +88,18 @@ aws s3 cp s3://{S3bucket}/{任意の}.json /{任意のディレクトリ}/
 --//--
 ```
 
+※ちなみにCopyしたファイルの権限についてみてみた
+
+```bash
+[ec2-user@ip-{ip-address} my]$ whoami
+ec2-user
+[ec2-user@ip-{ip-address} my]$ ls -l
+total 4
+-rw-r--r--. 1 root root 2379 Feb  9 03:32 test.json
+```
+ファイルの所有者はroot です。読み取り権限は、他のユーザーにあるみたいです。
+
+
 ## 3. ログの確認方法
 
 - **目的**: スクリプトの実行結果を確認します。
