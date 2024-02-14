@@ -1,5 +1,5 @@
 ---
-title: "ネットワークスペシャリスト　ARP Snooping"
+title: "ネットワークスペシャリスト　ARP Spoofing"
 date: 2024-02-05T21:25:00
 jobtitle: ""
 linkedinurl: ""
