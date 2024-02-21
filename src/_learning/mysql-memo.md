@@ -60,8 +60,28 @@ EXPLAIN select * from messages
 - **`Using filesort`**: MySQLが結果をソートするために外部のソート操作を使用する場合。インデックスを利用できないソート処理に使われる。
 
 
+
+```sql
+EXPLAIN analyze select * from messages
+
+-- 実行結果
+/*
+# EXPLAIN
+'-> Table scan on messages  (cost=198 rows=1900) (actual time=4.43..23 rows=1900 loops=1)\n'
+
+*/
+```
+
 # [SHOW STATUS ステートメント](https://dev.mysql.com/doc/refman/8.0/ja/show-status.html)
 ## MySQLサーバーに接続されているスレッドの数
 ```sql
 SHOW STATUS WHERE `variable_name` = 'Threads_connected';
 ```
+
+## table status
+
+```sql
+SHOW TABLE STATUS LIKE 'messages';
+```
+
+
