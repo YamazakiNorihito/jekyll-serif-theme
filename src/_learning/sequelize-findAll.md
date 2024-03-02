@@ -1,7 +1,8 @@
-
 ---
 title: "sequelizeのfindAllちょっと調べたよ"
 date: 2024-3-2T11:05:00
+#image: "images/team/nonsap-visuals-kMJp7620W6U-unsplash.jpg"
+jobtitle: "Graphic Designer"
 linkedinurl: ""
 weight: 7
 ---
