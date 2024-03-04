@@ -14,7 +14,7 @@ Sequelizeを使用してMySQLに接続しクエリを実行していたところ
 
 # 原因
 
-調査の結果、[mysql2ライブラリ](https://www.npmjs.com/package/mysql2)のバージョン3.9に問題がある？(かSequelizeがv3.9に対応していない)ことが判明しました。具体的には、バージョン3.8まではDateTime型のデータの扱いで問題がなかったにも関わらず、3.9で変更された部分に不具合が存在していました。GitHub上の[差分](https://github.com/sidorares/node-mysql2/compare/v3.8.0...v3.9.0)と、関連する[プルリクエスト](https://github.com/sidorares/node-mysql2/pull/2398)を詳細に確認することで、より具体的に特定できる。（今後確認します。
+調査の結果、[mysql2ライブラリ](https://www.npmjs.com/package/mysql2)のバージョン3.9に問題がある？(かSequelizeがv3.9に対応していない)ことが判明しました。具体的には、バージョン3.8まではDateTime型のデータの扱いで問題がなかったにも関わらず、3.9で変更された部分に不具合が存在していました。GitHub上の[差分](https://github.com/sidorares/node-mysql2/compare/v3.8.0...v3.9.0)と、関連する[プルリクエスト](https://github.com/sidorares/node-mysql2/pull/2398)を詳細に確認することで、より具体的に特定できる。（[sequelize v6.37.1とmysql2 v3.9.2の互換性に関する調査結果](/learning/sequelize-v6-37-1-mysql2-v3-9-2-compatibility/)の記事に書きました。
 
 # 解析方法
 

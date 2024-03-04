@@ -37,7 +37,7 @@ npm i mysql2@3.9.2
 
 ##　背景
 
-[sequelizeのfindAllちょっと調べたよ](/learning/sequelize-findAll/)で書いたけど、
+[sequelizeのfindAllちょっと調べたよ](/learning/sequelize-findall-datetime-issue/)で書いたけど、
 sequelizeのBindパラメータを使った queryでDatetime型をSelectでColumn指定すると
 「invalid time value」となり、困っていた。
 
@@ -529,7 +529,6 @@ queryDatabase();
 
 ## じゃあなんでsequelizeのv6.37.1でエラーになんのよ
 
-### 結論
 MySQL2ライブラリのバージョン3.9で導入された`TypeCast`機能に関して、Sequelizeとの互換性に問題が発生しています。
 具体的には、MySQL2の`execute`メソッドを使用する際に、Sequelizeが実装している[`TypeCast`](https://github.com/sequelize/sequelize/blob/3a08dc387da094661a1e08de68fac27454548fce/packages/core/src/dialects/mysql/data-types.db.ts#L18-L19)機能が意図せずに働き、期待される動作をしない問題があります。
 
