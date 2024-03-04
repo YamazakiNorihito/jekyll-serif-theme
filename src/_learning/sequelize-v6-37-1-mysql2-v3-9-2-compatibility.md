@@ -35,20 +35,17 @@ npm i mysql2@3.9.2
 
 ```
 
-##　背景
+## 背景
 
-[sequelizeのfindAllちょっと調べたよ](/learning/sequelize-findall-datetime-issue/)で書いたけど、
-sequelizeのBindパラメータを使った queryでDatetime型をSelectでColumn指定すると
-「invalid time value」となり、困っていた。
-
-のでちゃんと調べてみた
+SequelizeのBindパラメータを使ってDatetime型をColumn指定でSelectすると、「invalid time value」となり困っていた。
+関連記事-> [sequelizeのfindAllちょっと調べたよ](/learning/sequelize-findall-datetime-issue/)
 
 ## Mysql v3.9に関連するPR
 
 - [sidorares/node-mysql2/ #2398](https://github.com/sidorares/node-mysql2/pull/2398)
   - (v3.8とv.3.9との[差分](https://github.com/sidorares/node-mysql2/compare/v3.8.0...v3.9.0))
 
-## #2398　の変更とは?
+## #2398 の変更とは?
 
 `mysql2`で`execute`で取得した内容をTypeCast機能を導入した.
 
@@ -503,7 +500,7 @@ queryDatabase();
 
 ほんとだTypeCastの処理変わっている
 
-```diff_javascript
+```bash
   function(){
     return class BinaryRow {
       constructor() {
