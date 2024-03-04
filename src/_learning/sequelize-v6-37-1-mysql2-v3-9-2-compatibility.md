@@ -9,7 +9,7 @@ weight: 7
 
 # 概要
 sequelize v6.37.1とmysql2 v3.9.2の間には相性問題があります。
-解決先は、今の所mysql2 v3.8.0までに止めるか、sequelizeのTypeCastを自前実装してください。
+解決先は、mysql2 v3.8.0までに止めるか、sequelizeのTypeCastを自前実装してください。
 
 ```bash
 npm i sequelize@6.37.1
