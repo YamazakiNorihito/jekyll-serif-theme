@@ -36,6 +36,7 @@ TPIDとTCIが差し込まれる
 
 
 *TCI（Tag Control Information*
+
 | Field          | Size (bits) | Description                              |
 |----------------|-------------|------------------------------------------|
 | Priority Code Point (PCP) | 3           | フレームの優先度を示す。                 |
