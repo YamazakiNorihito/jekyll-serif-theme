@@ -50,3 +50,20 @@ docker network disconnect redius_default redius-redis-1
 # コンテナを新しいネットワークに接続する:
 docker network connect mysql_default redius-redis-1
 ```
+
+# docker rmi
+
+```bash
+# noneのimageを削除
+docker rmi $(docker images -f "dangling=true" -q)
+
+
+```
+# docker compose
+
+```bash
+# コンテナとネットワークの削除:
+docker compose down
+# ボリュームの削除:
+docker compose down -v
+```
