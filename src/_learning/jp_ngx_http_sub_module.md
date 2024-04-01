@@ -73,7 +73,7 @@ This directive appeared in version 1.5.1.
 
 |  |  |
 | ---- | ---- |
-|Syntax|	sub_filter_once on | off;|
+|Syntax|	sub_filter_once on \| off;|
 |Default|	sub_filter_once on; |
 |Context|	http, server, location |
 
