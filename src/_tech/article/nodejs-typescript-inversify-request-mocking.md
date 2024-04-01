@@ -69,7 +69,7 @@ describe('TokenController', () => {
     expect(responseMessage.statusCode).toEqual(200);
 
     const content = await responseMessage.content.readAsStringAsync();
-    expect(JSON.parse(content)).toEqual({token : 'testToken'});
+    expect(JSON.parse(content)).toEqual('testToken');
   });
 });
 
