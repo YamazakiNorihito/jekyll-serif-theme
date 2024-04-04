@@ -16,6 +16,7 @@ weight: 7
     - [sub\_filter\_last\_modified](#sub_filter_last_modified)
     - [sub\_filter\_once](#sub_filter_once)
     - [sub\_filter\_types](#sub_filter_types)
+- [余談](#余談)
 
 
 
@@ -92,3 +93,10 @@ This directive appeared in version 1.5.1.
 >Enables string replacement in responses with the specified MIME types in addition to “text/html”. The special value “*” matches any MIME type (0.8.29).
 
 "text/html" に加えて、指定されたMIMEタイプのレスポンスで文字列置換を有効にします。特別な値 "* " は任意のMIMEタイプに一致します（0.8.29）
+
+
+# 余談
+
+正規表現での置換はできない。
+ngx_http_substitutions_filter_moduleを使うと正規表現で置換ができるみたい、buildが必要みたいでオラ全然わからない
+https://www.nginx.com/resources/wiki/modules/substitutions/
