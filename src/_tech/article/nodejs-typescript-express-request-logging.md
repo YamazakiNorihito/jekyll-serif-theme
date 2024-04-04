@@ -18,8 +18,7 @@ categories:
 まず、一意のリクエスト識別子を生成して、それをリクエストオブジェクトとレスポンスオブジェクトの両方に添付するためのミドルウェアを設定します。
 この識別子は、アプリケーション全体の特定のリクエストに関連するログを追跡するために重要です。
 
-<details>
-<summary>src/middlewares.ts</summary>
+### src/middlewares.ts
 
 ```typescript
 import 'reflect-metadata';
@@ -55,14 +54,12 @@ export const loggerMiddleware = (
   next();
 };
 ```
-</details>
 
 ## Expressへのミドルウェアの統合
 
 次に、ミドルウェア関数を含むようにExpressアプリケーションのメインサーバーファイルを変更して、ミドルウェアをアプリケーションに統合します。
 
-<details>
-<summary>src/index.ts</summary>
+### src/index.ts
 
 ```typescript
 import 'reflect-metadata';
@@ -138,10 +135,14 @@ startServer().catch(error => {
   console.error('Failed to start the server:', error);
 });
 ```
-</details>
 
-<details>
-<summary>src/infrastructure/logger/loggerFactory.ts</summary>
+
+## ロガーの実装
+ロガーの実装では、メッセージをロギングするためにリクエスト識別子を利用します。これにより、アプリケーション全体でリクエストごとのログを追跡することができます。
+
+`src/infrastructure/logger/loggerFactory.ts`と`src/infrastructure/logger/logger.ts`は、LoggerFactoryクラスとLoggerクラスの実装の詳細を示しています。
+
+### src/infrastructure/logger/loggerFactory.ts
 
 ```typescript
 import {injectable} from 'inversify';
@@ -206,15 +207,8 @@ export class LoggerFactory {
   }
 }
 ```
-</details>
 
-## ロガーの実装
-ロガーの実装では、メッセージをロギングするためにリクエスト識別子を利用します。これにより、アプリケーション全体でリクエストごとのログを追跡することができます。
-
-`src/infrastructure/logger/loggerFactory.ts`と`src/infrastructure/logger/logger.ts`は、LoggerFactoryクラスとLoggerクラスの実装の詳細を示しています。
-
-<details>
-<summary>src/infrastructure/logger/logger.ts</summary>
+### src/infrastructure/logger/logger.ts
 
 ```typescript
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -268,7 +262,6 @@ export class Logger implements ILogger {
     `[${this.context.requestId} - ${this.context.ipAddress} - ${this.context.method} ${this.context.url}]`;
 }
 ```
-</details>
 
 
 ## 使用例

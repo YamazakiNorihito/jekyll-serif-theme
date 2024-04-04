@@ -61,10 +61,7 @@ CMD ["node", "build/index.js"]
 特に、gts関連のスクリプトは、ソースコードの特定の構成に依存するため、直接使用せずに回避しています。
 必要なソースコードと設定ファイルのみをDockerイメージ内にコピーし、`npx jest`を使用してテストを直接実行します。
 
-
-<details>
-<summary>package.json</summary>
-
+### package.json
 ```json
 {
   "name": "app",
@@ -118,5 +115,3 @@ CMD ["node", "build/index.js"]
   }
 }
 ```
-
-</details>

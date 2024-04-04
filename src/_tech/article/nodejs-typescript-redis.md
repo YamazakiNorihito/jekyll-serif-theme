@@ -58,8 +58,7 @@ describe('ICacheClient', () => {
 
 ```
 
-<details>
-<summary>src/infrastructure/database/cacheClient.ts</summary>
+### src/infrastructure/database/cacheClient.ts
 
 ```typescript
 import {RedisClientType} from 'redis';
@@ -104,9 +103,6 @@ export class RedisCacheClient implements ICacheClient {
 }
 
 ```
-
-
-</details>
 
 ## 結論
 jest-mock-extendedを使用することで、Redisクライアントのモックを簡単に作成し、

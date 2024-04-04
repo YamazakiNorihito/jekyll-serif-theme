@@ -53,8 +53,7 @@ CMD ["node", "build/index.js"]
 
 ```
 
-<details>
-<summary>package.json</summary>
+### package.json
 
 ```json
 {
@@ -111,7 +110,6 @@ CMD ["node", "build/index.js"]
 
 ```
 
-</details>
 
 ## マルチステージビルドの採用
 
