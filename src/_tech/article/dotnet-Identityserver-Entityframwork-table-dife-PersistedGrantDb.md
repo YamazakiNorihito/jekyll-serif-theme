@@ -26,14 +26,12 @@ categories:
 | Expiration    | datetime2       | Yes  | 有効期限      |
 | Data          | nvarchar(max)   | Yes  | データ        |
 
-
 主キー制約: PK_DeviceCodes (UserCode)
 
 | インデックス名                            | 列          | 説明                          |
 |------------------------------------------|-------------|-------------------------------|
 | IX_DeviceCodes_DeviceCode                | [DeviceCode]| デバイスコードに関するユニークインデックス |
 | IX_DeviceCodes_Expiration                | [Expiration]| 有効期限に関するインデックス           |
-
 
 ### Keys テーブル
 
@@ -53,7 +51,6 @@ categories:
 | インデックス名                          | 列      | 説明                    |
 |----------------------------------------|---------|-------------------------|
 | IX_Keys_Use                            | [Use]   | 用途に関するインデックス |
-
 
 ### PersistedGrants テーブル
 
@@ -79,7 +76,6 @@ categories:
 | IX_PersistedGrants_Key                          | Key                          | キーに関する一意のインデックス（Key IS NOT NULL） |
 | IX_PersistedGrants_SubjectId_ClientId_Type      | SubjectId, ClientId, Type    | 主題ID、クライアントID、タイプに関するインデックス  |
 | IX_PersistedGrants_SubjectId_SessionId_Type     | SubjectId, SessionId, Type   | 主題ID、セッションID、タイプに関するインデックス   |
-
 
 ### PushedAuthorizationRequests  テーブル
 
@@ -112,7 +108,6 @@ categories:
 | Data          | nvarchar(max)   | Yes  | データ             |
 
 主キー制約: PK_ServerSideSessions (Id)
-
 
 | インデックス名                              | 列            | 説明                              |
 |--------------------------------------------|---------------|-----------------------------------|

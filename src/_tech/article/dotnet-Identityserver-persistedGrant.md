@@ -29,13 +29,13 @@ IPersistedGrantStoreは、さまざまな種類のグラントをサポートし
 ### 実装の種類
 
 IdentityServerでは、二つの主要なIPersistedGrantStoreの実装があります。
+
 1. **InMemoryPersistedGrantStore**：これはメモリ内にグラントを保存します。主にテストやデモのために使用され、実際の運用環境では使われません。
 2. **Duende.IdentityServer.EntityFramework.Stores.PersistedGrantStore**：これはEntityFrameworkを使ってデータベースにグラントを保存します。実際の運用環境での使用に適しています。
 
 ### カスタマイズ可能性
 
 自分自身でIPersistedGrantStoreの実装を作ることもできます。これにより、特定のデータストアをサポートしたり、環境やニーズに合わせてデータアクセスを最適化することが可能になります。
-
 
 ## Duende.IdentityServer.Stores.IPersistedGrantStore
 
@@ -64,8 +64,8 @@ Duendeの実装は[こちら](https://github.dev/DuendeSoftware/IdentityServer/b
 - **ConsumedTime**: グラントが使用された時間。
 - **Data**: グラントのシリアライズされ、データ保護された表現。
 
-
 ## PersistedGrantFilter
+
 `PersistedGrantFilter`クラスは、永続的なグラントストアへのアクセス時に使用されるフィルタリング条件を定義します。
 
 ```csharp
@@ -104,6 +104,7 @@ public class PersistedGrantFilter
 ```
 
 ## PersistedGrantTypes
+
 `PersistedGrantTypes`クラスは、IdentityServerで定義されている永続的なグラントのタイプを指定します。
 
 ```csharp

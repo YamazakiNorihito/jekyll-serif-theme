@@ -21,7 +21,6 @@ weight: 7
 | 200 Gbps |              |                      | 200GBASE-SR4   | 200GBASE-LR4   |
 | 400 Gbps |              |                      | 400GBASE-SR16  | 400GBASE-LR8   |
 
-
 - ***T*** :ツイストペアケーブル
 - ***S*** :短波長レーザー
 - ***L*** :超波長レーザー
@@ -71,9 +70,8 @@ transfer_times_seconds
 '''
 
 ```
+
 </div></details>
-
-
 
 ## 周波数と速度
 

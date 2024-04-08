@@ -17,11 +17,9 @@ npm install typescript@5.4.2 @types/node@20.11.27  --save-dev
 ```
 
 ### アプリケーションの作成手順
-https://inversify.io/のThe Basics　セクションに従う
+<https://inversify.io/のThe> Basics　セクションに従う
 
-
-https://github.com/inversify/inversify-express-example/blob/master/BindingDecorators/controller/user.ts
-
+<https://github.com/inversify/inversify-express-example/blob/master/BindingDecorators/controller/user.ts>
 
 ### TypeScript (`typescript@5.4.2`) と `@types/node` の役割
 
@@ -36,7 +34,6 @@ https://github.com/inversify/inversify-express-example/blob/master/BindingDecora
   - Node.jsの各API関数の引数、戻り値、オブジェクトのプロパティなどに対する正確な型情報を提供し、開発者が型ミスを減らすのを助ける。
   - 開発者がNode.jsのAPIを使用する際にリアルタイムで型情報に基づくフィードバックを得られるようにし、開発効率を向上させる。
   - Node.jsのバージョンごとに異なる可能性があるAPIの変更に対応し、プロジェクトが特定のNode.jsバージョンと互換性を持つようにする。
-
 
 # npm installの`--save-dev`オプションについて
 

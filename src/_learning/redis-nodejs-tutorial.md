@@ -10,6 +10,7 @@ Redis初心者なのでドキュメント見ながら、データの読み書き
 ## redis
 
 ### 準備
+
 ```bash
 mkdir redis-and-node
 cd redis-and-node
@@ -20,6 +21,7 @@ touch users.acl
 
 *docker-compose.yaml*
 [Run Redis Stack on Docker](https://redis.io/docs/install/install-stack/docker/)
+
 ```yaml
 version: "3.8"
 services:
@@ -35,7 +37,9 @@ services:
 volumes:
   redis-data:
 ```
+
 *redis-stack.conf*
+
 ```conf
 # 認証のためのパスワードを設定
 requirepass password
@@ -50,6 +54,7 @@ aclfile /users.acl
 
 *users.acl*
 [Redis access control list](http://mogile.web.fc2.com/redis/docs/manual/security/acl/index.html)
+
 ```text
 user admin on >adminpass +@all ~*
 user read_only on >readonlypass +@read ~*
@@ -74,8 +79,11 @@ redis-cli>quit
 ```
 
 ## NodeJs
+
 ### 準備
+
 [Node.js guide](https://redis.io/docs/connect/clients/nodejs/)
+
 ```bash
 npm init -y
 
@@ -85,6 +93,7 @@ touch index.js
 ```
 
 *index.js*
+
 ```javascript
 import { createClient } from 'redis';
 

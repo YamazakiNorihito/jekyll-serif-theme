@@ -15,7 +15,6 @@ IdentityResource/ApiResource/ApiScope それぞれの役割がわからなくな
 下記の記事を参考にしています。
 [IdentityServer – IdentityResource vs. ApiResource vs. ApiScope](https://nestenius.se/2023/02/02/identityserver-identityresource-vs-apiresource-vs-apiscope/)
 
-
 - Identity Scopes
   - 主にユーザーのアイデンティティ情報（例えば、ユーザー名、メールアドレス）に関連しています。
   - スコープが要求されると、要求されたクレームはIDトークンに含まれます。

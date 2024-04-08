@@ -17,6 +17,7 @@ weight: 7
 （例）
 新しく`Book`というオブジェクトを作成しました。この`Book`オブジェクトには`title`、`author`、`publishedDate`などのプロパティがあります。
 次のステップは、この`Book`オブジェクトをRelational DataBaseに保存する方法を決定することです。
+
 1. まず、Bookオブジェクトをどのテーブルに保存するかを決定します。この場合、新しくbooksテーブルを作成することを決定しました。
 2. 次に、Bookオブジェクトの各プロパティがbooksテーブルのどの列に対応するかを決定します。例えば、titleはtitle列、authorはauthor_name列、publishedDateはpublished_date列にマップすることを決定しました。
 3. さらに、特定のプロパティ（例えば、publishedDate）に制約やフォーマットが必要な場合、その詳細も決定します。この場合、publishedDateは日付形式で保存することを決定しました。
@@ -97,18 +98,17 @@ sequelize.sync();
 
 つまりこの設定結果をMapping (n)
 
->Property. 
+>Property.
 
 「オブジェクト内のデータ要素や属性」や「オブジェクトが持つ個々のデータ」
 
 Mapping (n). で決定したBook.BookIdなどがPropertyを指しています。
 
-
->Relationship mapping. 
+>Relationship mapping.
 
 エンティティ間の関連性をどのようにデータベースに保存するかの定義や構造を意味する
 
-Mapping (n). で決定した`.HasMany(a => a.Books) `や`.WithOne(b => b.Author)`がRelationship mapping.を指している。
+Mapping (n). で決定した`.HasMany(a => a.Books)`や`.WithOne(b => b.Author)`がRelationship mapping.を指している。
 
 > shadow information
 オブジェクトが正常に永続化するために必要な追加の情報
@@ -119,6 +119,7 @@ Mapping (n). で決定した`.HasMany(a => a.Books) `や`.WithOne(b => b.Author)
 この追加の情報がShadow Informationです。
 
 主なShadow Informationの例
+
 1. 主キー (Primary Key): これは、データベース内の各レコードを一意に識別するためのキーです。サロゲートキーとして知られる主キーは、ビジネス上の意味を持たないが、データの識別に必要なキーです。
 2. 同時実行制御のマーキング (Concurrency Control Markings): これは、複数のユーザーが同時に同じデータにアクセスした場合に、データの一貫性を維持するためのものです。タイムスタンプやインクリメンタルカウンターがこの例として挙げられます。
 3. バージョン番号 (Versioning Numbers): これは、オブジェクトやレコードのバージョンを追跡するためのものです。これにより、変更履歴や更新の追跡が可能となります。

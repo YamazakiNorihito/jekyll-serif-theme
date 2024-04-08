@@ -10,7 +10,7 @@ categories:
 
 # ASP.NET Core: `UseAuthentication` と `UseAuthorization` の順序の重要性
 
-ASP.NET Coreにおいて、ミドルウェアの順序は特に重要です。中でも、`UseAuthentication` 
+ASP.NET Coreにおいて、ミドルウェアの順序は特に重要です。中でも、`UseAuthentication`
 と `UseAuthorization` の順序は、セキュリティ上の理由から正確に配置する必要があります。
 
 ## なぜこの順序が重要なのか？

@@ -38,6 +38,7 @@ Sequelizeを使用してMySQLに接続しクエリを実行していたところ
                 }
           });
       ```
+
     </details>
 
 2. `Raw Queriesの実行`: [Replacements](https://sequelize.org/docs/v6/core-concepts/raw-queries/#replacements)と[Bind Parameter](https://sequelize.org/docs/v6/core-concepts/raw-queries/#bind-parameter)を用いたクエリを実行し、mysql2がDateTime型のデータをどのように処理しているかを詳細に調査しました。
@@ -66,6 +67,7 @@ Sequelizeを使用してMySQLに接続しクエリを実行していたところ
           }
         );
       ```
+
     </details>
 
 TextとBinaryの処理における差異が明らかになり、特にBinaryRowでDateTime型のデータを扱う際に問題が発生していることがわかりました。
@@ -114,8 +116,8 @@ TextとBinaryの処理における差異が明らかになり、特にBinaryRow�
     };
   })()
   ```
-</details>
 
+</details>
 
 # sequelizeのコードを簡単に解説
 
@@ -289,7 +291,6 @@ static async findAll(options) {
 
 ## [query-interface.js select(model, tableName, optionsArg)](https://github.com/sequelize/sequelize/blob/8b1f73ade0251a9ff5a9f76ddbc77dfe75003335/packages/core/src/dialects/abstract/query-interface.js#L566-L567)
 
-
 <details>
 <summary>コード</summary>
 
@@ -335,11 +336,9 @@ static async findAll(options) {
   }
 ```
 
-
 </details>
 
 ## [sequelize.js queryRaw(sql, options)](https://github.com/sequelize/sequelize/blob/8b1f73ade0251a9ff5a9f76ddbc77dfe75003335/packages/core/src/sequelize.js#L638-L639)
-
 
 <details>
 <summary>コード</summary>
@@ -414,8 +413,8 @@ static async findAll(options) {
 </details>
 
 ## [sql.ts mapBindParameters](https://github.com/sequelize/sequelize/blob/abca55ee52d959f95c98dc7ae8b8162005536d05/packages/core/src/utils/sql.ts#L316-L317)
- - [MysqlDialect](https://github.com/sequelize/sequelize/blob/abca55ee52d959f95c98dc7ae8b8162005536d05/packages/core/src/dialects/mysql/index.ts#L17-L18)
 
+- [MysqlDialect](https://github.com/sequelize/sequelize/blob/abca55ee52d959f95c98dc7ae8b8162005536d05/packages/core/src/dialects/mysql/index.ts#L17-L18)
 
 <details>
 <summary>コード</summary>
@@ -454,7 +453,6 @@ export function mapBindParameters(
 </details>
 
 ## [mysql/query.js run(sql, parameters)](https://github.com/sequelize/sequelize/blob/8b1f73ade0251a9ff5a9f76ddbc77dfe75003335/packages/core/src/dialects/mysql/query.js#L26-L27)
-
 
 <details>
 <summary>コード</summary>
@@ -522,13 +520,10 @@ export function mapBindParameters(
 
 </details>
 
-
 ## [mysql connection-manager.ts connect(config: ConnectionOptions): Promise<MySqlConnection>](https://github.com/sequelize/sequelize/blob/8b1f73ade0251a9ff5a9f76ddbc77dfe75003335/packages/core/src/dialects/mysql/connection-manager.ts#L74-L75)
-
 
 <details>
 <summary>コード</summary>
-
 
 ```javascript
 async connect(config: ConnectionOptions): Promise<MySqlConnection> {

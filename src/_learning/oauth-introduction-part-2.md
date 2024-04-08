@@ -29,6 +29,7 @@ Keycloakは、オープンソースのアイデンティティとアクセス管
 ## 他のIAMクラウドサービス
 
 IAMのクラウドサービスとしては、  
+
 - AWSの[Amazon Cognito](https://aws.amazon.com/jp/cognito/)
 - Azureの[Azure Active Directory External Identities](https://azure.microsoft.com/ja-jp/products/active-directory-external-identities)  
 などがあります。

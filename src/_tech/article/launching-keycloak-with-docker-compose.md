@@ -37,7 +37,7 @@ volumes:
 docker-compose up
 ```
 
-
 #### 注意点
+
 - [KeyCloakの公式ドキュメントGetting started Docker](https://www.keycloak.org/getting-started/getting-started-docker)をDocker-composeにしただけです。本番運用はできません。
 - dataディレクトリはKeycloakのデータを永続化するためのものです。このディレクトリを削除すると、Keycloakのデータも失われるので注意してください。

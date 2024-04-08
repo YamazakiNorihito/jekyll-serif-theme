@@ -29,6 +29,7 @@ TypeScript開発では、ソースコードの変更後に都度コンパイル�
 - デバッグ設定(launch.json): デバッグセッションを管理する設定を行います。ここでは、Nodemonを使用して変更があった場合に自動でアプリケーションを再起動する設定を加えます。
 
 ## tasks.jsonの設定
+
 tasks.jsonでは、TypeScriptコンパイラ(tsc)を使用してプロジェクトをビルドするタスクを設定します。--watchオプションを使用することで、ソースファイルの変更をリアルタイムで監視し、変更があるたびに自動的にビルドを実行します。
 
 | プロパティ       | 設定値                                 | 説明                                                                                                   |
@@ -42,10 +43,9 @@ tasks.jsonでは、TypeScriptコンパイラ(tsc)を使用してプロジェク�
 | `problemMatcher` | `$tsc-watch`                           | 出力を解析し、問題を特定するためのパターン。`$tsc-watch`はTypeScriptの監視モードに最適化されています。 |
 | `group`          | `{"kind": "build", "isDefault": true}` | タスクを`build`グループに分類し、デフォルトのビルドタスクとして設定します。                            |
 
-
 ## launch.jsonの設定
-launch.jsonでは、デバッグセッションの設定を行います。NodemonをruntimeExecutableとして使用することで、ビルド後のファイル(build/index.js)に対する変更を監視し、変更があった場合にNode.jsアプリケーションを自動的に再起動します。また、preLaunchTaskによりデバッグセッション開始前にTypeScriptのビルドタスクを実行し、最新のコードでデバッグが行われるようにします。
 
+launch.jsonでは、デバッグセッションの設定を行います。NodemonをruntimeExecutableとして使用することで、ビルド後のファイル(build/index.js)に対する変更を監視し、変更があった場合にNode.jsアプリケーションを自動的に再起動します。また、preLaunchTaskによりデバッグセッション開始前にTypeScriptのビルドタスクを実行し、最新のコードでデバッグが行われるようにします。
 
 | プロパティ          | 設定値                                         | 説明                                                                                     |
 | ------------------- | ---------------------------------------------- | ---------------------------------------------------------------------------------------- |
@@ -60,7 +60,9 @@ launch.jsonでは、デバッグセッションの設定を行います。Nodemo
 | `outFiles`          | `["${workspaceFolder}/build/**/*.js"]`         | デバッグされるトランスパイル済みファイルの場所。ビルドディレクトリ                       |
 
 ## 各ファイル
+
 *task.json*
+
 ```json
 {
     "version": "2.0.0",
@@ -80,7 +82,6 @@ launch.jsonでは、デバッグセッションの設定を行います。Nodemo
     ]
 }
 ```
-
 
 <details>
 <summary>*launch.json*</summary>
@@ -153,9 +154,6 @@ launch.jsonでは、デバッグセッションの設定を行います。Nodemo
 ```
 
 </details>
-
-
-
 
 <details>
 

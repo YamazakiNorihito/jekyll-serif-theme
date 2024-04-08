@@ -12,6 +12,7 @@ categories:
 この記事では、Dockerを用いてKeycloakをNginxの背後でリバースプロキシとして運用する方法について解説します。このセットアップでは、Keycloakをセキュリティサービスとして活用しながら、Nginxを通じてリソースへのアクセスを制御することができます。特に、内部アプリケーションがプロキシを介さずにKeycloak APIへ直接リクエストを送る設定に焦点を当てます。
 
 ### アーキテクチャの概要
+
 以下のアーキテクチャ図は、クライアントがNginxを通じてリクエストを送り、NginxがそのリクエストをアプリケーションやKeycloakへルーティングする流れを示しています。アプリケーションは、セッション情報をRedisに保存し、またMySQLをデータストアとして利用します。この構成により、Keycloakを介したセキュリティ管理と効率的なリソースアクセスが実現されます。
 
 ```mermaid
@@ -143,19 +144,25 @@ volumes:
   redis_data:
 
 ```
+
 #### Keycloakの設定ポイント
+
 KeycloakをNginxの背後で運用する際の重要な設定ポイントを紹介します。
+
 - **KC_PROXY_HEADERS**: `"xforwarded"`を指定することで、KeycloakはX-Forwarded-* ヘッダーを通じてクライアントから受け取る情報（例えば、実際のIPアドレスやプロトコル）を信頼し利用します。これは、プロキシを介した環境でクライアント情報の正確性を保持するために必要です。
 - **KC_HOSTNAME**: Keycloakが外部からアクセスされる際のホスト名（またはIPアドレス）とポートを指定します。`"localhost:8080"` のように設定することで、特定のホスト名やポートでKeycloakを公開する際の挙動を定義します。
 - **KC_HTTP_ENABLED**: この環境変数を `true` に設定すると、HTTPプロトコルでのアクセスを許可します。セキュアな環境ではHTTPSの使用が推奨されますが、開発環境など特定のケースではHTTPを有効にすることがあります。
 - **開発モードでのKeycloak起動**: `command`オプションに`start-dev`を指定してKeycloakを起動することがあります。これは、開発時の利便性を高めるための設定で、本番環境ではセキュリティ強化された`start`コマンドを使用することが推奨されます。
 
 #### Docker Composeの依存性と健全性チェック
+
 サービス間の依存関係を管理し、特にMySQLが正しく起動していることを保証するために、Docker Composeの`depends_on`セクションに`condition: service_healthy`を設定することが重要です。これにより、依存サービスが健全な状態になるまで、他のサービスの起動を遅延させることができます。
+
 - **目的**: 依存するサービスが完全に起動し、受け入れ準備が整うまで、アプリケーションサービスの起動を待機させます。
 - **`service_healthy`の役割**: Dockerのヘルスチェック機能を利用して、コンテナが健全かどうかを定期的に確認し、その結果に基づいてサービスの起動順序を制御します。
 
 関連記事:
+
 - [Keycloak Reverse Proxy Setup](https://www.keycloak.org/server/reverseproxy)
 - [Keycloak All Configuration Options](https://www.keycloak.org/server/all-config)
 

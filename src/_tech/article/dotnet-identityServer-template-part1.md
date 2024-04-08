@@ -173,7 +173,6 @@ SignInAsyncメソッドは、指定されたユーザー情報を使用して現
 次回のリクエストでそのユーザーが認証されていることが認識されるようになります。
 Cookieに`idsrv`で[登録](https://github.com/IdentityServer/IdentityServer4/blob/main/src/IdentityServer4/src/IdentityServerConstants.cs#L15)される。（カスタムは可能
 
-
 ### 元ネタ
 
 - [github quickstart2](https://github.com/DuendeSoftware/Samples/blob/main/IdentityServer/v6/Quickstarts/2_InteractiveAspNetCore/src/IdentityServer/IdentityServer.csproj)

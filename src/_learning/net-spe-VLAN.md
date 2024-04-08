@@ -34,7 +34,6 @@ TPIDとTCIが差し込まれる
 | ペイロード（データ） | ユーザーデータ、IPパケットなど | 46-1500 |
 | フレームチェックシーケンス (FCS) | エラーチェック用のCRC値 | 4 |
 
-
 *TCI（Tag Control Information*
 
 | Field          | Size (bits) | Description                              |
@@ -42,7 +41,6 @@ TPIDとTCIが差し込まれる
 | Priority Code Point (PCP) | 3           | フレームの優先度を示す。                 |
 | Drop Eligible Indicator (DEI) | 1           | フレームが破棄される可能性を示す。         |
 | VLAN Identifier (VID) | 12          | VLANのIDを示す。                          |
-
 
 ## VLANの種類とOSIレイヤー
 
@@ -73,4 +71,3 @@ VID 0: このVIDは特別な用途であり、VLANタグが存在しないこと
 VID 1: 通常、デフォルトVLANとして使用されます。ほとんどのスイッチや機器では、初期設定でこのVLANに割り当てられています。
 VID 4095: このVIDも特別な用途に予約されており、通常はユーザーによる通常のVLAN割り当てには使用されません。
 したがって、ユーザーが実際に使用できるVIDの範囲は 2から4094 までです。この範囲内で任意のVIDを設定し、ネットワーク内で異なるVLANを構成することができます。
-

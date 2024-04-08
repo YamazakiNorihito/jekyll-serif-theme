@@ -7,7 +7,7 @@ linkedinurl: ""
 weight: 7
 ---
 
-Hacker NewsがAPIを公開してました。https://hackernews.api-docs.io
+Hacker NewsがAPIを公開してました。<https://hackernews.api-docs.io>
 firebaseを使ってAPIを構築しているみたいです。
 
 公開されているAPIを叩いたので、各EndPointを紹介します。（全部じゃないよ

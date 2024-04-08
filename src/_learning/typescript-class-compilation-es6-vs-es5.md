@@ -12,7 +12,7 @@ ES6からクラス定義が使えるようになった。
 [公式 ECMAScript® 2015 Language Specification](https://262.ecma-international.org/6.0/#sec-makeclassconstructor)
 
 [原文](https://262.ecma-international.org/6.0/#:~:text=The%20ECMAScript%20built,permit%20programmers%20to%20concisely%20define)
->  The ECMAScript built-in objects themselves follow such a class-like pattern. Beginning with ECMAScript 2015, the ECMAScript language includes syntactic class definitions that permit programmers to concisely define objects that conform to the same class-like abstraction pattern used by the built-in objects.
+> The ECMAScript built-in objects themselves follow such a class-like pattern. Beginning with ECMAScript 2015, the ECMAScript language includes syntactic class definitions that permit programmers to concisely define objects that conform to the same class-like abstraction pattern used by the built-in objects.
 
 （DeepL翻訳）ECMAScript の組み込みオブジェクトは、このようなクラスのようなパターンに従っている。ECMAScript 2015 以降、ECMAScript 言語には構文的なクラス定義が含まれており、プログラマは組み込みオブジェクトで使用されているのと同じクラスのような抽象化パターンに準拠したオブジェクトを簡潔に定義することができます。
 

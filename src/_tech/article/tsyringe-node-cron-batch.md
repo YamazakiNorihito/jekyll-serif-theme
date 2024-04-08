@@ -13,11 +13,9 @@ categories:
 
 tsyringe×node-cron で定義実行バッチを作成を作成したので紹介します。
 
-
 紹介するコードは、node-cronライブラリを使用して定期的にRSSフィードを取得します。
 tsyringeを使った依存性注入でモジュール性とテスタビリティを高めます。
 [node-cron](https://www.npmjs.com/package/node-cron)ライブラリ
-
 
 ## 重要なコードスニペット
 
@@ -92,11 +90,10 @@ export class NewsScheduler {
 }
 ```
 
-
-
 ### 開発環境設定
 
 参考までに
+
 ### tsconfig.json
 
 ```json

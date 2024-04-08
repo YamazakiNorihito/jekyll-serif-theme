@@ -11,7 +11,6 @@ categories:
 
 このガイドでは、AWS S3バケットからEC2インスタンスにファイルをダウンロードする手順を説明します。
 
-
 ## 1. IAMロールの作成
 
 - **目的**: EC2インスタンスがS3バケットにアクセスするための権限を設定します。
@@ -22,7 +21,8 @@ categories:
   4. 適切なポリシー（例: AmazonS3ReadOnlyAccess）を添付します。
 - **設定内容**:
 
-許可ポリシー:AmazonS3ReadOnlyAccess   
+許可ポリシー:AmazonS3ReadOnlyAccess
+
 ```json
   {
       "Version": "2012-10-17",
@@ -43,6 +43,7 @@ categories:
 ```
 
 信頼ポリシー
+
 ```json
   {
     "Version": "2012-10-17",
@@ -97,8 +98,8 @@ ec2-user
 total 4
 -rw-r--r--. 1 root root 2379 Feb  9 03:32 test.json
 ```
-ファイルの所有者はroot です。読み取り権限は、他のユーザーにあるみたいです。
 
+ファイルの所有者はroot です。読み取り権限は、他のユーザーにあるみたいです。
 
 ## 3. ログの確認方法
 
@@ -168,6 +169,7 @@ Resources:
 
 ※1. "2. インスタンス起動毎UserDataを実行する"の内容をCloudFormationテンプレートに書くとEC 2インスタンスが再構築されます。
 ※2. CloudFormationテンプレートメタデータを手動実行するときのコマンド（SSHでEC 2インスタンスへ接続して下さい。）
+
 ```bash
 /opt/aws/bin/cfn-init -v --stack S3ToEC2DownloadCloudformation --resource S3ToEC2DownloadCloudformation --region {リージョン}
 ```
@@ -185,8 +187,6 @@ Resources:
 - **解決策**:
   - IAMポリシーを確認し、必要な権限が含まれているか再確認してください。
   - `/var/log/cloud-init-output.log` をチェックし、スクリプトのエラーメッセージを確認します。
-
-
 
 ## 参考サイト
 

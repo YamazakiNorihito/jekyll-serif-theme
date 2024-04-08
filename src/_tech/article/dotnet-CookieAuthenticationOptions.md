@@ -12,6 +12,7 @@ categories:
 [CookieAuthenticationOptions](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.aspnetcore.builder.cookieauthenticationoptions)の仕方のメモでごやんす
 
 *appsettings.json*
+
 ```json
 {
   "CookieAuthentication": {
@@ -118,7 +119,6 @@ public class AccountController : Controller
 }
 ```
 
-
-
 参考資料
+
 - [Use cookie authentication without ASP.NET Core Identity](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/cookie?view=aspnetcore-7.0)

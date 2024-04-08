@@ -16,9 +16,11 @@ categories:
 (１つ１つのコード説明は[別ページ](/tech/article/js-ts-create-webapi-bookshelf-explanation/)でしています。)
 
 ### API仕様
+
 ## API 仕様書
 
 ### 1. すべての著者を取得
+
 - **URL**: `/authors`
 - **メソッド**: `GET`
 - **成功時のレスポンスコード**: `200`
@@ -27,16 +29,18 @@ categories:
 ---
 
 ### 2. 著者の作成
+
 - **URL**: `/authors`
 - **メソッド**: `POST`
-- **リクエストボディ**: 
+- **リクエストボディ**:
 
 ```json
 {
    "name":"著者の名前"
 }
 ```
-- **バリデーション**: 
+
+- **バリデーション**:
 - `name`: 文字列、空ではない
 - **成功時のレスポンス**:
 - コード: `201`
@@ -48,6 +52,7 @@ categories:
 ---
 
 ### 3. 著者による書籍の取得
+
 - **URL**: `/authors/:authorId/books`
 - **メソッド**: `GET`
 - **URLパラメータ**:
@@ -58,6 +63,7 @@ categories:
 ---
 
 ### 4. 書籍のバリデーションと作成
+
 - **URL**: `/books`
 - **メソッド**: `POST`
 - **リクエストボディ**:
@@ -69,7 +75,7 @@ categories:
 }
 ```
 
-- **バリデーション**: 
+- **バリデーション**:
 - `title`: 文字列、空ではない
 - `authorId`: 整数、既存の著者に対応
 - **成功時のレスポンス**:
@@ -82,6 +88,7 @@ categories:
 ---
 
 ### 5. すべての書籍を取得
+
 - **URL**: `/books`
 - **メソッド**: `GET`
 - **成功時のレスポンスコード**: `200`
@@ -90,6 +97,7 @@ categories:
 ---
 
 ### 6. その著者とともに書籍を取得
+
 - **URL**: `/books-authors`
 - **メソッド**: `GET`
 - **成功時のレスポンスコード**: `200`
@@ -100,19 +108,21 @@ categories:
 ### 7. APIレスポンスの構造
 
 #### a. 成功時のレスポンス
+
 - **フィールド**:
 - `data`: レスポンスデータ
 - `message`: レスポンスメッセージ
 - `status`: HTTPステータスコード
 
 #### b. エラーレスポンス
+
 - **フィールド**:
 - `errors`: エラーオブジェクトの配列
 - `message`: レスポンスメッセージ
 - `status`: HTTPステータスコード
 
+## 新しいNode.jsプロジェクトの作成
 
-## 新しいNode.jsプロジェクトの作成:
 ```bash
 
 mkdir bookshelf
@@ -124,8 +134,10 @@ npm install express express-validator sequelize sqlite3 ts-node typescript doten
 
 ```
 
-## TypeScriptの設定:
+## TypeScriptの設定
+
 tsconfig.json ファイルをプロジェクトルートに作成し、以下の内容をコピーして貼り付けます。
+
 ```typescript
 {
     "compilerOptions": {
@@ -144,6 +156,7 @@ tsconfig.json ファイルをプロジェクトルートに作成し、以下の
 
 1. Sequelizeインスタンスの設定:
    - src/database.ts  ファイルを作成します。
+
       ```typescript
       import { Sequelize } from 'sequelize';
 
@@ -153,8 +166,10 @@ tsconfig.json ファイルをプロジェクトルートに作成し、以下の
       });
 
       ```
+
 1. モデルの作成:
    - src/models/Author.ts
+
       ```typescript
       import { DataTypes, Model } from "sequelize";
       import { sequelize } from "../database";
@@ -177,7 +192,9 @@ tsconfig.json ファイルをプロジェクトルートに作成し、以下の
       }, { sequelize, modelName: 'Author' });
       export default Author;
       ```
+
    - src/models/Book.ts
+
       ```typescript
       import { DataTypes, Model } from "sequelize";
       import { sequelize } from "../database";
@@ -220,9 +237,12 @@ tsconfig.json ファイルをプロジェクトルートに作成し、以下の
 
       export default Book;
       ```
+
 2. ルーティングとコントローラの設定:
+
 - コントローラの作成
-   - src/controllers/apiResponse.ts
+  - src/controllers/apiResponse.ts
+
       ```typescript
       import { Response } from 'express';
 
@@ -270,7 +290,9 @@ tsconfig.json ファイルをプロジェクトルートに作成し、以下の
       };
 
       ```
-   - src/controllers/authorController.ts
+
+  - src/controllers/authorController.ts
+
       ```typescript
       import { Request, Response } from 'express';
       import { body, validationResult } from 'express-validator';
@@ -307,7 +329,9 @@ tsconfig.json ファイルをプロジェクトルートに作成し、以下の
       };
 
       ```
-   - src/controllers/bookController.ts
+
+  - src/controllers/bookController.ts
+
       ```typescript
       import { Request, Response } from 'express';
       import { body, validationResult } from 'express-validator';
@@ -353,7 +377,8 @@ tsconfig.json ファイルをプロジェクトルートに作成し、以下の
       ```
 
 - middlewareの作成
-   - src/middleware/asyncHandler.ts
+  - src/middleware/asyncHandler.ts
+
       ```typescript
       import { Request, Response, NextFunction } from 'express';
 
@@ -363,7 +388,9 @@ tsconfig.json ファイルをプロジェクトルートに作成し、以下の
         };
 
       ```
-   - src/middleware/errorHandler.ts
+
+  - src/middleware/errorHandler.ts
+
       ```typescript
       import { NextFunction, Request, Response } from 'express';
 
@@ -384,8 +411,10 @@ tsconfig.json ファイルをプロジェクトルートに作成し、以下の
       };
 
       ```
+
 - ルーティングの設定
-   - src/routes/authorRoutes.ts
+  - src/routes/authorRoutes.ts
+
       ```typescript
       import express from 'express';
       import * as authorController from '../controllers/authorController';
@@ -402,7 +431,9 @@ tsconfig.json ファイルをプロジェクトルートに作成し、以下の
       export default router;
 
       ```
-   - src/routes/bookRoutes.ts
+
+  - src/routes/bookRoutes.ts
+
       ```typescript
       import express from 'express';
       import * as bookController from '../controllers/bookController';
@@ -418,8 +449,10 @@ tsconfig.json ファイルをプロジェクトルートに作成し、以下の
       export default router;
 
       ```
+
 - Express アプリケーションのセットアップ
-   - src/app.ts
+  - src/app.ts
+
       ```typescript
       import express from 'express';
       import authorRoutes from './routes/authorRoutes';
@@ -465,7 +498,9 @@ tsconfig.json ファイルをプロジェクトルートに作成し、以下の
       export default app;
 
       ```
-   - src/environment.ts
+
+  - src/environment.ts
+
       ```typescript
       export function isProduction(): boolean {
           return process.env.NODE_ENV === 'production';

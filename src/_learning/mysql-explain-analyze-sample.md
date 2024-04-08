@@ -10,8 +10,6 @@ weight: 7
 
 クエリの実行計画は、データベースがSQLクエリをどのように実行するかの詳細を提供します。以下の実行計画を分析しました：
 
-
-
 ```sql
 set @ownerId = 4242;
 set @hospitalId = 21;
@@ -51,8 +49,6 @@ LIMIT 0 , 1000
             -> Filter: (phone_numbers.phoneNumber = calls.pairPhoneNumber)  (cost=0.336 rows=0.105) (actual time=0.0105..0.0105 rows=724e-6 loops=1.06e+6)
                 -> Index lookup on phone_numbers using indeex_phonenumber_contact (contactId=contacts.id)  (cost=0.336 rows=1.05) (actual time=0.0085..0.00956 rows=0.486 loops=1.06e+6)
 ```
-
-
 
 #### 解説
 

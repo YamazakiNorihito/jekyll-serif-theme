@@ -59,10 +59,10 @@ volumes:
   https-portal-data:
 ```
 
-
 ## dockerfile
 
 - Dockerfile-node
+
 ```bash
 # ビルドステージ
 FROM node:18 as builder
@@ -100,9 +100,7 @@ CMD ["node", "dist/app.js"]
 
 ```
 
-
 - Dockerfile-redis
-
 
 ```bash
 # ベースイメージを指定

@@ -77,7 +77,6 @@ describe('TokenController', () => {
 
 </detail>
 
-
 <detail>
 <summary>TokenController.ts</summary>
 
@@ -114,7 +113,6 @@ export class TokenController extends BaseHttpController {
 ```
 
 </detail>
-
 
 <detail>
 <summary>package.json</summary>
@@ -174,4 +172,5 @@ export class TokenController extends BaseHttpController {
 
 
 ```
+
 </detail>

@@ -13,6 +13,7 @@ RedisClientをDIする方法と呼び出し方を紹介します。
 dependency injection containerは[TSyringe](https://github.com/microsoft/tsyringe#tsyringe)を使います。
 
 ### Dependency Injection
+
 ```typescript
 import 'reflect-metadata';
 import { container } from 'tsyringe';
@@ -34,6 +35,7 @@ container.registerInstance<RedisClientType>("RedisClient", redisClient);
 ```
 
 ### Resolving Dependencies
+
 ```typescript
 import { SchemaFieldTypes, RedisClientType } from 'redis';
 import { inject, singleton } from "tsyringe";

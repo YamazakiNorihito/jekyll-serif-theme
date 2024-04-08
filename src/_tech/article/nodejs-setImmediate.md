@@ -9,10 +9,10 @@ categories:
   - typescript
 ---
 
-## 
+##
+
 大量データをメモリを大量に使わずに処理するのに最適なFunctionを見つけました。
 それは `setImmediate`です。（[ドキュメント](https://nodejs.org/en/learn/asynchronous-work/understanding-setimmediate)
-
 
 ## タスクの性質
 
@@ -39,7 +39,6 @@ categories:
 # setImmediate の使用判断基準
 
 `setImmediate` の使用に関する判断基準は、主にタスクの性質とアプリケーションの要件に基づいています。以下は、`setImmediate` を使うかどうかを判断する際の主要な考慮事項です：
-
 
 ```typescript
 import { format } from 'fast-csv';

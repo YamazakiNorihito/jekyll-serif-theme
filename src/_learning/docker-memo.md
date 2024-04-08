@@ -39,7 +39,6 @@ a1b3ec38ca72   redis:latest                                                  "do
 04eccbd05a37   quay.io/keycloak/keycloak:22.0.4                              "/opt/keycloak/bin/k…"   5 months ago        Exited (143) 3 months ago                determined_jemison
 ```
 
-
 ```bash
 # 今接続しているnetworkを表示
 docker inspect --format='{{.Name}} - {{range $key, $_ := .NetworkSettings.Networks}}{{$key}}{{"\n"}}{{end}}' redius-redis-1
@@ -59,6 +58,7 @@ docker rmi $(docker images -f "dangling=true" -q)
 
 
 ```
+
 # docker compose
 
 ```bash

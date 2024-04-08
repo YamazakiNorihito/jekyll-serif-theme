@@ -77,6 +77,7 @@ sequenceDiagram
 ```
 
 ## EAP-TLS認証プロセス
+
 EAP-TLSを使用した認証プロセスでは、サプリカント（Supplicant）、オーセンティケータ（Authenticator）、および認証サーバー（Authentication Server）間で証明書が交換され、相互認証が行われます。以下はそのプロセスを示したシーケンス図です。
 
 ```mermaid
@@ -111,4 +112,3 @@ sequenceDiagram
 1. EAP-Request TLS (サーバー証明書提供): 認証サーバーがサーバー証明書を提供します。
 1. EAP-TLS Exchange: TLSハンドシェイクが続行され、相互認証とセキュアな通信チャネルの確立が行われます。
 1. EAP-Success or EAP-Failure: 認証結果がサプリカントに通知されます。
-

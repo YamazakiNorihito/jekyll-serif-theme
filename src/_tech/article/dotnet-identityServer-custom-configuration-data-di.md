@@ -10,24 +10,26 @@ categories:
 ---
 
 ## やったこと
+
 [Registering Custom Stores](https://docs.duendesoftware.com/identityserver/v6/data/configuration/#registering-custom-stores)の
 記載通り、下記をInterfaceを実装してDIしてみた。
+
 - [IClientStore](https://github.dev/DuendeSoftware/IdentityServer/blob/8acc6f5446192028fbc304e9bcd8985b32d4a6e9/src/Storage/Stores/IClientStore.cs#L15-L16)
 - [ICorsPolicyService](https://github.dev/DuendeSoftware/IdentityServer/blob/8acc6f5446192028fbc304e9bcd8985b32d4a6e9/src/Storage/Services/ICorsPolicyService.cs#L14-L15)
 - [IResourceStore](https://github.dev/DuendeSoftware/IdentityServer/blob/8acc6f5446192028fbc304e9bcd8985b32d4a6e9/src/Storage/Stores/IResourceStore.cs#L16-L17)
 - [IIdentityProviderStore](https://github.dev/DuendeSoftware/IdentityServer/blob/8acc6f5446192028fbc304e9bcd8985b32d4a6e9/src/Storage/Stores/IIdentityProviderStore.cs#L16-L17)
 
-
 ## なんで
+
 `Duende.IdentityServer.EntityFramework`を使うと個人で運用するには[Table数](https://github.dev/DuendeSoftware/IdentityServer/blob/8acc6f5446192028fbc304e9bcd8985b32d4a6e9/src/EntityFramework.Storage/Entities)が多すぎるなので、
 必要最低限でできないかなと考えた。
 チュートリアルでDIしている数が、４つしかなかったので、たぶん`Duende.IdentityServer.EntityFramework`を使わなくても
 永続ストレージに保存しながらAuthServerが実装できるんじゃないかとおもった。
 
-
 ## 実装
 
 *IClientStore*
+
 ```csharp
 using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
@@ -81,6 +83,7 @@ public class ClientStore : IClientStore
 ```
 
 *ICorsPolicyService*
+
 ```csharp
 using Duende.IdentityServer.Services;
 
@@ -110,6 +113,7 @@ public class CorsPolicyService : ICorsPolicyService
 ```
 
 *IResourceStore*
+
 ```csharp
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Stores;
@@ -188,6 +192,7 @@ public class ResourceStore : IResourceStore
 ```
 
 *IIdentityProviderStore*
+
 ```csharp
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Stores;
@@ -249,6 +254,7 @@ public class IdentityProviderStore : IIdentityProviderStore
 ```
 
 *HostingExtensions*
+
 ```csharp
 using Duende.IdentityServer;
 using IdentityServer.Configrations;
@@ -337,8 +343,9 @@ CorsPolicyServiceの実装が有効になるのは２つの条件を満たす必
    1. [IdentityServer4](https://identityserver4.readthedocs.io/en/latest/topics/cors.html#mixing-identityserver-s-cors-policy-with-asp-net-core-s-cors-policies)なので今回実装したVersionとはちがうものの記事には”ICorsPolicyProviderをカスタム実装することを選択した場合、ASP.NET CoreのCORSサービスとIdentityServerの使用との間に競合が生じる可能性があります。”なので気を付けましょう。
 
 DynamicにCrosを登録する場合`CorsPolicyBuilder`を使えばいいんだとさらなる[学び](https://github.com/DuendeSoftware/IdentityServer/blob/8acc6f5446192028fbc304e9bcd8985b32d4a6e9/src/IdentityServer/Hosting/CorsPolicyProvider.cs#L85C1-L98C6)があった。
-  - [CorsPolicyBuilder クラス](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.aspnetcore.cors.infrastructure.corspolicybuilder?view=aspnetcore-7.0)
-  - [ICorsPolicyProvider](https://learn.microsoft.com/ja-jp/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api#custom-cors-policy-providers) も実装しないといけないね
+
+- [CorsPolicyBuilder クラス](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.aspnetcore.cors.infrastructure.corspolicybuilder?view=aspnetcore-7.0)
+- [ICorsPolicyProvider](https://learn.microsoft.com/ja-jp/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api#custom-cors-policy-providers) も実装しないといけないね
 
 - IdentityProviderStoreについて
 
@@ -347,5 +354,5 @@ DynamicにCrosを登録する場合`CorsPolicyBuilder`を使えばいいんだ�
 IdentityProviderStoreがあるんじゃないのかと私の結論付けた。
 根拠は、IdentityServerでの[実装](https://github.com/DuendeSoftware/IdentityServer/blob/8eb790cfe5480fb43b1ed770cee8d34545d07adb/hosts/AspNetIdentity/Pages/Account/Login/Index.cshtml.cs#L155-L156)だ。
 
-なので、デフォルトで外部の認証先を表示したい場合は、` builder.Services.AddAuthentication()`のあとにつらつらと
+なので、デフォルトで外部の認証先を表示したい場合は、`builder.Services.AddAuthentication()`のあとにつらつらと
 認証先の設定をすればいいじゃないかと思った。

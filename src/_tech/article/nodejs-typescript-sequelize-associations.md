@@ -9,8 +9,7 @@ categories:
   - typescript
 ---
 
-読んだドキュメントはhttps://sequelize.org/docs/v6/core-concepts/assocs/　です。
-
+読んだドキュメントは<https://sequelize.org/docs/v6/core-concepts/assocs/>　です。
 
 ### Associations
 
@@ -24,7 +23,6 @@ Associationsには４種類ある
    1. `USER.hasMany(ORDER)` `USER`と`ORDER`の間に一対多の関係が存在し、外部キーがターゲットモデル（`ORDER`）に定義される
 4. The BelongsToMany association
    1. `ORDER.belongsToMany(PRODUCT, { through: 'ORDER_PRODUCT' })` `ORDER`と`PRODUCT`の間に多対多の関係が存在し、表ORDER_PRODUCTを junction tableとして使用する
-
 
 ```mermaid
 erDiagram
@@ -76,7 +74,6 @@ erDiagram
     }
 ```
 
-
 #### Standard relationships
 
 標準的なリレーショナルシップの作成の仕方
@@ -84,45 +81,51 @@ erDiagram
 1. **One-To-One**
    1. `hasOne` / `belongsTo`を一緒に使う
    2. Implementation
+
         ```typescript
             USER.hasOne(PROFILE, foreignKey: 'userId');
             PROFILE.belongsTo(USER);
         ```
+
    1. `USER`がsource model/`PROFILE`がtarget model　である
 2. **One-To-Many**
    1. `HasMany` / `belongsTo`を一緒に使う
    2. Implementation
+
         ```typescript
             USER.hasMany(ORDER, foreignKey: 'userId');
             ORDER.belongsTo(USER);
         ```
+
    1. `USER`がsource model/`ORDER`がtarget model　である
 3. **Many-To-Many**
    1. 二つの`belongsToMany` を併用します。
    2. Implementation
+
         ```typescript
             ORDER.belongsToMany(PRODUCT, { through: ORDER_PRODUCT });
             PRODUCT.belongsToMany(ORDER, { through: ORDER_PRODUCT });
         ```
 
-
 #### sourceKey と targetKey を使い分けるコツ
 
 #### BelongsTo アソシエーション
+
 **定義**: PROFILE.belongsTo(USER) では、PROFILEはソースモデル、USERはターゲットモデルです。
 **外部キーの配置**: この関係では、外部キーはソースモデル PROFILE に保持されます。
 **参照キー**: 外部キーはターゲットモデル USER のあるフィールドを参照します。このため、targetKeyを使用して、USERのどのフィールドを参照するかを指定します。
 
 #### HasOne および HasMany アソシエーション
+
 **定義**: USER.hasOne(PROFILE) および USER.hasMany(ORDER) では、Aがソース、Bがターゲットモデルです。
 **外部キーの配置**: これらの関係では、外部キーはターゲットモデル PROFILE/ORDER に配置されます。
 **参照キー**: 外部キーはソースモデル USER のあるフィールドを参照します。このため、sourceKeyを使用して、USERのどのフィールドを参照するかを指定します。
 
 #### BelongsToMany アソシエーション
+
 **定義**: ORDER.belongsToMany(PRODUCT) は、2つのモデル間の多対多の関係を示します。
 **外部キーの配置**: この関係では、ジャンクションテーブル（中間テーブル）が使用されます。
 **参照キー**: ジャンクションテーブルには、ソースモデル ORDER と ターゲットモデル PRODUCT の両方のフィールドを参照する外部キーが含まれます。したがって、sourceKey（ORDERのフィールドを参照）とtargetKey（PRODUCTのフィールドを参照）の両方が使用可能です。
-
 
 #### なぜAssociationsはペアで定義するのか？
 
@@ -138,7 +141,6 @@ await USER.findOne({ include: PROFILE });
 await PROFILE.findOne({ include: USER });
 
 ```
-
 
 ### 主キー以外のフィールドを参照するアソシエーションの作成
 
@@ -172,4 +174,3 @@ erDiagram
 Associationsで参照されるフィールドには、一意制約が設定されていなければならないことを忘れないでください。
 そうでない場合、エラーがスローされます
 （SequelizeDatabaseError のような謎のエラーメッセージが表示されることもあります）： SQLITE_ERROR: foreign key mismatch - "ships" referencing "captains" for SQLite)。
-

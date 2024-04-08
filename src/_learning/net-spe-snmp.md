@@ -19,7 +19,6 @@ SNMPは、ネットワークデバイス（ルータ、スイッチ、サーバ�
 - **ポート161**: SNMPマネージャがSNMPエージェントに対してリクエスト（GetRequest, SetRequest等）を送信するために使用します。
 - **ポート162**: SNMPエージェントがSNMPマネージャにトラップ（非同期通知）を送信するために使用します。
 
-
 ## 機能
 
 - **データ収集**: ネットワークデバイスからの情報収集。
@@ -85,6 +84,7 @@ MIBを通じて、ネットワーク管理者はデバイスの状態を監視�
 ### シーケンス図
 
 #### 簡易版
+
 ```mermaid
 sequenceDiagram
     participant Manager as SNMP Manager
@@ -96,8 +96,8 @@ sequenceDiagram
     Note over Manager,Agent: SNMP Agent sends requested data back
 ```
 
-
 #### ちょっと詳しく版
+
 ```mermaid
 sequenceDiagram
     participant Manager as SNMP Manager
@@ -123,8 +123,6 @@ sequenceDiagram
     Note over Manager,Agent1: SNMP Manager receives Trap from Agent 1
 
 ```
-
-
 
 ```bash
 [SNMPマネージャ]              [L2スイッチ]                [L3スイッチ]
@@ -153,6 +151,6 @@ sequenceDiagram
 
 ```
 
-
 # 参考
+
 - [ネットワーク監視の超基本「SNMP」とは？](https://blogs.manageengine.jp/itom_what_is_snmp/)

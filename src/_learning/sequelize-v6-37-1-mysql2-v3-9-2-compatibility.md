@@ -8,6 +8,7 @@ weight: 7
 ---
 
 # 概要
+
 sequelize v6.37.1とmysql2 v3.9.2の間には相性問題があります。
 解決先は、mysql2 v3.8.0までに止めるか、sequelizeのTypeCastを自前実装してください。
 
@@ -491,8 +492,8 @@ SequelizeのBindパラメータを使ってDatetime型をColumn指定でSelect�
   ~/Documents/mystady/simple-codes$ 
 
 ```
-</details>
 
+</details>
 
 ほんとだTypeCastの処理変わっている
 
@@ -518,7 +519,6 @@ SequelizeのBindパラメータを使ってDatetime型をColumn指定でSelect�
     };
   }()
 ```
-
 
 ## じゃあなんでsequelizeのv6.37.1でエラーになんのよ
 
@@ -600,14 +600,12 @@ callAtの値が`è`と表示されました。
 
 </details>
 
-
 MySQL2のfieldWrapperの[String Function](https://github.com/sidorares/node-mysql2/blob/68cc3358121a88f955c0adab95a2d5f3d2b4ecb4/lib/parsers/binary_parser.js#L92-L93)は、DATETIMEには対応してないみたいです。
 
-
 ### んじゃどうすればいいのよ、
+
 結論、`field.buffer()`を呼ぼうぜ！
 `buffer()`を使って直接バイナリデータから日時情報を解析することで日時が期待通り表示されました。
-
 
 ```bash
   callAtの値:->  2024-02-20T18:05:13.000Z
@@ -663,4 +661,3 @@ MySQL2のfieldWrapperの[String Function](https://github.com/sidorares/node-mysq
   queryDatabase();
 
 ```
-

@@ -26,4 +26,3 @@ Androidエンジニアの同僚からAndroidアプリの開発を学ぶための
 
 さらに、Kotlinのオンラインプレイグラウンドでサンプルコードを試すことができる
 [Kotlin PlayGround](https://play.kotlinlang.org/)
-

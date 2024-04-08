@@ -9,13 +9,11 @@ TypeScriptでWebアプリを使っていて、DI (Dependency injection)が
 必要だったので、[`microsoft/tsyringe`](https://github.com/microsoft/tsyringe)を使った見たのだが、
 どうも依存注入の順番がすごく大事らしい。
 
-
 依存注入される`controllers/freee.ts`よりも先に`services/freeeHrService.ts`を
 ContainerにRegisrしないと実行時に`Error: Cannot inject the dependency "freeeService" at position #0 of "FreeeController" constructor. Reason:`という大エラーになる。
 
-
-
 ### 依存注入するクラスとされるクラスの実装
+
 ```typescript
 // controllers/freee.ts
 import ejs from 'ejs';
@@ -64,7 +62,6 @@ export class FreeeService {
 }
 ```
 
-
 ### エラーが発生するDI設定
 
 ```typescript
@@ -94,6 +91,7 @@ export default router;
 ```
 
 エラーメッセージ
+
 ```typescript
 node_modules/tsyringe/dist/cjs/dependency-container.js:297
         })();

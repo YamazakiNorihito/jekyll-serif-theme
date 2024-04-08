@@ -41,7 +41,6 @@ HTTP/3は、HTTPの次の大きな進化であり、QUICトランスポートプ
 
 これらのプロトコルは、ウェブのパフォーマンスとセキュリティを向上させるために進化しています。
 
-
 ### HTTP/1.x
 
 ```mermaid
@@ -61,8 +60,6 @@ sequenceDiagram
     C->>S: Connection Close Notice
     S-->>C: Connection Close Ack
 ```
-
-
 
 ### HTTP/2
 
@@ -84,7 +81,6 @@ sequenceDiagram
     C->>S: Connection Close Notice
 ```
 
-
 ### HTTP/3
 
 ```mermaid
@@ -102,7 +98,6 @@ sequenceDiagram
     C->>S: Connection Close Notice
 ```
 
-
 ### 違いの要約
 
 - **HTTP/1.x** は各リクエスト/レスポンスが独立しており、パイプライニングにも関わらずヘッド・オブ・ライン・ブロッキングの問題が残ります。
@@ -114,7 +109,6 @@ sequenceDiagram
 3. **HTTPリクエスト送信**: TCP/QUIC接続が確立された後、クライアントはHTTPリクエストを送信します。このリクエストには、クライアントがサポートするHTTPバージョン情報が含まれています（例: `Upgrade: h2` ヘッダーを通じてHTTP/2を提案）。
 4. **HTTPバージョンの決定と応答**: サーバーはクライアントのリクエストを受け取り、サポートするHTTPバージョンを決定します。サーバーは選択したバージョンで応答を返します。HTTP/2へのアップグレード要求がある場合、サーバーは適切な応答ヘッダー（例: `HTTP/2 101 Switching Protocols`）を使用してこれを承認します。
 5. **HTTP通信の開始**: バージョンが決定された後、双方は合意されたバージョンでHTTP通信を開始します。
-
 
 ```mermaid
 sequenceDiagram

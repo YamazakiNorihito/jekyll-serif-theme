@@ -11,9 +11,11 @@ weight: 7
 DNSレコードのリソースファイル（ゾーンファイル）は、ドメイン名とそのドメインに関連する様々なリソースレコード（RR）を定義するために使用されます。
 
 ---
+
 ### DNSゾーンファイルサンプル
 
 short version
+
 ```bind
 $TTL 86400 ; 24 hours could be shorter
 @       IN      SOA     ns1.example.com. admin.example.com. (
@@ -51,8 +53,8 @@ www     IN      CNAME   @
 
 ```
 
-
 long version
+
 ```bind
 $TTL 86400 ; 24 hours could be shorter
 example.com. IN SOA ns1.example.com. admin.example.com. (
@@ -90,8 +92,8 @@ example.com. IN TXT "v=spf1 ip4:192.0.2.5 ~all"
 
 ```
 
-
 ### 解説
+
 - `$TTL`: このゾーンでのデフォルトの生存時間。ここでは24時間に設定。
 - `SOAレコード`: ゾーンの権威情報。更新管理に使用される。
 - `NSレコード`: このゾーンのDNSサーバー。ここでは`ns1.example.com`と`ns2.example.com`が使用されている。
@@ -100,9 +102,10 @@ example.com. IN TXT "v=spf1 ip4:192.0.2.5 ~all"
 - `CNAMEレコード`: エイリアス（ここでは`www`）を実際のドメイン（`@`は現在のゾーンを指す）にマッピング。
 - `TXTレコード`: ドメインに関連するテキスト情報。例えば、SPFレコードがこれに含まれる。
 
-
 ---
+
 ## DNSレコード設定一覧
+
 ### SOAレコード（Start Of Authority）
 
 「権威の開始」という意味
@@ -115,28 +118,34 @@ RNAME（admin.example.com.）
 ・このドメインの管理者のメールアドレス（責任者のEメール）
 ・ DNS のサーバがこのアドレスを使うことはないが、人がゾーンの管理者と連絡を取りたい際に使う
 ・メールアドレスをそのまま書くのではなく、「@」記号を「.」に置き換えて記載
-・例えば、「admin@example.jp」が管理者のメールアドレスであれば、「admin.example.jp」と記載する
+・例えば、「<admin@example.jp>」が管理者のメールアドレスであれば、「admin.example.jp」と記載する
 
 ### Aレコード（IPv4アドレス）
+
 example.com. IN A 192.0.2.1
 
 ### AAAAレコード（IPv6アドレス）
+
 example.com. IN AAAA 2001:db8::1
 
 ### CNAMEレコード（Canonical Name）
-www.example.com. IN CNAME example.com.
+<www.example.com>. IN CNAME example.com.
 
 ### MXレコード（Mail Exchange）
+
 example.com. IN MX 10 mail.example.com.
 
 ### TXTレコード（テキスト情報）
+
 example.com. IN TXT "v=spf1 include:_spf.example.com ~all"
 
 ### NSレコード（DNSサーバー）
+
 example.com. IN NS ns1.example.com.
 example.com. IN NS ns2.example.com.
 
 ### PTRレコード（ポインタレコード、逆引き用）
+
 1.2.0.192.in-addr.arpa. IN PTR example.com.
 
 ***PTRレコードの構造***
@@ -150,17 +159,19 @@ sample)IPv4アドレス192.0.2.1のPTRレコードの場合、その逆引きエ
 `1.2.0.192.in-addr.arpa. IN PTR example.com.`
 
 PTRレコードの使用目的
+
 - 電子メールの送信元認証: 電子メールサーバーが他のメールサーバーにメールを送信する際、受信側のサーバーは、送信元IPアドレスのPTRレコードをチェックして、そのドメイン名が正当なメールサーバーからのものであるかを確認します。これにより、スパムや不正なメールの送信を抑制します。
 - ログや監視: サーバーのアクセスログに記録されるIPアドレスから、どのドメインがアクセスしてきたかを特定するのに役立ちます。
 - セキュリティ: セキュリティ監視ツールは、ネットワーク上の異常なトラフィックを特定する際に、PTRレコードを使用してIPアドレスの背後にあるドメイン情報を取得します。
 
 ### SRVレコード（サービスレコード）
-_sip._tcp.example.com. IN SRV 0 5 5060 sipserver.example.com.
 
+_sip._tcp.example.com. IN SRV 0 5 5060 sipserver.example.com.
 
 注意: 実際にこれらの設定を適用する際は、`example.com`や`192.0.2.1`などの値を実際のドメイン名やIPアドレスに置き換えてください。
 
 ---
+
 ## SPFとPTRレコードについて
 
 ### PTRレコードと電子メールの送信元認証
@@ -184,6 +195,7 @@ sequenceDiagram
     R->>R: IPアドレスの照合
     R->>S: メール受理/拒否
 ```
+
 1. メール送信: 送信メールサーバー(S)が受信メールサーバー(R)にメールを送信します。
 2. PTRレコード照会: 受信メールサーバーは、送信メールサーバーのIPアドレスに基づいてPTRレコードを照会するためにDNSサーバー(DNS)に問い合わせます。
 3. PTRレコード応答: DNSサーバーは、該当するIPアドレスのドメイン名を含むPTRレコードの情報を受信メールサーバーに返します。
@@ -200,7 +212,6 @@ TXTレコード内に設定されるSPF（Sender Policy Framework）レコード
 
 このSPFレコードは、example.comドメインからのメール送信が_spf.example.comによって定義されたサーバーからのみ許可され、それ以外の送信元からのメールはソフトフェイル（~all）として扱われることを意味します。ソフトフェイルは、メールがスパムである可能性が高いとみなされるべきであるが、完全には拒否されないという意味です。
 
-
 ```mermaid
 sequenceDiagram
     participant S as 送信メールサーバー
@@ -212,6 +223,7 @@ sequenceDiagram
     R->>R: SPFレコードに基づく検証
     R->>S: メール受理/拒否
 ```
+
 1. メール送信: 送信メールサーバー(S)が受信メールサーバー(R)に対してメールを送信します。
 2. SPFレコード照会: 受信メールサーバーは、送信されたメールのドメインに対応するSPFレコードを取得するためにDNSサーバー(DNS)に問い合わせます。
 3. SPFレコード応答: DNSサーバーは、要求されたSPFレコードの情報を受信メールサーバーに返します。
@@ -219,9 +231,11 @@ sequenceDiagram
 5. メール受理/拒否: 検証の結果、メールが許可された送信サーバーから送信されたと判断されればメールを受理し、そうでなければ拒否します。
 
 ### 結論
+
 PTRレコードは、IPアドレスの所有者のドメインを逆引きするために使用され、電子メールの送信元の識別に間接的に役立ちますが、メインの送信元認証メカニズムではありません。
 SPFレコード（TXTレコード内で定義）は、ドメインからの電子メール送信を認証するための直接的な方法を提供し、偽装されたメールの識別に効果的です。
 
 ## 参考
+
 - [SOAレコードには何が記述されている？](https://atmarkit.itmedia.co.jp/fnetwork/dnstips/014.html)
 - [PTRレコード【DNSレコード】](https://wa3.i-3-i.info/word12291.html)

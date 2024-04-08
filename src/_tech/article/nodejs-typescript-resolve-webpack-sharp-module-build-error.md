@@ -9,6 +9,7 @@ categories:
 ---
 
 Webpackでビルドをしているのですが、sharpライブラリをinstallしたら突然Buildエラーになった。
+
 ```bash
 ERROR in ./node_modules/sharp/build/Release/sharp-darwin-arm64v8.node 1:0
 Module parse failed: Unexpected character '�' (1:0)
@@ -23,6 +24,7 @@ You may need an appropriate loader to handle this file type, currently no loader
 
 webpack 5.88.2 compiled with 1 error and 1 warning in 19696 ms
 ```
+
 原因は、Node.jsの画像処理ライブラリである`sharp`をWebpackでビルドしようとした際に発生しています。
 `sharp`は内部でネイティブのバイナリファイルを使用しており、Webpackはデフォルトではこれらのバイナリファイルを扱うことができません。
 
@@ -33,6 +35,7 @@ Webpackで`sharp`モジュールのビルドエラーを解決するために、
 以下の設定をwebpack.config.jsに追加することで、問題を解決することができます：
 
 *Webpack*
+
 ```javascript
 module: {
   rules: [
@@ -43,13 +46,16 @@ module: {
   ],
 },
 ```
+
 [node-loader](https://webpack.js.org/loaders/node-loader/)はWebpackのローダーの一つで、
 Node.jsの[ネイティブモジュール](https://js.studio-kingdom.com/webpack/getting_started/using_loaders)（.node拡張子を持つファイル）をWebpackで扱えるように変換する役割を持っています。
 これにより、サーバーサイドやデスクトップアプリケーションでよく使用されるネイティブモジュールを、
 Webアプリケーション内で利用することが可能になります。
 
 ### 環境設定
+
 *package.json*
+
 ```javascript
 {
   "name": "sample",
@@ -142,6 +148,7 @@ Webアプリケーション内で利用することが可能になります。
 ```
 
 *tsconfig.json*
+
 ```javascript
 {
   "compilerOptions": {
@@ -171,6 +178,7 @@ Webアプリケーション内で利用することが可能になります。
 ```
 
 *webpack.config.js*
+
 ```javascript
 const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');

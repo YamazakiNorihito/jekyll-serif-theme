@@ -49,6 +49,7 @@ export default router;
 ### HTML FormでDeleteを指定する
 
 methodOverride関数にクエリストリングのキーを文字列として指定することで、クエリストリングの値を使用してHTTPメソッドを上書きできます。
+
 ```html
 
     <div id="attendance-input">
@@ -69,7 +70,6 @@ methodOverride関数にクエリストリングのキーを文字列として指
     </div>
 
 ```
-
 
 ### 環境情報
 

@@ -10,6 +10,7 @@ categories:
 /tmp はデフォルトサイズが512MBなので気をつけるように
 
 *nodejs v20*
+
 ```javascript
 import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
 import { writeFile, readFile, access } from 'fs/promises';
@@ -71,7 +72,6 @@ function streamToString(stream) {
 }
 
 ```
-
 
 ### 参考
 

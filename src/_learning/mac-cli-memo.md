@@ -12,8 +12,8 @@ weight: 7
 ```bash
 # Currentディレクトリ内のファイルを一覧表示
 ~/Downloads$ ls
-Dump20240227.sql	Dump20240227_1.sql.zip
-Dump20240227.sql.zip	Dump20240227_2.sql
+Dump20240227.sql Dump20240227_1.sql.zip
+Dump20240227.sql.zip Dump20240227_2.sql
 
 # 特定のファイルのフルパス取得
 ~/Downloads$ realpath Dump20240227_2.sql
@@ -81,6 +81,7 @@ chmod +x /Users/{userName}/Documents/mystady/simple-codes/DEV-746/unit-test-log/
 ```
 
 ## 2. Cronの設定とアクセス権限
+
 ### 2.1 参考サイト
 
 以下のサイトが参考になります:
@@ -89,6 +90,7 @@ chmod +x /Users/{userName}/Documents/mystady/simple-codes/DEV-746/unit-test-log/
 ## 3. Cron Jobの登録
 
 `crontab -e`コマンドを使用してCron Jobを登録します。以下の手順に従ってください。
+
 1. Terminalを開いて`crontab -e`を実行します。
 1. `i`キーを押して挿入モードに入ります。
 1. 適切な行に以下を追加します。
@@ -104,6 +106,7 @@ chmod +x /Users/{userName}/Documents/mystady/simple-codes/DEV-746/unit-test-log/
 `crontab -l`コマンドを使用して、登録されたジョブが正しく設定されているか確認します。
 
 ## 5. Cron Jobのログ確認
+
 Cron Jobが正しく実行されているかを確認するには、以下のコマンドを使用してログを確認します。
 
 ```bash

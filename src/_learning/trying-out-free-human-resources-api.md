@@ -142,6 +142,6 @@ Authorization: Bearer {{access_token}}
 }
 ```
 
-
 参考
+
 - [人事労務APIリファレンス](https://developer.freee.co.jp/reference/hr/reference)

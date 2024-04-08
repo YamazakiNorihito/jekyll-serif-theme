@@ -10,10 +10,12 @@ weight: 7
 # KeycloakへRestしてみた
 
 ## 前提
+
 - [KeyCloakをDockerComposeで立ち上げる](/tech/article/keycloak-docker-compose/) でKeyCloakを立ち上げていること
 - VscodeのRestClientで実行する
 
 ## 実際に投げたRequest
+
 ```bash
 
 @baseuri = http://localhost:8080/

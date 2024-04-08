@@ -10,7 +10,6 @@ weight: 7
 - [github][`cloud-init`](https://github.com/canonical/`cloud-init`)
 - [`cloud-init` ドキュメント (v23.4.3)](https://cloudinit.readthedocs.io/en/latest/)
 
-
 # [`cloud-init` documentation](https://cloudinit.readthedocs.io/en/latest/index.html)
 
 `cloud-init` は、クロスプラットフォームのクラウドインスタンスの初期化のための業界標準のマルチディストリビューション方法です。主要なパブリッククラウドプロバイダー、プライベートクラウドインフラストラクチャのプロビジョニングシステム、およびベアメタルインストールでサポートされています。
@@ -30,17 +29,21 @@ weight: 7
 これは、主に開発者、システム管理者、および他のITプロフェッショナルによって使用され、VM、クラウドインスタンス、またはネットワーク上のマシンの構成を自動化します。簡潔にするため、このページの残りの部分ではインスタンスのみを参照しますが、議論にはベアメタルとVMも含まれていると仮定します。定型的なセットアップタスクを自動化することで、`cloud-init` はシステムのプロビジョニングにおいて反復性と効率性を確保します。
 
 ## `cloud-init` の利点は何ですか？
+
 新しいクラウドインスタンスを展開するとき、`cloud-init` は供給された初期設定を取得し、その設定をインスタンスが作成されるときに自動的に適用します。これは、やるべきことリストを書いて、そのリストを`cloud-init` に処理させるのと似ています。
 
 `cloud-init` の真の力は、設定命令を必要な回数だけ繰り返し使用でき、常に一貫性のある信頼性の高い結果を得られるという点にあります。システム管理者であり、複数のマシンを展開したい場合、手動でプロビジョニングするのにかかる時間と労力の一部でそれを行うことができます。
 
 ## `cloud-init` は何を行いますか？
+
 `cloud-init` は、通常新しいインスタンスが作成される際に行われるさまざまなタスクを処理できます。ホスト名の設定、ネットワークインタフェースの構成、ユーザーアカウントの作成、スクリプトの実行などのアクティビティに責任があります。これにより、展開プロセスが効率化され、クラウドインスタンスはすべて同じ方法で自動的に構成されるため、人為的エラーを引き起こす可能性が低下します。
 
 ## `cloud-init` はどのように動作しますか？
+
 `cloud-init` の動作は、ブートプロセス中に主に2つの異なるフェーズで行われます。最初のフェーズは、ネットワーキングが有効になる前の初期（ローカル）ブート段階で行われます。2番目のフェーズは、`cloud-init` がネットワーキング構成を適用した後の遅いブート段階で行われます。
 
 ### 初期ブート時
+
 このネットワーキング前の段階では、`cloud-init` はデータソースを発見し、そこからすべての構成データを取得し、ネットワーキングを構成します。この段階では、以下のようなことが行われます。
 
 - データソースの特定：ハードウェアは、インスタンスが実行されているデータソースを特定するための組み込み値を確認します。データソースは、すべての構成データのソースです。
@@ -54,6 +57,7 @@ weight: 7
   - ネットワーク構成の書き込み：`cloud-init` はネットワーク構成を書き込み、DNSを構成し、ネットワーキングサービスが起動されると適用される準備が整います。
 
 ### 遅いブート時
+
 ネットワークが構成された後のブート段階では、`cloud-init` はプロビジョニングに必須ではなかったタスクを実行します。これは、ベンダーデータおよび/またはユーザーデータで指定されたとおりに、実行中のインスタンスを必要に応じて構成する場所です。以下のことに注意を払います。
 
 - 構成管理：`cloud-init` は、Puppet、Ansible、またはChefなどのツールと連携して、より複雑な構成を適用し、システムが最新であることを確認します。
@@ -97,6 +101,7 @@ weight: 7
 </details>
 
 ## 次は何ですか？
+
 `cloud-init` の基本的な概要、機能、動作について把握したので、おそらく[自分で試してみたいと思うでしょう。](https://cloudinit.readthedocs.io/en/latest/tutorial/qemu.html#tutorial-qemu)
 
 さらに詳細に読むこともできます。[異なるブート段階で `cloud-init` が行う作業](https://cloudinit.readthedocs.io/en/latest/explanation/boot.html#boot-stages)や、`cloud-init` に渡すことができる[構成の種類](https://cloudinit.readthedocs.io/en/latest/explanation/configuration.html#configuration)、およびそれらがどのように使用されるかについて詳しく説明されています。
@@ -106,7 +111,9 @@ weight: 7
 内部的には、`cloud-init` は単一の構成を構築し、その後 `cloud-init` の寿命全体で参照されます。この構成は複数のソースから構築され、キーが複数のソースで定義されている場合は、優先度の高いソースが優先度の低いソースを上書きします。
 
 ## 基本構成
+
 優先度の低いものから高いものまで、構成ソースは次のとおりです。
+
 - ハードコードされた構成：`cloud-init` のソース内に存在し、変更できない構成。
 - 構成ディレクトリ：`/etc/cloud/cloud.cfg` および `/etc/cloud/cloud.cfg.d` に定義されたもの。
 - ランタイム構成：`/run/cloud-init/cloud.cfg` に定義されたもの。
@@ -115,6 +122,7 @@ weight: 7
 これらの4つのソースが基本構成を構成します。
 
 ## ベンダーデータとユーザーデータ
+
 基本構成に追加されるのは、データソースによって提供される[ベンダーデータ](https://cloudinit.readthedocs.io/en/latest/explanation/vendordata.html#vendordata)と[ユーザーデータ](https://cloudinit.readthedocs.io/en/latest/explanation/format.html#user-data-formats)です。
 これらはデータソースから取得され、インスタンスの起動時に定義されます。
 
@@ -122,23 +130,29 @@ weight: 7
 基本構成で定義されている内容の多くは、ベンダーデータとユーザーデータによって上書きできますが、基本構成ソースは [#cloud-config](https://cloudinit.readthedocs.io/en/latest/explanation/format.html#user-data-formats) に準拠していません。
 
 ## ネットワーク構成
+
 ネットワーク構成は、他の cloud-init 構成とは独立して行われます。詳細については、[ネットワーク構成のドキュメント](https://cloudinit.readthedocs.io/en/latest/reference/network-config.html#network-config)を参照してください。
 
 ## 構成の指定
+
 ### エンドユーザー
+
 [ユーザーデータ](https://cloudinit.readthedocs.io/en/latest/explanation/format.html#user-data-formats)をクラウドプロバイダーに渡します。`cloud-init` をサポートするすべてのプラットフォームは、ユーザーデータを提供する方法を提供します。これを行う方法がわからない場合は、利用しているクラウドプラットフォームが提供するドキュメントを参照してください。また、[データソースセクション](https://cloudinit.readthedocs.io/en/latest/reference/datasources.html#datasources)に関連する `cloud-init` ドキュメントがある場合もあります。
 
 インスタンスが初期化されると、ユーザーデータを編集することはできません。ユーザーデータはクラウドから直接取得されるため、ローカルファイルにユーザーデータが含まれていても、次の起動時に上書きされる可能性があります。
 
 ### ディストリビューションプロバイダー
+
 基本構成を変更します。これは、通常、基本の [cloud.cfg テンプレート](https://github.com/canonical/cloud-init/blob/main/config/cloud.cfg.tmpl)を変更するための PR を提出し、ディストリビューションごとに `/etc/cloud/cloud.cfg` をカスタマイズするために使用されます。さらに、`/etc/cloud/cloud.cfg.d` にファイルを追加して、基本構成の一部を上書きすることもできます。
 
 ### クラウドプロバイダー
+
 ベンダーデータを渡します。これは、クラウドが独自のカスタマイズを提供するための推奨される方法です。一部の場合では、クラウドがサポートするイメージの場合に、ディストリビューションプロバイダーと同じ方法で基本構成を変更することが意味をなす場合もあります。
 
 # [Boot stages](https://cloudinit.readthedocs.io/en/latest/explanation/boot.html)
 
 ブートには5つの段階があります：
+
 1. Detect
 1. Local
 1. Network
@@ -161,6 +175,7 @@ weight: 7
   - なし
 
 ローカルステージの目的は次のとおりです：
+
 - 「ローカル」データソースを見つけること
 - システムにネットワーク構成を適用すること（「フォールバック」を含む）
   
@@ -209,14 +224,12 @@ Azureなどの一部のクラウドでは、このステージで `/etc/fstab` �
 
 このステージでは、パートハンドラと[ブートフック](https://cloudinit.readthedocs.io/en/latest/explanation/format.html#cloud-boothook)が実行されます。
 
-
 <details>
 <summary>要するに</summary>
 
 `cloud-init.service` はクラウド上の仮想マシンや物理サーバーが起動する際に、ネットワークが利用可能になった後の段階で実行されるプロセスです。このサービスの主な目的は、ネットワーク経由で提供されるユーザーが指定したデータを取得し、処理することです。これには、特定のウェブページからのデータの取り込み、圧縮解除、および特定の操作を自動実行するスクリプトの実行が含まれます。また、ディスクの設定やファイルシステムのマウントポイントの設定など、システムのストレージ構成を設定する作業もこのステージで行われます。これらの処理を通じて、マシンはユーザーの要求に応じた形で正しく設定され、使用準備が整います。
 
 </details>
-
 
 ## Config
 
@@ -250,7 +263,6 @@ Azureなどの一部のクラウドでは、このステージで `/etc/fstab` �
 
 `cloud-init` の完了を待機している外部のスクリプトは、`cloud-init status --wait` サブコマンドを使用して、独自の `systemd` ユニットの依存関係チェーンを記述する必要なしに、`cloud-init` が完了するまで外部スクリプトをブロックするのに役立ちます。詳細については、[status](https://cloudinit.readthedocs.io/en/latest/explanation/boot.html#:~:text=dependency%20chains.%20See-,status,-for%20more%20info) を参照してください。
 
-
 <details>
 <summary>要するに</summary>
 
@@ -266,7 +278,6 @@ Azureなどの一部のクラウドでは、このステージで `/etc/fstab` �
 デフォルトでは、`Cloud-init` は実行時にキャッシュ内のインスタンスIDを実行時に決定したインスタンスIDと照合して、どのケースで実行されているかを判断しようとします。一致しない場合、これがインスタンスの最初のブートであり、そうでない場合は後続のブートです。内部的には、`Cloud-init` はこの動作を `check` と呼んでいます。
 この動作は、起動済みのインスタンスからキャプチャされたイメージが正しく動作するために必要ですので、ジェネリックなクラウドイメージにはデフォルトで含まれています。しかし、この動作が問題を引き起こす場合もあります[[2](https://cloudinit.readthedocs.io/en/latest/explanation/boot.html#problems)]。これらのケースでは、`Cloud-init` はシステムに存在するインスタンスIDを無条件に信頼するように動作を変更するサポートがあります。これはつまり、キャッシュが存在する場合に `Cloud-init` が新しいインスタンスを検出しないことを意味し、したがって、`Cloud-init` が新しいインスタンス（およびそのための最初のブート）を検出する唯一の方法は、`Cloud-init` のキャッシュを手動で削除することです。内部的には、この動作を `trust` と呼んでいます。
 これらの動作のどちらを使用するかを構成するには、`Cloud-init` は `manual_cache_clean` 構成オプションを公開しています。`false`（デフォルト）の場合、`Cloud-init` はキャッシュ内のインスタンスIDが一致しない場合にキャッシュをチェックしてクリーンアップします（上述の通り、これがデフォルトです）。`true` の場合、`Cloud-init` は既存のキャッシュを信頼します（したがって、クリーンアップしません）。
-
 
 <details>
 <summary>まとめると</summary>
@@ -292,9 +303,7 @@ Azureなどの一部のクラウドでは、このステージで `/etc/fstab` �
   - `false`（デフォルト）：インスタンスIDが一致しない場合にキャッシュをクリーンします。
   - `true`：既存のキャッシュを信頼し、キャッシュをクリーンしません。
 
-
 <details>
-
 
 <details>
 <summary>要すると</summary>
@@ -303,15 +312,13 @@ Azureなどの一部のクラウドでは、このステージで `/etc/fstab` �
 
 <details>
 
-
 ## Manual cache cleaning
-`Cloud-init` は、キャッシュを手動でクリーンアップするためのコマンド `cloud-init clean` を提供しています。詳細については、[クリーン](https://cloudinit.readthedocs.io/en/latest/reference/cli.html#cli-clean)のドキュメントを参照してください。
 
+`Cloud-init` は、キャッシュを手動でクリーンアップするためのコマンド `cloud-init clean` を提供しています。詳細については、[クリーン](https://cloudinit.readthedocs.io/en/latest/reference/cli.html#cli-clean)のドキュメントを参照してください。
 
 ### Reverting manual_cache_clean setting
 
 現在、`manual_cache_clean` が `true` で起動されたインスタンスを `trust` 動作から `check` 動作に切り替えるサポートはありません。キャッシュを手動でクリーンアップする以外に方法はありません。
-
 
 ***Warning***<br>
 現在 `trust` モードであるインスタンスをイメージとしてキャプチャし、他のインスタンスを起動する場合、キャッシュを手動でクリーンアップする必要があります。そうしないと、キャプチャされたイメージから起動されたインスタンスはすべて、最初のブートをキャプチャされたインスタンスの後続のブートとして検出し、インスタンスごとの構成を適用しません。
@@ -324,4 +331,3 @@ Azureなどの一部のクラウドでは、このステージで `/etc/fstab` �
 
 - クラウドのメタデータサービスが不安定であり、`cloud-init` がそのプラットフォームでローカルにインスタンスIDを取得できない場合、`cloud-init` のインスタンスIDの決定が失敗することがあります。そのため、これがインスタンスの最初のブートか後続のブートかを判断することができなくなります（[#1885527](https://bugs.launchpad.net/ubuntu/+source/cloud-init/+bug/1885527)）。
 - `cloud-init` が物理アプライアンスやデバイスをプロビジョニングするために使用され、攻撃者が異なるインスタンスIDを持つデータソースをデバイスに提示できる場合、`cloud-init` のデフォルトの動作では、これがインスタンスの最初のブートと検出され、攻撃者の構成でデバイスがリセットされます（これは、[NoCloud データソース](https://cloudinit.readthedocs.io/en/latest/explanation/boot.html#:~:text=observed%20with%20the-,NoCloud%20datasource,-in%20%231879530).)で観察されました（[#1879530](https://bugs.launchpad.net/ubuntu/+source/cloud-init/+bug/1879530)）。）。
-

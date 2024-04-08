@@ -1,12 +1,12 @@
 
 ---
+
 title: "AWS Elastic Beanstalk"
 date: 2023-11-22T06:14:00
 jobtitle: ""
 linkedinurl: ""
 weight: 7
 ---
-
 
 [AWS Elastic Beanstalk](https://aws.amazon.com/jp/elasticbeanstalk/)(ビーン・ストーク)というのを見つけた。
  Expressを使って開発WebアプリケーションをそのままDeployできそうな

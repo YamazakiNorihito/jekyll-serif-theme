@@ -15,7 +15,7 @@ ChatGPTの新機能：インターネット閲覧がPlusユーザーに再展開
 原文
 
 >Browse is rolling back out to Plus users (September 27, 2023)
-Browse is rolling out to all Plus users. ChatGPT can now browse the internet to provide you with current and authoritative information, complete with direct links to sources. It is no longer limited to data before September 2021. 
+Browse is rolling out to all Plus users. ChatGPT can now browse the internet to provide you with current and authoritative information, complete with direct links to sources. It is no longer limited to data before September 2021.
 >
 >To try it out, enable Browse in your beta features setting.
 >
@@ -31,10 +31,8 @@ Toggle on ‘Browse with Bing’
 
 ![設定](/images/tech/ChatGPT-BrowsePlusUpdate_20230927_2.png)
 
-
 設定手順
 
 ![設定](/images/tech/ChatGPT-BrowsePlusUpdate_20230927_1.png)
-
 
 きれいにまとめてくれて助かりますね。

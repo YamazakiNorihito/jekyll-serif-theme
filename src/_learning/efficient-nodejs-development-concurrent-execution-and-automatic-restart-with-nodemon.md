@@ -12,13 +12,13 @@ weight: 7
 クライアント、認証サーバー、プロテクトサーバーを同時に動かす方法
 [Git](https://github.com/oauthinaction/oauth-in-action-code/tree/master/exercises/ch-5-ex-3)
 
-
 ```bash
 npm i concurrently
 npm i nodemon
 ```
 
 package.jsonのscriptsを追加する
+
 ```json
 {
   "dependencies": {

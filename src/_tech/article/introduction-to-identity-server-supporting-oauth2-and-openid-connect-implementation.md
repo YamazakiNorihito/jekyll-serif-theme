@@ -19,8 +19,9 @@ https://accounts.google.com/o/oauth2/v2/auth?response_type=code?&client_id={clie
 後で気付いたのですが、[identityserver4.readthedocs.io](https://identityserver4.readthedocs.io/en/aspnetcore1/quickstarts/4_external_authentication.html) にも同じ内容が明確に記載されていました。
 
 IdentityServerは多くの外部OAuthプロバイダと統合することができます。以下はいくつかの一般的なOAuthプロバイダと、それに関連するデフォルトのリダイレクトURLのリストです：
-- **Google**: http://localhost:5000/signin-google
-- **Facebook**: http://localhost:5000/signin-facebook
-- **Twitter**: http://localhost:5000/signin-twitter
-- **Microsoft (Azure AD)**: http://localhost:5000/signin-microsoft
-- **GitHub**: http://localhost:5000/signin-github
+
+- **Google**: <http://localhost:5000/signin-google>
+- **Facebook**: <http://localhost:5000/signin-facebook>
+- **Twitter**: <http://localhost:5000/signin-twitter>
+- **Microsoft (Azure AD)**: <http://localhost:5000/signin-microsoft>
+- **GitHub**: <http://localhost:5000/signin-github>

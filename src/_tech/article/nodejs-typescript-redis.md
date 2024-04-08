@@ -13,9 +13,11 @@ categories:
 Redisクライアントのモックを作成することは、Node.js環境でのテスト戦略の重要な部分です。特に、外部の依存関係やサービスに対するテストを行う場合、その実行環境を完全にコントロール下に置くことが望ましいです。このブログ記事では、jest-mock-extendedを使用してRedisクライアントをモックする方法について説明します。これは、実際のRedisサーバーに依存しないテストを可能にする、シンプルかつ効果的な方法を紹介します。
 
 ## jest-mock-extendedの利用
+
 jest-mock-extendedはJestのためのTypeScriptフレンドリーなモックライブラリです。これを使うことで、TypeScriptの型安全性を保ちながら、任意のオブジェクトのモックを容易に作成できます。このライブラリは、特に型情報を持つオブジェクトをモックする場合に有効です。
 
 # test/infrastructure/database/cacheClient.test.ts
+
 ```typescript
 import {RedisClientType} from 'redis';
 import {DeepMockProxy, mockDeep} from 'jest-mock-extended';
@@ -105,6 +107,7 @@ export class RedisCacheClient implements ICacheClient {
 ```
 
 ## 結論
+
 jest-mock-extendedを使用することで、Redisクライアントのモックを簡単に作成し、
 依存関係を持つコードのテストを行うことができます。
 これにより、実際の外部サービスとの通信を必要とせずに、

@@ -12,6 +12,7 @@ Webpackと`inversify-express-utils`を組み合わせてWeb APIを実装する�
 
 `npx webpack`コマンドでのビルド後、`node dist/index.js`を実行した時に特定のエラーが発生しました。
 このエラーの内容や発生原因、そして解決策について詳しく見ていきます。
+
 ```bash
 Error: Two controllers cannot have the same name: s
     at /Users/sugimoto/Desktop/GitHub/api-server_V2/dist/index.js:2:884127
@@ -124,6 +125,7 @@ Metadata: [
   }
 ]
 ```
+
 ```javascript
 // targetがes5以前の場合
 Metadata: [
@@ -141,6 +143,7 @@ Metadata: [
 ```
 
 #### 補足: ES5とES6のクラス名表示の違い
+
 ES5までのJavaScript環境では、クラスはコンストラクタ関数として扱われ、ログに関数として出力されるのが一般的でした。
 しかし、ES6からは新しいクラス構文が導入され、ログの出力形式も変わりました。
 この違いを理解することで、上記の問題がどのように発生するのかの背景をより深く理解できます。
@@ -151,6 +154,7 @@ ES5までのJavaScript環境では、クラスはコンストラクタ関数と�
 class MyNewClass {}
 console.log(MyNewClass); // 出力: [class MyNewClass]
 ```
+
 ```javascript
 // targetがes5以前の場合
 function MyClass() {}

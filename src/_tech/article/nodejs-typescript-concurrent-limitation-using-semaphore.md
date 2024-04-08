@@ -144,7 +144,6 @@ public async deleteWorkRecords(req: Request, res: Response): Promise<void> {
 }
 ```
 
-
 ### 環境情報
 
 ```json
