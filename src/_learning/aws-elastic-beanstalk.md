@@ -1,4 +1,3 @@
-
 ---
 
 title: "AWS Elastic Beanstalk"
