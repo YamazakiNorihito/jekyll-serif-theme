@@ -41,136 +41,130 @@ Androidアプリは、いくつかの基本的なアプリコンポーネント�
 - UI関連のクラスには、UI表示やOSとのやり取りを行うロジックのみを含め、それ以外のロジックは分離しましょう。
 - これにより、コンポーネントのライフサイクルに関連する問題を回避し、テストのしやすさを向上させます。
 
-<details>
-<summary>Dice Roller アプリを例に関心分離コード</summary>
+#### Dice Roller アプリを例に関心分離コード
 
-元コード：<https://github.com/google-developer-training/basic-android-kotlin-compose-training-dice-roller>
-[チュートリアル](https://developer.android.com/codelabs/basic-android-kotlin-compose-build-a-dice-roller-app?continue=https%3A%2F%2Fdeveloper.android.com%2Fcourses%2Fpathways%2Fandroid-basics-compose-unit-2-pathway-2&hl=ja#7)
+- 元コード：<https://github.com/google-developer-training/basic-android-kotlin-compose-training-dice-roller>
+- [チュートリアル](https://developer.android.com/codelabs/basic-android-kotlin-compose-build-a-dice-roller-app?continue=https%3A%2F%2Fdeveloper.android.com%2Fcourses%2Fpathways%2Fandroid-basics-compose-unit-2-pathway-2&hl=ja#7)
 
-DiceViewModel.kt
+```java
+    // DiceRoller/app/src/main/java/com/example/diceroller/DiceViewModel.kt
+    package com.example.diceroller
 
-```kotlin
-package com.example.diceroller
-
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
-
-/**
- * DiceViewModel: サイコロのロール結果を管理するビューモデル。
- * UIとビジネスロジックの間の橋渡しを行い、UIの状態を保持します。
- */
-class DiceViewModel : ViewModel() {
-    private val _diceResult = MutableStateFlow(1) // Default value is 1
-    val diceResult: StateFlow<Int> = _diceResult
+    import androidx.lifecycle.ViewModel
+    import androidx.lifecycle.viewModelScope
+    import kotlinx.coroutines.flow.MutableStateFlow
+    import kotlinx.coroutines.flow.StateFlow
+    import kotlinx.coroutines.launch
 
     /**
-     * rollDice: サイコロを振り、1から6までのランダムな整数を生成して結果を更新します。
-     */
-    fun rollDice() {
-        viewModelScope.launch {
-            _diceResult.value = (1..6).random()
-        }
-    }
-}
+    * DiceViewModel: サイコロのロール結果を管理するビューモデル。
+    * UIとビジネスロジックの間の橋渡しを行い、UIの状態を保持します。
+    */
+    class DiceViewModel : ViewModel() {
+        private val _diceResult = MutableStateFlow(1) // Default value is 1
+        val diceResult: StateFlow<Int> = _diceResult
 
-```
-
-```kotlin
-package com.example.diceroller
-
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.viewModels
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-
-/**
- * MainActivity: アプリケーションのエントリポイント。
- * このアクティビティは、UI を設定し、DiceViewModel を初期化します。
- */
-class MainActivity : ComponentActivity() {
-    private val diceViewModel by viewModels<DiceViewModel>()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            MaterialTheme {
-                DiceRollerApp(diceViewModel)
+        /**
+        * rollDice: サイコロを振り、1から6までのランダムな整数を生成して結果を更新します。
+        */
+        fun rollDice() {
+            viewModelScope.launch {
+                _diceResult.value = (1..6).random()
             }
         }
     }
-}
 
-/**
- * DiceRollerApp: サイコロアプリのUIを構築するコンポーザブル関数。
- * @param diceViewModel DiceViewModelのインスタンスを受け取り、UIにデータを提供します。
- */
-@Composable
-fun DiceRollerApp(diceViewModel: DiceViewModel) {
-    val result by diceViewModel.diceResult.collectAsState()
-    DiceWithButtonAndImage(result = result, onRollDice = { diceViewModel.rollDice() })
-}
+    // DiceRoller/app/src/main/java/com/example/diceroller/MainActivity.kt
+    package com.example.diceroller
 
-/**
- * DiceWithButtonAndImage: サイコロの結果を表示し、サイコロを振るボタンを提供するUIコンポーネント。
- * @param result サイコロの結果を表す整数。
- * @param onRollDice サイコロを振る動作を実行するコールバック関数。
- */
-@Composable
-fun DiceWithButtonAndImage(result: Int, onRollDice: () -> Unit) {
-    val imageResource = when(result) {
-        1 -> R.drawable.dice_1
-        2 -> R.drawable.dice_2
-        3 -> R.drawable.dice_3
-        4 -> R.drawable.dice_4
-        5 -> R.drawable.dice_5
-        else -> R.drawable.dice_6
-    }
+    import android.os.Bundle
+    import androidx.activity.ComponentActivity
+    import androidx.activity.compose.setContent
+    import androidx.activity.viewModels
+    import androidx.compose.foundation.Image
+    import androidx.compose.foundation.layout.*
+    import androidx.compose.material3.Button
+    import androidx.compose.material3.MaterialTheme
+    import androidx.compose.material3.Text
+    import androidx.compose.runtime.Composable
+    import androidx.compose.runtime.collectAsState
+    import androidx.compose.runtime.getValue
+    import androidx.compose.ui.Alignment
+    import androidx.compose.ui.Modifier
+    import androidx.compose.ui.res.painterResource
+    import androidx.compose.ui.res.stringResource
+    import androidx.compose.ui.tooling.preview.Preview
+    import androidx.compose.ui.unit.dp
+    import androidx.compose.ui.unit.sp
 
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .wrapContentSize(Alignment.Center), horizontalAlignment = Alignment.CenterHorizontally) {
-        Image(painter = painterResource(id = imageResource), contentDescription = "Dice rolled result $result")
-        Spacer(modifier = Modifier.height(16.dp)) // Add some space between the image and button
-        Button(onClick = onRollDice) {
-            Text(text = stringResource(id = R.string.roll), fontSize = 24.sp)
+    /**
+    * MainActivity: アプリケーションのエントリポイント。
+    * このアクティビティは、UI を設定し、DiceViewModel を初期化します。
+    */
+    class MainActivity : ComponentActivity() {
+        private val diceViewModel by viewModels<DiceViewModel>()
+
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            setContent {
+                MaterialTheme {
+                    DiceRollerApp(diceViewModel)
+                }
+            }
         }
     }
-}
 
-/**
- * PreviewDiceWithButtonAndImage: プレビュー機能を提供するコンポーザブル関数。
- * デザインタイムにUIの見た目を確認するために使用します。
- */
-@Preview(showBackground = true)
-@Composable
-fun PreviewDiceWithButtonAndImage() {
-    MaterialTheme {
-        DiceWithButtonAndImage(result = 1, onRollDice = {})
+    /**
+    * DiceRollerApp: サイコロアプリのUIを構築するコンポーザブル関数。
+    * @param diceViewModel DiceViewModelのインスタンスを受け取り、UIにデータを提供します。
+    */
+    @Composable
+    fun DiceRollerApp(diceViewModel: DiceViewModel) {
+        val result by diceViewModel.diceResult.collectAsState()
+        DiceWithButtonAndImage(result = result, onRollDice = { diceViewModel.rollDice() })
     }
-}
+
+    /**
+    * DiceWithButtonAndImage: サイコロの結果を表示し、サイコロを振るボタンを提供するUIコンポーネント。
+    * @param result サイコロの結果を表す整数。
+    * @param onRollDice サイコロを振る動作を実行するコールバック関数。
+    */
+    @Composable
+    fun DiceWithButtonAndImage(result: Int, onRollDice: () -> Unit) {
+        val imageResource = when(result) {
+            1 -> R.drawable.dice_1
+            2 -> R.drawable.dice_2
+            3 -> R.drawable.dice_3
+            4 -> R.drawable.dice_4
+            5 -> R.drawable.dice_5
+            else -> R.drawable.dice_6
+        }
+
+        Column(modifier = Modifier
+            .fillMaxSize()
+            .wrapContentSize(Alignment.Center), horizontalAlignment = Alignment.CenterHorizontally) {
+            Image(painter = painterResource(id = imageResource), contentDescription = "Dice rolled result $result")
+            Spacer(modifier = Modifier.height(16.dp)) // Add some space between the image and button
+            Button(onClick = onRollDice) {
+                Text(text = stringResource(id = R.string.roll), fontSize = 24.sp)
+            }
+        }
+    }
+
+    /**
+    * PreviewDiceWithButtonAndImage: プレビュー機能を提供するコンポーザブル関数。
+    * デザインタイムにUIの見た目を確認するために使用します。
+    */
+    @Preview(showBackground = true)
+    @Composable
+    fun PreviewDiceWithButtonAndImage() {
+        MaterialTheme {
+            DiceWithButtonAndImage(result = 1, onRollDice = {})
+        }
+    }
 
 
 ```
-
-</details>
 
 ### UIをデータモデルで操作
 
@@ -271,7 +265,7 @@ Android アプリ開発において、`Hilt`は依存関係の注入を簡単に
 
 以下は、Hiltを使用して依存関係を注入する簡単な例です。
 
-```kotlin
+```java
 // 依存関係を提供するクラス
 @Module
 @InstallIn(SingletonComponent::class)
