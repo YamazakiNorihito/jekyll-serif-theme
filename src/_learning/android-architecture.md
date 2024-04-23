@@ -217,6 +217,22 @@ Androidアプリは、いくつかの基本的なアプリコンポーネント�
   - **UI要素**: データを画面にレンダリングします。`View`や`Jetpack Compose`関数を利用して作成されます。
   - **状態ホルダー**: データを保持し、UIに公開し、ロジックを処理します。例えば、`ViewModel`クラスがこれにあたります。
 
+```mermaid
+flowchart TB
+
+    datalayer["データレイヤ"]
+    viewModel["ViewModel(UI State)"]
+    ui_elements["UI elements"]
+
+
+    datalayer-. "`Application Data`" .->viewModel
+
+    subgraph UI レイヤ
+        viewModel-->ui_elements
+        ui_elements-. "events" .->viewModel
+    end
+```
+
 #### [データレイヤ](https://developer.android.com/topic/architecture/data-layer?hl=ja)
 
 - **役割**: アプリのビジネスロジックを含み、データを作成、保存、変更する方法を決定します。
@@ -229,6 +245,15 @@ Androidアプリは、いくつかの基本的なアプリコンポーネント�
 - **役割**: UIレイヤとデータレイヤの間のやり取りを簡素化し、再利用性を高めるために存在します。複雑なビジネスロジックや、複数のViewModelで再利用される単純なビジネスロジックをカプセル化します。
 - **構成要素**:
   - **ユースケース/インタラクタ**: 一つの機能を担当します。例えば、`GetTimeZoneUseCase`クラスがある特定の機能を実行します。
+
+```mermaid
+flowchart TD
+    UIレイヤ:::GreenClass --> データレイヤ
+    データレイヤ:::BlueClass  --> ドメインレイヤ:::BlackClass
+    classDef GreenClass fill:#00FF00
+    classDef BlueClass fill:#0000FF
+    classDef BlackClass fill:#000000
+```
 
 ### 最新のアプリアーキテクチャの特徴
 
@@ -354,3 +379,7 @@ class MainActivity : AppCompatActivity() {
 
 - **推奨**: データの関連性と新鮮さをできるだけ維持します。
 - **理由**: ユーザーがオフラインでもアプリの機能を利用できるようにし、接続速度が遅い場合や受信状況が悪い場所でも最良のユーザーエクスペリエンスを提供するためです。
+
+## サンプルコード
+
+- <https://github.com/google-developer-training>
