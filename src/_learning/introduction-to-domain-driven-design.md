@@ -426,6 +426,132 @@ class Program
 
 ```
 
+### アプリケーションサービス
+
+#### 性質
+
+1. **データの形状変換とマッピング**:
+   - アプリケーションサービスはドメインモデルからクライアントが必要とするデータ形式へのマッピングと変換を行います。ドメインオブジェクトを直接公開せず、データ更新はクライアントではなくサービスを通じて行います。
+
+2. **ドメインモデル依存性**:
+   - 値オブジェクト、エンティティ、リポジトリ、ドメインサービスに依存し、これらを統合してシステムの機能を実現します。
+
+3. **ビジネスロジックの実装**:
+   - アプリケーションサービスは、ビジネスロジックを処理し、システム間の調整や外部APIとの連携を担います。これにより、アプリケーションの核となる機能が効率的に運用されます。
+
+4. **ステートレス性**:
+   - アプリケーションサービスはステートレスに設計されており、状態情報を保持せずにリクエストを処理します。これにより、スケーラビリティと再利用性が向上します。
+
+#### サンプルコード
+
+```csharp
+public class PersonDto
+{
+    public Guid Id { get; }
+    public string FirstName { get; }
+    public string LastName { get; }
+
+    public PersonDto(Person person)
+    {
+        if (person == null) throw new ArgumentNullException(nameof(person));
+        Id = person.Id;
+        FirstName = person.FullName.firstName;
+        LastName = person.FullName.LastName;
+    }
+}
+
+public class RegisterPersonCommand
+{
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+}
+
+public class GetPersonCommand
+{
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+}
+
+public interface IPersonRegistrationService
+{
+    PersonDto Handle(RegisterPersonCommand command);
+}
+
+public interface IPersonRetrievalService
+{
+    PersonDto Handle(GetPersonCommand command);
+}
+
+public class PersonRegistrationService : IPersonRegistrationService
+{
+    private readonly IPersonRepository _personRepository;
+    private readonly IPersonService _personService;
+
+    public PersonRegistrationService(IPersonRepository personRepository, IPersonService personService)
+    {
+        _personRepository = personRepository ?? throw new ArgumentNullException(nameof(personRepository));
+        _personService = personService ?? throw new ArgumentNullException(nameof(personService));
+    }
+
+    public PersonDto Handle(RegisterPersonCommand command)
+    {
+        var name = new Name(command.FirstName, command.LastName);
+        var newPerson = new Person(name);
+
+        if (_personService.IsDuplicate(newPerson))
+        {
+            throw new ArgumentException("このユーザーは既に登録されています。");
+        }
+
+        _personRepository.Save(newPerson);
+        return new PersonDto(newPerson);
+    }
+}
+
+public class PersonRetrievalService : IPersonRetrievalService
+{
+    private readonly IPersonRepository _personRepository;
+
+    public PersonRetrievalService(IPersonRepository personRepository)
+    {
+        _personRepository = personRepository ?? throw new ArgumentNullException(nameof(personRepository));
+    }
+
+    public PersonDto Handle(GetPersonCommand command)
+    {
+        var name = new Name(command.FirstName, command.LastName);
+        Person person = _personRepository.Find(name);
+
+        if (person == null)
+        {
+            throw new KeyNotFoundException("指定されたユーザーは見つかりませんでした。");
+        }
+
+        return new PersonDto(person);
+    }
+}
+```
+
+### 実装のポイント
+
+#### インターフェースの使用
+
+- **インターフェース**: `IPersonRegistrationService` と `IPersonRetrievalService`。
+- **目的**: 依存性の逆転原則（Dependency Inversion Principle）を適用し、高レベルのモジュールが低レベルのモジュールに依存しないように設計。
+- **結果**: より柔軟でテストしやすいコードを実現。
+
+#### 責務の分離
+
+- **分離内容**: アプリケーションサービスを「登録」と「取得」という明確に区別される責務に分割。
+- **目的**: 各サービスが単一の機能に集中し、高い凝縮度を実現。
+- **結果**: 凝縮度が高まることで、各コンポーネントの再利用性とテスト容易性が向上し、システム全体の理解とメンテナンスが容易になる。
+
+#### commandオブジェクトの使用
+
+- **オブジェクト**: `RegisterPersonCommand` および `GetPersonCommand`。
+- **目的**: パラメータを一つのオブジェクトにまとめ、将来的にパラメータが増えてもメソッドシグネチャの変更を避ける。
+- **結果**: 機能拡張が容易に。
+
 ## 参考
 
 - [ドメイン駆動設計入門](https://www.seshop.com/product/detail/20675)
