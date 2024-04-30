@@ -430,16 +430,16 @@ class Program
 
 #### 性質
 
-1. **データの形状変換とマッピング**:
+1. データの形状変換とマッピング:
    - アプリケーションサービスはドメインモデルからクライアントが必要とするデータ形式へのマッピングと変換を行います。ドメインオブジェクトを直接公開せず、データ更新はクライアントではなくサービスを通じて行います。
 
-2. **ドメインモデル依存性**:
+2. ドメインモデル依存性:
    - 値オブジェクト、エンティティ、リポジトリ、ドメインサービスに依存し、これらを統合してシステムの機能を実現します。
 
-3. **ビジネスロジックの実装**:
+3. ビジネスロジックの実装:
    - アプリケーションサービスは、ビジネスロジックを処理し、システム間の調整や外部APIとの連携を担います。これにより、アプリケーションの核となる機能が効率的に運用されます。
 
-4. **ステートレス性**:
+4. ステートレス性:
    - アプリケーションサービスはステートレスに設計されており、状態情報を保持せずにリクエストを処理します。これにより、スケーラビリティと再利用性が向上します。
 
 #### サンプルコード
@@ -551,6 +551,85 @@ public class PersonRetrievalService : IPersonRetrievalService
 - **オブジェクト**: `RegisterPersonCommand` および `GetPersonCommand`。
 - **目的**: パラメータを一つのオブジェクトにまとめ、将来的にパラメータが増えてもメソッドシグネチャの変更を避ける。
 - **結果**: 機能拡張が容易に。
+
+### ファクトリ
+
+#### 性質
+
+- 明確化
+  - ファクトリーメソッドによって、オブジェクト生成の複雑なロジックが一箇所に集約され、全体のコードの読解性と整合性が向上します。
+- 再利用性の向上
+  - 同じ生成ロジックをファクトリークラスで管理することで、コードの重複を防ぎ、一貫性のあるオブジェクト生成が可能になります。
+- カプセル化
+  - オブジェクトの生成詳細をクライアントから隠蔽することで、使用する側はオブジェクトの生成方法を意識せずに済むため、コードの簡潔さが保たれます。
+
+### サンプルコード
+
+```csharp
+using System;
+
+
+public interface IPersonFactory
+{
+    Person CreatePerson(Name fullName);
+}
+public class PersonFactory : IPersonFactory
+{
+    public Person CreatePerson(Name fullName)
+    {
+        if (fullName == null)
+        {
+            throw new ArgumentNullException(nameof(fullName), "Full name cannot be null.");
+        }
+
+        return new Person(Guid.NewGuid(), fullName);
+    }
+}
+
+
+public class Person : IEquatable<Person>
+{
+    public Guid Id { get; private set; }
+    public Name FullName { get; private set; }
+
+    // factoryからの生成
+    public Person(Guid Id, Name fullName)
+    {
+        this.Id = Id; 
+        FullName = fullName ?? throw new ArgumentNullException(nameof(fullName));
+    }
+
+    public override bool Equals(object obj)
+    {
+        return Equals(obj as Person);
+    }
+
+    public bool Equals(Person other)
+    {
+        return other != null && Id == other.Id;
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Id);
+    }
+
+    public static bool operator ==(Person left, Person right)
+    {
+        return EqualityComparer<Person>.Default.Equals(left, right);
+    }
+
+    public static bool operator !=(Person left, Person right)
+    {
+        return !(left == right);
+    }
+
+    public void UpdateName(Name newName)
+    {
+        FullName = newName ?? throw new ArgumentNullException(nameof(newName));
+    }
+}
+```
 
 ## 参考
 

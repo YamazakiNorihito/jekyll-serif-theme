@@ -1,0 +1,47 @@
+
+<https://andmorefine.gitbook.io/learn-go-with-tests/go-fundamentals/install-go>
+
+## Hello Worldプログラムの作成
+
+### ディレクトリの作成と移動
+
+```bash
+mkdir hello
+cd hello
+# Goモジュールの初期化
+go mod init hello
+# main.goファイルの作成
+touch main.go
+```
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, world")
+}
+```
+
+## GolangCI-Lintのインストール
+
+### Go言語用VSCode拡張機能のインストール
+
+Go Team at [Googleの拡張機能](https://marketplace.visualstudio.com/items?itemName=golang.Go)をインストールします。
+
+### settings.jsonの設定
+
+VSCodeの設定ファイル settings.json を以下のように編集します。
+
+```json
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[go]": {
+    "editor.defaultFormatter": "golang.go"
+  },
+  "go.lintTool": "golangci-lint",
+  "go.lintFlags": ["--fast"]
+}
+```
