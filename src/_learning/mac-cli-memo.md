@@ -112,3 +112,16 @@ Cron Jobが正しく実行されているかを確認するには、以下のコ
 ```bash
 log show --predicate 'process == "cron"' --info --debug
 ```
+
+## timezone
+
+```bash
+# 設定できるTimeZone一覧
+$ sudo systemsetup -listtimezones
+
+# timezone設定
+$ sudo systemsetup -settimezone "Asia/Tokyo"
+
+# 確認
+$ date
+```

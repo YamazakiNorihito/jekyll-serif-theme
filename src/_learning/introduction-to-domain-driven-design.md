@@ -631,6 +631,196 @@ public class Person : IEquatable<Person>
 }
 ```
 
+## 知識を表現する、より発展的なパターン
+
+### 集約
+
+#### 性質
+
+- ルート
+  - 集約ルートは集約内の主要なエンティティであり、集約内の他のオブジェクトに対するアクセスポイントの役割を果たす
+
+- 境界:
+  - 集約内のオブジェクトがどこまでの範囲かを定めるもの
+
+### サンプルコード
+
+```csharp
+
+public class User
+{
+    public Guid Id { get; private set; }
+    public string Name { get; private set; }
+
+    public User(string name)
+    {
+        Id = Guid.NewGuid();
+        Name = name;
+    }
+
+    public void ChangeName(string newName)
+    {
+        if (string.IsNullOrWhiteSpace(newName))
+        {
+            throw new ArgumentException("Name cannot be empty.");
+        }
+
+        Name = newName;
+    }
+}
+
+public class Circle
+{
+    public Guid Id { get; private set; }
+    public User Owner { get; private set; }
+    // サンプルとしてUser集約を定義しているが
+    // 本来はUserId(識別子)だけを持つ方がいいだろう
+    // 集約のサイズが小さくなる。またメモリ消費量を抑えられる
+    private List<User> members;
+    private const int MaxMembers = 30;
+
+    public Circle(User owner)
+    {
+        Id = Guid.NewGuid();
+        Owner = owner;
+        members = new List<User>();
+    }
+
+    public void Join(User user)
+    {
+        if (IsFull())
+            throw new InvalidOperationException("Cannot join: Circle is full.");
+
+        if (members.Any(m => m.Id == user.Id) || user.Id == Owner.Id)
+            throw new InvalidOperationException("User is already a member.");
+
+        members.Add(user);
+    }
+
+    public void Leave(User user)
+    {
+        if (user.Id == Owner.Id)
+            throw new InvalidOperationException("Owner cannot leave.");
+
+        if (!members.Remove(user))
+            throw new InvalidOperationException("User not a member.");
+    }
+
+    // オーナーを含むサークルの総人数を計算する。
+    private int CountMember() => members.Count + 1;
+    private bool IsFull() => CountMember() >= MaxMembers;
+}
+
+
+public class Program
+{
+    public static void Main()
+    {
+        var owner = new User("Alice");
+        var circle = new Circle(owner);
+        var user1 = new User("Bob");
+        var user2 = new User("Charlie");
+
+        circle.Join(user1);
+        circle.Join(user2);
+        // 集約の外部から境界内部のオブジェクトへの直接の操作はしてはいけません。
+        // circle.members.add(user1);
+        // circle.members.add(user2);
+
+        circle.Leave(owner);
+
+        /*
+            UserとCircleは異なる集約に属しているため、Userに対する操作はUser集約を通じて行う必要があります。
+            例えば、Circleから直接Userの名前を変更するのではなく、User自身のメソッドを使用します。
+
+            // 不適切な例: circle.changeMemberName("Mary");
+            // 適切な例:
+            user1.ChangeName("Mary");
+        */
+        user1.ChangeName("Mary");
+    }
+}
+```
+
+#### 集約の分け方
+
+集約はとトランザクション整合性の境界と同義のようです。
+
+トランザクション整合性を保つために設計された境界です。
+この境界内のエンティティやオブジェクトは、一つのトランザクション内で一貫性を持って処理されるべき最小の項目として定義すべきです。
+
+サンプルコードにおいて、`Circle`クラスは`User`オブジェクトのリストをメンバーとして保持していますが、
+これは集約の設計として最適ではない場合があります。
+理想的には、`Circle`は`User`の詳細を直接持つのではなく、
+必要なのはユーザーを識別するための`UserId`のみです。
+これにより、`Circle`集約のサイズを小さく保つことができ、
+メモリ消費量も抑えることが可能になります。
+各`User`への参照はその識別子を通じて行うべきで、
+これによって集約間の疎結合が保たれ、システム全体の拡張性とメンテナンス性が向上します。
+
+#### 結果整合性について
+
+集約が大きくなると、トランザクションも大規模になり、それに伴ってパフォーマンスの問題や複雑さが増すことがあります。
+これを解決する一つの方法として「結果整合性」があります。結果整合性とは、データの一貫性が即座にではなく、
+最終的には保証されることを意味します。
+つまり、システムの各部分が一時的には非整合状態にあることを許容し、
+時間が経過するにつれて整合性が保証される状態に収束することを許します。
+
+```csharp
+public class Account
+{
+    public Guid Id { get; private set; }
+    public decimal Balance { get; private set; }
+
+    public Account()
+    {
+        Id = Guid.NewGuid();
+        Balance = 0;
+    }
+
+    // 非同期で口座に入金
+    public void Credit(decimal amount)
+    {
+        // 何らかのメッセージングシステムを通じて入金処理を非同期に行う
+        MessagingSystem.Send(new CreditMessage { AccountId = this.Id, Amount = amount });
+    }
+
+    // メッセージングシステムで処理されるメソッド
+    public void ApplyCredit(decimal amount)
+    {
+        Balance += amount;
+        Console.WriteLine($"Account {Id}: Credited {amount}, New Balance: {Balance}");
+    }
+}
+
+public class MessagingSystem
+{
+    public static void Send(CreditMessage message)
+    {
+        // メッセージを受信後、非同期でApplyCreditを呼び出す
+        // 実際の実装ではキューシステムやイベントバスが使用されることが多い
+        Console.WriteLine("Sending message...");
+        Task.Delay(1000).ContinueWith(_ =>
+        {
+            var account = new Account { Id = message.AccountId };
+            account.ApplyCredit(message.Amount);
+        });
+    }
+}
+
+public class CreditMessage
+{
+    public Guid AccountId { get; set; }
+    public decimal Amount { get; set; }
+}
+
+```
+
+このアプローチは、システムが高い可用性とスケーラビリティを必要とする場合に特に有効です。
+結果整合性を利用することで、集約間の依存関係を減らし、それぞれのトランザクションを小さく保つことができます。
+
+### 仕様
+
 ## 参考
 
 - [ドメイン駆動設計入門](https://www.seshop.com/product/detail/20675)
