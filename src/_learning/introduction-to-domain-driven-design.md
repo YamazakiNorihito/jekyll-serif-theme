@@ -766,62 +766,113 @@ public class Program
 つまり、システムの各部分が一時的には非整合状態にあることを許容し、
 時間が経過するにつれて整合性が保証される状態に収束することを許します。
 
+### 仕様
+
+#### 性質
+
+- **Entityのバリデーション**
+  - 個々の属性がそれぞれ妥当であっても、Entity全体として必ずしも妥当な状態であるとは限りません。この全体的な妥当性を評価するために仕様は重要な役割を果たします。
+
+#### 契約プログラミングとドメインモデルのバリデーション
+
+##### 契約プログラミングの原則
+
+呼び出しもとは特定の義務を果たす必要があり、対価として、呼び出したコードは目的の値を返すべきです。
+
+- **条件**
+  - **事前条件**: システムのあるべき状態や、コードに提供されるべき入力など、コードを呼び出す前に満たされるべき条件です。
+  - **事後条件**: システムの新しい状態や、返されるべき特定の値など、コードを呼び出した後に保証されるべき条件です。
+  - **不変条件**: コードの呼び出し前後で比較した際に、変わるべきでない条件です。
+
+**事前条件**は、Value ObjectやEntityのインスタンス生成時に重要です。これにより、インスタンスが正しい状態で作成されることが保証されます。
+**事後条件**は、Entityの操作後の状態を保証するために利用されます。
+これはしばしば複雑な仕様のロジックとなるため、Specificationクラスを実装し、そこでのバリデーションが効果的です。これにより、ドメインモデルの整合性を保つことができます。
+
+ウェブアプリケーションなどでは、プレゼンテーション層で事前条件を満たすようにvalidationを行うことが効果的になるでしょう。
+
+### サンプルコード
+
 ```csharp
-public class Account
+
+public interface ISpecification<T>
 {
-    public Guid Id { get; private set; }
-    public decimal Balance { get; private set; }
+    bool IsSatisfiedBy(T entity);
+}
 
-    public Account()
+public class AgeSpecification : ISpecification<User>
+{
+    private readonly int _minimumAge;
+
+    public AgeSpecification(int minimumAge)
     {
-        Id = Guid.NewGuid();
-        Balance = 0;
+        _minimumAge = minimumAge;
     }
 
-    // 非同期で口座に入金
-    public void Credit(decimal amount)
+    public bool IsSatisfiedBy(User user)
     {
-        // 何らかのメッセージングシステムを通じて入金処理を非同期に行う
-        MessagingSystem.Send(new CreditMessage { AccountId = this.Id, Amount = amount });
-    }
-
-    // メッセージングシステムで処理されるメソッド
-    public void ApplyCredit(decimal amount)
-    {
-        Balance += amount;
-        Console.WriteLine($"Account {Id}: Credited {amount}, New Balance: {Balance}");
+        return user.Age >= _minimumAge;
     }
 }
 
-public class MessagingSystem
+public class User
 {
-    public static void Send(CreditMessage message)
-    {
-        // メッセージを受信後、非同期でApplyCreditを呼び出す
-        // 実際の実装ではキューシステムやイベントバスが使用されることが多い
-        Console.WriteLine("Sending message...");
-        Task.Delay(1000).ContinueWith(_ =>
-        {
-            var account = new Account { Id = message.AccountId };
-            account.ApplyCredit(message.Amount);
-        });
-    }
+    public int Age { get; set; }
 }
 
-public class CreditMessage
+public class Program
 {
-    public Guid AccountId { get; set; }
-    public decimal Amount { get; set; }
+    public static void Main(string[] args)
+    {
+        User user = new User { Age = 25 };
+        ISpecification<User> ageSpecification = new AgeSpecification(18);
+
+        bool isEligible = ageSpecification.IsSatisfiedBy(user);
+
+        Console.WriteLine($"Is the user eligible? {isEligible}");
+    }
 }
 
 ```
 
-このアプローチは、システムが高い可用性とスケーラビリティを必要とする場合に特に有効です。
-結果整合性を利用することで、集約間の依存関係を減らし、それぞれのトランザクションを小さく保つことができます。
+```csharp
+// domain entity
+public class Customer
+{
+  public Customer(string name)
+  {
+    this.Name = name;
+  }
 
-### 仕様
+  string name;
+
+  public string Name
+  {
+    get { return this.name; }
+    set
+    {
+      if (value == null)
+        throw new ArgumentNullException();
+      this.name = value;
+    }
+  }
+}
+
+// web view model
+public class CustomerViewModel
+{
+  [Required]
+  public string Name { get; set; }
+
+  public Customer ToCustomer()
+  {
+    return new Customer(this.Name);
+  }
+}
+```
 
 ## 参考
 
 - [ドメイン駆動設計入門](https://www.seshop.com/product/detail/20675)
 - [Best Practice - An Introduction To Domain-Driven Design](https://learn.microsoft.com/en-us/archive/msdn-magazine/2009/february/best-practice-an-introduction-to-domain-driven-design)
+- [VaughnVernon/IDDD_Samples](https://github.com/VaughnVernon/IDDD_Samples)
+- [ドメイン モデル レイヤーでの検証を設計する](https://learn.microsoft.com/ja-jp/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/domain-model-layer-validations)
