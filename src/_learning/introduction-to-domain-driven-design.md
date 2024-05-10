@@ -1,5 +1,5 @@
 ---
-title: "ドメイン駆動設計入門(工事中)"
+title: "ドメイン駆動設計入門"
 date: 2024-4-24T06:00:00
 jobtitle: ""
 linkedinurl: ""
