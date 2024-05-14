@@ -377,3 +377,148 @@ class Program
 }
 
 ```
+
+## [車輪の再発明](https://ja.wikipedia.org/wiki/%E8%BB%8A%E8%BC%AA%E3%81%AE%E5%86%8D%E7%99%BA%E6%98%8E)
+
+「車輪の再発明」とは、すでに存在する技術や解決策を知らずに、同じものを一から再び作り上げることを指します。
+
+しかし、「車輪の再発明」が常に悪いわけではありません。
+学習目的で一から作り直すことで、技術の本質を理解し、技術力を高めることができます。
+
+## First Class Collection
+
+コレクション専用のクラスを作成するデザインパターンです。
+
+**利点**
+
+- 集約操作のカプセル化
+  - コレクションに対する操作（例えば、追加、削除、フィルタリングなど）をコレクションクラス内にカプセル化します。これにより、操作が分散されることを防ぎ、データの不正な操作を防ぎます。
+
+**注意**
+
+- 副作用の管理
+  - Itemの追加時の副作用や、コレクションを外部に渡す際に副作用が生じないように、実装に注意を払いましょう。
+
+```csharp
+public class Party
+{
+    private readonly ImmutableList<Member> _members;
+
+    public Party(IEnumerable<Member> members)
+    {
+        _members = members.ToImmutableList();
+    }
+
+    // 不変
+    public ImmutableList<Member> Members => _members;
+
+    // メンバーを追加し、新しい Party インスタンスを返す
+    public Party AddMember(Member member)
+    {
+        if (member == null) throw new ArgumentNullException(nameof(member));
+        if (_members.Contains(member)) return this; // すでに存在する場合は追加しない
+
+        var newMembers = _members.Add(member);
+        return new Party(newMembers);
+    }
+
+    // メンバーを削除し、新しい Party インスタンスを返す
+    public Party RemoveMember(Member member)
+    {
+        if (member == null) throw new ArgumentNullException(nameof(member));
+        if (!_members.Contains(member)) return this; // 存在しない場合は何もしない
+
+        var newMembers = _members.Remove(member);
+        return new Party(newMembers);
+    }
+}
+
+```
+
+## [単一責任](https://learn.microsoft.com/ja-jp/dotnet/architecture/modern-web-apps-azure/architectural-principles#single-responsibility)
+
+オブジェクトは１つの責任のみを持つべきです。
+
+単一責任に則って、製品の価格に関して通常割引と夏季割引を実装してみるとこんな感じ
+
+```csharp
+public interface IDiscountStrategy
+{
+    decimal ApplyDiscount(decimal originalPrice);
+}
+
+public class RegularDiscount : IDiscountStrategy
+{
+    public decimal ApplyDiscount(decimal originalPrice)
+    {
+        // ここでは例として10%の割引を適用
+        return originalPrice * 0.90m;
+    }
+}
+
+public class SummerDiscount : IDiscountStrategy
+{
+    public decimal ApplyDiscount(decimal originalPrice)
+    {
+        // 夏季割引として例として20%の割引を適用
+        return originalPrice * 0.80m;
+    }
+}
+public class Product
+{
+    public string Name { get; set; }
+    public decimal Price { get; set; }
+    private IDiscountStrategy discountStrategy;
+
+    public Product(string name, decimal price, IDiscountStrategy discountStrategy)
+    {
+        Name = name;
+        Price = price;
+        this.discountStrategy = discountStrategy;
+    }
+
+    public decimal GetPriceWithDiscount()
+    {
+        return discountStrategy.ApplyDiscount(Price);
+    }
+}
+```
+
+## 継承
+
+継承はオブジェクト指向プログラミングにおいて強力なツールですが、それには注意が必要です。継承を利用する際、基底クラスの変更が派生クラスに影響を与える可能性があります。基底クラスは派生クラスの事情を考慮せずに変更されることが多いため、これは重要なリスクとなります。
+
+もし派生クラスが基底クラスのメソッドを完全にオーバーライドする場合、継承の本来の利点が問われます。全てのメソッドをオーバーライドすると、派生クラスは基底クラスの実装とは異なる振る舞いを持つことになり、そもそも継承する理由が薄れてしまいます。
+
+継承が便利である一方で、ドメインやビジネスロジックの知識が分散してしまうという問題があります。
+これにより、保守が難しくなる可能性があります。
+継承の使用を検討する前に、単一責任の原則に従い、コンポジションや値オブジェクトを利用して設計できないかを検討をお勧めします。
+
+```csharp
+using System;
+
+public interface IDiscountStrategy
+{
+    decimal ApplyDiscount(decimal originalPrice);
+}
+
+public class RegularDiscount : IDiscountStrategy
+{
+    public decimal ApplyDiscount(decimal originalPrice)
+    {
+        // 通常の割引として10%オフを適用
+        return originalPrice * 0.90m;
+    }
+}
+
+public class SummerDiscount : RegularDiscount
+{
+    public override decimal ApplyDiscount(decimal originalPrice)
+    {
+        // 夏季割引として、通常の割引に追加して更に5%オフを適用
+        decimal priceAfterRegularDiscount = base.ApplyDiscount(originalPrice);
+        return priceAfterRegularDiscount * 0.95m;  // 追加5%オフ
+    }
+}
+
+```
