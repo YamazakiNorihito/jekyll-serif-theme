@@ -522,3 +522,15 @@ public class SummerDiscount : RegularDiscount
 }
 
 ```
+
+## [YAGNI](https://ja.wikipedia.org/wiki/YAGNI)
+
+You ain't gonna need it
+
+将来の予測に基づいて汎用的な機能や複雑な設計をするのではなく、現在の実際のニーズに基づいて限定的かつシンプルに実装することだと理解
+
+## null問題
+
+結論から言えば、nullは扱うべきではありません。「nullを返さない」「nullを渡さない」という原則が大切です。nullの発明者である[アントニー・ホーア](https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%B3%E3%83%88%E3%83%8B%E3%83%BC%E3%83%BB%E3%83%9B%E3%83%BC%E3%82%A2)さんは、nullを発明したことをとても後悔しています。
+
+nullとは未初期化状態を表し、何かを持っていない状態や未設定状態など、その状態すら存在しないのがnullなのです。nullがあるために、至る所でnullチェックをしなければならなくなります。
