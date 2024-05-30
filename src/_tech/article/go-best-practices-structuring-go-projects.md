@@ -47,7 +47,7 @@ go version go1.22.2 darwin/arm64
 │          │   ├── function.zip
 │          │   ├── go.mod
 │          │   └── main.go
-│          │── shared
+│          └── shared
 │              ├── error_response.go
 │              └── client_factory.go
 ├── go.mod
