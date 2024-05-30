@@ -6,6 +6,8 @@ categories:
 - go
 ---
 
+# 思い
+
 Goをvscodeで開発するときの設定を紹介します。
 
 ## Go言語用VSCode拡張機能のインストール

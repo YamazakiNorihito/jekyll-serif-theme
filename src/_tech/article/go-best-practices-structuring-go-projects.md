@@ -6,17 +6,19 @@ categories:
   - go
 ---
 
+# 思い
+
 [golang-standards/project-layout](https://github.com/golang-standards/project-layout/blob/master/README_ja.md)をベースに自分が必要そうな
 ディレクトリ構成を記述する。もし悩んだら`golang-standards/project-layout`に立ち返り、構成を見直す。
 
-# 対象となるGo Version
+## Go Version
 
 ```bash
 ~$ go version
 go version go1.22.2 darwin/arm64
 ```
 
-# Tproject tree
+## Project tree
 
 ```bash
 .
