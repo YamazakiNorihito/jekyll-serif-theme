@@ -210,3 +210,17 @@ validate := validator.New(validator.WithRequiredStructEnabled())
 | `excluded_without`       | 他の特定のフィールドが存在しない場合に除外 | 他の特定のフィールドが存在しない場合にフィールドが除外されることを確認する場合           |
 | `excluded_without_all`   | 全ての特定のフィールドが存在しない場合に除外 | 全ての特定のフィールドが存在しない場合にフィールドが除外されることを確認する場合         |
 | `unique`                 | 一意                                       | 配列やスライス内の値が一意であることを確認する場合                                      |
+
+## [Validation Functions Return Type error](https://pkg.go.dev/github.com/go-playground/validator/v10#hdr-Validation_Functions_Return_Type_error)
+
+検証関数の戻り値のエラー ¶
+このようにすることは、実際に標準ライブラリが行っている方法です。以下のリンクのfile.Openメソッドを参照してください：
+
+<https://golang.org/pkg/os/#Open>
+著者は「error」型を戻り値として使用し、以下で議論されている問題を回避しています。ここでは、常にerr != nilである場合について説明されています：
+
+- [StackOverflowの議論](http://stackoverflow.com/a/29138676/3158232)
+  - こっちの[ページ](/learning/go-hiding-nil-values/)で日本語翻訳と内容を理解してみた
+- [GitHubのIssue #134](https://github.com/go-playground/validator/issues/134)
+
+Validatorは、不正な検証入力に対してのみInvalidValidationErrorを返し、nilまたはValidationErrorsをerror型として返します。したがって、あなたのコードでは、返されたエラーがnilでないことを確認し、もしnilでない場合は、そのエラーがInvalidValidationErrorであるか（ほとんどの場合は必要ありませんが）を確認し、次のようにValidationErrors型にキャストします：err.(validator.ValidationErrors)
