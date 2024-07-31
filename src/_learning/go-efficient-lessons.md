@@ -618,3 +618,172 @@ WaitGroupは必要ないことに注意してください。もしそのよう�
 ⑤ また、もう何も送信する予定がないのであれば、チャネルをクローズすべきです。これにより
 リソースが解放され、特定の送受信フローがブロックされなくなります（これについては後で説明
 します）。
+
+### Goメモリリソースの使用方法
+
+#### mmapを利用したメモリ
+
+```bash
+$ ./run_and_check.sh
+  PID      VSZ    RSS COMM
+42511 410075680   1120 go
+  PID      VSZ    RSS COMM
+42511 411371984  21696 go
+
+```
+
+1. **PID**:
+   - `42511`
+   - プロセスIDです。システム上の一意の識別子で、この値を使用して特定のプロセスに対する操作を行います。
+
+2. **VSZ**:
+   - `411371984`
+   - 仮想メモリサイズ（Virtual Memory Size）です。プロセスが使用する仮想メモリの総量をバイト単位で表します。この場合、約411MB（411371984バイト）です。仮想メモリには、物理メモリに存在しないページやマップされたファイルのサイズなどが含まれます。
+
+3. **RSS**:
+   - `21696`
+   - 常駐セットサイズ（Resident Set Size）です。プロセスが実際に使用している物理メモリのサイズ（キロバイト単位）を表します。この場合、約21MB（21696キロバイト）です。RSSは、現在物理メモリ上に読み込まれているプロセスのメモリ部分を表し、スワップアウトされている部分は含まれません。
+
+4. **COMM**:
+   - `go`
+   - 実行中のコマンドの名前です。この場合、Goランタイムが実行していることを示しています。
+
+プロセスID `42511` のGoプログラムが約411MBの仮想メモリを使用し、そのうち約21MBが物理メモリに読み込まれていることがわかります。仮想メモリの大部分は、メモリマッピングされたファイルやヒープの空間などに対応しており、実際に使用されている物理メモリ（RSS）はその一部です。
+
+```go
+package main
+
+import (
+ "fmt"
+ "os"
+
+ "github.com/efficientgo/core/merrors"
+ "golang.org/x/sys/unix"
+)
+
+type MemoryMap struct {
+ f *os.File // 匿名なら nil
+ b []byte
+}
+
+// OpenFileBacked は、指定されたパスからファイルによってバックアップされたメモリマップを作成します。
+func OpenFileBacked(path string, size int) (*MemoryMap, error) {
+ f, err := os.OpenFile(path, os.O_RDWR, 0644)
+ if err != nil {
+  return nil, err
+ }
+
+ b, err := unix.Mmap(int(f.Fd()), 0, size, unix.PROT_READ|unix.PROT_WRITE, unix.MAP_SHARED)
+ if err != nil {
+  return nil, merrors.New(f.Close(), err).Err()
+ }
+
+ return &MemoryMap{f: f, b: b}, nil
+}
+
+// Close はメモリマップを解除し、ファイルを閉じます。
+func (m *MemoryMap) Close() error {
+ errs := merrors.New()
+ errs.Add(unix.Munmap(m.b))
+ errs.Add(m.f.Close())
+ return errs.Err()
+}
+
+// Bytes はメモリマップされたバイト配列を返します。
+func (m *MemoryMap) Bytes() []byte { return m.b }
+
+func main() {
+ // テスト用のファイルパスとサイズ
+ path := "test1mbfile.out"
+ size := 1 * 1024 * 1024 // 1MB
+
+ // メモリマップを作成
+ mm, err := OpenFileBacked(path, size)
+ if err != nil {
+  fmt.Println("Error opening file:", err)
+  return
+ }
+ defer func() {
+  if err := mm.Close(); err != nil {
+   fmt.Println("Error closing memory map:", err)
+  }
+ }()
+
+ // メモリマップされたデータにアクセス
+ fmt.Println("Before modification:")
+ fmt.Println("Reading the 5000th byte:", mm.Bytes()[5000])
+ fmt.Println("Reading the 100 000th byte:", mm.Bytes()[100000])
+ fmt.Println("Reading the 104 000th byte:", mm.Bytes()[104000])
+
+ // メモリマップされたデータを書き換え
+ mm.Bytes()[5000] = 'A'
+ mm.Bytes()[100000] = 'B'
+ mm.Bytes()[104000] = 'C'
+
+ fmt.Println("After modification:")
+ fmt.Println("Reading the 5000th byte:", mm.Bytes()[5000])
+ fmt.Println("Reading the 100 000th byte:", mm.Bytes()[100000])
+ fmt.Println("Reading the 104 000th byte:", mm.Bytes()[104000])
+}
+
+```
+
+#### 仮想メモリ（VSZ）と物理メモリ（RSS）の使用状況を確認
+
+1. **デバッグ開始**:
+   VS CodeでGoプログラムのデバッグを開始し、途中でブレークポイントを設定してプログラムを停止させます。
+2. **プロセスIDの確認**:
+   ターミナルで以下のコマンドを実行し、DelveデバッガのプロセスID（PID）を確認します。
+
+   ```bash
+   $ ps aux | grep dlv
+   {user}       52771   0.0  0.0 410069680    960 s007  R+    8:54AM   0:00.00 grep dlv
+   {user}      52280   0.0  0.1 415623216  18048   ??  S     8:53AM   0:00.23 /Users/{user}/go/bin/dlv dap --listen=127.0.0.1:49378 --log-dest=3
+   ```
+
+   `{user}` はあなたのユーザー名です。ここで `52280` はDelveデバッガのプロセスIDです。
+3. **メモリ使用量の確認**:
+   取得したプロセスIDを使って、以下のコマンドでプロセスのメモリ使用量を確認します。
+
+   ```bash
+   $ ps -o pid,vsz,rss,comm -p 52280
+     PID      VSZ    RSS COMM
+   52280 415623216  21744 /Users/{user}/go/bin/dlv
+   ```
+
+   - **VSZ (Virtual Memory Size)**: 仮想メモリの使用量（バイト単位）。
+   - **RSS (Resident Set Size)**: 物理メモリの使用量（キロバイト単位）。
+   - **COMM**: 実行中のコマンド名。
+
+```go
+package main
+
+import (
+ "fmt"
+ "os"
+)
+
+func main() {
+ // 600MBのファイルを開く
+ f, err := os.Open("test68mbfile.out")
+ if err != nil {
+  fmt.Println("Error opening file:", err)
+  return
+ }
+ defer f.Close()
+
+ // 600MBのバッファを作成
+ b := make([]byte, 600*1024*1024)
+
+ // ファイルからバッファにデータを読み込む
+ if _, err := f.Read(b); err != nil {
+  fmt.Println("Error reading file:", err)
+  return
+ }
+
+ // バッファ内の特定の位置のデータを表示
+ fmt.Println("Reading the 5000th byte:", b[5000])
+ fmt.Println("Reading the 100 000th byte:", b[100000])
+ fmt.Println("Reading the 104 000th byte:", b[104000])
+}
+```
