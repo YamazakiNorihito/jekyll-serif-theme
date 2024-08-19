@@ -22,5 +22,9 @@
     "**/_site": true,
     "**/.jekyll-cache": true
   },
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "cSpell.words": [
+    "rollingupdate",
+    "updatepolicy"
+  ]
 }

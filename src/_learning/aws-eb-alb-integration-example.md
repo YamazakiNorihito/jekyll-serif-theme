@@ -206,6 +206,21 @@ Resources:
         - Namespace: "aws:autoscaling:trigger"
           OptionName: "LowerBreachScaleIncrement"
           Value: "-1"
+        - Namespace: "aws:autoscaling:updatepolicy:rollingupdate"
+          OptionName: "RollingUpdateEnabled"
+          Value: "true"
+        - Namespace: "aws:autoScaling:updatepolicy:rollingupdate"
+          OptionName: "MaxBatchSize"
+          Value: "1"
+        - Namespace: "aws:autoScaling:updatepolicy:rollingupdate"
+          OptionName: "MinInstancesInService"
+          Value: "1"
+        - Namespace: "aws:autoScaling:updatepolicy:rollingupdate"
+          OptionName: "RollingUpdateType"
+          Value: "Health"
+        - Namespace: "aws:autoScaling:updatepolicy:rollingupdate"
+          OptionName: "pauseTime"
+          Value: "PT3M"
         # リクエストの流れ client -> (https) -> Application Load balancer -> (http) -> EC2(application)
         - Namespace: "aws:elasticbeanstalk:environment:process:default"
           OptionName: "Port"
@@ -228,6 +243,16 @@ Resources:
         - Namespace: "aws:elasticbeanstalk:environment:process:default"
           OptionName: "UnhealthyThresholdCount"
           Value: "2" # 異常とみなすまでの連続失敗回数
+        # アプリケーションのインスタンスログストリーミングを設定
+        - Namespace: "aws:elasticbeanstalk:cloudwatch:logs"
+          OptionName: "StreamLogs"
+          Value: "true"
+        - Namespace: "aws:elasticbeanstalk:cloudwatch:logs"
+          OptionName: "DeleteOnTerminate"
+          Value: "true"
+        - Namespace: "aws:elasticbeanstalk:cloudwatch:logs"
+          OptionName: "RetentionInDays"
+          Value: "5"
         
         # リスナールールの設定
         # 下記を参考にした
@@ -252,6 +277,59 @@ Resources:
         - Namespace: "aws:elbv2:listenerrule:apprule"
           OptionName: "Process"
           Value: "default"
+        
+        # アプリケーションの環境変数を設定
+        - Namespace: "aws:elasticbeanstalk:application:environment"
+          OptionName: "KC_DB_URL_HOST"
+          Value: !Ref KcDbURLHost
+        - Namespace: "aws:elasticbeanstalk:application:environment"
+          OptionName: "KC_DB_URL_DATABASE"
+          Value: "keycloak"
+        - Namespace: "aws:elasticbeanstalk:application:environment"
+          OptionName: "KC_DB_USERNAME"
+          Value: !Ref KcDbUsername
+        - Namespace: "aws:elasticbeanstalk:application:environment"
+          OptionName: "KC_DB_PASSWORD"
+          Value: !Ref KcDbPassword
+        - Namespace: "aws:elasticbeanstalk:application:environment"
+          OptionName: "KC_HOSTNAME_URL"
+          Value: !Sub "${LoadBalancerURL}/auth"
+        - Namespace: "aws:elasticbeanstalk:application:environment"
+          OptionName: "KC_HOSTNAME_ADMIN_URL"
+          Value: !Sub "${LoadBalancerURL}/auth"
+        - Namespace: "aws:elasticbeanstalk:application:environment"
+          OptionName: "KC_HOSTNAME_STRICT"
+          Value: "true"
+        - Namespace: "aws:elasticbeanstalk:application:environment"
+          OptionName: "KC_HOSTNAME_STRICT_BACKCHANNEL"
+          Value: "true"
+        - Namespace: "aws:elasticbeanstalk:application:environment"
+          OptionName: "KC_PROXY"
+          Value: "edge"
+        - Namespace: "aws:elasticbeanstalk:application:environment"
+          OptionName: "KC_PROXY_HEADERS"
+          Value: "xforwarded"
+        - Namespace: "aws:elasticbeanstalk:application:environment"
+          OptionName: "KC_HTTP_ENABLED"
+          Value: "true"
+        - Namespace: "aws:elasticbeanstalk:application:environment"
+          OptionName: "KEYCLOAK_ADMIN"
+          Value: !Ref KeycloakAdmin
+        - Namespace: "aws:elasticbeanstalk:application:environment"
+          OptionName: "KEYCLOAK_ADMIN_PASSWORD"
+          Value: !Ref KeycloakAdminPassword
+        - Namespace: "aws:elasticbeanstalk:application:environment"
+          OptionName: "TZ"
+          Value: "Asia/Tokyo"
+        - Namespace: "aws:elasticbeanstalk:application:environment"
+          OptionName: "JGROUPS_DISCOVERY_PROTOCOL"
+          Value: "JDBC_PING"
+        - Namespace: "aws:elasticbeanstalk:application:environment"
+          OptionName: "KC_CACHE"
+          Value: "ispn"
+        - Namespace: "aws:elasticbeanstalk:application:environment"
+          OptionName: "KC_LOG_LEVEL"
+          Value: "info"
 
 Outputs:
   ApplicationName:
