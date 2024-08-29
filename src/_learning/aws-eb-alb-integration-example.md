@@ -221,6 +221,23 @@ Resources:
         - Namespace: "aws:autoScaling:updatepolicy:rollingupdate"
           OptionName: "pauseTime"
           Value: "PT3M"
+
+        # アプリケーションコードのデプロイポリシーを設定
+        - Namespace: "aws:elasticbeanstalk:command"
+          OptionName: "DeploymentPolicy"
+          Value: "Rolling"
+        - Namespace: "aws:elasticbeanstalk:command"
+          OptionName: "Timeout"
+          Value: "600" # Unit: seconds
+        - Namespace: "aws:elasticbeanstalk:command"
+          OptionName: "BatchSizeType"
+          Value: "Fixed"
+        - Namespace: "aws:elasticbeanstalk:command"
+          OptionName: "BatchSize"
+          Value: "1"
+        - Namespace: "aws:elasticbeanstalk:command"
+          OptionName: "IgnoreHealthCheck"
+          Value: "false"
         # リクエストの流れ client -> (https) -> Application Load balancer -> (http) -> EC2(application)
         - Namespace: "aws:elasticbeanstalk:environment:process:default"
           OptionName: "Port"
