@@ -23,7 +23,7 @@ import (
  "context"
 
  "github.com/aws/aws-sdk-go-v2/service/sns"
- "github.com/medcom/alarm-api/internal/domain"
+ "github.com/example/alarm-api/internal/domain"
 )
 
 type SNSNotificationEndpointService struct {

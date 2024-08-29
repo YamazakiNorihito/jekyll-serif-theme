@@ -10,9 +10,9 @@ Resources:
         config:
           commands:
             01_create_dir:
-              command: "mkdir -p /yamazaki1"
+              command: "mkdir -p /{user}1"
             02_copy_file:
-              command: "aws s3 cp s3://nyamazaki-credentials-bucket/ff-api-server-firebase-adminsdk-nki15-5a868d3dda.json /yamazaki1/ff-api-server-firebase-adminsdk-nki15-5a868d3dda.json"
+              command: "aws s3 cp s3://n{user}-credentials-bucket/ff-api-server-firebase-adminsdk-nki15-5a868d3dda.json /{user}1/ff-api-server-firebase-adminsdk-nki15-5a868d3dda.json"
     Properties:
       InstanceType: t2.micro
       ImageId: ami-0b5c74e235ed808b9  # 適切なAMI IDに置き換えてください。
