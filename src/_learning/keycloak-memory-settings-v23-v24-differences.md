@@ -80,4 +80,4 @@ volumes:
 ### 参考リンク
 
 - [Keycloak公式メモリ設定ドキュメント](https://www.keycloak.org/server/containers#_specifying_different_memory_settings)
-- [Keycloak 19から22へのアップグレード後の問題に関するディスカッション](https://keycloak.discourse.group/t/high-cpu-utilization-and-frequent-restarts-after-upgrading-from-keycloak-19-to-keycloak-22/26298) [oai_citation:1,How-to Optimize Memory Consumption for Java Containers Running in Kubernetes - Ralph's Open Source Blog](https://ralph.blog.imixs.com/2020/10/22/how-to-optimize-memory-consumption-for-wildfly-running-in-kubernetes/)
+- [Increase jvm on container in AWS ECS](https://keycloak.discourse.group/t/increase-jvm-on-container-in-aws-ecs/25428)
