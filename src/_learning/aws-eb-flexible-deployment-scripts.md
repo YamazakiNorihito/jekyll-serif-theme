@@ -5,6 +5,13 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - AWS
+  - Elastic Beanstalk
+  - Linux
+  - Deployment
+  - Custom Scripts
+  - Automation
 ---
 
 ### AWS Elastic Beanstalkでの柔軟なデプロイスクリプトの活用

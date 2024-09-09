@@ -5,6 +5,7 @@ date: 2024-02-14T13:00:00
 jobtitle: ""
 linkedinurl: ""
 weight: 7
+tags:
 ---
 
 - [github][`cloud-init`](https://github.com/canonical/`cloud-init`)

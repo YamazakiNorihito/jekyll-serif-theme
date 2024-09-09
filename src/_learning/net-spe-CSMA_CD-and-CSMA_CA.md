@@ -5,6 +5,15 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - CSMA/CD
+  - CSMA/CA
+  - Network Protocols
+  - Ethernet
+  - Wi-Fi
+  - Collision Detection
+  - Collision Avoidance
+  - Network Specialist
 ---
 
 # CSMA/CD と CSMA/CA の概要と覚え方

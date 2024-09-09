@@ -5,6 +5,13 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - DHCP Snooping
+  - DHCP Spoofing
+  - Network Security
+  - Switch Security
+  - Network Specialist
+  - Cybersecurity
 ---
 
 # DHCPスヌーピングとは

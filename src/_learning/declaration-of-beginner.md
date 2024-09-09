@@ -5,6 +5,7 @@ date: 2023-10-04T07:32:00
 jobtitle: "Graphic Designer"
 linkedinurl: ""
 weight: 7
+tags:
 ---
 
 # Blogの開始について

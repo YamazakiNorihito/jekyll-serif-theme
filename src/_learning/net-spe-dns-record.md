@@ -5,6 +5,16 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - DNS
+  - DNS Records
+  - Zone File
+  - A Record
+  - CNAME
+  - MX Record
+  - SPF
+  - PTR Record
+  - Network Specialist
 ---
 
 
@@ -129,6 +139,7 @@ example.com. IN A 192.0.2.1
 example.com. IN AAAA 2001:db8::1
 
 ### CNAMEレコード（Canonical Name）
+
 <www.example.com>. IN CNAME example.com.
 
 ### MXレコード（Mail Exchange）

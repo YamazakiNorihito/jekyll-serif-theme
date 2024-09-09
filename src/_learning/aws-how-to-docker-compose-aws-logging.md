@@ -5,6 +5,13 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - Docker
+  - Docker Compose
+  - AWS
+  - CloudWatch
+  - Logging
+  - EC2
 ---
 
 # Docker Compose で AWS Logs を利用するための設定ガイド

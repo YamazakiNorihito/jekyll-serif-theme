@@ -4,6 +4,7 @@ date: 2024-6-8T05:26:00
 jobtitle: "jekyll-sitemap"
 linkedinurl: ""
 weight: 7
+tags:
 ---
 
 <https://pkg.go.dev/log/slogのページを日本語に翻訳しただけです。>

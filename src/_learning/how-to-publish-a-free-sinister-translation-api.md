@@ -5,6 +5,7 @@ date: 2023-10-18T13:37:00
 jobtitle: "悪どいぞ翻訳API無料公開する方法"
 linkedinurl: ""
 weight: 7
+tags:
 ---
 
 参考サイトはGETメソッドで作っていましたが、

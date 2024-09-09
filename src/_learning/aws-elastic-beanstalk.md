@@ -5,6 +5,12 @@ date: 2023-11-22T06:14:00
 jobtitle: ""
 linkedinurl: ""
 weight: 7
+tags:
+  - AWS
+  - Elastic Beanstalk
+  - EC2
+  - Express
+  - Cloud Deployment
 ---
 
 [AWS Elastic Beanstalk](https://aws.amazon.com/jp/elasticbeanstalk/)(ビーン・ストーク)というのを見つけた。

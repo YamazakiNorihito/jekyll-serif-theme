@@ -5,6 +5,15 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - BGP
+  - IGP
+  - EGP
+  - iBGP
+  - eBGP
+  - Network Protocols
+  - Network Routing
+  - Network Specialist
 ---
 
 # BGPとその関連プロトコルについての概要

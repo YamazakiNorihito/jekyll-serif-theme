@@ -5,6 +5,15 @@ date: 2024-3-2T11:05:00
 jobtitle: "Graphic Designer"
 linkedinurl: ""
 weight: 7
+tags:
+  - Sequelize
+  - MySQL
+  - Node.js
+  - ORM
+  - Debugging
+  - SQL Queries
+  - DateTime Handling
+  - MySQL2
 ---
 
 

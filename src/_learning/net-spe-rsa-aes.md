@@ -5,6 +5,15 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - RSA
+  - AES
+  - Encryption
+  - Network Security
+  - Cryptography
+  - SSL/TLS
+  - Public Key Cryptography
+  - Symmetric Encryption
 ---
 
 ## AES (Advanced Encryption Standard)

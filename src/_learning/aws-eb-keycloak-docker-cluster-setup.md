@@ -4,6 +4,14 @@ date: 2024-08-19T07:00:00
 jobtitle: ""
 linkedinurl: ""
 weight: 7
+tags:
+  - Docker
+  - Keycloak
+  - Clustering
+  - AWS
+  - Elastic Beanstalk
+  - Infinispan
+  - EC2
 ---
 
 ### DockerでKeycloakをクラスタ運用する話

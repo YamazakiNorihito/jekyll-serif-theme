@@ -4,6 +4,21 @@ date: 2024-02-16T11:24:00
 jobtitle: ""
 linkedinurl: ""
 weight: 7
+tags:
+  - MySQL
+  - SQL
+  - EXPLAIN
+  - Database Performance
+  - Query Optimization
+  - Database Management
+  - SQL Indexing
+  - MySQL EXPLAIN ANALYZE
+  - MySQL SHOW STATUS
+  - Disk Management
+  - Query Execution Plan
+  - MySQL Table Size
+  - SQL Error Handling
+  - MySQL Binary Logs
 ---
 
 
