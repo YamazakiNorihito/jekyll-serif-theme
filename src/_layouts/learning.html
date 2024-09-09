@@ -12,4 +12,37 @@ bodyClass: "page-team"
       </div>
     </div>
   </div>
+
+
+  <h3>関連記事</h3>
+  <ul class="related-posts">
+    {% assign learnings = site.learning | where_exp: "item", "item.tags != null and item.tags.size > 0" | sort: "weight" %}
+    {% for learning in learnings %}
+      <!-- タグの取得をそのまま使用 -->
+      {% assign page_tags = page.tags %}
+      {% assign learning_tags = learning.tags %}
+      
+      <!-- 共通タグがあるかどうかを確認 -->
+      {% assign has_common_tags = false %}
+      {% for tag in page_tags %}
+        {% if learning_tags contains tag %}
+          {% assign has_common_tags = true %}
+          {% break %} <!-- 一致するタグが見つかったらループを抜ける -->
+        {% endif %}
+      {% endfor %}
+  
+      <!-- 共通タグがある場合のみ表示 -->
+      {% if learning != page and has_common_tags %}
+        <li>
+          <div class="related-post-thumbnail">
+            <!-- サムネイルの追加 (存在する場合) -->
+            {% if learning.image %}
+              <img src="{{ learning.image | relative_url }}" alt="{{ learning.title }}">
+            {% endif %}
+          </div>
+          <a href="{{ learning.url | relative_url }}">{{ learning.title }}</a><br>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
 </div>

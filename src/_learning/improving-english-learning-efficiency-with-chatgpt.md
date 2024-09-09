@@ -5,6 +5,7 @@ date: 2023-10-11T05:17:00
 jobtitle: "英語を読めるまでになるには"
 linkedinurl: ""
 weight: 7
+tags:
 ---
 
 ChatGPTに ”｛英文｝ 構文と単語の意味をおしえてください”と

@@ -5,6 +5,14 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - BGP
+  - OSPF
+  - Autonomous System
+  - AS
+  - Network Routing
+  - Network Specialist
+  - Internet Protocols
 ---
 
 # BGP、OSPF、およびASについての簡単な説明

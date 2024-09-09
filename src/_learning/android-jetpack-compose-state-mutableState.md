@@ -6,6 +6,7 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
 ---
 
 # Jetpack ComposeのStateとMutableStateの理解を深めていく

@@ -5,6 +5,7 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
 ---
 
 ## Kotlin スタイルガイド

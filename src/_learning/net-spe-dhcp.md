@@ -5,6 +5,14 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - DHCP
+  - Network Protocols
+  - IP Address Management
+  - Dynamic Host Configuration Protocol
+  - Network Specialist
+  - UDP
+  - DHCP Security
 ---
 
 # DHCPについて

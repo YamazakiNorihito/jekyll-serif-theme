@@ -5,6 +5,15 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - AWS
+  - Elastic Beanstalk
+  - CloudWatch
+  - Monitoring
+  - CloudFormation
+  - Docker
+  - Logs
+  - EC2
 ---
 
 

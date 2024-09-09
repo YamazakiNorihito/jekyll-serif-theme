@@ -5,6 +5,15 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - IPSec
+  - AH
+  - ESP
+  - Network Security
+  - Authentication Header
+  - Encapsulating Security Payload
+  - VPN
+  - Network Specialist
 ---
 
 # IPSecのAHとESPの概要と比較

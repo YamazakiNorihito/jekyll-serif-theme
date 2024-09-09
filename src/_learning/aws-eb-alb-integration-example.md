@@ -5,6 +5,15 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - AWS
+  - Elastic Beanstalk
+  - Application Load Balancer
+  - CloudFormation
+  - Docker
+  - EC2
+  - Auto Scaling
+  - Infrastructure as Code
 ---
 
 # AWS Elastic BeanstalkとApplication Load Balancerを連携するCloudFormationテンプレート

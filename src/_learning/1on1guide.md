@@ -5,6 +5,15 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - 1on1ミーティング
+  - ガイド
+  - リーダーシップ
+  - コミュニケーション
+  - イベント
+  - connpass
+  - 組織開発
+  - パーソナルグロース
 ---
 
 ### 1on1ミーティングガイドを作っている団体がある

@@ -5,6 +5,7 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
 ---
 
 EC2インスタンスでアプリケーションを動かしていた際、突然プロセスが終了した原因を調査したときの記録です。
@@ -38,4 +39,3 @@ EC2上でKeycloakを動かしていたところ、予期せずアプリケーシ
    ```
 
    `amazon-cloudwat`が`oom-killer`を実行したことがわかります。これにより、システム全体のメモリ不足が引き金となり、Keycloakのプロセスが終了しました。
-

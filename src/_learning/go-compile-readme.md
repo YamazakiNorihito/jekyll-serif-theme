@@ -5,6 +5,7 @@ date: 2024-7-20T16:07:00
 jobtitle: "jekyll-sitemap"
 linkedinurl: ""
 weight: 7
+tags:
 ---
 
 # 日本語翻訳

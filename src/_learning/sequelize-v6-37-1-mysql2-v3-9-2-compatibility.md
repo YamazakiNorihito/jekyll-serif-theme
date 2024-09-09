@@ -5,6 +5,15 @@ date: 2024-3-4T15:13:00
 jobtitle: "Graphic Designer"
 linkedinurl: ""
 weight: 7
+tags:
+  - Sequelize
+  - MySQL2
+  - Node.js
+  - ORM
+  - TypeCasting
+  - Datetime
+  - Debugging
+  - Compatibility Issues
 ---
 
 # 概要
