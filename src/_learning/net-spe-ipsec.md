@@ -5,6 +5,15 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - IPSec
+  - VPN
+  - セキュリティ
+  - トンネリング
+  - 暗号化
+  - IKE
+  - ネットワークプロトコル
+  - Network Specialist
 ---
 
 

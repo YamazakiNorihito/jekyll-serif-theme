@@ -5,6 +5,12 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - SNMP
+  - ネットワーク監視
+  - RMON
+  - RADIUS
+  - Network Specialist
 ---
 
 

@@ -5,6 +5,12 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - TLS
+  - 暗号化
+  - セキュリティプロトコル
+  - SSL
+  - Network Specialist
 ---
 
 

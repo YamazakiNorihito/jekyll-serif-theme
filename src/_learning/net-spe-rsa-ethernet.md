@@ -5,6 +5,15 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - 物理層
+  - IEEE802.3
+  - ツイストペアケーブル
+  - 無線通信
+  - Cat5e
+  - Cat6
+  - データ転送
+  - Network Specialist
 ---
 
 

@@ -5,6 +5,14 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - DNS
+  - 再帰問い合わせ
+  - 非再帰問い合わせ
+  - ネットワーク
+  - ネットワークセキュリティ
+  - ネットワークプロトコル
+  - Network Specialist
 ---
 
 # 再帰問い合わせと非再帰問い合わせ

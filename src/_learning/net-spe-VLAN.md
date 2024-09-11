@@ -5,6 +5,13 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - VLAN
+  - ネットワークセグメンテーション
+  - IEEE 802.1Q
+  - CoS
+  - Virtual LAN
+  - Network Specialist
 ---
 
 # VLANの基本

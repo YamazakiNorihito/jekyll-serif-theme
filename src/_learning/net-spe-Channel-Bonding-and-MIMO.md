@@ -5,6 +5,16 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - Wi-Fi
+  - チャネルボンディング
+  - MIMO
+  - IEEE 802.x
+  - 無線通信
+  - ネットワーク
+  - 無線LAN
+  - 高速通信
+  - Network Specialist
 ---
 
 # 無線Wi-Fi技術：チャネルボンディングとMIMO

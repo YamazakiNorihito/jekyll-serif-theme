@@ -5,6 +5,14 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - IPパケット
+  - TCP
+  - UDP
+  - ネットワークプロトコル
+  - ヘッダー構成
+  - Ethernet
+  - Network Specialist
 ---
 
 

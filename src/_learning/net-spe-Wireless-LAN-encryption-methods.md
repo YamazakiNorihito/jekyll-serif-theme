@@ -5,6 +5,14 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - 暗号化
+  - 無線LAN
+  - セキュリティ
+  - WPA2
+  - WPA3
+  - WEP
+  - Network Specialist
 ---
 
 # 無線LANの暗号化方式について

@@ -5,6 +5,16 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - HTTP
+  - HTTP/1.x
+  - HTTP/2
+  - HTTP/3
+  - QUIC
+  - TCP
+  - ネットワークプロトコル
+  - Web通信
+  - Network Specialist
 ---
 
 # HTTP/1.x

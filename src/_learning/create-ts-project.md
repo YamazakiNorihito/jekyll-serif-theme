@@ -6,6 +6,14 @@ jobtitle: ""
 linkedinurl: ""
 weight: 7
 tags:
+  - Node.js
+  - TypeScript
+  - npm
+  - 開発環境
+  - Inversify
+  - Express
+  - プロジェクトセットアップ
+  - 開発依存
 ---
 
 

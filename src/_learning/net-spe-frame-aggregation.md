@@ -5,6 +5,15 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - フレームアグリゲーション
+  - Wi-Fi
+  - MAC層
+  - スループット
+  - A-MSDU
+  - A-MPDU
+  - ネットワーク
+  - Network Specialist
 ---
 
 # フレームアグリゲーションについて

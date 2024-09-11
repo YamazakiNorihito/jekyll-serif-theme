@@ -5,6 +5,17 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - QUIC
+  - UDP
+  - TCP
+  - HTTPS
+  - TLS
+  - セキュア通信
+  - ネットワークプロトコル
+  - 暗号化
+  - Webパフォーマンス
+  - Network Specialist
 ---
 
 ## TCP vs UDP vs QUIC

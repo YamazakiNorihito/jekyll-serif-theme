@@ -5,6 +5,15 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - ケロベロス
+  - Kerberos
+  - 認証
+  - ネットワークセキュリティ
+  - SAML
+  - KDC
+  - 認証プロトコル
+  - Network Specialist
 ---
 
 # ケロベロス認証の簡単な説明

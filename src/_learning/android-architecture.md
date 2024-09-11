@@ -7,6 +7,15 @@ linkedinurl: ""
 mermaid: true
 weight: 7
 tags:
+  - Android
+  - アプリ開発
+  - アーキテクチャ
+  - モバイル
+  - ユーザーエクスペリエンス
+  - データフロー
+  - Hilt
+  - Kotlin
+  - Compose
 ---
 
 <https://developer.android.com/topic/architecture?hl=ja>

@@ -5,6 +5,16 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - ロードバランサー
+  - L4ロードバランサー
+  - L7ロードバランサー
+  - トラフィック分散
+  - セッション維持
+  - リバースプロキシ
+  - SSL終端
+  - Network Specialist
+  - 負荷分散
 ---
 
 # ロードバランサーについて

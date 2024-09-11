@@ -5,6 +5,16 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - OSPF
+  - ルーティングプロトコル
+  - ネットワーク
+  - 動的ルーティング
+  - LSA
+  - DR
+  - ABR
+  - ASBR
+  - Network Specialist
 ---
 
 # OSPFについてのまとめ

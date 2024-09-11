@@ -6,6 +6,12 @@ linkedinurl: ""
 mermaid: true
 weight: 7
 tags:
+  - Android Studio
+  - Gradle
+  - AGP
+  - エラー対応
+  - バージョン管理
+  - アプリ開発
 ---
 
 # エラー集
