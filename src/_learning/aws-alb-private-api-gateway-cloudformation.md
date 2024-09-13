@@ -253,3 +253,4 @@ Resources:
 - [How Amazon VPC works](https://docs.aws.amazon.com/vpc/latest/userguide/how-it-works.html)
 - [プライベートエンドポイントと Application Load Balancer を使用して、Amazon API Gateway API を内部 Web サイトにデプロイする](https://docs.aws.amazon.com/ja_jp/prescriptive-guidance/latest/patterns/deploy-an-amazon-api-gateway-api-on-an-internal-website-using-private-endpoints-and-an-application-load-balancer.html)
 - [API Gateway のプライベート REST API](https://docs.aws.amazon.com/ja_jp/apigateway/latest/developerguide/apigateway-private-apis.html)
+- [プライベート API の呼び出し](https://docs.aws.amazon.com/ja_jp/apigateway/latest/developerguide/apigateway-private-api-test-invoke-url.html)
