@@ -6,6 +6,14 @@ jobtitle: "Graphic Designer"
 linkedinurl: ""
 weight: 7
 tags:
+  - Blogging
+  - Personal Journey
+  - Self-Expression
+  - Life Goals
+  - Motivation
+  - New Beginnings
+  - Personal Growth
+  - Philosophy
 ---
 
 # Blogの開始について

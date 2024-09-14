@@ -5,6 +5,15 @@ date: 2023-10-19T07:43:00
 jobtitle: "結局運用まで至らないが"
 linkedinurl: ""
 weight: 7
+tags:
+  - freee人事労務
+  - API
+  - OAuth
+  - REST API
+  - 勤怠管理
+  - プログラミング
+  - TypeScript
+  - 連携
 ---
 
 勤怠管理にはfree人事労務を使っている。残業する場合、残業申請と勤務時間を両方別画面で入力するのは大変手間である。

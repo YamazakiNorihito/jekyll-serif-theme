@@ -6,6 +6,12 @@ linkedinurl: ""
 mermaid: true
 weight: 7
 tags:
+  - Programming Languages
+  - Benchmarking
+  - Performance
+  - Development Tools
+  - Code Optimization
+  - Resource
 ---
 
 プログラミング言語のパフォーマンス比較にこちらのウェブサイトをお勧め。

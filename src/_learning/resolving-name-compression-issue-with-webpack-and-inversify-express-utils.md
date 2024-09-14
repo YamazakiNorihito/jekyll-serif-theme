@@ -5,6 +5,15 @@ date: 2023-10-24T09:11:00
 jobtitle: "Graphic Designer"
 linkedinurl: ""
 weight: 7
+tags:
+  - Webpack
+  - TypeScript
+  - inversify-express-utils
+  - Terser
+  - Minification
+  - Dependency Injection
+  - Node.js
+  - Error Handling
 ---
 
 Webpackと`inversify-express-utils`を組み合わせてWeb APIを実装する際に遭遇した、

@@ -5,6 +5,15 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - Keycloak
+  - Migration
+  - Quarkus
+  - Identity Management
+  - Upgrade Guide
+  - Database Schema
+  - Configuration
+  - Security
 ---
 
 

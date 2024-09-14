@@ -5,6 +5,15 @@ date: 2023-10-25T04:43:00
 jobtitle: ""
 linkedinurl: ""
 weight: 7
+tags:
+  - TypeScript
+  - JavaScript
+  - ES6
+  - ES5
+  - ECMAScript
+  - Programming
+  - Class Definition
+  - Compilation
 ---
 
 

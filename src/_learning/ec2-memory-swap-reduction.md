@@ -6,6 +6,14 @@ linkedinurl: ""
 mermaid: true
 weight: 7
 tags:
+  - EC2
+  - AWS
+  - Memory Management
+  - Swap File
+  - Linux
+  - System Performance
+  - CloudWatch
+  - Troubleshooting
 ---
 
 ## 背景

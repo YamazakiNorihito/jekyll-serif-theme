@@ -6,6 +6,7 @@ jobtitle: "jekyll-sitemap"
 linkedinurl: ""
 weight: 7
 tags:
+  - 
 ---
 
 # 日本語翻訳

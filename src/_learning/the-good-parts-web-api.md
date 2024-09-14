@@ -5,6 +5,16 @@ date: 2024-5-9T06:43:00
 jobtitle: "Graphic Designer"
 linkedinurl: ""
 weight: 7
+tags:
+  - API Design
+  - Web API
+  - RESTful API
+  - HTTP Methods
+  - Error Handling
+  - Security
+  - Versioning
+  - JSON
+  - Best Practices
 ---
 
 

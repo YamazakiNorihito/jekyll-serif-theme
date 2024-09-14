@@ -5,6 +5,16 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - Terraform
+  - Infrastructure as Code
+  - IaC
+  - Cloud Infrastructure
+  - Automation
+  - DevOps
+  - Configuration Management
+  - HashiCorp
+  - Infrastructure Management
 ---
 
 <https://developer.hashicorp.com/terraform/intro>

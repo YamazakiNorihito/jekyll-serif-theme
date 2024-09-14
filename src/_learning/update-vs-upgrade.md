@@ -5,6 +5,15 @@ date: 2023-10-25T06:14:00
 jobtitle: ""
 linkedinurl: ""
 weight: 7
+tags:
+  - Software
+  - Update
+  - Upgrade
+  - IT
+  - Technology
+  - System Maintenance
+  - Software Development
+```​⬤
 ---
 
 ## Update vs Upgrade

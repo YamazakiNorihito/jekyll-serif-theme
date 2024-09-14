@@ -6,6 +6,8 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - 
 ---
 
 元サイト：<https://kotlinlang.org/docs/ranges.html>

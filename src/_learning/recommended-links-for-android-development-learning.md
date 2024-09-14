@@ -5,6 +5,15 @@ date: 2023-10-13T07:31:00
 jobtitle: "Androidエンジニアになろうぜ！"
 linkedinurl: ""
 weight: 7
+tags:
+  - Android
+  - Android Development
+  - Learning Resources
+  - Kotlin
+  - Architecture
+  - Mobile Development
+  - Programming
+  - Beginner Guide
 ---
 
 

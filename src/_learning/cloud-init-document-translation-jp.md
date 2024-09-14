@@ -6,6 +6,15 @@ jobtitle: ""
 linkedinurl: ""
 weight: 7
 tags:
+  - cloud-init
+  - Cloud Computing
+  - Server Configuration
+  - Virtual Machines
+  - Automation
+  - System Administration
+  - Infrastructure
+  - Boot Stages
+  - Linux
 ---
 
 - [github][`cloud-init`](https://github.com/canonical/`cloud-init`)

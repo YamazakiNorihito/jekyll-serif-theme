@@ -5,6 +5,15 @@ date: 2023-10-09T7:00:00
 jobtitle: "OAuthのコンポーネントの役割"
 linkedinurl: "/tech/article/OAuth-%20Sequence_Diagram/"
 weight: 7
+tags:
+  - OAuth
+  - Authentication
+  - Authorization
+  - Security
+  - Access Token
+  - Identity Management
+  - API Security
+  - Learning Resources
 ---
 
 ## OAuthのコンポーネントの役割

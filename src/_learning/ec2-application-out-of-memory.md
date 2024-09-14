@@ -6,6 +6,14 @@ linkedinurl: ""
 mermaid: true
 weight: 7
 tags:
+  - EC2
+  - AWS
+  - Troubleshooting
+  - Out of Memory
+  - Keycloak
+  - System Logs
+  - OOM Killer
+  - Java
 ---
 
 EC2インスタンスでアプリケーションを動かしていた際、突然プロセスが終了した原因を調査したときの記録です。

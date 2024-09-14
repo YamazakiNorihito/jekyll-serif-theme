@@ -6,6 +6,7 @@ jobtitle: "O/R Mapping 基本概念の解説"
 linkedinurl: ""
 weight: 7
 tags:
+  - 
 ---
 [Mapping Objects to Relational Databases: O/R Mapping In Detail](http://agiledata.org/essays/mappingObjects.html)　を読んでいて
 意味わからんぷーとなったところ自分なりの理解をまとめる。

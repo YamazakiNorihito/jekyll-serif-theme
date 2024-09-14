@@ -6,6 +6,14 @@ linkedinurl: ""
 mermaid: true
 weight: 7
 tags:
+  - NGINX
+  - HTTP Module
+  - Configuration
+  - String Replacement
+  - Web Server
+  - MIME Types
+  - Documentation Translation
+  - ngx_http_sub_module
 ---
 
 # Module ngx_http_sub_module

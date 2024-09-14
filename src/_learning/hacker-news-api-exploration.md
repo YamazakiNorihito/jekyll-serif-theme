@@ -5,6 +5,15 @@ date: 2023-11-21T17:26:00
 jobtitle: ""
 linkedinurl: ""
 weight: 7
+tags:
+  - Hacker News
+  - API
+  - Web Development
+  - Firebase
+  - REST API
+  - Vscode
+  - Data Retrieval
+  - JavaScript
 ---
 
 Hacker NewsがAPIを公開してました。<https://hackernews.api-docs.io>

@@ -6,6 +6,7 @@ linkedinurl: ""
 mermaid: true
 weight: 7
 tags:
+  - 
 ---
 
 # 依存関係の逆転の原則(Dependency Inversion Principle, DIP)

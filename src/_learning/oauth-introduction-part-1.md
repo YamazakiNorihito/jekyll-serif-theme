@@ -5,6 +5,15 @@ date: 2023-10-05T08:19:00
 jobtitle: "Client Callbackのredirect_uriの役割"
 linkedinurl: ""
 weight: 7
+tags:
+  - OAuth
+  - Security
+  - redirect_uri
+  - Authorization
+  - Authentication
+  - Access Token
+  - Identity Management
+  - Learning Resources
 ---
 
 # `3.2.2. Processing the authorization response`における`redirect_uri`の理解

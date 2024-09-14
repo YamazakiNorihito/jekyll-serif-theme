@@ -3,6 +3,16 @@ title: "Redisを使ってNode Jsと連携してみた"
 date: 2023-10-27T09:21:00
 linkedinurl: ""
 weight: 7
+tags:
+  - Redis
+  - Node.js
+  - Docker
+  - Database
+  - JavaScript
+  - Data Storage
+  - Tutorial
+  - Redis CLI
+  - Web Development
 ---
 
 Redis初心者なのでドキュメント見ながら、データの読み書きやユーザー管理を試してみました。

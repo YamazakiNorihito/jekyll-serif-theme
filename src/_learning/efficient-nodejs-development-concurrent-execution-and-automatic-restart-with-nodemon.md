@@ -6,6 +6,14 @@ jobtitle: "Ｎodejsで複数のアプリケーションを同時に実行する�
 linkedinurl: ""
 weight: 7
 tags:
+  - Node.js
+  - Development Tools
+  - Concurrently
+  - Nodemon
+  - Automation
+  - JavaScript
+  - Code Hot Reloading
+  - Multi-process Management
 ---
 
 # Ｎodejsで複数のアプリケーションを同時に実行する方法

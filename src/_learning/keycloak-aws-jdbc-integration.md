@@ -5,6 +5,15 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - Keycloak
+  - JDBC
+  - AWS
+  - Docker
+  - Database
+  - MySQL
+  - Configuration
+  - Identity Management
 ---
 
 # KeycloakのJDBCドライバーをAWS Advanced JDBC Wrapperに変更する方法

@@ -4,6 +4,7 @@ date: 2024-06-24T17:10:00
 linkedinurl: ""
 weight: 7
 tags:
+  - 
 ---
 
 ## 1章: 課題と原則

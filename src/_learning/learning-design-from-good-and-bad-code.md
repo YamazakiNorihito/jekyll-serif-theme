@@ -5,6 +5,20 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
+tags:
+  - Code Quality
+  - Software Design
+  - Static Methods
+  - Best Practices
+  - Design Patterns
+  - Tell Don't Ask
+  - Switch Case
+  - Polymorphism
+  - Inheritance
+  - YAGNI
+  - Null Handling
+  - Development Process
+  - Code Review
 ---
 
 # 学び
