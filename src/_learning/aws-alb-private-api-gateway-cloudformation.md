@@ -36,12 +36,8 @@ Parameters:
   VpcId:
     Type: String
     Description: The ID of the VPC
-  PublicSubnet1:
-    Type: String
-    Description: The ID of the first private subnet
-  PublicSubnet2:
-    Type: String
-    Description: The ID of the second private subnet
+  PublicSubnets:
+    Type: CommaDelimitedList
   AlbSecurityGroupId:
     Type: String
     Description: The ID of the security group associated with the Application Load Balancer (ALB)
@@ -52,9 +48,7 @@ Resources:
     Properties:
       VpcId: !Ref VpcId
       ServiceName: !Sub com.amazonaws.${AWS::Region}.execute-api
-      SubnetIds:
-        - !Ref PublicSubnet1
-        - !Ref PublicSubnet2
+      SubnetIds: !Ref PublicSubnets
       PrivateDnsEnabled: true
       VpcEndpointType: Interface
       SecurityGroupIds:
@@ -75,9 +69,9 @@ AWSTemplateFormatVersion: '2010-09-09'
 Description: CloudFormation template for a private REST API using an interface VPC endpoint
 
 Parameters:
-  VpcEndpointId:
-    Type: String
-    Description: The ID of the VPC Endpoint to be used for the API Gateway.
+  VpcEndpointIds:
+    Type: CommaDelimitedList
+    Description: The first VPC Endpoint ID to be used for the API Gateway.
 
 Resources:
   PrivateRestApi:
@@ -88,8 +82,7 @@ Resources:
       EndpointConfiguration:
         Types:
           - PRIVATE
-        VpcEndpointIds:
-          - !Ref VpcEndpointId
+        VpcEndpointIds: !Ref VpcEndpointIds
       Policy:
         Version: '2012-10-17'
         Statement:
@@ -99,7 +92,7 @@ Resources:
             Resource: !Sub 'arn:aws:execute-api:${AWS::Region}:*:*/*/*/*'
             Condition:
               StringNotEquals:
-                aws:SourceVpce: !Ref VpcEndpointId
+                aws:SourceVpce: !Ref VpcEndpointIds
           - Effect: Allow
             Principal: '*'
             Action: 'execute-api:Invoke'
@@ -199,12 +192,9 @@ Parameters:
   VpcId:
     Type: String
     Description: The ID of the VPC
-  EndpointIpAddress1:
-    Type: String
-    Description: The IP address of the first endpoint
-  EndpointIpAddress2:
-    Type: String
-    Description: The IP address of the second endpoint
+  TargetIps:
+    Type: CommaDelimitedList
+    Description: The IP address
   AlbListenerArn:
     Type: String
     Description: The ARN of the Application Load Balancer (ALB) listener
@@ -228,9 +218,9 @@ Resources:
       Matcher:
         HttpCode: '200,403'
       Targets:
-        - Id: !Ref EndpointIpAddress1
+        - Id: !Select [0, !Ref TargetIps]
           Port: 443
-        - Id: !Ref EndpointIpAddress2
+        - Id: !Select [1, !Ref TargetIps]
           Port: 443
 
   HelloApiListenerRule:
