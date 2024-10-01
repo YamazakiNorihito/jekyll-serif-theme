@@ -13,7 +13,6 @@ tags:
   - Technology
   - System Maintenance
   - Software Development
-```​⬤
 ---
 
 ## Update vs Upgrade

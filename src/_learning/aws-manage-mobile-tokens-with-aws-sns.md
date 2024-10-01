@@ -155,6 +155,172 @@ private String createEndpoint() {
 
 唯一、トークンを更新せずにエンドポイントを再有効化して効果があるのは、トークンが以前は無効だったが再び有効になった場合です。例えば、アプリがアンインストールされた後に同じデバイスに再インストールされ、同じトークンが再発行された場合などです。
 
+## ハンズオン
+
+このハンズオンでは、`CreatePlatformEndpoint` APIの異なるシナリオでの挙動を確認します。
+
+- **シナリオ1**：属性情報なしで`CreatePlatformEndpoint`を2回呼び出す場合。
+- **シナリオ2**：属性情報ありで`CreatePlatformEndpoint`を呼び、その後属性情報なしで再度呼ぶ場合。
+- **シナリオ3**：同じ属性情報で`CreatePlatformEndpoint`を複数回呼ぶ場合。
+
+#### ステップ1：LocalStackを起動
+
+AWSサービスをローカルでシミュレートするために、LocalStackのDockerコンテナを起動します。
+
+```bash
+docker run --name localstack \
+-p 127.0.0.1:4566:4566 \
+-p 127.0.0.1:4510-4559:4510-4559 \
+-e DEBUG=${DEBUG:-0} \
+-v "$(pwd)/docker/localstack:/var/lib/localstack" \
+-v /var/run/docker.sock:/var/run/docker.sock \
+localstack/localstack:latest
+```
+
+#### ステップ2：プラットフォームアプリケーションを作成
+
+`create_platform_application.sh`というスクリプトを作成し、以下の内容を記述します。
+
+```bash
+#!/bin/bash
+set -euo pipefail
+
+PROFILE="localstack"
+ENV="local"
+REGION="us-east-1"
+PLATFORM_NAME="alarm-${ENV}-FCM"
+FCM_SERVICE_JSON_FILE_PATH="./fcm_credential.json"  # 実際のパスに置き換えてください
+SERVICE_JSON=$(jq @json < "${FCM_SERVICE_JSON_FILE_PATH}")
+
+aws sns create-platform-application \
+    --name "${PLATFORM_NAME}" \
+    --platform "GCM" \
+    --attributes PlatformCredential="${SERVICE_JSON}" \
+    --region "${REGION}" \
+    --profile "${PROFILE}" \
+    --endpoint-url="http://localhost:4566"
+```
+
+注意点：
+
+- `./fcm_credential.json`を実際のFCMクレデンシャルJSONファイルのパスに置き換えてください。
+- 実行権限を付与します：`chmod +x create_platform_application.sh`
+- スクリプトを実行します：`./create_platform_application.sh`
+
+#### ステップ3：プラットフォームアプリケーションの確認
+
+作成されたプラットフォームアプリケーションをリストします。
+
+```bash
+aws sns list-platform-applications \
+    --region "us-east-1" \
+    --profile "localstack" \
+    --endpoint-url="http://localhost:4566" \
+    --query 'PlatformApplications[].PlatformApplicationArn' \
+    --output text
+```
+
+#### ステップ4：シナリオ1 - 属性なしで2回呼び出す
+
+最初の呼び出し：
+
+```bash
+aws sns create-platform-endpoint \
+    --platform-application-arn "arn:aws:sns:us-east-1:000000000000:app/GCM/alarm-local-FCM" \
+    --token "valid-token" \
+    --region "us-east-1" \
+    --profile "localstack" \
+    --endpoint-url="http://localhost:4566"
+```
+
+同じトークンで属性情報なしの2回目の呼び出し：
+
+```bash
+aws sns create-platform-endpoint \
+    --platform-application-arn "arn:aws:sns:us-east-1:000000000000:app/GCM/alarm-local-FCM" \
+    --token "valid-token" \
+    --region "us-east-1" \
+    --profile "localstack" \
+    --endpoint-url="http://localhost:4566"
+```
+
+**観察結果**：2回目の呼び出しは既存の`EndpointArn`を返し、冪等性を示します。
+
+#### ステップ5：シナリオ2 - 属性情報ありとなしでの呼び出し
+
+カスタムユーザーデータを指定してエンドポイントを作成：
+
+```bash
+aws sns create-platform-endpoint \
+    --platform-application-arn "arn:aws:sns:us-east-1:000000000000:app/GCM/alarm-local-FCM" \
+    --token "valid-token1" \
+    --custom-user-data "your-custom-user-data" \
+    --region "us-east-1" \
+    --profile "localstack" \
+    --endpoint-url="http://localhost:4566"
+```
+
+同じトークンで属性情報なしの呼び出し：
+
+```bash
+aws sns create-platform-endpoint \
+    --platform-application-arn "arn:aws:sns:us-east-1:000000000000:app/GCM/alarm-local-FCM" \
+    --token "valid-token1" \
+    --region "us-east-1" \
+    --profile "localstack" \
+    --endpoint-url="http://localhost:4566"
+```
+
+**観察結果**：2回目の呼び出しは属性の不一致によりエラーが発生する可能性があります。
+
+#### ステップ6：シナリオ3 - 同じ属性情報での複数回の呼び出し
+
+同じトークンとカスタムユーザーデータで再度`CreatePlatformEndpoint`を呼び出します。
+
+```bash
+aws sns create-platform-endpoint \
+    --platform-application-arn "arn:aws:sns:us-east-1:000000000000:app/GCM/alarm-local-FCM" \
+    --token "valid-token1" \
+    --custom-user-data "your-custom-user-data" \
+    --region "us-east-1" \
+    --profile "localstack" \
+    --endpoint-url="http://localhost:4566"
+```
+
+**観察結果**：属性が一致しているため、呼び出しは成功し、既存の`EndpointArn`が返されます。
+
+#### ステップ7：エンドポイントのリスト表示
+
+結果を確認するため、すべてのエンドポイントをリストします。
+
+```bash
+aws sns list-endpoints-by-platform-application \
+    --platform-application-arn "arn:aws:sns:us-east-1:000000000000:app/GCM/alarm-local-FCM" \
+    --region "us-east-1" \
+    --profile "localstack" \
+    --endpoint-url="http://localhost:4566" \
+    --query 'Endpoints[].EndpointArn' \
+    --output text
+```
+
+#### ステップ8：クリーンアップ
+
+必要に応じてエンドポイントを削除します。
+
+```bash
+aws sns delete-endpoint \
+    --endpoint-arn "arn:aws:sns:us-east-1:000000000000:endpoint/GCM/alarm-local-FCM/your-endpoint-id" \
+    --region "us-east-1" \
+    --profile "localstack" \
+    --endpoint-url="http://localhost:4566"
+```
+
+#### まとめ
+
+- **冪等性**：`CreatePlatformEndpoint`は、同じトークンと属性で呼び出すと冪等的に動作します。
+- **属性の不一致**：同じトークンで異なる属性を指定すると、エラーが発生します。
+- **属性の一致**：同じトークンと属性であれば、既存のエンドポイントがエラーなく返されます。
+
 ---
 
 **参考サイト**
