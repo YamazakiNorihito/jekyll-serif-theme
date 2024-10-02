@@ -4,6 +4,20 @@ date: 2024-09-18T07:15:00
 mermaid: true
 weight: 7
 tags:
+  - AWS
+  - VPC
+  - サブネット
+  - ネットワーク
+  - ルートテーブル
+  - インターネットゲートウェイ
+  - プライベートネットワーク
+  - Transit Gateway
+  - VPC Peering
+  - VPN接続
+  - AWSネットワーキング
+  - フルメッシュ構成
+  - セキュリティ
+  - クラウドネットワーク
 ---
 
 [userguide/what-is-amazon-vpc](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html)を読んだので、自分なりにまとめました。
