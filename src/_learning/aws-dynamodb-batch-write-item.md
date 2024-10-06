@@ -1,6 +1,6 @@
 ---
 title: AWS DynamoDB - BatchWriteItemの使用方法と注意点
-date: 2024-10-03
+date: 2024-10-06T07:15:00
 tags:
   - AWS
   - DynamoDB
