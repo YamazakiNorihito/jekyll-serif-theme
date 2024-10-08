@@ -7,7 +7,7 @@ linkedinurl: ""
 mermaid: true
 weight: 7
 tags:
-description: ""
+description: "Jetpack Composeにおける`remember`と`mutableStateOf`の使い方を解説。UI状態の管理や再コンポーズ時の状態保持を実現し、ユーザー操作を効果的に処理するためのベストプラクティスを紹介します。"
 ---
 
 ### Composeにおける`remember`と`mutableStateOf`の使い方

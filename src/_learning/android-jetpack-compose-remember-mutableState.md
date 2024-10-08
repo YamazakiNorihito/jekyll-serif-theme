@@ -7,7 +7,7 @@ linkedinurl: ""
 mermaid: true
 weight: 7
 tags:
-description: ""
+description: "Androidアプリ開発における自動テストの基本を解説。ローカルテストとインストルメンテーションテストの違いや使い分け、ベストプラクティス、ディレクトリ構造、テストの実践的なコードサンプルを紹介します。"
 ---
 
 ## 自動テストの種類

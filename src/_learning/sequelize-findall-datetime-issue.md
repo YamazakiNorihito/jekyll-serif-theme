@@ -14,7 +14,7 @@ tags:
   - SQL Queries
   - DateTime Handling
   - MySQL2
-description: ""
+description: "Sequelizeを使ったMySQLのDateTime型データの取得に関する問題とその原因を解説。mysql2ライブラリのバージョンの違いによるエラーの解析方法、Sequelizeの内部構造、特にfindAllの動作やクエリの生成に関する詳細な説明も含めています。"
 ---
 
 

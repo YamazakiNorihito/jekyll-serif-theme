@@ -7,7 +7,7 @@ linkedinurl: ""
 mermaid: true
 weight: 7
 tags:
-description: ""
+description: "Jetpack Composeを使ったAndroidアプリ開発において、宣言型UIや再コンポーズの仕組み、動的コンテンツの作成、パフォーマンスを向上させるポイントについて解説。従来のUIフレームワークとの違いや、効率的な画面更新方法を学びます。"
 ---
 <https://developer.android.com/develop/ui/compose/mental-model?hl=ja>
 

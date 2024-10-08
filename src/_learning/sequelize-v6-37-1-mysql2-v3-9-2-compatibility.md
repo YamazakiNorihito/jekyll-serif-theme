@@ -14,7 +14,7 @@ tags:
   - Datetime
   - Debugging
   - Compatibility Issues
-description: ""
+description: "Sequelize v6.37.1とMySQL2 v3.9.2の間の互換性問題に関する調査結果と、DateTime型のデータに対する解決策を説明。MySQL2 v3.9でのTypeCastの変更が原因で発生するエラーの解析と、TypeCastのカスタマイズによる解決方法を解説。"
 ---
 
 # 概要
