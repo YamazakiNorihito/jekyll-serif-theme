@@ -18,6 +18,7 @@ tags:
   - インフラ構成
   - ネットワークセキュリティ
   - AWSベストプラクティス
+description: ""
 ---
 
 この記事では、ALB（Application Load Balancer）を経由して、プライベートなAPI Gatewayにリクエストを送信する構成についてまとめています。ALB、VPCエンドポイント、プライベートAPI Gateway、およびListenerRuleを活用して構築しました。背景として、リクエストのエントリーポイントをALBにする必要があったため、このような設計を採用しました。

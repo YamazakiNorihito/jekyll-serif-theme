@@ -14,6 +14,7 @@ tags:
   - Access Token
   - Identity Management
   - Learning Resources
+description: ""
 ---
 
 # `3.2.2. Processing the authorization response`における`redirect_uri`の理解

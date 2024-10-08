@@ -5,6 +5,7 @@ weight: 4
 categories:
   - tech
   - openai
+description: ""
 ---
 
 OpenAIのSeptember 27, 2023にリリースされた

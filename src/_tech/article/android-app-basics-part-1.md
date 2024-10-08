@@ -5,6 +5,7 @@ weight: 4
 categories:
   - tech
   - android
+description: ""
 ---
 
 Android デベロッパーの[アプリの基礎](https://developer.android.com/guide/components/fundamentals?hl=ja)をつらつらと自分なりにまとめていく。

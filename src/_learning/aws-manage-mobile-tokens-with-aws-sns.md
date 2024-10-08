@@ -10,6 +10,7 @@ tags:
 - モバイルトークン管理
 - プッシュ通知
 - CreatePlatformEndpoint
+description: ""
 ---
 
 最近、Amazon Simple Notification Service (SNS) を使ってモバイルトークンの管理方法について学んだので、その内容をメモとして残します。

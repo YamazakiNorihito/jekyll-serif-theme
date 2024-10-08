@@ -14,6 +14,7 @@ tags:
   - Network Protocols
   - Network Routing
   - Network Specialist
+description: ""
 ---
 
 # BGPとその関連プロトコルについての概要

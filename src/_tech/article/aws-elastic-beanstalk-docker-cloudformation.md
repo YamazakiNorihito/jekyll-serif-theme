@@ -5,6 +5,7 @@ weight: 4
 categories:
   - aws
   - cloud-service
+description: ""
 ---
 
 AWS Elastic BeanstalkでDocker環境を構築するためのCloudFormationテンプレートのサンプルを紹介します。

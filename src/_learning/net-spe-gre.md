@@ -14,6 +14,7 @@ tags:
   - ネットワークプロトコル
   - Network Specialist
   - IPv6
+description: ""
 ---
 
 Generic Routing Encapsulation (GRE) は、異なる種類のネットワークトラフィックを他のプロトコルでカプセル化し、それをインターネットなどの異なるネットワーク上で転送するためのプロトコルです。

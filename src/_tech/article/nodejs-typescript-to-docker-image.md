@@ -7,6 +7,7 @@ categories:
   - nodejs
   - typescript
   - docker
+description: ""
 ---
 
 # TypeScriptで作成したプロジェクトをDockerイメージにする方法

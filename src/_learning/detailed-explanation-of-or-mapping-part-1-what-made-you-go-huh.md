@@ -7,6 +7,7 @@ linkedinurl: ""
 weight: 7
 tags:
   - 
+description: ""
 ---
 [Mapping Objects to Relational Databases: O/R Mapping In Detail](http://agiledata.org/essays/mappingObjects.html)　を読んでいて
 意味わからんぷーとなったところ自分なりの理解をまとめる。

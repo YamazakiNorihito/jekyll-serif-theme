@@ -7,6 +7,7 @@ linkedinurl: ""
 weight: 7
 tags:
   - 
+description: ""
 ---
 
 ChatGPTに ”｛英文｝ 構文と単語の意味をおしえてください”と

@@ -13,6 +13,7 @@ tags:
   - Network Routing
   - Network Specialist
   - Internet Protocols
+description: ""
 ---
 
 # BGP、OSPF、およびASについての簡単な説明

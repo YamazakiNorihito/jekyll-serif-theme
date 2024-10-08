@@ -14,6 +14,7 @@ tags:
   - Dependency Injection
   - Node.js
   - Error Handling
+description: ""
 ---
 
 Webpackと`inversify-express-utils`を組み合わせてWeb APIを実装する際に遭遇した、

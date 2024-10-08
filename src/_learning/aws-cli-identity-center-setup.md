@@ -8,6 +8,7 @@ tags:
   - CLI
   - IAM
   - Identity Center
+description: ""
 ---
 
 このブログ記事は、公式ドキュメント「[Configure the AWS CLI with IAM Identity Center authentication](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sso.html)」を参考にしています。基本的には公式を参照していただきたいのですが、特にユーザー作成の部分で分かりづらい点があったため、詳細にまとめました。自分自身の理解を深め、後で見返したときに分かりやすくするために、以下のように整形・整理しました。

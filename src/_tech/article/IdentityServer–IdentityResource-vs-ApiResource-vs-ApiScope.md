@@ -8,6 +8,7 @@ categories:
   - oauth
   - csharp
   - dotnet
+description: ""
 ---
 
 IdentityResource/ApiResource/ApiScope それぞれの役割がわからなくなったので

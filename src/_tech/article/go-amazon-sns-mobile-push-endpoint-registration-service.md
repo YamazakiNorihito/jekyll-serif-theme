@@ -4,6 +4,7 @@ date: 2024-06-5T5:00:00
 weight: 4
 categories:
   - go
+description: ""
 ---
 
 ## はじめに

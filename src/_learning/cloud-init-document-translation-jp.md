@@ -15,6 +15,7 @@ tags:
   - Infrastructure
   - Boot Stages
   - Linux
+description: ""
 ---
 
 - [github][`cloud-init`](https://github.com/canonical/`cloud-init`)

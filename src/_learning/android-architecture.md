@@ -16,6 +16,7 @@ tags:
   - Hilt
   - Kotlin
   - Compose
+description: ""
 ---
 
 <https://developer.android.com/topic/architecture?hl=ja>

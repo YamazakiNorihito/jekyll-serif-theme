@@ -6,6 +6,7 @@ jobtitle: ""
 linkedinurl: ""
 weight: 7
 tags:
+description: ""
 ---
 
  Exceptionは適切にThrowする必要がある。

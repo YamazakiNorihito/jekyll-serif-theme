@@ -8,6 +8,7 @@ categories:
   - oauth
   - csharp
   - dotnet
+description: ""
 ---
 
 [Table定義](https://github.dev/DuendeSoftware/IdentityServer/blob/main/migrations/IdentityServerDb/Migrations/ConfigurationDb/ConfigurationDbContextModelSnapshot.cs)を書き起こしてみた

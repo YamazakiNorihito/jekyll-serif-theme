@@ -8,6 +8,7 @@ categories:
   - oauth
   - csharp
   - dotnet
+description: ""
 ---
 
 [Persisted Grant Store](https://docs.duendesoftware.com/identityserver/v6/reference/stores/persisted_grant_store/)

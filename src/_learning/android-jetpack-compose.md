@@ -7,6 +7,7 @@ linkedinurl: ""
 mermaid: true
 weight: 7
 tags:
+description: ""
 ---
 <https://developer.android.com/develop/ui/compose/mental-model?hl=ja>
 

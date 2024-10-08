@@ -12,6 +12,7 @@ tags:
   - Development Tools
   - Code Optimization
   - Resource
+description: ""
 ---
 
 プログラミング言語のパフォーマンス比較にこちらのウェブサイトをお勧め。

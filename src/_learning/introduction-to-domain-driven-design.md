@@ -7,6 +7,7 @@ mermaid: true
 weight: 7
 tags:
   - 
+description: ""
 ---
 
 # ドメイン駆動設計 (DDD) 入門

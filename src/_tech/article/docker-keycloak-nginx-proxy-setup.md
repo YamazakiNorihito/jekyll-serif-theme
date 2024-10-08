@@ -7,6 +7,7 @@ categories:
   - docker
   - keycloak
   - nginx
+description: ""
 ---
 
 この記事では、Dockerを用いてKeycloakをNginxの背後でリバースプロキシとして運用する方法について解説します。このセットアップでは、Keycloakをセキュリティサービスとして活用しながら、Nginxを通じてリソースへのアクセスを制御することができます。特に、内部アプリケーションがプロキシを介さずにKeycloak APIへ直接リクエストを送る設定に焦点を当てます。

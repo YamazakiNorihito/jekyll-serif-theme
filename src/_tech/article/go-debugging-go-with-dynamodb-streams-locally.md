@@ -4,6 +4,7 @@ date: 2024-06-4T7:00:00
 weight: 4
 categories:
   - go
+description: ""
 ---
 
 # ローカルでDynamoDB Streamsを使ってGoプログラムをデバッグする方法

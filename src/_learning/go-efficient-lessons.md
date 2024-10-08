@@ -5,6 +5,7 @@ linkedinurl: ""
 weight: 7
 tags:
   - 
+description: ""
 ---
 
 ## 効率的なGoから私が学んだこと

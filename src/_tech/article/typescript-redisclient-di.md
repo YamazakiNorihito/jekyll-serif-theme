@@ -6,6 +6,7 @@ categories:
   - javascript
   - nodejs
   - typescript
+description: ""
 ---
 
 RedisClientをDIする方法と呼び出し方を紹介します。

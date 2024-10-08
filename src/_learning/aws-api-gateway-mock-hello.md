@@ -9,6 +9,7 @@ tags:
   - CloudFormation
   - Mock Integration
   - Infrastructure as Code
+description: ""
 ---
 
 ## API GatewayでMockを使って"hello"を返すAPIの作成

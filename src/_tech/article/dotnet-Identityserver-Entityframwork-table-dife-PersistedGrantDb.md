@@ -8,6 +8,7 @@ categories:
   - oauth
   - csharp
   - dotnet
+description: ""
 ---
 
 [Table定義](DuendeSoftware/IdentityServer/migrations/IdentityServerDb/Migrations/PersistedGrantDb/PersistedGrantDbContextModelSnapshot.cs)を書き起こしてみた

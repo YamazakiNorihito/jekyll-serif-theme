@@ -15,6 +15,7 @@ tags:
   - 無線LAN
   - 高速通信
   - Network Specialist
+description: ""
 ---
 
 # 無線Wi-Fi技術：チャネルボンディングとMIMO

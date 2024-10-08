@@ -5,6 +5,7 @@ weight: 4
 categories:
   - aws
   - cloud-service
+description: ""
 ---
 
 起動テンプレートとは、EC2インスタンス起動時に必要なAWSリソースの設定情報を予め定義するためのテンプレートです。

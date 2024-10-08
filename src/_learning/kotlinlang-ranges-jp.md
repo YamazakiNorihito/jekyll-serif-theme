@@ -8,6 +8,7 @@ mermaid: true
 weight: 7
 tags:
   - 
+description: ""
 ---
 
 元サイト：<https://kotlinlang.org/docs/ranges.html>

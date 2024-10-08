@@ -6,6 +6,7 @@ linkedinurl: ""
 weight: 7
 tags:
   - 
+description: ""
 ---
 
 <https://pkg.go.dev/log/slogのページを日本語に翻訳しただけです。>

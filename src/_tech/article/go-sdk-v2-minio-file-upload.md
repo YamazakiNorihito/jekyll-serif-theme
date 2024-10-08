@@ -4,6 +4,7 @@ date: 2024-06-6T15:00:00
 weight: 4
 categories:
   - go
+description: ""
 ---
 
 この記事では、AWS SDK for Go V2 を使用してローカルに立ち上げた MinIO コンテナにファイルをアップロードする方法を解説します。このコードは AWS Lambda での実装を前提としていますが、Lambda 環境外でも問題なく動作します。

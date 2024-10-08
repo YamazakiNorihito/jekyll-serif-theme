@@ -15,6 +15,7 @@ tags:
   - ネットワークプロトコル
   - Web通信
   - Network Specialist
+description: ""
 ---
 
 # HTTP/1.x

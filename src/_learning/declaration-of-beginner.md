@@ -14,6 +14,7 @@ tags:
   - New Beginnings
   - Personal Growth
   - Philosophy
+description: ""
 ---
 
 # Blogの開始について

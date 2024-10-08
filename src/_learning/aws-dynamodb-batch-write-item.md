@@ -5,6 +5,7 @@ tags:
   - AWS
   - DynamoDB
   - BatchWriteItem
+description: ""
 ---
 
 ### BatchWriteItem概要

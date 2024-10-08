@@ -6,6 +6,7 @@ mermaid: true
 categories:
   - tech
   - oauth
+description: ""
 ---
 
 OAuth 2.0承認フレームワークのAuthorization Code Grant を使った、

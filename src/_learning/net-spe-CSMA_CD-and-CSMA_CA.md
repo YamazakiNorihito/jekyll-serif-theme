@@ -14,6 +14,7 @@ tags:
   - Collision Detection
   - Collision Avoidance
   - Network Specialist
+description: ""
 ---
 
 # CSMA/CD と CSMA/CA の概要と覚え方
