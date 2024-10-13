@@ -1,5 +1,5 @@
 ---
-title: Amazon DynamoDBの基礎知識のメモ
+title: "Amazon DynamoDBの基礎知識のメモ"
 date: 2024-10-07T07:15:00
 tags:
   - AWS
@@ -12,7 +12,7 @@ description: "自分用のメモとして、DynamoDBのコアコンポーネン�
 
 ## Core components of Amazon DynamoDB
 
-### [Tables, items, and attributes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html)
+### [Tables, items, and attributes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html)
 
 Amazon DynamoDBは、3つの主要なコアコンポーネントで構成されています。
 
@@ -38,6 +38,191 @@ Amazon DynamoDBは、3つの主要なコアコンポーネントで構成され�
    - 一般的なデータベースのフィールドやカラムに相当します。
    - 多くの属性はスカラー型（文字列や数値などの単一の値）ですが、ネストされた属性もサポートしており、32階層まで深くネスト可能です。
 
+#### [Naming Rules](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html)
+
+- 全てのName
+  - UTF-8でエンコードされる
+  - 大文字小文字を区別する
+  - Reserved wordsは使用できない
+    - [Reserved words in DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html)
+- Table NameとIndex Name
+  - 3文字以上255文字以下
+  - 使用可能な文字
+    - a-z
+    - A-Z
+    - 0-9
+    - _(underscore)
+    - -(dash)
+    - .(dot)
+  - Attribute Name
+    - １文字以上
+    - 64KB未満
+
+#### [Data Type](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes)
+
+AttributeのサポートしているData Type
+
+- Data Types
+  - Scalar Types
+    - 1つの値しか持たないシンプルな型
+    - 対応するType
+      - number
+        - 最大38桁まで対応
+        - DynamoDBに送信する際は「文字列」として送信されるが、内部で数値として扱われる
+        - dateやtimestampはepoch time（UNIX時間）として数値で表現可能
+      - string
+        - UTF-8バイナリエンコーディングを使用したUnicode文字列
+        - 空文字（0文字）も使用可能
+        - dateやtimestampはISO 8601形式の文字列で表現可能
+      - binary
+        - 圧縮テキスト、暗号化データ、画像などのバイナリデータを保持できる
+        - 空バイト（0 byte）も使用可能
+        - Base64形式でDynamoDBに送信し、内部でデコードしてバイト配列に変換される
+      - boolean
+        - `true` または `false` を扱う
+      - null
+        - unknown または undefinedの意味で使われる
+  - Document Types
+    - 複雑なデータ構造を保持する型で、ListやMapが該当
+    - 対応するType
+      - List
+        - 空のListで登録可能
+        - 順序が保持される（JSON配列に類似）
+        - List内の要素の型が異なっても問題ない
+        - 例：
+          - FavoriteThings: ["Cookies", "Coffee", 3.14159]
+          - key: ["values1", "values2"]
+      - Map
+        - 空のMapで登録可能
+        - 順序は保持されない（JSONオブジェクトに類似）
+        - name-valueペアのコレクションを保持
+        - Map内の要素の型が異なっても問題ない
+        - 例：
+          - {Day: "Monday", FavoriteThings: ["Cookies", "Coffee", 3.14159]}
+          - {name1: value1, name2: value2}
+    - 共通仕様
+      - MapやListの中にさらに別のMapやListをネストでき、最大32階層まで許容される
+      - List、Mapの要素数に制限はない
+      - 空の文字列や空のバイナリ値は、テーブルやインデックスキーでない限り使用可能
+      - ListやMap内では、空の文字列や空のバイナリ値も使用可能
+      - 空のListやMapは登録可能
+  - Set Types
+    - 複数のScalar Typesを持つ集合体で、number set, string set, binary setが対応
+    - 空のSetは登録不可（エラーとなる）
+    - number, string, binaryのいずれか1つの型で要素を持つ
+    - Set内の全要素は同じ型でなければならない
+    - Set内の値はユニークでなければならない
+    - 順序は保持されないため、アプリ側で順序を前提とした実装は避けること
+
+##### data type descriptors(記述子)
+
+| 記述子 | データタイプ     | 説明            |
+|--------|------------------|-----------------|
+| S      | String           | 文字列          |
+| N      | Number           | 数値            |
+| B      | Binary           | バイナリ        |
+| BOOL   | Boolean          | 真偽値          |
+| NULL   | Null             | 無効値          |
+| M      | Map              | マップ（辞書）  |
+| L      | List             | リスト（配列）  |
+| SS     | String Set       | 文字列セット    |
+| NS     | Number Set       | 数値セット      |
+| BS     | Binary Set       | バイナリセット  |
+
+Document Typesに関してHandsOn
+
+```bash
+# Create a DynamoDB table named TestTable
+aws dynamodb create-table \
+  --table-name TestTable \
+  --attribute-definitions AttributeName=ID,AttributeType=S \
+  --key-schema AttributeName=ID,KeyType=HASH \
+  --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 \
+  --endpoint-url http://localhost:8000
+
+# Response from create-table
+{
+    "TableDescription": {
+        "AttributeDefinitions": [
+            {"AttributeName": "ID", "AttributeType": "S"}
+        ],
+        "TableName": "TestTable",
+        "KeySchema": [{"AttributeName": "ID", "KeyType": "HASH"}],
+        "TableStatus": "ACTIVE",
+        "ProvisionedThroughput": {
+            "ReadCapacityUnits": 5,
+            "WriteCapacityUnits": 5,
+            "NumberOfDecreasesToday": 0
+        },
+        "TableArn": "arn:aws:dynamodb:ddblocal:000000000000:table/TestTable"
+    }
+}
+
+# Insert an item with an empty string in the 'Name' attribute
+aws dynamodb put-item \
+  --table-name TestTable \
+  --item '{"ID": {"S": "1"}, "Name": {"S": ""}}' \
+  --endpoint-url http://localhost:8000
+
+# Attempt to insert an empty string set (Triggers ValidationException)
+aws dynamodb put-item \
+  --table-name TestTable \
+  --item '{"ID": {"S": "2"}, "Tags": {"SS": []}}' \
+  --endpoint-url http://localhost:8000
+
+# Response from put-item with empty string set
+An error occurred (ValidationException) when calling the PutItem operation: 
+One or more parameter values were invalid: An string set may not be empty
+
+# Insert an item with an empty list in the 'Items' attribute
+aws dynamodb put-item \
+  --table-name TestTable \
+  --item '{"ID": {"S": "3"}, "Items": {"L": []}}' \
+  --endpoint-url http://localhost:8000
+
+# Insert an item with a list containing an empty string and a file name
+aws dynamodb put-item \
+  --table-name TestTable \
+  --item '{"ID": {"S": "4"}, "Documents": {"L": [{"S": ""}, {"S": "file1.pdf"}]}}' \
+  --endpoint-url http://localhost:8000
+
+# Scan the table to retrieve all items
+aws dynamodb scan \
+  --table-name TestTable \
+  --endpoint-url http://localhost:8000
+
+# Response from scan
+{
+    "Items": [
+        {
+            "ID": {"S": "1"},
+            "Name": {"S": ""}
+        },
+        {
+            "ID": {"S": "4"},
+            "Documents": {
+                "L": [{"S": ""}, {"S": "file1.pdf"}]
+            }
+        },
+        {
+            "ID": {"S": "3"},
+            "Items": {"L": []}
+        }
+    ],
+    "Count": 3,
+    "ScannedCount": 3,
+    "ConsumedCapacity": null
+}
+
+```
+
+#### Best practice
+
+- Names should be meaningful(意味のある) and concise(簡潔)
+- Attribute Nameをできるだけ短くすること
+  - ReadCapacityUnitsの消費削減に役立つ
+  - スループットとストレージコストを削減できる
+
 ### Primary key
 
 Primary Keyは、テーブル内の各Itemを一意に識別するためのキーです。
@@ -47,12 +232,14 @@ Primary Keyには2種類があります。
 1. Partition key
    1. 1つの属性で構成される単純なPrimary Keyです。
    2. Partition Keyの値はDynamoDBの内部ハッシュ関数の入力として使用され、得られたハッシュ値をもとに異なる物理パーティションに分散してItemが格納されます。
+   3. Partition keyはmaxsize `2048 bytes`
 
 2. Partition key and sort key
    1. 2つの属性で構成される複合的なPrimary Keyです。Partition KeyとSort Keyで構成されます。
    2. Partition Keyの値に基づいて、DynamoDBの内部ハッシュ関数が実行され、その結果に応じてデータが物理パーティションに割り当てられます。
    3. Sort Keyは同じPartition Key内でのitemの順序を決定し、DynamoDBはSort Keyの値に基づいてitemをソートして保存します。
    4. 同じPartition Keyを持つ複数のitemを格納できますが、その場合はSort Keyの値が一意である必要があります。
+   5. sort keyはmaxsize `1024 bytes`
 
 Partition Keyに許可されているデータ型は、String、Number、Binaryのいずれかです。
 補足：
