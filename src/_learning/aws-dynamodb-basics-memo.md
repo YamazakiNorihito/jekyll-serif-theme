@@ -223,6 +223,59 @@ aws dynamodb scan \
   - ReadCapacityUnitsの消費削減に役立つ
   - スループットとストレージコストを削減できる
 
+## DynamoDB Table Classes
+
+DynamoDBには以下の2つのテーブルクラスがあります。
+
+1. **Standard table class**  
+   - ほとんどのワークロードに最適  
+   - デフォルト設定で推奨される  
+2. **Standard-Infrequent Access (DynamoDB Standard-IA) table class**  
+   - あまりアクセスされないデータ向け  
+   - ストレージコストを重視  
+   - **使用例:**
+     - アプリケーションログ  
+     - 古いソーシャルメディア投稿  
+     - Eコマース注文履歴  
+     - 過去のゲーム実績  
+
+すべてのTableは上記のいずれかのclassに関連づけられ、  
+Secondary Indexも元Tableと同じclassが適用されます。
+
+### StandardとStandard-IAの共通点  
+
+- パフォーマンス  
+- 耐久性 (durability)  
+- 可用性 (availability)  
+
+Standard-IAはStandardと同様に以下の機能をサポート:
+
+- 自動スケーリング (auto scaling)  
+- オンデマンドモード (on-demand mode)  
+- 有効期限の設定 (time-to-live, TTL)  
+- オンデマンドバックアップ (on-demand backups)  
+- 時点復元 (point-in-time recovery, PITR)  
+- グローバルセカンダリーインデックス (global secondary indexes)
+
+### DynamoDB Table Classesの変更管理  
+
+- AWS Management Console、AWS CLI、AWS SDKから変更可能  
+- CloudFormationでシングルリージョンおよびグローバルテーブルも管理可能  
+
+### 判断基準
+
+| 項目 | Standard | Standard-IA |
+|--------|----------|--------------|
+| スループットコスト (読み書き) | 低 | 高 |
+| ストレージコスト | 高 | 低 |
+
+- ストレージがスループットコストの50%を超える場合、Standard-IAに変更を検討すると良い。  
+- 例: 月間でスループットに10,000円かかり、ストレージコストが6,000円の場合、ストレージコストは全体のスループットコストの60%にあたる。このケースでは「50%を超えている」と判断できる。  
+
+AWS Cost and Usage ReportsやAWS Cost Explorerを利用して履歴を確認し、最適なクラスを選択することが推奨される。  
+
+---
+
 ### Primary key
 
 Primary Keyは、テーブル内の各Itemを一意に識別するためのキーです。
@@ -276,6 +329,8 @@ indexの管理と属性の投影
   - 最低限プライマリキーが投影される。
   - その他の属性も選択可能で、必要に応じてindexに複製できる。
 
+---
+
 ## [DynamoDB Streams](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html)
 
 オプション機能でDynamoDBテーブルのデータ変更イベントをほぼリアルタイムで記録します。イベントは発生順にストリーム内に表示され、各イベントはstream recordとして表されます。
@@ -308,6 +363,8 @@ stream recordの有効期間は24時間で、その後自動的に削除され�
    - 権限管理の簡素化
    - アプリケーションのオーバーヘッド削減
    - バックアップコストの低減
+
+---
 
 ### Approaching NoSQL design
 
