@@ -501,3 +501,141 @@ Sort Key: userId
 ```
 
 </details>
+
+## DynamoDB API
+
+### 管理操作(Control plane)
+
+以下は管理操作ができるAPIです。
+
+- CreateTable
+  - テーブル作成する
+  - オプション
+    - 複数のsecondary indexesの作成
+    - DynamoDB Streamの有効
+- DescribeTable
+  - テーブルの情報を取得する
+    - primary key schema
+    - throughput settings
+    - secondary indexes information
+- ListTables
+  - すべてのテーブル名をリストで取得する
+- UpdateTable
+  - テーブルの設定またはindexを更新する
+    - indexは作成や削除が可能
+    - dynamoDB Stream の設定を更新
+- DeleteTable
+  - テーブルを削除する
+    - 依存するすべてのオブジェクトも削除される
+
+### データ操作(Data plane)
+
+テーブル内のデータに対してCRUD 操作を行うAPI。
+データを処理する操作には、PartiQLとclassic APIsの２種類ある。
+
+#### [PartiQL - A SQL-compatible query language](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ql-reference.html)
+
+PartiQL の読み方は 「パーティークエル」
+
+- ExecuteStatement
+  - 1つのテーブルから複数のアイテムを読み取る
+  - 1つのアイテムに対して、書き込みや更新が可能
+    - 操作にはprimary keyを指定する必要がある
+- BatchExecuteStatement
+  - 1つのテーブルから複数のアイテムに対して、書き込み、更新、または読み取りを実行する
+  - ExecuteStatementより効率的
+    - 1回のネットワーク往復で操作を完了できる
+
+#### Classic APIs
+
+- Creating data
+  - PutItem
+    - 1つのItemを書き込む
+      - 操作にはprimary keyを指定する必要がある
+      - primary key以外のattributesは指定しなくてもよい
+  - BatchWriteItem
+    - 上限25のItemをを書き込む
+    - PutItemを複数呼ぶより効率的
+      - 1回のネットワーク往復で操作を完了できる
+- Reading data
+  - GetItem
+    - 1 Itemを取得する
+      - 操作にはprimary keyを指定する必要がある
+      - アイテム全体、または一部のattributesを選択できる
+  - BatchGetItem
+    - 複数のテーブルから上限100 Itemを取得する
+    - GetItemを複数呼ぶより効率的
+      - 1回のネットワーク往復で操作を完了できる
+  - Query
+    - 指定したpartition keyを持つ全てのItemを取得する
+      - 操作にはpartition keyを指定する必要がある
+      - アイテム全体、または一部のattributesを選択できる
+    - オプション
+      - sort keyに対して条件を適用し、取得するアイテムを絞り込むことができる
+      - この操作は、partition keyとsort keyを持つテーブルまたはインデックスに対してのみ使用できる
+  - Scan
+    - 全てのItemを取得する
+      - アイテム全体、または一部のattributesを選択できる
+    - オプション
+      - filtering condition を使用して、必要なアイテムのみ取得する
+- Updating data
+  - UpdateItem
+    - Item内の1つ以上のattributesを更新する
+      - 操作にはpartition keyを指定する必要がある
+    - 新しい属性の追加、既存の属性の削除が可能
+    - 条件付き更新ができる
+      - 更新成功と判断されるのはユーザー定義の条件を満たすとき
+    - オプション
+      - [Atomic counter](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html#WorkingWithItems.AtomicCounters)の実装ができる
+        - 数値属性をインクリメントまたはデクリメントする
+- Deleting data
+  - DeleteItem
+    - テーブルから1つのItemを削除する
+      - 操作にはpartition keyを指定する必要がある
+  - BatchWriteItem
+    - Deletes up to 25 items from one or more tables. This is more efficient than calling DeleteItem multiple times because your application only needs a single network round trip to delete the items.
+    - 上限25のItemを削除する
+      - 操作にはpartition keyを指定する必要がある
+      - DeleteItemを複数呼ぶより効率的
+        - 1回のネットワーク往復で操作を完了できる
+
+##### Atomic counters
+
+Atomic countersとは、ロックを使わずに、効率的にスレッドセーフなインクリメントやデクリメントを実行する仕組み。
+[[AWS Developer Guide]Atomic counters](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html)
+[[Blog]Implement resource counters with Amazon DynamoDB](https://aws.amazon.com/jp/blogs/database/implement-resource-counters-with-amazon-dynamodb/)
+
+特徴:
+
+- 他のWrite Requestに干渉しない
+  - incrementやdecrementは、他の書き込み操作に影響されず、受信した順番通りに適用されます。
+- 冪等ではない
+  - UpdateItem 操作は冪等ではありません。
+  - UpdateItem 操作が繰り返し実行されると、値がそのたびに増減します。これにより、操作が失敗してリトライが発生した際に、incrementやdecrementが生じる可能性があります。
+- overcounting&undercounting
+  - UpdateItem 操作のリトライによって「overcounting」や「undercounting」が起きる可能性がある
+    - 正確な数値が求められる場合、誤差が許されないケースでは条件付き更新が推奨されます。
+
+**Atomic Counter**
+
+```bash
+aws dynamodb update-item \
+    --table-name ProductCatalog \
+    --key '{"Id": { "N": "601" }}' \
+    --update-expression "SET Price = Price + :incr" \
+    --expression-attribute-values '{":incr":{"N":"5"}}' \
+    --return-values UPDATED_NEW
+```
+
+**条件付き更新**
+条件付き更新を使用することで、特定の条件が満たされている場合のみ値を更新できます。これにより、過剰計数や不足計数を防ぐことができます。
+
+```bash
+aws dynamodb update-item \
+    --table-name ProductCatalog \
+    --key '{"Id": { "N": "601" }}' \
+    --update-expression "SET Price = Price + :incr" \
+    --expression-attribute-values '{":incr":{"N":"5"}, ":currentPrice":{"N":"100"}}' \
+    --condition-expression "Price = :currentPrice" \
+    --return-values UPDATED_NEW
+```
