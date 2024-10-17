@@ -639,3 +639,5 @@ aws dynamodb update-item \
     --condition-expression "Price = :currentPrice" \
     --return-values UPDATED_NEW
 ```
+
+### DynamoDB Streams
