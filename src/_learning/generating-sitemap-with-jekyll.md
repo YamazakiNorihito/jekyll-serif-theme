@@ -7,7 +7,7 @@ linkedinurl: ""
 weight: 7
 tags:
   - 
-description: ""
+description: "Jekyllで構築されたブログサイトにおいて、Googleにページをインデックスしてもらうために必要なSitemapの生成方法を紹介します。Jekyll-sitemapプラグインを利用することで、手軽にSitemapを作成でき、その手順を解説しています。Google Searchコンソールへの提出方法についても触れており、サイトのSEO対策をサポートします。"
 ---
 
 ## Jekyll-sitemapの利用方法

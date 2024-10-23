@@ -1,6 +1,6 @@
 ---
 title: "Amazon DynamoDBの基礎知識のメモ"
-date: 2024-10-07T07:15:00
+date: 2024-10-7T07:15:00
 tags:
   - AWS
   - DynamoDB

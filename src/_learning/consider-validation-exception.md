@@ -6,7 +6,7 @@ jobtitle: ""
 linkedinurl: ""
 weight: 7
 tags:
-description: ""
+description: "ValidationException に関する考察と未完成の記事。この記事では、エラーバリデーションと例外処理の違い、例外処理を利用したエラーハンドリングアーキテクチャの利点と欠点について触れています。エラーハンドリングのアプローチについての理解を深めるために、関連するドキュメントや参考リンクも紹介しています。"
 ---
 
  Exceptionは適切にThrowする必要がある。

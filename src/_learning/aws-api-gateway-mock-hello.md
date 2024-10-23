@@ -9,7 +9,7 @@ tags:
   - CloudFormation
   - Mock Integration
   - Infrastructure as Code
-description: ""
+description: "AWS API Gatewayを使用して、モック統合機能を活用し、バックエンドサービスを必要とせずに静的なレスポンスを返すAPIをCloudFormationテンプレートで作成する方法を解説します。このテンプレートを使用することで、簡単にAPI Gatewayを設定し、GETリクエストに対してモックレスポンスとして'hello'メッセージを返すAPIを自動で構築できます。モックレスポンスの設定方法やCloudFormationによるインフラのコード化の基本も紹介します。"
 ---
 
 ## API GatewayでMockを使って"hello"を返すAPIの作成

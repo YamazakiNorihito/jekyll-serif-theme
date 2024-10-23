@@ -14,7 +14,7 @@ tags:
   - New Beginnings
   - Personal Growth
   - Philosophy
-description: ""
+description: "ブログを初めて始める初心者の視点から、日常の出来事、気持ち、趣味、興味について正直に書くことを目指します。完璧を求めず、自分のペースで更新し、成長していく姿勢を大切にします。指針として、人生の冒険、理想の未来、心の羅針盤を掲げます。"
 ---
 
 ## Blog の開始について

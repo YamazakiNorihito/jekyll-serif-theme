@@ -1,5 +1,4 @@
 ---
-
 title: "android 自動テストの基本"
 date: 2024-4-15T010:40:00
 jobtitle: ""

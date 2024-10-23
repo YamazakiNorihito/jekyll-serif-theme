@@ -14,7 +14,7 @@ tags:
   - JavaScript
   - Code Hot Reloading
   - Multi-process Management
-description: ""
+description: "Node.js開発において、複数のアプリケーションを効率的に管理するためのツール、concurrentlyとnodemonの活用方法について解説します。concurrentlyで複数のプロセスを同時に実行し、nodemonでコード変更時の自動再起動を実現することで、開発効率を向上させる方法を紹介します。実際のプロジェクト設定例を通じて、クライアント、認証サーバー、保護リソースの同時起動を設定する手順も説明します。"
 ---
 
 ## Ｎ odejs で複数のアプリケーションを同時に実行する方法

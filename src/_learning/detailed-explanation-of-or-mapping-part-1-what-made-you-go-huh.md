@@ -7,7 +7,7 @@ linkedinurl: ""
 weight: 7
 tags:
   - 
-description: ""
+description: "O/R Mappingの基本概念を整理し、Mappingの定義やProperty、Relationship mapping、Shadow informationについて解説します。オブジェクト指向とリレーショナルデータベースの間にあるギャップを埋めるための手法と、その具体的な例を紹介します。"
 ---
 [Mapping Objects to Relational Databases: O/R Mapping In Detail](http://agiledata.org/essays/mappingObjects.html)　を読んでいて
 意味わからんぷーとなったところ自分なりの理解をまとめる。

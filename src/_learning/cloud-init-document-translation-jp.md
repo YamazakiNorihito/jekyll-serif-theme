@@ -15,7 +15,7 @@ tags:
   - Infrastructure
   - Boot Stages
   - Linux
-description: ""
+description: "`cloud-init` のドキュメントを日本語に翻訳し、その一部を要約しました。`cloud-init` は、クラウド環境でのインスタンス初期設定と自動化を担うツールで、主要なパブリッククラウドやプライベートクラウドで広くサポートされています。本記事では、`cloud-init` の概要、動作フェーズ、設定方法、キャッシュの使用、ブート時の処理などについて解説しています。特に、初回起動の判定方法とその設定についても詳しく触れています。"
 ---
 
 - [github][`cloud-init`](https://github.com/canonical/`cloud-init`)

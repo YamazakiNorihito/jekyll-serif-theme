@@ -14,7 +14,7 @@ tags:
   - EC2
   - Auto Scaling
   - Infrastructure as Code
-description: ""
+description: "このブログ記事では、AWS Elastic Beanstalk と Application Load Balancer を連携するための CloudFormation テンプレートを紹介します。Docker コンテナを利用したアプリケーションのデプロイに対応し、トラフィック管理とスケーラビリティの確保を目的とした構成です。テンプレートには必要なパラメータ、リソース、オプション設定が含まれ、Elastic Beanstalk 環境の自動設定、ALB の共有設定、Auto Scaling、セキュリティグループの設定、ログストリーミングの構成などの機能を提供します。"
 ---
 
 ## AWS Elastic Beanstalk と Application Load Balancer を連携する CloudFormation テンプレート

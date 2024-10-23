@@ -14,7 +14,7 @@ tags:
   - System Performance
   - CloudWatch
   - Troubleshooting
-description: ""
+description: "EC2インスタンスで発生したメモリ不足問題の対策としてSwapファイルを導入し、その結果メモリ使用量が減少した経緯について解説します。Swapファイルの作成によるメモリ管理の改善、CloudWatchでのメモリモニタリング、LinuxシステムでのメモリおよびSwapの使用状況確認方法など、トラブルシューティングに役立つ情報を提供します。"
 ---
 
 ## 背景
