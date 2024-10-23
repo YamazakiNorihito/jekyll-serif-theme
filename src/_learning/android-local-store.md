@@ -6,8 +6,8 @@ linkedinurl: ""
 mermaid: true
 weight: 7
 tags:
+description: "DataStore の2種類の実装である Preferences DataStore と Proto DataStore の概要と、それぞれのユースケースについて解説します。ユーザー設定の保存方法やカスタムデータ型の利用について学びましょう。"
 ---
-
 
 # [DataStore](https://developer.android.com/topic/libraries/architecture/datastore?hl=ja)
 

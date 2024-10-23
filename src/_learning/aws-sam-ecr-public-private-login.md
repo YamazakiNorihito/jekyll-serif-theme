@@ -7,7 +7,7 @@ tags:
   - SAM
   - ECR
   - Docker
-description: ""
+description: "AWS SAM で Lambda 関数をローカルで動作確認する際に、ECR (Elastic Container Registry) からイメージを取得する方法を解説。Public ECR と Private ECR でログイン方法が異なるため、正しいコマンドを使用することが重要です。Go ランタイムの例を挙げ、Public ECR へのログイン方法やエラーの対処法についても説明します。"
 ---
 
 ## AWS SAM 使用時の ECR ログイン方法

@@ -5,7 +5,7 @@ mermaid: true
 weight: 7
 tags:
   - Keycloak
-description: ""
+description: "KeycloakのAuthentication SPIを用いたカスタム認証メカニズムの作成方法を解説します。認証フローの詳細や必要なクラスの実装、AuthenticatorやRequired Actionの設定などについて説明し、登録フォームのバリデーションやユーザー拡張の方法も紹介します。"
 ---
 
 ## Authentication SPI について
@@ -344,3 +344,15 @@ my-auth-spi/
   ```
 
 これらの手順を行うことで、カスタム認証プロバイダーとテーマを Keycloak に追加することができます。
+
+## Modifying or extending the registration form
+
+- Keycloak では、独自の認証フローを作成して、登録の仕組み全体を変更することが可能です。
+  - しかし、一般的には、標準の登録ページに少しだけバリデーションを追加するだけで十分な場合が多いです。
+- そのために、新しい SPI（Service Provider Interface）が用意されており、この SPI を使うことで、次のことができます：
+  - フォームの入力内容を検証（バリデーション）する。
+  - 登録が完了した後に、ユーザーの属性やデータを初期化する。
+- サンプルコード
+  - [AbstractRegistrationRecaptcha](https://github.com/keycloak/keycloak/blob/902abfdae42685b68c127e309da17ec64ffd2382/services/src/main/java/org/keycloak/authentication/forms/AbstractRegistrationRecaptcha.java#L47-L48)
+  - [RegistrationRecaptcha](https://github.com/keycloak/keycloak/blob/902abfdae42685b68c127e309da17ec64ffd2382/services/src/main/java/org/keycloak/authentication/forms/RegistrationRecaptcha.java#L42-L43)
+  - [RegistrationRecaptchaEnterprise](https://github.com/keycloak/keycloak/blob/902abfdae42685b68c127e309da17ec64ffd2382/services/src/main/java/org/keycloak/authentication/forms/RegistrationRecaptchaEnterprise.java#L42-L43)

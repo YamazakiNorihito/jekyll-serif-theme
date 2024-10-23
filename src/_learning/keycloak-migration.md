@@ -14,14 +14,12 @@ tags:
   - Database Schema
   - Configuration
   - Security
-description: ""
+description: "Keycloakのバージョン16.0.0から17.0.0への移行に関するガイドです。主な変更点として、レガシーセキュリティサブシステムの廃止、Quarkusへのデフォルトディストリビューション変更、カスタムプロバイダーの配置方法変更などが含まれます。データベーススキーマの更新手順や新しい設定方法についても詳述しています。"
 ---
 
+こちらは、Keycloak のバージョン 16.0.0 から 17.0.0 への移行に関するブログ投稿のドラフトです：
 
-
-こちらは、Keycloakのバージョン16.0.0から17.0.0への移行に関するブログ投稿のドラフトです：
-
-## Keycloak 16.0.0への移行
+## Keycloak 16.0.0 への移行
 
 ### 主な変更点
 
@@ -30,35 +28,40 @@ description: ""
      - データベースを使用せずに、プロパティファイルを使ってユーザーを定義できます。
 2. **プロキシ設定**
    - リクエストとレスポンスが同じプロキシを経由するようになりました。
-3. **Keycloak Operatorの変更**
-   - Metrics拡張を含むKeycloak Operatorが削除されました。
+3. **Keycloak Operator の変更**
+   - Metrics 拡張を含む Keycloak Operator が削除されました。
 
 詳細なアップグレード手順については、[公式アップグレードガイド](https://www.keycloak.org/docs/latest/upgrading/index.html#migrating-to-16-0-0)を参照してください。
 
-## Keycloak 17.0.0への移行
+## Keycloak 17.0.0 への移行
 
 ### 主な変更点
 
-1. **デフォルトディストリビューションの変更: WildFlyからQuarkusへ**
+1. **デフォルトディストリビューションの変更: WildFly から Quarkus へ**
+
    - 旧ディストリビューションを使用するには、`legacy`または`17.0.0-legacy`タグを使用します。
-   - Quarkusではデフォルトでコンテキストパスから`/auth`が削除されています。これを維持するには、以下のコマンドでサーバーを起動します：
+   - Quarkus ではデフォルトでコンテキストパスから`/auth`が削除されています。これを維持するには、以下のコマンドでサーバーを起動します：
 
      ```sh
      bin/kc.[sh|bat] start-dev --http-relative-path /auth
      ```
 
 2. **クライアントスコープ条件**
-   - クライアントスコープ条件のJSONドキュメント内の`scope`フィールド名が`scopes`に変更されました。
+
+   - クライアントスコープ条件の JSON ドキュメント内の`scope`フィールド名が`scopes`に変更されました。
 
 3. **設定の変更**
-   - 新しいQuarkus CLIコマンドがWildFly CLIの代わりになります。詳細は[サーバーガイド](https://www.keycloak.org/guides#server)を参照してください。
+
+   - 新しい Quarkus CLI コマンドが WildFly CLI の代わりになります。詳細は[サーバーガイド](https://www.keycloak.org/guides#server)を参照してください。
 
 4. **管理者ユーザーの設定**
+
    - 初回起動時に`KEYCLOAK_ADMIN`と`KEYCLOAK_ADMIN_PASSWORD`環境変数を設定します。追加のユーザーは`kcadm.sh`または`kcadm.bat`を使用して追加できます。
 
 5. **カスタムプロバイダーの移行**
+
    - カスタムプロバイダーは`standalone/deployments`ではなく`providers`ディレクトリに配置します。
-   - EARパッケージ形式と`jboss-deployment-structure.xml`はサポートされなくなりました。
+   - EAR パッケージ形式と`jboss-deployment-structure.xml`はサポートされなくなりました。
 
 6. **ヘッダー処理の変更**
    - `X-Forwarded-Port`ヘッダーが`X-Forwarded-Host`に含まれるポートよりも優先されます。
@@ -66,7 +69,7 @@ description: ""
 ### データベーススキーマの更新
 
 - インデックス`IDX_USER_SERVICE_ACCOUNT`が追加されました。
-- スキーマバージョンを確認するには、以下のSQLを実行します：
+- スキーマバージョンを確認するには、以下の SQL を実行します：
 
   ```sql
   SELECT * FROM DATABASECHANGELOG;
@@ -76,5 +79,5 @@ description: ""
 
 ### 参考資料
 
-- [Quarkusディストリビューションへの移行](https://www.keycloak.org/migration/migrating-to-quarkus)
-- [Keycloak 17.0.0 GitHubリポジトリ](https://github.com/keycloak/keycloak/tree/17.0.0)
+- [Quarkus ディストリビューションへの移行](https://www.keycloak.org/migration/migrating-to-quarkus)
+- [Keycloak 17.0.0 GitHub リポジトリ](https://github.com/keycloak/keycloak/tree/17.0.0)

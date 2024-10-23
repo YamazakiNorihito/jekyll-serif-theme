@@ -14,16 +14,16 @@ tags:
   - MySQL
   - Configuration
   - Identity Management
-description: ""
+description: "KeycloakのJDBCドライバーをAWS Advanced JDBC Wrapperに変更する手順を解説します。Dockerを使ったローカル環境での設定方法やサンプルのDockerfile、環境変数、Docker Compose設定などを紹介し、MySQL接続の構成についても詳しく説明します。"
 ---
 
-# KeycloakのJDBCドライバーをAWS Advanced JDBC Wrapperに変更する方法
+# Keycloak の JDBC ドライバーを AWS Advanced JDBC Wrapper に変更する方法
 
-このガイドでは、KeycloakのJDBCドライバーを[aws-advanced-jdbc-wrapper](https://github.com/aws/aws-advanced-jdbc-wrapper)に変更して使用する方法を説明します。ローカル環境でDockerを使用した設定手順と、サンプルの環境変数について解説します。
+このガイドでは、Keycloak の JDBC ドライバーを[aws-advanced-jdbc-wrapper](https://github.com/aws/aws-advanced-jdbc-wrapper)に変更して使用する方法を説明します。ローカル環境で Docker を使用した設定手順と、サンプルの環境変数について解説します。
 
-## Dockerfileの設定
+## Dockerfile の設定
 
-まず、KeycloakのDockerイメージをカスタマイズするために、以下のDockerfileを作成します。これは、aws-advanced-jdbc-wrapperをKeycloakに組み込むためのサンプルです。
+まず、Keycloak の Docker イメージをカスタマイズするために、以下の Dockerfile を作成します。これは、aws-advanced-jdbc-wrapper を Keycloak に組み込むためのサンプルです。
 
 ```dockerfile
 ARG dbflavor=mysql
@@ -131,11 +131,11 @@ ENTRYPOINT [ "/opt/keycloak/bin/kc.sh" ]
 </infinispan>
 ```
 
-このDockerfileは、AWS Advanced JDBC WrapperをKeycloakに追加し、ビルドプロセスを実行してカスタムイメージを作成します。
+この Dockerfile は、AWS Advanced JDBC Wrapper を Keycloak に追加し、ビルドプロセスを実行してカスタムイメージを作成します。
 
-## Docker Composeの設定
+## Docker Compose の設定
 
-次に、Docker Composeを使用して、KeycloakとMySQLのコンテナを設定します。以下に必要な環境変数と設定を含むDocker Composeファイルを示します。
+次に、Docker Compose を使用して、Keycloak と MySQL のコンテナを設定します。以下に必要な環境変数と設定を含む Docker Compose ファイルを示します。
 
 ```yaml
 services:
@@ -197,7 +197,8 @@ services:
       MYSQL_USER: keycloak
       MYSQL_PASSWORD: password
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-ppassword"]
+      test:
+        ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-ppassword"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -238,7 +239,7 @@ upstream backend {
 server {
     listen 443 ssl http2;
     server_name localhost;
-    
+
     include mime.types;
 
     ssl_certificate /etc/nginx/ssl/server.crt;
@@ -279,11 +280,11 @@ server {
 }
 ```
 
-この設定により、Keycloakがaws-advanced-jdbc-wrapperを使用してMySQLに接続するように構成されます。
+この設定により、Keycloak が aws-advanced-jdbc-wrapper を使用して MySQL に接続するように構成されます。
 
 ## `--optimized` オプションの使用について
 
-Keycloakをstartコマンドで実行する際に、`--optimized`オプションは設定しないでください。このオプションはKeycloakのスタートアップ時間を短縮し、メモリ使用量を最適化しますが、以下の問題が報告されています:  
+Keycloak を start コマンドで実行する際に、`--optimized`オプションは設定しないでください。このオプションは Keycloak のスタートアップ時間を短縮し、メモリ使用量を最適化しますが、以下の問題が報告されています:  
 [Keycloak Issue #15898](https://github.com/keycloak/keycloak/issues/15898)
 
 ### `--optimized` の役割

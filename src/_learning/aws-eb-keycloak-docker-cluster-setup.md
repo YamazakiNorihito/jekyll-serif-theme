@@ -12,27 +12,27 @@ tags:
   - Elastic Beanstalk
   - Infinispan
   - EC2
-description: ""
+description: "DockerでKeycloakをクラスタ運用する方法を紹介します。Elastic Beanstalkでのデプロイを前提に、EC2インスタンス間でKeycloakのトークン共有を実現するために、Infinispanの分散キャッシュを使用した設定方法を解説します。また、クラスタ構成で発生したトークンの共有問題の解決策として、`network_mode`を`host`に設定してインスタンス間通信を改善する方法や、Infinispan設定例、Dockerfileのサンプルコードも提供しています。"
 ---
 
-### DockerでKeycloakをクラスタ運用する話
+### Docker で Keycloak をクラスタ運用する話
 
-プロジェクトで、Dockerコンテナ使ってKeycloakを運用することになったんだ。Elastic Beanstalkを使って環境とデプロイを簡単にするのが狙い。EC2に直接Keycloakをインストールするのって、正直めんどくさいし、コンテナにしちゃえば、Keycloakのマイグレーションも楽だし、いいんじゃないかって話。
+プロジェクトで、Docker コンテナ使って Keycloak を運用することになったんだ。Elastic Beanstalk を使って環境とデプロイを簡単にするのが狙い。EC2 に直接 Keycloak をインストールするのって、正直めんどくさいし、コンテナにしちゃえば、Keycloak のマイグレーションも楽だし、いいんじゃないかって話。
 
 #### トラブル発生：トークンが共有されない問題
 
-そこで、EC2インスタンス2台を使ってクラスタ構成を試してみたんだけど、JWTを使った`userinfo`リクエストで200と401のステータスが交互に返ってくるっていう謎の現象が発生。要するに、各Keycloakインスタンス間でトークンが共有されてなかったわけ。
+そこで、EC2 インスタンス 2 台を使ってクラスタ構成を試してみたんだけど、JWT を使った`userinfo`リクエストで 200 と 401 のステータスが交互に返ってくるっていう謎の現象が発生。要するに、各 Keycloak インスタンス間でトークンが共有されてなかったわけ。
 
-Keycloakでは、トークン情報を[Infinispan](https://infinispan.org/)っていう分散キャッシュで管理してるんだけど、各インスタンスが独自にInfinispanを持ってるせいで、トークンの共有がうまくいってなかったんだ。
+Keycloak では、トークン情報を[Infinispan](https://infinispan.org/)っていう分散キャッシュで管理してるんだけど、各インスタンスが独自に Infinispan を持ってるせいで、トークンの共有がうまくいってなかったんだ。
 
-#### 解決策：Infinispanの同期
+#### 解決策：Infinispan の同期
 
-Infinispanをどうやって同期するかって話なんだけど、方法は二つある。
+Infinispan をどうやって同期するかって話なんだけど、方法は二つある。
 
-1. **別にInfinispanを立ち上げて、全インスタンスが同じInfinispanを参照する**
-2. **各インスタンスが自分のInfinispanを同期させる**
+1. **別に Infinispan を立ち上げて、全インスタンスが同じ Infinispan を参照する**
+2. **各インスタンスが自分の Infinispan を同期させる**
 
-今回は、既存システムとの兼ね合いもあって、2番目の「各インスタンスが自分のInfinispanを同期させる」方法を選んだよ。
+今回は、既存システムとの兼ね合いもあって、2 番目の「各インスタンスが自分の Infinispan を同期させる」方法を選んだよ。
 
 #### アーキテクチャの問題発覚
 
@@ -51,11 +51,11 @@ LB ------> auto scaling group -----------|
           --------------------------------
 ```
 
-でも、Dockerのデフォルトのブリッジ・ネットワークを使ってたら、Keycloakのログに`172.17.0.2`みたいな内部IPアドレスが表示されちゃって、各インスタンス間で通信できず、クラスタ構成がうまく機能しなかったんだよね。
+でも、Docker のデフォルトのブリッジ・ネットワークを使ってたら、Keycloak のログに`172.17.0.2`みたいな内部 IP アドレスが表示されちゃって、各インスタンス間で通信できず、クラスタ構成がうまく機能しなかったんだよね。
 
 #### 解決策：`network_mode`を`host`に設定
 
-で、最終的に思い切って`network_mode`を`host`に設定してみたら、EC2インスタンスのIPアドレスが物理アドレスとしてちゃんと表示されて、クラスタ構成がうまくいったってわけ。以下はその設定例ね。
+で、最終的に思い切って`network_mode`を`host`に設定してみたら、EC2 インスタンスの IP アドレスが物理アドレスとしてちゃんと表示されて、クラスタ構成がうまくいったってわけ。以下はその設定例ね。
 
 ```yaml
 services:
@@ -90,7 +90,7 @@ services:
         awslogs-region: us-east-1
         awslogs-group: idp/keycloak
         awslogs-create-group: "true"
-    network_mode: "host" 
+    network_mode: "host"
 
   nginx:
     image: public.ecr.aws/docker/library/nginx:stable-alpine3.19-slim
@@ -107,7 +107,7 @@ services:
         awslogs-region: us-east-1
         awslogs-group: idp/nginx
         awslogs-create-group: "true"
-    network_mode: "host" 
+    network_mode: "host"
 ```
 
 今のところ、この方法でプロジェクト進めてるけど、他にも良い方法があるかもね。でも、これでうまくいってるし、まあいいかなって感じ。
@@ -123,7 +123,7 @@ cache-ispn-jdbc-ping-mysql.xml
     xsi:schemaLocation="urn:infinispan:config:14.0 http://www.infinispan.org/schemas/infinispan-config-14.0.xsd"
     xmlns="urn:infinispan:config:14.0">
 
-    
+
     <!-- custom stack goes into the jgroups element -->
     <jgroups>
         <stack name="jdbc-ping-tcp" extends="tcp">

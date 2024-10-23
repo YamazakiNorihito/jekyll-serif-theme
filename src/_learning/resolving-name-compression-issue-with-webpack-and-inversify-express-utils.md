@@ -14,10 +14,10 @@ tags:
   - Dependency Injection
   - Node.js
   - Error Handling
-description: ""
+description: "Webpackとinversify-express-utilsの組み合わせで発生する名前圧縮問題の解決方法を紹介します。TerserPluginを使用してクラス名や関数名の最小化を防ぎ、エラーを回避する設定について解説します。"
 ---
 
-Webpackと`inversify-express-utils`を組み合わせてWeb APIを実装する際に遭遇した、
+Webpack と`inversify-express-utils`を組み合わせて Web API を実装する際に遭遇した、
 クラス名や関数名の圧縮に関する問題とその解決方法について説明します。
 
 `npx webpack`コマンドでのビルド後、`node dist/index.js`を実行した時に特定のエラーが発生しました。
@@ -37,82 +37,84 @@ Error: Two controllers cannot have the same name: s
     at Module._compile (node:internal/modules/cjs/loader:1256:14)
 ```
 
-解決方法として、`webpack.config.js`内でTerserPluginを使用し、
-Class名とFunction名の圧縮・最小化を防ぐ設定を行うことです。
+解決方法として、`webpack.config.js`内で TerserPlugin を使用し、
+Class 名と Function 名の圧縮・最小化を防ぐ設定を行うことです。
 
 ```javascript
 // targetがes6以降の場合
-const path = require('path');
-const TerserPlugin = require('terser-webpack-plugin');
+const path = require("path");
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
-    entry: './src/server.ts',
-    mode: 'production',
-    target: 'node',
-    output: {
-        filename: 'index.js',
-        path: path.resolve(__dirname, 'dist')
-    },
-    resolve: {
-        extensions: ['.ts', '.js']
-    },
-    module: {
-        rules: [
-            {
-                test: /\.ts$/,
-                use: 'ts-loader',
-                exclude: /node_modules/
-            }
-        ]
-    },
-    optimization: {
-        minimizer: [
-            new TerserPlugin({ // ここ重要
-                terserOptions: {
-                    keep_classnames: true, // 必須
-                },
-                parallel: true,
-            }),
-        ],
-    }
+  entry: "./src/server.ts",
+  mode: "production",
+  target: "node",
+  output: {
+    filename: "index.js",
+    path: path.resolve(__dirname, "dist"),
+  },
+  resolve: {
+    extensions: [".ts", ".js"],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.ts$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        // ここ重要
+        terserOptions: {
+          keep_classnames: true, // 必須
+        },
+        parallel: true,
+      }),
+    ],
+  },
 };
 ```
 
 ```javascript
 // targetがes5以前の場合
-const path = require('path');
-const TerserPlugin = require('terser-webpack-plugin');
+const path = require("path");
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
-    entry: './src/server.ts',
-    mode: 'production',
-    target: 'node',
-    output: {
-        filename: 'index.js',
-        path: path.resolve(__dirname, 'dist')
-    },
-    resolve: {
-        extensions: ['.ts', '.js']
-    },
-    module: {
-        rules: [
-            {
-                test: /\.ts$/,
-                use: 'ts-loader',
-                exclude: /node_modules/
-            }
-        ]
-    },
-    optimization: {
-        minimizer: [
-            new TerserPlugin({ // ここ重要
-                terserOptions: {
-                    keep_fnames: true,// 必須
-                },
-                parallel: true,
-            }),
-        ],
-    }
+  entry: "./src/server.ts",
+  mode: "production",
+  target: "node",
+  output: {
+    filename: "index.js",
+    path: path.resolve(__dirname, "dist"),
+  },
+  resolve: {
+    extensions: [".ts", ".js"],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.ts$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        // ここ重要
+        terserOptions: {
+          keep_fnames: true, // 必須
+        },
+        parallel: true,
+      }),
+    ],
+  },
 };
 ```
 
@@ -152,12 +154,12 @@ Metadata: [
 ]
 ```
 
-#### 補足: ES5とES6のクラス名表示の違い
+#### 補足: ES5 と ES6 のクラス名表示の違い
 
-ES5までのJavaScript環境では、クラスはコンストラクタ関数として扱われ、ログに関数として出力されるのが一般的でした。
-しかし、ES6からは新しいクラス構文が導入され、ログの出力形式も変わりました。
+ES5 までの JavaScript 環境では、クラスはコンストラクタ関数として扱われ、ログに関数として出力されるのが一般的でした。
+しかし、ES6 からは新しいクラス構文が導入され、ログの出力形式も変わりました。
 この違いを理解することで、上記の問題がどのように発生するのかの背景をより深く理解できます。
-（[TypeScriptでのクラス定義がES6とES5でどのようにコンパイルされるか](/learning/typescript-class-compilation-es6-vs-es5)少し詳しく書きました。）
+（[TypeScript でのクラス定義が ES6 と ES5 でどのようにコンパイルされるか](/learning/typescript-class-compilation-es6-vs-es5)少し詳しく書きました。）
 
 ```javascript
 // targetがes6以降の場合

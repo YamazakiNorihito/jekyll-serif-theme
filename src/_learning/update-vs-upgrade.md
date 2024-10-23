@@ -13,12 +13,13 @@ tags:
   - Technology
   - System Maintenance
   - Software Development
-description: ""
+description: "「Update」と「Upgrade」の違いについて解説します。Updateは小さな修正や改善を指し、Upgradeは大きな変更や新しい機能の追加を伴います。それぞれの特徴や使い分けについて学びましょう。"
 ---
 
 ## Update vs Upgrade
 
 1. **Update**:
+
    - 主にソフトウェアやシステムの小さな修正や改善を指します。
    - セキュリティパッチ、バグ修正、小さな機能の追加などが該当します。
    - 定期的に提供され、既存のバージョンを安定させるためや新しい脅威から保護するために行われる。

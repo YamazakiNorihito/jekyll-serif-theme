@@ -14,7 +14,7 @@ tags:
   - MIME Types
   - Documentation Translation
   - ngx_http_sub_module
-description: ""
+description: "ngx_http_sub_moduleモジュールは、NGINXのレスポンスをフィルタリングし、指定された文字列を別の文字列に置き換える機能を提供します。設定パラメータを使って有効化する必要があり、複数の置換指令や条件付きのヘッダー保持などがサポートされています。text/htmlや他のMIMEタイプでの文字列置換を設定でき、複数のディレクティブを組み合わせて使用することで、レスポンスの内容を柔軟に変更することが可能です。"
 ---
 
 # Module ngx_http_sub_module
@@ -29,11 +29,11 @@ description: ""
     - [sub\_filter\_types](#sub_filter_types)
 - [余談](#余談)
 
->The ngx_http_sub_module module is a filter that modifies a response by replacing one specified string by another.
-This module is not built by default, it should be enabled with the --with-http_sub_module configuration parameter.
+> The ngx_http_sub_module module is a filter that modifies a response by replacing one specified string by another.
+> This module is not built by default, it should be enabled with the --with-http_sub_module configuration parameter.
 
-ngx_http_sub_moduleモジュールは、指定された文字列を別の文字列で置き換えることでレスポンスを修正するフィルターです。
-このモジュールはデフォルトではビルドされず、--with-http_sub_module設定パラメーターで有効化する必要があります。
+ngx_http_sub_module モジュールは、指定された文字列を別の文字列で置き換えることでレスポンスを修正するフィルターです。
+このモジュールはデフォルトではビルドされず、--with-http_sub_module 設定パラメーターで有効化する必要があります。
 
 **Example Configuration**
 
@@ -49,28 +49,29 @@ location / {
 
 ### sub_filter
 
-|  |  |
-| ---- | ---- |
-|Syntax| sub_filter *string* *replacement*;|
-|Default| — |
-|Context| http, server, location|
+|         |                                    |
+| ------- | ---------------------------------- |
+| Syntax  | sub_filter _string_ _replacement_; |
+| Default | —                                  |
+| Context | http, server, location             |
 
->Sets a string to replace and a replacement string. The string to replace is matched ignoring the case. The string to replace (1.9.4) and replacement string can contain variables. Several sub_filter directives can be specified on the same configuration level (1.9.4). These directives are inherited from the previous configuration level if and only if there are no sub_filter directives defined on the current leve
+> Sets a string to replace and a replacement string. The string to replace is matched ignoring the case. The string to replace (1.9.4) and replacement string can contain variables. Several sub_filter directives can be specified on the same configuration level (1.9.4). These directives are inherited from the previous configuration level if and only if there are no sub_filter directives defined on the current leve
 
-置換対象の文字列と置換する文字列を設定します。置換対象の文字列は、大文字小文字を区別せずに一致させます。置換対象の文字列（1.9.4）と置換文字列には変数を含めることができます。同じ構成レベルで複数のsub_filterディレクティブを指定することができます（1.9.4）。これらのディレクティブは、現在のレベルでsub_filterディレクティブが定義されていない場合に限り、前の構成レベルから継承されます。
+置換対象の文字列と置換する文字列を設定します。置換対象の文字列は、大文字小文字を区別せずに一致させます。置換対象の文字列（1.9.4）と置換文字列には変数を含めることができます。同じ構成レベルで複数の sub_filter ディレクティブを指定することができます（1.9.4）。これらのディレクティブは、現在のレベルで sub_filter ディレクティブが定義されていない場合に限り、前の構成レベルから継承されます。
 
 ### sub_filter_last_modified
 
-|  |  |
-| ---- | ---- |
-|Syntax| sub_filter_last_modified on | off; |
-|Default| sub_filter_last_modified off; |
-|Context| http, server, location |
+|         |                               |
+| ------- | ----------------------------- | ---- |
+| Syntax  | sub_filter_last_modified on   | off; |
+| Default | sub_filter_last_modified off; |
+| Context | http, server, location        |
+
 This directive appeared in version 1.5.1.
 
->Allows preserving the “Last-Modified” header field from the original response during replacement to facilitate response caching.
+> Allows preserving the “Last-Modified” header field from the original response during replacement to facilitate response caching.
 >
->By default, the header field is removed as contents of the response are modified during processing.
+> By default, the header field is removed as contents of the response are modified during processing.
 
 置換中に元のレスポンスから「Last-Modified」ヘッダーフィールドを保持することで、レスポンスのキャッシュを容易にすることができます。
 
@@ -78,30 +79,30 @@ This directive appeared in version 1.5.1.
 
 ### sub_filter_once
 
-|  |  |
-| ---- | ---- |
-|Syntax| sub_filter_once on \| off;|
-|Default| sub_filter_once on; |
-|Context| http, server, location |
+|         |                            |
+| ------- | -------------------------- |
+| Syntax  | sub_filter_once on \| off; |
+| Default | sub_filter_once on;        |
+| Context | http, server, location     |
 
->Indicates whether to look for each string to replace once or repeatedly.
+> Indicates whether to look for each string to replace once or repeatedly.
 
 置換する各文字列を一度だけ探すか繰り返し探すかを指定します。
 
 ### sub_filter_types
 
-|  |  |
-| ---- | ---- |
-|Syntax| sub_filter_types mime-type ...;|
-|Default| sub_filter_types text/html; |
-|Context| http, server, location|
+|         |                                 |
+| ------- | ------------------------------- |
+| Syntax  | sub_filter_types mime-type ...; |
+| Default | sub_filter_types text/html;     |
+| Context | http, server, location          |
 
->Enables string replacement in responses with the specified MIME types in addition to “text/html”. The special value “*” matches any MIME type (0.8.29).
+> Enables string replacement in responses with the specified MIME types in addition to “text/html”. The special value “\*” matches any MIME type (0.8.29).
 
-"text/html" に加えて、指定されたMIMEタイプのレスポンスで文字列置換を有効にします。特別な値 "* " は任意のMIMEタイプに一致します（0.8.29）
+"text/html" に加えて、指定された MIME タイプのレスポンスで文字列置換を有効にします。特別な値 "\* " は任意の MIME タイプに一致します（0.8.29）
 
 # 余談
 
 正規表現での置換はできない。
-ngx_http_substitutions_filter_moduleを使うと正規表現で置換ができるみたい、buildが必要みたいでオラ全然わからない
+ngx_http_substitutions_filter_module を使うと正規表現で置換ができるみたい、build が必要みたいでオラ全然わからない
 <https://www.nginx.com/resources/wiki/modules/substitutions/>

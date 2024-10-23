@@ -14,7 +14,7 @@ tags:
   - Collision Detection
   - Collision Avoidance
   - Network Specialist
-description: ""
+description: "CSMA/CDとCSMA/CAの概要と違いを解説し、それぞれの特徴を簡単に覚えやすい方法で紹介します。CSMA/CDは有線ネットワーク（イーサネット）での衝突検出に、CSMA/CAは無線LAN（Wi-Fi）での衝突回避に使われるメディアアクセス制御方式です。動作原理を踏まえて、イメージしやすい覚え方を提示しています。"
 ---
 
 # CSMA/CD と CSMA/CA の概要と覚え方
@@ -30,7 +30,7 @@ description: ""
 
 ## CSMA/CA（Collision Avoidance）
 
-- **定義**: 「Carrier Sense Multiple Access with Collision Avoidance」の略で、無線LAN（Wi-Fi）で使用される技術。
+- **定義**: 「Carrier Sense Multiple Access with Collision Avoidance」の略で、無線 LAN（Wi-Fi）で使用される技術。
 - **動作原理**:
   1. 聞く: 他のデバイスがデータを送っているか確認。
   2. 待つ: 通信チャネルが空いているのを待つ。
@@ -40,5 +40,5 @@ description: ""
 
 ## 覚えやすい方法
 
-- **CSMA/CD**: CDプレイヤー。物理的なディスク（有線ケーブルを使うイーサネット）を連想。
-- **CSMA/CA**: CAフェ。友達とのんびりとカフェで会うように、無線で通信するイメージ。
+- **CSMA/CD**: CD プレイヤー。物理的なディスク（有線ケーブルを使うイーサネット）を連想。
+- **CSMA/CA**: CA フェ。友達とのんびりとカフェで会うように、無線で通信するイメージ。

@@ -18,19 +18,19 @@ tags:
   - インフラ構成
   - ネットワークセキュリティ
   - AWSベストプラクティス
-description: ""
+description: "ALBを経由してプライベートなAPI Gatewayにリクエストを送信する構成を解説します。CloudFormationテンプレートを使い、VPCエンドポイントの作成、プライベートAPI Gatewayの設定、ALBとターゲットグループの関連付けを行います。ALB、VPCエンドポイント、API Gatewayの組み合わせで、セキュアかつ柔軟なリクエストルーティングを実現する方法を示します。"
 ---
 
-この記事では、ALB（Application Load Balancer）を経由して、プライベートなAPI Gatewayにリクエストを送信する構成についてまとめています。ALB、VPCエンドポイント、プライベートAPI Gateway、およびListenerRuleを活用して構築しました。背景として、リクエストのエントリーポイントをALBにする必要があったため、このような設計を採用しました。
+この記事では、ALB（Application Load Balancer）を経由して、プライベートな API Gateway にリクエストを送信する構成についてまとめています。ALB、VPC エンドポイント、プライベート API Gateway、および ListenerRule を活用して構築しました。背景として、リクエストのエントリーポイントを ALB にする必要があったため、このような設計を採用しました。
 
-以下に、構成を実現するためのCloudFormationテンプレートを紹介します。
+以下に、構成を実現するための CloudFormation テンプレートを紹介します。
 
 ## vpc-endpoint-template.yaml
 
-最初に、プライベートAPI GatewayにアクセスするためのVPCエンドポイントを設定します。
+最初に、プライベート API Gateway にアクセスするための VPC エンドポイントを設定します。
 
 ```yaml
-AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: "2010-09-09"
 Description: CloudFormation template to create an interface VPC endpoint for private access to API Gateway
 
 Parameters:
@@ -45,7 +45,7 @@ Parameters:
 
 Resources:
   ApiGatewayVPCEndpoint:
-    Type: 'AWS::EC2::VPCEndpoint'
+    Type: "AWS::EC2::VPCEndpoint"
     Properties:
       VpcId: !Ref VpcId
       ServiceName: !Sub com.amazonaws.${AWS::Region}.execute-api
@@ -63,10 +63,10 @@ Outputs:
 
 ## private-api-gateway-template.yaml
 
-次に、プライベートAPI Gatewayを構成します。VPCエンドポイントを利用してアクセスするための設定を行います。
+次に、プライベート API Gateway を構成します。VPC エンドポイントを利用してアクセスするための設定を行います。
 
 ```yaml
-AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: "2010-09-09"
 Description: CloudFormation template for a private REST API using an interface VPC endpoint
 
 Parameters:
@@ -77,7 +77,7 @@ Parameters:
 Resources:
   PrivateRestApi:
     Type: AWS::ApiGateway::RestApi
-    Properties: 
+    Properties:
       Name: PrivateHelloApi
       Description: Private API Gateway that returns "hello" without using Lambda.
       EndpointConfiguration:
@@ -85,19 +85,19 @@ Resources:
           - PRIVATE
         VpcEndpointIds: !Ref VpcEndpointIds
       Policy:
-        Version: '2012-10-17'
+        Version: "2012-10-17"
         Statement:
           - Effect: Deny
-            Principal: '*'
-            Action: 'execute-api:Invoke'
-            Resource: !Sub 'arn:aws:execute-api:${AWS::Region}:*:*/*/*/*'
+            Principal: "*"
+            Action: "execute-api:Invoke"
+            Resource: !Sub "arn:aws:execute-api:${AWS::Region}:*:*/*/*/*"
             Condition:
               StringNotEquals:
                 aws:SourceVpce: !Ref VpcEndpointIds
           - Effect: Allow
-            Principal: '*'
-            Action: 'execute-api:Invoke'
-            Resource: !Sub 'arn:aws:execute-api:${AWS::Region}:*:*/*/*/*'
+            Principal: "*"
+            Action: "execute-api:Invoke"
+            Resource: !Sub "arn:aws:execute-api:${AWS::Region}:*:*/*/*/*"
 
   HelloResource:
     Type: AWS::ApiGateway::Resource
@@ -122,12 +122,12 @@ Resources:
               method.response.header.Access-Control-Allow-Headers: "'content-type,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
               method.response.header.Access-Control-Allow-Methods: "'OPTIONS,GET'"
             ResponseTemplates:
-              application/json: "{\"message\": \"OK\"}"
+              application/json: '{"message": "OK"}'
           - StatusCode: "500"
             ResponseTemplates:
-              application/json: "{\"message\": \"Internal Server Error\"}"
+              application/json: '{"message": "Internal Server Error"}'
         RequestTemplates:
-          application/json: "{\"statusCode\": 200}"
+          application/json: '{"statusCode": 200}'
       MethodResponses:
         - StatusCode: "200"
           ResponseParameters:
@@ -146,7 +146,7 @@ Resources:
       Integration:
         Type: MOCK
         RequestTemplates:
-          application/json: "{\"statusCode\": 200}"
+          application/json: '{"statusCode": 200}'
         IntegrationResponses:
           - StatusCode: 200
             ResponseParameters:
@@ -165,7 +165,7 @@ Resources:
   HelloApiModel:
     Type: AWS::ApiGateway::Model
     Properties:
-      ContentType: 'application/json'
+      ContentType: "application/json"
       RestApiId: !Ref PrivateRestApi
       Schema: {}
 
@@ -179,16 +179,16 @@ Resources:
 Outputs:
   PrivateApiUrl:
     Description: "Invoke URL for the Private API"
-    Value: 
+    Value:
       Fn::Sub: "https://${PrivateRestApi}.execute-api.${AWS::Region}.amazonaws.com/dev/hello"
 ```
 
 ## alb-attach-template.yaml
 
-最後に、ALBとターゲットグループを設定し、ALBからAPI Gatewayへのトラフィックを転送します。
+最後に、ALB とターゲットグループを設定し、ALB から API Gateway へのトラフィックを転送します。
 
 ```yaml
-AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: "2010-09-09"
 Parameters:
   VpcId:
     Type: String
@@ -202,22 +202,22 @@ Parameters:
 
 Resources:
   HelloApiTargetGroup:
-    Type: 'AWS::ElasticLoadBalancingV2::TargetGroup'
-    Properties: 
-      Name: 'HelloApiTargetGroup'
-      TargetType: 'ip'
-      Protocol: 'HTTPS'
+    Type: "AWS::ElasticLoadBalancingV2::TargetGroup"
+    Properties:
+      Name: "HelloApiTargetGroup"
+      TargetType: "ip"
+      Protocol: "HTTPS"
       Port: 443
       VpcId: !Ref VpcId
-      HealthCheckProtocol: 'HTTPS'
-      HealthCheckPort: '443'
-      HealthCheckPath: '/200,403'
+      HealthCheckProtocol: "HTTPS"
+      HealthCheckPort: "443"
+      HealthCheckPath: "/200,403"
       HealthCheckIntervalSeconds: 30
       HealthCheckTimeoutSeconds: 5
       HealthyThresholdCount: 5
       UnhealthyThresholdCount: 2
       Matcher:
-        HttpCode: '200,403'
+        HttpCode: "200,403"
       Targets:
         - Id: !Select [0, !Ref TargetIps]
           Port: 443
@@ -225,15 +225,15 @@ Resources:
           Port: 443
 
   HelloApiListenerRule:
-    Type: 'AWS::ElasticLoadBalancingV2::ListenerRule'
+    Type: "AWS::ElasticLoadBalancingV2::ListenerRule"
     Properties:
       Actions:
-        - Type: 'forward'
+        - Type: "forward"
           TargetGroupArn: !Ref HelloApiTargetGroup
       Conditions:
-        - Field: 'path-pattern'
+        - Field: "path-pattern"
           Values:
-            - '/dev/*'
+            - "/dev/*"
       ListenerArn: !Ref AlbListenerArn
       Priority: 30
 ```

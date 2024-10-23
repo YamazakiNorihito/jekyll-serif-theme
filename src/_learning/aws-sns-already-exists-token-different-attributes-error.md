@@ -7,12 +7,12 @@ tags:
   - AWS
   - GoLang
   - SNS
-description: ""
+description: "GoLangでAmazon SNSのCreatePlatformEndpoint APIを使用する際に発生するエラー「already exists with the same Token, but different attributes」の原因と対処法を解説。エラーは同じデバイストークンで異なる属性を持つエンドポイントが既に存在する場合に発生します。モバイル端末の共有によるCustomUserDataの更新が必要なケースを例に、解決策と実装コードの改善方法を紹介します。"
 ---
 
 ## はじめに
 
-GoLangでAmazon SNSの`CreatePlatformEndpoint` APIを使って、プラットフォームエンドポイントを作成しようとした際に、以下のようなエラーに遭遇しました。今回は、そのエラーの原因と対処法について解説します。
+GoLang で Amazon SNS の`CreatePlatformEndpoint` API を使って、プラットフォームエンドポイントを作成しようとした際に、以下のようなエラーに遭遇しました。今回は、そのエラーの原因と対処法について解説します。
 
 ```bash
 "error": "operation error SNS: CreatePlatformEndpoint, https response error StatusCode: 400, RequestID: 31859cc5-5e31-5416-9df5-c3a9036654ee, InvalidParameter: Invalid parameter: Token Reason: Endpoint arn:aws:sns:ap-northeast-1:******:endpoint/GCM/******/830d456e-dbea-304f-a2af-e2e9e666cd70 already exists with the same Token, but different attributes."
@@ -22,7 +22,7 @@ GoLangでAmazon SNSの`CreatePlatformEndpoint` APIを使って、プラットフ
 
 ## 該当コード
 
-アプリケーションでは、デバイストークンを使ってSNSのエンドポイントを作成しようとしています。また、CustomUserDataを使ってデバイストークンの所有者情報を登録しています。
+アプリケーションでは、デバイストークンを使って SNS のエンドポイントを作成しようとしています。また、CustomUserData を使ってデバイストークンの所有者情報を登録しています。
 
 ```go
 func (s *SNSEndpointService) createEndpoint(ctx context.Context, user domain.UserMeta, deviceToken string) error {
@@ -45,13 +45,13 @@ func (s *SNSEndpointService) createEndpoint(ctx context.Context, user domain.Use
 
 ## 背景
 
-モバイル端末1台を複数のユーザーで共有しているため、同じデバイストークンでも、その時々で所有者が変わるケースがあります。そのため、`CustomUserData`を更新する必要がありました。`CreatePlatformEndpoint`メソッドを使ってエンドポイントを作成し、既存のエンドポイントがある場合はARNを取得し、そのARNを使って`CustomUserData`を更新するつもりでした。
+モバイル端末 1 台を複数のユーザーで共有しているため、同じデバイストークンでも、その時々で所有者が変わるケースがあります。そのため、`CustomUserData`を更新する必要がありました。`CreatePlatformEndpoint`メソッドを使ってエンドポイントを作成し、既存のエンドポイントがある場合は ARN を取得し、その ARN を使って`CustomUserData`を更新するつもりでした。
 
 しかし、これがエラーの原因となりました。
 
 ## エラーの原因
 
-Amazon SNSの`CreatePlatformEndpoint`は、デバイストークンが同じであっても、他の属性（例: `CustomUserData`）が異なると、既存のエンドポイントを返さずにエラーを返す仕様になっています。このことは、[AWSの公式ブログ](https://aws.amazon.com/jp/blogs/mobile/mobile-token-management-with-amazon-sns/)でも確認できます。
+Amazon SNS の`CreatePlatformEndpoint`は、デバイストークンが同じであっても、他の属性（例: `CustomUserData`）が異なると、既存のエンドポイントを返さずにエラーを返す仕様になっています。このことは、[AWS の公式ブログ](https://aws.amazon.com/jp/blogs/mobile/mobile-token-management-with-amazon-sns/)でも確認できます。
 
 > If a PlatformEndpoint with the same token, but different attributes already exists, doesn’t create anything; also does not return anything but throws an exception.
 

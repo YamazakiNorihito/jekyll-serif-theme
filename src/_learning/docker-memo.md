@@ -14,10 +14,10 @@ tags:
   - Memo
   - Tips and Tricks
   - Image Management
-description: ""
+description: "Dockerに関するメモ。コンテナのネットワークの付け替え方法、使っていないイメージの削除、Docker Composeでのコンテナ、ネットワーク、ボリュームの削除など、日常的なDocker作業に役立つコマンドやヒントをまとめています。Dockerのネットワーク管理、イメージ管理、Composeの使い方を効率的に行うための基本的なコマンドを網羅しています。"
 ---
 
-## container のnetworkを付け替える
+## container の network を付け替える
 
 ```bash
 ~/Documents$ docker network list

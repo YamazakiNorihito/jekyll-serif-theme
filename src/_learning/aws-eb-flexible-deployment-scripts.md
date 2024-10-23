@@ -12,18 +12,18 @@ tags:
   - Deployment
   - Custom Scripts
   - Automation
-description: ""
+description: "AWS Elastic Beanstalk の Linux プラットフォームを活用し、デプロイ時にカスタムスクリプトを使って柔軟な処理を自動化する方法を紹介します。インスタンスごとの設定や Nginx プロキシの調整、デプロイ前後の特定の操作を実行するスクリプトの設定など、アプリケーションに合わせた柔軟なカスタマイズが可能です。構成例や設定ファイルの使い方を通じて、デプロイ作業の効率化と環境の最適化を図る方法を解説します。"
 ---
 
-### AWS Elastic Beanstalkでの柔軟なデプロイスクリプトの活用
+### AWS Elastic Beanstalk での柔軟なデプロイスクリプトの活用
 
-AWS Elastic BeanstalkのLinuxプラットフォームでは、デプロイ時にスクリプトを利用して様々な処理を自動化できます。たとえば、デプロイされたEC2インスタンスのIPアドレスを取得して環境変数に設定するなど、インスタンスごとに必要な調整が簡単に行えます。これにより、アプリケーションのニーズに合わせた柔軟なカスタマイズが可能になります。
+AWS Elastic Beanstalk の Linux プラットフォームでは、デプロイ時にスクリプトを利用して様々な処理を自動化できます。たとえば、デプロイされた EC2 インスタンスの IP アドレスを取得して環境変数に設定するなど、インスタンスごとに必要な調整が簡単に行えます。これにより、アプリケーションのニーズに合わせた柔軟なカスタマイズが可能になります。
 
 より詳細な設定方法や追加のカスタマイズ例については、[公式ドキュメント](https://docs.aws.amazon.com/ja_jp/elasticbeanstalk/latest/dg/platforms-linux-extend.html)をご覧ください。
 
 ### ディレクトリ構成例
 
-以下は、典型的なアプリケーションディレクトリのサンプル構成です。この構成を参考にすることで、Elastic Beanstalkのカスタマイズが容易になります。
+以下は、典型的なアプリケーションディレクトリのサンプル構成です。この構成を参考にすることで、Elastic Beanstalk のカスタマイズが容易になります。
 
 ```
 ~/my-app/
@@ -66,7 +66,7 @@ AWS Elastic BeanstalkのLinuxプラットフォームでは、デプロイ時に
 
 #### 2. プロキシ設定
 
-`.platform/nginx/` ディレクトリに `nginx.conf` や `custom.conf` を配置することで、Nginxプロキシの設定を調整できます。
+`.platform/nginx/` ディレクトリに `nginx.conf` や `custom.conf` を配置することで、Nginx プロキシの設定を調整できます。
 
 #### 3. デプロイフックの活用
 
@@ -74,7 +74,7 @@ AWS Elastic BeanstalkのLinuxプラットフォームでは、デプロイ時に
 
 ### まとめ
 
-AWS Elastic BeanstalkのLinuxプラットフォームは、デフォルトでも強力な機能を提供しますが、上記のようにカスタマイズすることで、さらにアプリケーションのニーズに応じた柔軟な環境を構築できます。これらのディレクトリやスクリプトを活用し、効率的な運用を進めてください。
+AWS Elastic Beanstalk の Linux プラットフォームは、デフォルトでも強力な機能を提供しますが、上記のようにカスタマイズすることで、さらにアプリケーションのニーズに応じた柔軟な環境を構築できます。これらのディレクトリやスクリプトを活用し、効率的な運用を進めてください。
 
 より詳細な情報や追加のカスタマイズについては、公式ドキュメントをご確認ください。[Elastic Beanstalk Linux プラットフォームの拡張](https://docs.aws.amazon.com/ja_jp/elasticbeanstalk/latest/dg/platforms-linux-extend.html)
 

@@ -14,11 +14,11 @@ tags:
   - SSL/TLS
   - Reverse Proxy
   - Redis
-description: ""
+description: "Dockerを使用して簡単にHTTPS対応を実現する手順を解説します。steveltn/https-portal Dockerイメージを利用し、Nginxをベースにしたリバースプロキシの設定でHTTPS化を実現。例として、Node.jsアプリケーションとRedisを含むシンプルなdocker-compose構成を紹介し、各コンテナのDockerfileと設定ファイルも提供しています。SSL/TLSセキュリティやWebサーバー構成の基本的な知識が学べます。"
 ---
 
-[steveltn/https-portal:1](https://github.com/SteveLTN/https-portal) のDockerImageを使うと簡単にHttps化ができる
-nginxを使っているので、nginxの知識があれば、チューニングもできる。
+[steveltn/https-portal:1](https://github.com/SteveLTN/https-portal) の DockerImage を使うと簡単に Https 化ができる
+nginx を使っているので、nginx の知識があれば、チューニングもできる。
 
 ## docker-compose
 
@@ -28,12 +28,12 @@ services:
   https-portal:
     image: steveltn/https-portal:1
     ports:
-      - '80:80'
-      - '443:443'
+      - "80:80"
+      - "443:443"
     restart: always
     environment:
-      DOMAINS: 'workday.ap-northeast-1.elasticbeanstalk.com -> http://app:3000'
-      STAGE: 'production'
+      DOMAINS: "workday.ap-northeast-1.elasticbeanstalk.com -> http://app:3000"
+      STAGE: "production"
     volumes:
       - https-portal-data:/var/lib/https-portal
     depends_on:
