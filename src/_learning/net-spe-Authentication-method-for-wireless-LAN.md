@@ -18,31 +18,31 @@ tags:
 description: ""
 ---
 
-# 無線LANの認証方式
+## 無線LANの認証方式
 
 無線LANにおける主要な認証方式には、以下のものがあります：
 
-## WEP (Wired Equivalent Privacy)
+#### WEP (Wired Equivalent Privacy)
 
 - **認証プロセス**: 端末がネットワークに接続する際に、事前に共有された鍵（WEPキー）を用いてデータを暗号化し、送信します。アクセスポイントはこのキーを使用してデータを復号化し、認証を行います。
 - **必要な情報**: 事前に共有されたWEPキー。
 
-## WPA-PSK (Wi-Fi Protected Access Pre-Shared Key)
+#### WPA-PSK (Wi-Fi Protected Access Pre-Shared Key)
 
 - **認証プロセス**: 事前に共有されたキー（プリシェアードキー、PSK）を基にハンドシェイクプロセスを行い、暗号化キーを生成します。このキーはセッション中のデータ暗号化に使用されます。
 - **必要な情報**: 事前に共有されたPSK。
 
-## MACアドレス認証
+#### MACアドレス認証
 
 - **認証プロセス**: アクセスポイントのフィルタリングリストに登録されたMACアドレスを持つデバイスのみがネットワークアクセスを許可されます。
 - **必要な情報**: デバイスのMACアドレス。
 
-## WEB認証
+#### WEB認証
 
 - **認証プロセス**: ユーザーがブラウザを介して認証ページにアクセスし、ログイン情報（ユーザー名とパスワード）を提供します。認証後、ネットワークアクセスが許可されます。
 - **必要な情報**: ユーザー名とパスワード。
 
-## EAP (Extensible Authentication Protocol) / IEEE 802.1X認証
+#### EAP (Extensible Authentication Protocol) / IEEE 802.1X認証
 
 - **認証プロセス**: 認証サーバー（例: RADIUSサーバー）を使用してデバイス認証を行います。クライアントと認証サーバー間でEAPメッセージが交換され、ユーザー名とパスワード、証明書などに基づいて認証が行われます。
 - **必要な情報**: 認証方法に依存しますが、一般にユーザー名とパスワード、デジタル証明書など。
@@ -77,11 +77,11 @@ sequenceDiagram
     AS->>C: 認証結果
 ```
 
-# PEAPとEAP-TLSについて
+## PEAPとEAP-TLSについて
 
 無線LANネットワークで使用される認証プロトコル、PEAP（Protected Extensible Authentication Protocol）とEAP-TLS（Extensible Authentication Protocol-Transport Layer Security）についての概要と特徴。
 
-## 概要
+#### 概要
 
 | 特徴           | PEAP                                        | EAP-TLS                                     |
 | -------------- | ------------------------------------------- | ------------------------------------------- |
@@ -90,9 +90,9 @@ sequenceDiagram
 | 認証情報       | サーバー証明書（クライアント証明書は任意）   | サーバーとクライアントの証明書               |
 | 設定の容易さ   | 比較的容易                                   | 複雑                                        |
 
-## 認証プロセスのシーケンス図
+#### 認証プロセスのシーケンス図
 
-### PEAP認証プロセス
+###### PEAP認証プロセス
 
 ```mermaid
 sequenceDiagram
@@ -108,7 +108,7 @@ sequenceDiagram
     AS->>C: 認証結果
 ```
 
-### EAP-TLS認証プロセス
+###### EAP-TLS認証プロセス
 
 ```mermaid
 sequenceDiagram

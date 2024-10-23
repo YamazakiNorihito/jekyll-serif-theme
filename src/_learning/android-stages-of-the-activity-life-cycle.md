@@ -9,16 +9,15 @@ tags:
 description: ""
 ---
 
-
-# Android アクティビティのライフサイクル
+## Android アクティビティのライフサイクル
 
 アンドロイドのアクティビティは、特定のライフサイクルに従っています。このライフサイクルは、アクティビティがユーザーに対してどのように現れ、消えるかを管理します。以下の説明と図は、アクティビティが経験する主なライフサイクルのステージを表しています。
 
-## ライフサイクルのステージ
+#### ライフサイクルのステージ
 
 - **Initialized**: アクティビティがメモリにロードされた状態。
 - **Created**: `onCreate()` が呼ばれる。アクティビティに対して 1 回限りの初期化が行われる。
-  - アクティビティがメモリ上に新しく作成された直後に1回だけ呼ばれます。
+  - アクティビティがメモリ上に新しく作成された直後に 1 回だけ呼ばれます。
   - 呼び出された時点でアクティビティは「作成された」と見なされます。
   - オーバーライドする際は、アクティビティの作成を完了するためにスーパークラスの onCreate() (super.onCreate())を必ず呼び出す必要があります。
     - 注意）すべてのライフサイクル コールバック メソッド（onStart(), onResume(), onPause(), onStop(), onDestroy()）においても、同様にスーパークラスのメソッドを呼び出す必要があります。
@@ -35,7 +34,7 @@ description: ""
 
 各ステージに対して、Android システムは関連するコールバックメソッドを呼び出します。開発者はこれらのコールバックをオーバーライドして、必要な処理を実装します。
 
-## コールバックメソッドとそのタイミング
+#### コールバックメソッドとそのタイミング
 
 - `onCreate()`: アクティビティが生成されたときに一度だけ呼ばれる。初期化処理を行う。
 - `onStart()`/`onRestart()`: アクティビティがユーザーに見えるようになる前に呼ばれる。リソースの確保などを行う。
@@ -60,16 +59,16 @@ stateDiagram-v2
     Destroyed --> [*]
 ```
 
-## 動作
+#### 動作
 
-### アプリがバックグラウンドになるとき
+###### アプリがバックグラウンドになるとき
 
 アプリがバックグラウンドになるときに onPause() と onStop() が呼び出され、フォアグラウンドに戻るときに onRestart()、onStart()、onResume() が呼び出されます。
 
-### デバイスの画面回転とアクティビティのライフサイクル
+###### デバイスの画面回転とアクティビティのライフサイクル
 
 画面が回転すると、アクティビティはシャットダウンされ再作成されるため、デフォルト値にリセットされます。この動作は、アクティビティが持っていたデータ（例：デザートの販売数や総収益）が失われることを意味します。
-Androidアプリケーションでデバイスの画面が回転すると、以下のライフサイクルイベントが発生します。
+Android アプリケーションでデバイスの画面が回転すると、以下のライフサイクルイベントが発生します。
 
 1. **`onPause()`** が呼ばれ、アクティビティは一時停止します。
 2. **`onStop()`** が続いて呼ばれ、アクティビティは停止します。
@@ -78,22 +77,23 @@ Androidアプリケーションでデバイスの画面が回転すると、以�
 5. 新しいアクティビティインスタンスで **`onCreate()`** が呼ばれ、アクティビティは再び作成されます。
 6. **`onStart()`** と **`onResume()`** が呼ばれ、アクティビティがユーザーに再表示されます。
 
-## コンポーザブルのライフサイクル
+#### コンポーザブルのライフサイクル
 
-### Composition
+###### Composition
 
-- **コンポーズの初期化**: アプリのUIは、コンポーズ可能な関数を実行することで初めて構築されます。このプロセスを Composition と呼びます。
-- **状態の変化と再コンポーズ**: アプリの状態が変化すると、影響を受けるコンポーズ可能な関数は再実行されます。これを再コンポーズと呼び、更新されたUIが作成されます。
+- **コンポーズの初期化**: アプリの UI は、コンポーズ可能な関数を実行することで初めて構築されます。このプロセスを Composition と呼びます。
+- **状態の変化と再コンポーズ**: アプリの状態が変化すると、影響を受けるコンポーズ可能な関数は再実行されます。これを再コンポーズと呼び、更新された UI が作成されます。
 
-### Composable 関数のライフサイクル
+###### Composable 関数のライフサイクル
 
 - **Composition に入る**: コンポーズ可能な関数が最初に実行される際のプロセス。
-- **再コンポーズする**: 状態変化に応じて、関数が0回以上再実行されることがあります。
-- **Composition から出る**: UIからコンポーズ可能な要素が削除される時、リソースのクリーンアップが行われます。
+- **再コンポーズする**: 状態変化に応じて、関数が 0 回以上再実行されることがあります。
+- **Composition から出る**: UI からコンポーズ可能な要素が削除される時、リソースのクリーンアップが行われます。
 
-### 状態管理
+###### 状態管理
 
 - **State と MutableState**: Compose では状態の変更を追跡するために `State` または `MutableState` 型を使用します。
+
   - `State` 型: 不変であり、読み取り専用。
 
     ```java
@@ -115,6 +115,7 @@ Androidアプリケーションでデバイスの画面が回転すると、以�
     ```
 
 - **rememberSaveable**: remember の機能に加えて、アクティビティやフラグメントの再作成時に状態を自動的に保存し復元する
+
   - State は不変であり、その値は読み取り専用です。一方、MutableState は可変であり、値の更新が可能です。
   - rememberSaveable は remember の機能に加えて、アクティビティやフラグメントの再作成時に状態を自動的に保存し復元する機能を持っています。これにより、デバイスの回転やメモリ不足によるシステムによる再起動後も、ユーザーが入力したデータや選択した設定などが失われることなく保持されます。
 
@@ -122,12 +123,12 @@ Androidアプリケーションでデバイスの画面が回転すると、以�
       var count by rememberSaveable { mutableStateOf(0) }
     ```
 
-### 状態の追跡
+###### 状態の追跡
 
 - **状態のトラッキング**: Compose が再コンポーズを効果的にトリガーするためには、状態がどのように変化したのかを正確に把握する必要があります。
 - **再コンポーズのトリガー**: 特定の状態が変更された時、それに依存するコンポーズ可能な関数は再コンポーズされます。
 
-## Log
+#### Log
 
 コールバックメソッドとそのタイミングを可視化するためのプログラム
 
@@ -186,7 +187,7 @@ class MainActivity : ComponentActivity() {
 
 ```
 
-## 関連サイト
+#### 関連サイト
 
-- [アクティビティのライフサイクルのステージ](https://developer.android.com/codelabs/basic-android-kotlin-compose-activity-lifecycle?hl=ja&continue=https%3A%2F%2Fdeveloper.android.com%2Fcourses%2Fpathways%2Fandroid-basics-compose-unit-4-pathway-1%3Fhl%3Dja%23codelab-https%3A%2F%2Fdeveloper.android.com%2Fcodelabs%2Fbasic-android-kotlin-compose-activity-lifecycle#2)
-- [Activity Lifecycle](https://developer.android.com/reference/android/app/Activity#activity-lifecycle)
+- [アクティビティのライフサイクルのステージ](https://developer.android.com/codelabs/basic-android-kotlin-compose-activity-lifecycle?hl=ja&continue=https%3A%2F%2Fdeveloper.android.com%2Fcourses%2Fpathways%2Fandroid-basics-compose-unit-4-pathway-1%3Fhl%3Dja%23codelab-https%3A%2F%2Fdeveloper.android.com%2Fcodelabs%2Fbasic-android-kotlin-compose-activity-lifecycle##2)
+- [Activity Lifecycle](https://developer.android.com/reference/android/app/Activity##activity-lifecycle)

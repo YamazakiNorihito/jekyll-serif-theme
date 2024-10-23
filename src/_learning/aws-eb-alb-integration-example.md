@@ -17,15 +17,15 @@ tags:
 description: ""
 ---
 
-# AWS Elastic BeanstalkとApplication Load Balancerを連携するCloudFormationテンプレート
+## AWS Elastic Beanstalk と Application Load Balancer を連携する CloudFormation テンプレート
 
-今回はAWS Elastic Beanstalk（以下EB）とApplication Load Balancer（以下ALB）を連携して、Dockerコンテナを利用したアプリケーションをデプロイするためのCloudFormationテンプレートを紹介します。このテンプレートは、ALBを使用してトラフィックを管理し、必要に応じてAuto Scalingグループを利用することでスケーラビリティを確保します。
+今回は AWS Elastic Beanstalk（以下 EB）と Application Load Balancer（以下 ALB）を連携して、Docker コンテナを利用したアプリケーションをデプロイするための CloudFormation テンプレートを紹介します。このテンプレートは、ALB を使用してトラフィックを管理し、必要に応じて Auto Scaling グループを利用することでスケーラビリティを確保します。
 
-## CloudFormationテンプレートの概要
+### CloudFormation テンプレートの概要
 
-以下にテンプレートの内容を示します。このテンプレートは、必要なパラメータとリソースを定義し、EBとALBを設定します。
+以下にテンプレートの内容を示します。このテンプレートは、必要なパラメータとリソースを定義し、EB と ALB を設定します。
 
-### パラメータ
+#### パラメータ
 
 ```yaml
 AWSTemplateFormatVersion: "2010-09-09"
@@ -40,11 +40,11 @@ Parameters:
       - develop
       - staging
       - production
-  # https://docs.aws.amazon.com/ja_jp/elasticbeanstalk/latest/platforms/platforms-supported.html#platforms-supported.docker
+  ## https://docs.aws.amazon.com/ja_jp/elasticbeanstalk/latest/platforms/platforms-supported.html##platforms-supported.docker
   SolutionStackName:
     Type: String
     Description: "The name of the solution stack used by Elastic Beanstalk, such as '64bit Amazon Linux 2023 v4.3.5 running Docker'."
-  # https://aws.amazon.com/jp/ec2/instance-types/
+  ## https://aws.amazon.com/jp/ec2/instance-types/
   InstanceType:
     Type: String
     Description: "The EC2 instance type, e.g., 't3.micro'."
@@ -105,7 +105,7 @@ Resources:
           FromPort: 80
           ToPort: 80
           CidrIp: "0.0.0.0/0"
-  
+
   IdentityServerSecurityGroupInboundRule:
     Type: "AWS::EC2::SecurityGroupIngress"
     Properties:
@@ -115,7 +115,7 @@ Resources:
       ToPort: 80
       SourceSecurityGroupId: !Ref ALBSecurityGroupId
       Description: "security group for ALB"
-  
+
   ElasticacheSecurityGroupInboundRule:
     Type: "AWS::EC2::SecurityGroupIngress"
     Properties:
@@ -132,12 +132,13 @@ Resources:
       EnvironmentName: !Sub "${Application}"
       CNAMEPrefix: !Sub "${Application}-app-com"
       ApplicationName: !Ref Application
-      VersionLabel: !Ref ApplicationVersion
-       # https://docs.aws.amazon.com/ja_jp/elasticbeanstalk/latest/platforms/platforms-supported.html#platforms-supported.docker
+      VersionLabel:
+        !Ref ApplicationVersion
+        ## https://docs.aws.amazon.com/ja_jp/elasticbeanstalk/latest/platforms/platforms-supported.html##platforms-supported.docker
       SolutionStackName: !Ref SolutionStackName
-      # https://docs.aws.amazon.com/ja_jp/elasticbeanstalk/latest/dg/command-options.html
+      ## https://docs.aws.amazon.com/ja_jp/elasticbeanstalk/latest/dg/command-options.html
       OptionSettings:
-        # リクエストを直接受けるかLBを挟むかの設定
+        ## リクエストを直接受けるかLBを挟むかの設定
         - Namespace: "aws:elasticbeanstalk:environment"
           OptionName: "EnvironmentType"
           Value: "LoadBalanced"
@@ -147,8 +148,8 @@ Resources:
         - Namespace: "aws:elasticbeanstalk:environment"
           OptionName: "LoadBalancerType"
           Value: "application"
-        # 共有または専有どちらのLBに接続するのか設定
-        # https://docs.aws.amazon.com/ja_jp/elasticbeanstalk/latest/dg/command-options-general.html#command-options-general-elasticbeanstalkenvironment
+        ## 共有または専有どちらのLBに接続するのか設定
+        ## https://docs.aws.amazon.com/ja_jp/elasticbeanstalk/latest/dg/command-options-general.html##command-options-general-elasticbeanstalkenvironment
         - Namespace: "aws:elasticbeanstalk:environment"
           OptionName: "LoadBalancerIsShared"
           Value: "true"
@@ -161,8 +162,8 @@ Resources:
         - Namespace: "aws:autoscaling:launchconfiguration"
           OptionName: "IamInstanceProfile"
           Value: !Ref EC2RoleArn
-        # セキュリティグループはデフォルトでEBのものが作成されます。
-        # 追加でACLを操作したい場合は、別途セキュリティグループを作成してアタッチする
+        ## セキュリティグループはデフォルトでEBのものが作成されます。
+        ## 追加でACLを操作したい場合は、別途セキュリティグループを作成してアタッチする
         - Namespace: "aws:autoscaling:launchconfiguration"
           OptionName: "SecurityGroups"
           Value: !Ref SecurityGroup
@@ -172,8 +173,8 @@ Resources:
         - Namespace: "aws:ec2:vpc"
           OptionName: "Subnets"
           Value: !Ref Subnets
-        # Auto Scaling グループのインスタンスにパブリック IP アドレスを割り当てるためのオプション
-        # https://docs.aws.amazon.com/ja_jp/elasticbeanstalk/latest/dg/command-options-general.html#command-options-general-ec2vpc
+        ## Auto Scaling グループのインスタンスにパブリック IP アドレスを割り当てるためのオプション
+        ## https://docs.aws.amazon.com/ja_jp/elasticbeanstalk/latest/dg/command-options-general.html##command-options-general-ec2vpc
         - Namespace: "aws:ec2:vpc"
           OptionName: "AssociatePublicIpAddress"
           Value: "true"
@@ -188,7 +189,7 @@ Resources:
           Value: "4"
         - Namespace: "aws:autoscaling:asg"
           OptionName: "Cooldown"
-          Value: "300" # 5 min
+          Value: "300" ## 5 min
         - Namespace: "aws:autoscaling:trigger"
           OptionName: "MeasureName"
           Value: "CPUUtilization"
@@ -200,19 +201,19 @@ Resources:
           Value: "Percent"
         - Namespace: "aws:autoscaling:trigger"
           OptionName: "Period"
-          Value: "3" # 3 min
+          Value: "3" ## 3 min
         - Namespace: "aws:autoscaling:trigger"
           OptionName: "EvaluationPeriods"
           Value: "3"
         - Namespace: "aws:autoscaling:trigger"
           OptionName: "UpperThreshold"
-          Value: "80" # 80%
+          Value: "80" ## 80%
         - Namespace: "aws:autoscaling:trigger"
           OptionName: "UpperBreachScaleIncrement"
           Value: "1"
         - Namespace: "aws:autoscaling:trigger"
           OptionName: "LowerThreshold"
-          Value: "20" # 20%
+          Value: "20" ## 20%
         - Namespace: "aws:autoscaling:trigger"
           OptionName: "LowerBreachScaleIncrement"
           Value: "-1"
@@ -232,13 +233,13 @@ Resources:
           OptionName: "pauseTime"
           Value: "PT3M"
 
-        # アプリケーションコードのデプロイポリシーを設定
+        ## アプリケーションコードのデプロイポリシーを設定
         - Namespace: "aws:elasticbeanstalk:command"
           OptionName: "DeploymentPolicy"
           Value: "Rolling"
         - Namespace: "aws:elasticbeanstalk:command"
           OptionName: "Timeout"
-          Value: "600" # Unit: seconds
+          Value: "600" ## Unit: seconds
         - Namespace: "aws:elasticbeanstalk:command"
           OptionName: "BatchSizeType"
           Value: "Fixed"
@@ -248,7 +249,7 @@ Resources:
         - Namespace: "aws:elasticbeanstalk:command"
           OptionName: "IgnoreHealthCheck"
           Value: "false"
-        # リクエストの流れ client -> (https) -> Application Load balancer -> (http) -> EC2(application)
+        ## リクエストの流れ client -> (https) -> Application Load balancer -> (http) -> EC2(application)
         - Namespace: "aws:elasticbeanstalk:environment:process:default"
           OptionName: "Port"
           Value: "80"
@@ -260,17 +261,17 @@ Resources:
           Value: "/auth/health"
         - Namespace: "aws:elasticbeanstalk:environment:process:default"
           OptionName: "HealthCheckInterval"
-          Value: "30" # ヘルスチェックの実行間隔（秒）
+          Value: "30" ## ヘルスチェックの実行間隔（秒）
         - Namespace: "aws:elasticbeanstalk:environment:process:default"
           OptionName: "HealthCheckTimeout"
-          Value: "5" # ヘルスチェックのタイムアウト（秒）
+          Value: "5" ## ヘルスチェックのタイムアウト（秒）
         - Namespace: "aws:elasticbeanstalk:environment:process:default"
           OptionName: "HealthyThresholdCount"
-          Value: "5" # 正常とみなすまでの連続成功回数
+          Value: "5" ## 正常とみなすまでの連続成功回数
         - Namespace: "aws:elasticbeanstalk:environment:process:default"
           OptionName: "UnhealthyThresholdCount"
-          Value: "2" # 異常とみなすまでの連続失敗回数
-        # アプリケーションのインスタンスログストリーミングを設定
+          Value: "2" ## 異常とみなすまでの連続失敗回数
+        ## アプリケーションのインスタンスログストリーミングを設定
         - Namespace: "aws:elasticbeanstalk:cloudwatch:logs"
           OptionName: "StreamLogs"
           Value: "true"
@@ -280,21 +281,21 @@ Resources:
         - Namespace: "aws:elasticbeanstalk:cloudwatch:logs"
           OptionName: "RetentionInDays"
           Value: "5"
-        
-        # リスナールールの設定
-        # 下記を参考にした
-        # https://docs.aws.amazon.com/ja_jp/elasticbeanstalk/latest/dg/environments-cfg-alb-shared.html#environments-cfg-alb-shared-ebcli
-        # リスナールールはルートとPathPatternsの２つのルールが作成される
+
+        ## リスナールールの設定
+        ## 下記を参考にした
+        ## https://docs.aws.amazon.com/ja_jp/elasticbeanstalk/latest/dg/environments-cfg-alb-shared.html##environments-cfg-alb-shared-ebcli
+        ## リスナールールはルートとPathPatternsの２つのルールが作成される
         - Namespace: "aws:elbv2:listener:443"
           OptionName: "Rules"
-          Value: "default,apprule" # defaultは必須で設定しないとエラーになる。
+          Value: "default,apprule" ## defaultは必須で設定しないとエラーになる。
 
         - Namespace: "aws:elbv2:listenerrule:apprule"
           OptionName: "PathPatterns"
           Value: "/auth/*"
-        # https://docs.aws.amazon.com/ja_jp/elasticbeanstalk/latest/dg/environments-cfg-alb-shared.html#environments-cfg-alb-shared-intro
-        # > Elastic Beanstalk は、ロードバランサーを共有する環境間でルールの優先順位設定を相対的なものとして扱い、作成時に絶対的な優先順位にマッピングします。
-        #   と書いてある通り、設定通りの優先順位になるわけではない。
+        ## https://docs.aws.amazon.com/ja_jp/elasticbeanstalk/latest/dg/environments-cfg-alb-shared.html##environments-cfg-alb-shared-intro
+        ## > Elastic Beanstalk は、ロードバランサーを共有する環境間でルールの優先順位設定を相対的なものとして扱い、作成時に絶対的な優先順位にマッピングします。
+        ##   と書いてある通り、設定通りの優先順位になるわけではない。
         - Namespace: "aws:elbv2:listenerrule:apprule"
           OptionName: "Priority"
           Value: "32"
@@ -304,8 +305,8 @@ Resources:
         - Namespace: "aws:elbv2:listenerrule:apprule"
           OptionName: "Process"
           Value: "default"
-        
-        # アプリケーションの環境変数を設定
+
+        ## アプリケーションの環境変数を設定
         - Namespace: "aws:elasticbeanstalk:application:environment"
           OptionName: "KC_DB_URL_HOST"
           Value: !Ref KcDbURLHost

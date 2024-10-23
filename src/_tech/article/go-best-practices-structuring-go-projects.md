@@ -7,19 +7,19 @@ categories:
 description: ""
 ---
 
-# 思い
+## 思い
 
 [golang-standards/project-layout](https://github.com/golang-standards/project-layout/blob/master/README_ja.md)をベースに自分が必要そうな
 ディレクトリ構成を記述する。もし悩んだら`golang-standards/project-layout`に立ち返り、構成を見直す。
 
-## Go Version
+#### Go Version
 
 ```bash
 ~$ go version
 go version go1.22.2 darwin/arm64
 ```
 
-## Project tree
+#### Project tree
 
 ```bash
 .
@@ -74,32 +74,32 @@ go version go1.22.2 darwin/arm64
 └── wiki
 ```
 
-### `/cmd`
+###### `/cmd`
 
 - アプリケーションのディレクトリ名で、実行ファイルを生成する。
 - /internal と /pkg ディレクトリからコードをインポートして呼び出すだけの小さな main 関数にする。
 - Lambda など記述方法に制限がある場合、使用するアプリケーションの種類によってハンドラが異なるため、ハンドラごとにディレクトリを作成する。
   - 共通の処理がある場合には shared ディレクトリを作成し、共通の処理をそこに配置できる。
 
-### internal
+###### internal
 
 - プライベートなアプリケーションやライブラリのコードを配置
 - 同じプロジェクトツリー内の特定の範囲でのみインポート可能
 
-### pkg
+###### pkg
 
 - 外部アプリケーションで使用しても問題ないライブラリコードを配置
 - 他のプロジェクトや公開するコード（例：go get hogehogeの対象）をここに配置
 - 自分のプロジェクト内だけでなく、他人に公開して使用してもらうためのコード
 - 他人に公開するコードを書く予定がない場合は、このディレクトリを作成する必要はない
 
-### (不要) vendorディレクトリ
+###### (不要) vendorディレクトリ
 
 vendorディレクトリは以前、アプリケーションが依存している外部ライブラリやパッケージをプロジェクト内に格納するために使用されていました。
 しかし、Go 1.13以降、Goモジュールとモジュールプロキシ機能の導入により、vendorディレクトリはなくても問題なくなりました。
 依存関係は`go.mod`と`go.sum`ファイルによって管理され、必要なライブラリは[モジュールプロキシ](https://proxy.golang.org)を通じて自動的にダウンロードされます。
 
-## 参考サイト
+#### 参考サイト
 
 - [golang-standards/project-layout](https://github.com/golang-standards/project-layout/blob/master/README_ja.md)
 - [Golang project directory structure](https://stackoverflow.com/questions/46646559/golang-project-directory-structure)

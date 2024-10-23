@@ -8,11 +8,11 @@ categories:
 description: ""
 ---
 
-# AWS S3からEC2インスタンスへのファイルダウンロードのやり方
+## AWS S3からEC2インスタンスへのファイルダウンロードのやり方
 
 このガイドでは、AWS S3バケットからEC2インスタンスにファイルをダウンロードする手順を説明します。
 
-## 1. IAMロールの作成
+#### 1. IAMロールの作成
 
 - **目的**: EC2インスタンスがS3バケットにアクセスするための権限を設定します。
 - **手順**:
@@ -60,7 +60,7 @@ description: ""
   }
 ```
 
-## 2. EC2インスタンス起動時のUserDataの実行
+#### 2. EC2インスタンス起動時のUserDataの実行
 
 - **目的**: EC2インスタンス起動時に自動でファイルダウンロードスクリプトを実行します。
 - **実行方法**:
@@ -74,14 +74,14 @@ Content-Type: multipart/mixed; boundary="//"
 --//
 Content-Type: text/cloud-config; charset="us-ascii"
 
-#cloud-config
+##cloud-config
 cloud_final_modules:
 - [scripts-user, always]
 
 --//
 Content-Type: text/x-shellscript; charset="us-ascii"
 
-#!/bin/bash
+##!/bin/bash
 mkdir -p /{任意のディレクトリ}
 cd /{任意のディレクトリ}
 aws s3 cp s3://{S3bucket}/{任意のファイル}.json /{任意の}/
@@ -102,7 +102,7 @@ total 4
 
 ファイルの所有者はroot です。読み取り権限は、他のユーザーにあるみたいです。
 
-## 3. ログの確認方法
+#### 3. ログの確認方法
 
 - **目的**: スクリプトの実行結果を確認します。
 - **手順**:
@@ -114,7 +114,7 @@ total 4
 cat /var/log/cloud-init-output.log
 ```
 
-## 4. CloudFormationを使用した自動化
+#### 4. CloudFormationを使用した自動化
 
 - **目的**: プロセスを自動化し、エラーの可能性を減らします。
 - **方法**: CloudFormationテンプレートを使用して、上記手順を自動化します。
@@ -138,11 +138,11 @@ Resources:
               command: "aws s3 cp s3://{任意のファイル名}/{任意のファイル}.json /{任意のディレクトリ}/{任意のファイル}.json"
     Properties:
       InstanceType: t2.micro
-      ImageId: ami-0b5c74e235ed808b9  # 適切なAMI IDに置き換えてください。
+      ImageId: ami-0b5c74e235ed808b9  ## 適切なAMI IDに置き換えてください。
       KeyName: workdayKeyPeir2
       IamInstanceProfile: "S3ToEC2DownloadRole2"
       SecurityGroupIds: 
-        - sg-08054815e2b4cc74c  # 既存のセキュリティグループID
+        - sg-08054815e2b4cc74c  ## 既存のセキュリティグループID
       Tags:
         - Key: Name
           Value: s3ec2testioc
@@ -154,16 +154,16 @@ Resources:
           --//
           Content-Type: text/cloud-config; charset="us-ascii"
 
-          #cloud-config
+          ##cloud-config
           cloud_final_modules:
           - [scripts-user, always]
 
           --//
           Content-Type: text/x-shellscript; charset="us-ascii"
 
-          #!/bin/bash
-          # Install the files and packages from the metadata
-          # https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/cfn-init.html
+          ##!/bin/bash
+          ## Install the files and packages from the metadata
+          ## https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/cfn-init.html
           /opt/aws/bin/  -v --stack ${AWS::StackName} --resource S3ToEC2DownloadCloudformation --region ${AWS::Region}
           --//--
 ```
@@ -175,12 +175,12 @@ Resources:
 /opt/aws/bin/cfn-init -v --stack S3ToEC2DownloadCloudformation --resource S3ToEC2DownloadCloudformation --region {リージョン}
 ```
 
-## セキュリティ上の注意点
+#### セキュリティ上の注意点
 
 - 必要最低限の権限をIAMロールに付与し、プリンシパルに対するアクセスを制限してください。
 - S3バケットの公開設定を確認し、不要な公開アクセスがないようにします。
 
-## トラブルシューティング
+#### トラブルシューティング
 
 - **一般的なエラー**:
   - IAMロールの権限不足
@@ -189,7 +189,7 @@ Resources:
   - IAMポリシーを確認し、必要な権限が含まれているか再確認してください。
   - `/var/log/cloud-init-output.log` をチェックし、スクリプトのエラーメッセージを確認します。
 
-## 参考サイト
+#### 参考サイト
 
 - [EC2用にIAMロールを作ったのに、EC2へ割り当てられない！](https://dev.classmethod.jp/articles/how-to-create-iam-instance-profile-using-amc/)
 - [Amazon EC2 Linux インスタンスを再起動するたびに、ユーザーデータを利用してスクリプトを自動的に実行するにはどうすればよいですか?](https://repost.aws/ja/knowledge-center/execute-user-data-ec2)

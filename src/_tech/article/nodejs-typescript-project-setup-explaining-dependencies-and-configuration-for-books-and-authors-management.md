@@ -9,11 +9,11 @@ categories:
 description: ""
 ---
 
-# bookshelf パッケージの依存関係説明
+## bookshelf パッケージの依存関係説明
 
 ここで実装した[コード](/tech/article/js-ts-create-webapi-bookshelf/)の説明をします。
 
-## Dependencies
+#### Dependencies
 
 1. **Express**:
    - Expressは、Node.jsで動作する軽量で柔軟なWebアプリケーションフレームワークです。Expressは、ミドルウェア、ルーティング、およびテンプレートエンジンを提供し、Webおよびモバイルアプリケーションを構築するための強力な基盤を提供します。
@@ -34,7 +34,7 @@ description: ""
 1. **express-validator**:
    - `express-validator`は、Expressアプリケーションで受け取ったリクエストのデータを検証・整形するためのミドルウェアです。例えば、ユーザー登録フォームからの入力値が正しいフォーマットであるかチェックする際などに役立ちます。
 
-## tsconfig.json
+#### tsconfig.json
 
 この`tsconfig.json`([とは](https://runebook.dev/ja/docs/typescript/tsconfig-json))ファイルは、プロジェクトのコンパイルに必要なルート ファイルと[コンパイラ オプション](https://www.typescriptlang.org/ja/tsconfig)を指定します。
 
@@ -64,7 +64,7 @@ description: ""
 - [ECMAScriptの最新版 公式サイト](https://www.ecma-international.org/)
 - [わかりやすいECMAScriptの解説](https://note.com/takamoso/n/ndac801520eaf)
 
-## データモデルの定義
+#### データモデルの定義
 
 Modelクラスを継承して定義する方法は3つある。
 
@@ -129,7 +129,7 @@ class Book extends Model {
       - 型の不完全性: ジェネリック型が不在であるため、モデルに関連するメソッドや他のプロパティの型推論が不完全。
       - コードの不一致: データベースの変更や他のコードとの不一致が生じた際、この不整合を検出するのが難しくなる。
 
-## middleware
+#### middleware
 
 1. errorHandler:
    1. このミドルウェアは、サーバー上でエラーが発生した場合のハンドリングを行います。エラーオブジェクトが存在すれば、そのエラーのメッセージをレスポンスとして返します。エラーオブジェクトが存在しない場合は、一般的なエラーメッセージを返します。
@@ -172,7 +172,7 @@ class Book extends Model {
         ];
       ```
 
-## データモデルの定義データベースの接続設定
+#### データモデルの定義データベースの接続設定
 
 1. Sequelizeのインポート:
    1. Sequelizeライブラリから`Sequelize`クラスをインポートしています。このクラスはデータベース接続やモデルの定義、データのクエリなどの操作を行うための主要なクラスです。
@@ -191,8 +191,8 @@ class Book extends Model {
       });
       ```
 
-      ※1 他のDB接続方法は[ドキュメント](https://sequelize.org/docs/v6/getting-started/#connecting-to-a-database)見てください。
-      ※2 Sequelizeクラスの[Constructors](https://sequelize.org/api/v6/class/src/sequelize.js~sequelize#instance-constructor-constructor)
+      ※1 他のDB接続方法は[ドキュメント](https://sequelize.org/docs/v6/getting-started/##connecting-to-a-database)見てください。
+      ※2 Sequelizeクラスの[Constructors](https://sequelize.org/api/v6/class/src/sequelize.js~sequelize##instance-constructor-constructor)
    2. 使用方法:
        - このように、database.tsはアプリケーション全体で一貫したデータベース接続を提供する基盤として機能します。
 
@@ -210,7 +210,7 @@ class Book extends Model {
           });
           ```
 
-## 環境変数
+#### 環境変数
 
    1. `app.ts`:
        - `dotenvはNode.js`で環境変数を操作するための便利なnpmパッケージです。`dotenv.config()`を呼び出すと、`.env`ファイルから環境変数を読み込み、それをprocess.envに追加します。
@@ -236,7 +236,7 @@ class Book extends Model {
         NODE_ENV=develop
         ```
 
-## サーバの起動
+#### サーバの起動
 
 **説明**:
 
@@ -269,7 +269,7 @@ if (isProduction()) {
 }
 ```
 
-## sequelize.sync()
+#### sequelize.sync()
 
 `sequelize.sync()`はSequelizeを使用したNode.jsアプリケーションで、モデル定義とデータベースのスキーマとの間の同期をとるためのメソッドです。この同期は以下のような動作を含むことがあります：
 

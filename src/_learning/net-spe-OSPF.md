@@ -18,9 +18,9 @@ tags:
 description: ""
 ---
 
-# OSPFについてのまとめ
+## OSPFについてのまとめ
 
-## OSPFの概要
+#### OSPFの概要
 
 - **OSPF (Open Shortest Path First)**: ルータ間で動的にルーティング情報を交換するインターネットプロトコル。
   - ３５文字以内の説明
@@ -29,30 +29,30 @@ description: ""
 - **リンクステートルーティングプロトコル**: 各ルータがネットワークの全体像を把握し、最短経路を計算。
 - **動的ルーティングプロトコル**: ネットワークの変更時にルート情報を自動更新。
 
-## OSPFとエリア
+#### OSPFとエリア
 
 - **エリア**: 効率的な管理とルーティング情報の伝播制御のためにネットワークを分割。
 - **バックボーンエリア (エリア 0)**: OSPFネットワークの中心。他のエリアはこのエリアに接続する必要がある。
 - **非バックボーンエリア**: エリア 0 以外。ローカルなルーティング情報を保持。
 
-## OSPFの動作原理
+#### OSPFの動作原理
 
 - **LSA (Link State Advertisement)**: リンクステート情報の広告。
 - **LSDB (Link State Database)**: 受け取ったLSAを格納するデータベース。
 
-## OSPFの技術的詳細
+#### OSPFの技術的詳細
 
 - **OSIモデル**: OSPFはネットワーク層（レイヤー3）で動作。
 - **IPプロトコル番号**: OSPFはプロトコル番号 **89** を使用。
 - **マルチキャストアドレス**: 224.0.0.5 (全OSPFルーターへのメッセージ送信用)、224.0.0.6 (指定ルーターへのメッセージ送信用)。
   
-## 最短経路の計算
+#### 最短経路の計算
 
 - **アルゴリズム**: Dijkstra(ダイクストラ)アルゴリズム
 - **コスト計算**: 100(Mbps) / 回線速度
   - 回線速度10Mbpsの場合、100 /10 = 10 10コストとなる
 
-## 視覚的説明
+#### 視覚的説明
 
 - **Mermaid図**: OSPFのLSAとLSDBの関係と流れを視覚的に示す。
 
@@ -94,9 +94,9 @@ graph LR
     C --> C_LSA_C
 ```
 
-## 主要コンポーネント
+#### 主要コンポーネント
 
-### DR（Designated Router）
+###### DR（Designated Router）
 
 - 役割:
   - OSPFでは、同じブロードキャストネットワーク（例えば、イーサネット）上に複数のルーターが存在する場合、全てのルーター間で情報を交換すると大量のトラフィックが発生します。この問題を解決するために、DRとBDR（バックアップ）が選出され、ネットワーク上のルーター間の情報交換を代行します。
@@ -110,7 +110,7 @@ graph LR
 - どうやって選ばれるの？:
   - ルーターたちは、自分たちの中から「私がやる！」と言うルーターの中で、一番条件が良いルーターをDRとして選びます。
 
-### ABR（Area Border Router）
+###### ABR（Area Border Router）
 
 - 役割:
   - OSPFネットワークは、複数のエリアに分割されることがあります。ABRは異なるOSPFエリア間の境界に位置し、エリア間ルーティング情報を交換する役割を持ちます。
@@ -124,7 +124,7 @@ graph LR
 - どんな役割？:
   - ABRは、異なるエリアから来た情報を受け取り、他のエリアに伝えることで、大きなネットワーク全体で情報がスムーズに行き渡るようにします。
 
-### ASBR（Autonomous System Boundary Router）
+###### ASBR（Autonomous System Boundary Router）
 
 - 役割:
   - ASBRは、OSPFが動作している自律システム（AS）と外部ネットワーク（他のルーティングプロトコルや静的ルートが配置されているネットワーク）との間でルーティング情報を交換するルーターです。
@@ -138,19 +138,19 @@ graph LR
 - どんな役割？:
   - 外から来た情報をOSPFネットワーク内に伝えたり、逆にOSPFネットワークから外部に情報を出したりします。
 
-## LSA（Link State Advertisement）
+#### LSA（Link State Advertisement）
 
 - OSPFネットワーク内のトポロジー情報を伝播するために使用されるメッセージ。
 - 異なるタイプのLSAがあり、ネットワークの異なる側面を記述します。
 
-### タイプ別のLSA
+###### タイプ別のLSA
 
 1. **Router LSA (Type 1)**: ルーターが直接接続されているリンクの状態を記述します。
 2. **Network LSA (Type 2)**: DRによって生成され、ブロードキャストネットワーク上のルーターのリストを含みます。
 3. **Summary LSA (Type 3)**: ABRによって生成され、異なるエリアへのルートの要約を提供します。
 4. **AS External LSA (Type 5)**: ASBRによって生成され、外部ネットワークへのルート情報をOSPFエリア内に配布します。
 
-## 視覚化例（Mermaid）
+#### 視覚化例（Mermaid）
 
 ```mermaid
 graph TD
@@ -165,7 +165,7 @@ graph TD
     DR -->|Router LSA| Router2
     ABR -.->|Summary LSA| Router3
 
-classDef ospf fill:#f9f,stroke:#333,stroke-width:4px;
+classDef ospf fill:##f9f,stroke:##333,stroke-width:4px;
 class Internet,ASBR,ABR,DR,Router1,Router2,Router3 ospf;
 ```
 
@@ -200,13 +200,13 @@ graph LR
     ASBR(ASBR) -->|AS External LSA| Internet
     ASBR -->|Router LSA| DR0
 
-    classDef area fill:#f9f,stroke:#333,stroke-width:2px;
-    classDef router fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef area fill:##f9f,stroke:##333,stroke-width:2px;
+    classDef router fill:##bbf,stroke:##333,stroke-width:2px;
     class Area0,Area10,Area20 area;
     class DR0,ABR10_0,Router10A,Router10B,ABR20_0,Router20A,Router20B,ASBR router;
 ```
 
-## ちなみに
+#### ちなみに
 
 過去こんな問題がありました。
 

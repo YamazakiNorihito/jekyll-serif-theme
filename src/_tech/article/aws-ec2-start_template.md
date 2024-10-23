@@ -48,6 +48,6 @@ description: ""
   - バージョン番号は作成された順に付けられる。
   - ユーザーがバージョン番号を自分で指定することはできない。
 
-# 参考サイト
+## 参考サイト
 
 - [起動テンプレートからのインスタンスの起動](https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/ec2-launch-templates.html)

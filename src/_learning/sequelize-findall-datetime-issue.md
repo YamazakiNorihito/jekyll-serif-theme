@@ -1,7 +1,7 @@
 ---
 title: "sequelizeのfindAllちょっと調べたよ"
 date: 2024-3-2T11:05:00
-#image: "images/team/nonsap-visuals-kMJp7620W6U-unsplash.jpg"
+##image: "images/team/nonsap-visuals-kMJp7620W6U-unsplash.jpg"
 jobtitle: "Graphic Designer"
 linkedinurl: ""
 weight: 7
@@ -18,17 +18,17 @@ description: "Sequelizeを使ったMySQLのDateTime型データの取得に関�
 ---
 
 
-# 背景
+## 背景
 
 Sequelizeを使用してMySQLに接続しクエリを実行していたところ、特定のDateTime型のカラムを取得しようとすると「invalid time value」というエラーに直面しました。これまで同じコードで問題なく動作していたため、何が原因でこのような問題が発生したのか、深く調査する必要がありました。
 
-# 原因
+## 原因
 
 調査の結果、[mysql2ライブラリ](https://www.npmjs.com/package/mysql2)のバージョン3.9に問題がある？(かSequelizeがv3.9に対応していない)ことが判明しました。具体的には、バージョン3.8まではDateTime型のデータの扱いで問題がなかったにも関わらず、3.9で変更された部分に不具合が存在していました。GitHub上の[差分](https://github.com/sidorares/node-mysql2/compare/v3.8.0...v3.9.0)と、関連する[プルリクエスト](https://github.com/sidorares/node-mysql2/pull/2398)を詳細に確認することで、より具体的に特定できる。（[sequelize v6.37.1とmysql2 v3.9.2の互換性に関する調査結果](/learning/sequelize-v6-37-1-mysql2-v3-9-2-compatibility/)の記事に書きました。
 
-# 解析方法
+## 解析方法
 
-1. `Sequelizeの設定変更`: [`dialectOptions`](https://sequelize.org/docs/v6/other-topics/dialect-specific-things/#mysql)に[`debug: true`](https://sidorares.github.io/node-mysql2/docs/examples/connections/create-pool#pooloptions)を設定し、mysql2ライブラリが生成するログを観察しました。
+1. `Sequelizeの設定変更`: [`dialectOptions`](https://sequelize.org/docs/v6/other-topics/dialect-specific-things/##mysql)に[`debug: true`](https://sidorares.github.io/node-mysql2/docs/examples/connections/create-pool##pooloptions)を設定し、mysql2ライブラリが生成するログを観察しました。
 
     <details>
     <summary>コード</summary>
@@ -51,7 +51,7 @@ Sequelizeを使用してMySQLに接続しクエリを実行していたところ
 
     </details>
 
-2. `Raw Queriesの実行`: [Replacements](https://sequelize.org/docs/v6/core-concepts/raw-queries/#replacements)と[Bind Parameter](https://sequelize.org/docs/v6/core-concepts/raw-queries/#bind-parameter)を用いたクエリを実行し、mysql2がDateTime型のデータをどのように処理しているかを詳細に調査しました。
+2. `Raw Queriesの実行`: [Replacements](https://sequelize.org/docs/v6/core-concepts/raw-queries/##replacements)と[Bind Parameter](https://sequelize.org/docs/v6/core-concepts/raw-queries/##bind-parameter)を用いたクエリを実行し、mysql2がDateTime型のデータをどのように処理しているかを詳細に調査しました。
    1. なんでこの手法を取ったのか
       1. Replacementsは問題なくqueryが実行できたため￥
 
@@ -129,12 +129,12 @@ TextとBinaryの処理における差異が明らかになり、特にBinaryRow�
 
 </details>
 
-# sequelizeのコードを簡単に解説
+## sequelizeのコードを簡単に解説
 
 Mysql2に不具合があるとは思っておらず、sequelizeに不具合があると思って
 コードを読んでいた。ので、調査する過程で分かった内容を書いていく。
 
-## [model.js findAll(options)](https://github.com/sequelize/sequelize/blob/48181ced0e94577f19ed838b29a953602e631888/packages/core/src/model.js#L1343)
+#### [model.js findAll(options)](https://github.com/sequelize/sequelize/blob/48181ced0e94577f19ed838b29a953602e631888/packages/core/src/model.js##L1343)
 
 <details>
 <summary>コード</summary>
@@ -238,7 +238,7 @@ static async findAll(options) {
 
   // 仮想属性を持つAttributesが含まれる場合、対象ととなるAttributeをSelectのColumnに含める
   // 仮想属性に関連する実属性がクエリに含まれるようにする
-  // https://sequelize.org/docs/v6/core-concepts/getters-setters-virtuals/#virtual-fields
+  // https://sequelize.org/docs/v6/core-concepts/getters-setters-virtuals/##virtual-fields
   options.originalAttributes = this._injectDependentVirtualAttributes(options.attributes);
 
   // joinが必要な場合、設定を行う
@@ -299,7 +299,7 @@ static async findAll(options) {
 
 </details>
 
-## [query-interface.js select(model, tableName, optionsArg)](https://github.com/sequelize/sequelize/blob/8b1f73ade0251a9ff5a9f76ddbc77dfe75003335/packages/core/src/dialects/abstract/query-interface.js#L566-L567)
+#### [query-interface.js select(model, tableName, optionsArg)](https://github.com/sequelize/sequelize/blob/8b1f73ade0251a9ff5a9f76ddbc77dfe75003335/packages/core/src/dialects/abstract/query-interface.js##L566-L567)
 
 <details>
 <summary>コード</summary>
@@ -348,7 +348,7 @@ static async findAll(options) {
 
 </details>
 
-## [sequelize.js queryRaw(sql, options)](https://github.com/sequelize/sequelize/blob/8b1f73ade0251a9ff5a9f76ddbc77dfe75003335/packages/core/src/sequelize.js#L638-L639)
+#### [sequelize.js queryRaw(sql, options)](https://github.com/sequelize/sequelize/blob/8b1f73ade0251a9ff5a9f76ddbc77dfe75003335/packages/core/src/sequelize.js##L638-L639)
 
 <details>
 <summary>コード</summary>
@@ -389,8 +389,8 @@ static async findAll(options) {
       /*省略*/
 
       // 実際にクエリを実行する。方言に応じたクエリ実装を使う
-      // 例: MySQLならMySqlQueryをインスタンス化(https://github.com/sequelize/sequelize/blob/8b1f73ade0251a9ff5a9f76ddbc77dfe75003335/packages/core/src/dialects/mysql/query.js#L21-L22)
-      // dialectをどれを使うかは、Sequelizeのインスタンス生成の時のdialectで決まります。(https://github.com/sequelize/sequelize/blob/8b1f73ade0251a9ff5a9f76ddbc77dfe75003335/packages/core/src/sequelize.js#L341-L342)
+      // 例: MySQLならMySqlQueryをインスタンス化(https://github.com/sequelize/sequelize/blob/8b1f73ade0251a9ff5a9f76ddbc77dfe75003335/packages/core/src/dialects/mysql/query.js##L21-L22)
+      // dialectをどれを使うかは、Sequelizeのインスタンス生成の時のdialectで決まります。(https://github.com/sequelize/sequelize/blob/8b1f73ade0251a9ff5a9f76ddbc77dfe75003335/packages/core/src/sequelize.js##L341-L342)
       /*
         const sequelize = new Sequelize(
             '[databaseName]',
@@ -422,9 +422,9 @@ static async findAll(options) {
 
 </details>
 
-## [sql.ts mapBindParameters](https://github.com/sequelize/sequelize/blob/abca55ee52d959f95c98dc7ae8b8162005536d05/packages/core/src/utils/sql.ts#L316-L317)
+#### [sql.ts mapBindParameters](https://github.com/sequelize/sequelize/blob/abca55ee52d959f95c98dc7ae8b8162005536d05/packages/core/src/utils/sql.ts##L316-L317)
 
-- [MysqlDialect](https://github.com/sequelize/sequelize/blob/abca55ee52d959f95c98dc7ae8b8162005536d05/packages/core/src/dialects/mysql/index.ts#L17-L18)
+- [MysqlDialect](https://github.com/sequelize/sequelize/blob/abca55ee52d959f95c98dc7ae8b8162005536d05/packages/core/src/dialects/mysql/index.ts##L17-L18)
 
 <details>
 <summary>コード</summary>
@@ -462,7 +462,7 @@ export function mapBindParameters(
 
 </details>
 
-## [mysql/query.js run(sql, parameters)](https://github.com/sequelize/sequelize/blob/8b1f73ade0251a9ff5a9f76ddbc77dfe75003335/packages/core/src/dialects/mysql/query.js#L26-L27)
+#### [mysql/query.js run(sql, parameters)](https://github.com/sequelize/sequelize/blob/8b1f73ade0251a9ff5a9f76ddbc77dfe75003335/packages/core/src/dialects/mysql/query.js##L26-L27)
 
 <details>
 <summary>コード</summary>
@@ -505,7 +505,7 @@ export function mapBindParameters(
       */
       if (options.transaction && error.errno === ER_DEADLOCK) {
         // MySQL automatically rolls-back transactions in the event of a deadlock.
-        // However, we still initiate a manual rollback to ensure the connection gets released - see #13102.
+        // However, we still initiate a manual rollback to ensure the connection gets released - see ##13102.
         try {
           await options.transaction.rollback();
         } catch {
@@ -530,7 +530,7 @@ export function mapBindParameters(
 
 </details>
 
-## [mysql connection-manager.ts connect(config: ConnectionOptions): Promise<MySqlConnection>](https://github.com/sequelize/sequelize/blob/8b1f73ade0251a9ff5a9f76ddbc77dfe75003335/packages/core/src/dialects/mysql/connection-manager.ts#L74-L75)
+#### [mysql connection-manager.ts connect(config: ConnectionOptions): Promise<MySqlConnection>](https://github.com/sequelize/sequelize/blob/8b1f73ade0251a9ff5a9f76ddbc77dfe75003335/packages/core/src/dialects/mysql/connection-manager.ts##L74-L75)
 
 <details>
 <summary>コード</summary>
@@ -551,7 +551,7 @@ async connect(config: ConnectionOptions): Promise<MySqlConnection> {
       ...(config.password == null ? null : { password: config.password }),
       ...(config.database == null ? null : { database: config.database }),
       ...(!this.sequelize.options.timezone ? null : { timezone: this.sequelize.options.timezone }),
-      typeCast: (field, next) => this.#typecast(field, next),
+      typeCast: (field, next) => this.##typecast(field, next),
     };
 
     try {

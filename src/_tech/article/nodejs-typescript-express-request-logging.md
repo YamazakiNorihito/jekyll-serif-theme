@@ -9,18 +9,18 @@ categories:
 description: ""
 ---
 
-# TypeScriptを使ったExpressアプリケーションでのリクエストごとのロギング
+## TypeScriptを使ったExpressアプリケーションでのリクエストごとのロギング
 
 現代のWebアプリケーションにおいて、ロギングはモニタリングとデバッグの重要な部分です。
 この記事では、TypeScriptを使用したExpressアプリケーションでのリクエストごとのロギングを実装する方法を紹介します。
 これは、InversifyJSでの依存性注入とUUIDを利用して一意のリクエスト識別子を生成することに基づいています。
 
-## ミドルウェアの設定
+#### ミドルウェアの設定
 
 まず、一意のリクエスト識別子を生成して、それをリクエストオブジェクトとレスポンスオブジェクトの両方に添付するためのミドルウェアを設定します。
 この識別子は、アプリケーション全体の特定のリクエストに関連するログを追跡するために重要です。
 
-### src/middlewares.ts
+###### src/middlewares.ts
 
 ```typescript
 import 'reflect-metadata';
@@ -57,11 +57,11 @@ export const loggerMiddleware = (
 };
 ```
 
-## Expressへのミドルウェアの統合
+#### Expressへのミドルウェアの統合
 
 次に、ミドルウェア関数を含むようにExpressアプリケーションのメインサーバーファイルを変更して、ミドルウェアをアプリケーションに統合します。
 
-### src/index.ts
+###### src/index.ts
 
 ```typescript
 import 'reflect-metadata';
@@ -138,13 +138,13 @@ startServer().catch(error => {
 });
 ```
 
-## ロガーの実装
+#### ロガーの実装
 
 ロガーの実装では、メッセージをロギングするためにリクエスト識別子を利用します。これにより、アプリケーション全体でリクエストごとのログを追跡することができます。
 
 `src/infrastructure/logger/loggerFactory.ts`と`src/infrastructure/logger/logger.ts`は、LoggerFactoryクラスとLoggerクラスの実装の詳細を示しています。
 
-### src/infrastructure/logger/loggerFactory.ts
+###### src/infrastructure/logger/loggerFactory.ts
 
 ```typescript
 import {injectable} from 'inversify';
@@ -210,7 +210,7 @@ export class LoggerFactory {
 }
 ```
 
-### src/infrastructure/logger/logger.ts
+###### src/infrastructure/logger/logger.ts
 
 ```typescript
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -265,7 +265,7 @@ export class Logger implements ILogger {
 }
 ```
 
-## 使用例
+#### 使用例
 
 コントローラーやアプリケーションの任意の部分でロガーをどのように使用するかの例です：
 

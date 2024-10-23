@@ -15,7 +15,7 @@ tags:
 description: "AWS CloudWatch Logs (`awslogs`)を使用して、Docker Compose でログを CloudWatch に送信する方法を説明します。Elastic Beanstalk 上の EC2 インスタンスに Docker Compose をデプロイした際に、ログを CloudWatch に出力するための設定例を紹介し、必要な IAM ポリシーについても言及します。サンプルとして NGINX サービスの Docker Compose 設定を示し、`awslogs` ドライバーを使用したログ出力の設定を解説します。"
 ---
 
-# Docker Compose で AWS Logs を利用するための設定ガイド
+## Docker Compose で AWS Logs を利用するための設定ガイド
 
 Elastic BeanStalk で EC2 に docker compose を deploy したときに、CloudWatch にログを出力するにはどうしたものかと思った。
 
@@ -26,7 +26,7 @@ Elastic BeanStalk で EC2 に docker compose を deploy したときに、CloudW
 
 Amazon CloudWatch Logs logging driver についてのドキュメントは[こちら](https://docs.docker.com/config/containers/logging/awslogs/)
 
-## Docker Compose YAML 設定
+#### Docker Compose YAML 設定
 
 以下は、`awslogs` ドライバーを使用する NGINX サービスのサンプル Docker Compose YAML 設定です：
 
@@ -55,4 +55,4 @@ services:
         awslogs-create-group: "true"
 ```
 
-[credentials](https://docs.docker.com/config/containers/logging/awslogs/#credentials)に書いてあるとおり、EC2 インスタンスから CloudWatch へ`logs:CreateLogStream`と`logs:PutLogEvents`のポリシーを追加しないといけないのでお忘れずに。
+[credentials](https://docs.docker.com/config/containers/logging/awslogs/##credentials)に書いてあるとおり、EC2 インスタンスから CloudWatch へ`logs:CreateLogStream`と`logs:PutLogEvents`のポリシーを追加しないといけないのでお忘れずに。

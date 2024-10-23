@@ -10,19 +10,19 @@ categories:
 description: ""
 ---
 
-# InversifyでRequestをモックする
+## InversifyでRequestをモックする
 
-## 概要
+#### 概要
 
 `inversify-express-utils`を使ったテストで直面するかもしれない一つの課題、すなわち`BaseHttpController`からHTTPリクエスト情報を取得する際にアクセスできないプロパティをモックする方法について説明します。
 
-## 解決策
+#### 解決策
 
 `Object.defineProperty`を使用すると、オブジェクトに新しいプロパティを安全に追加したり、
 既存のプロパティを変更することができます。
 この方法を利用して`httpContext`プロパティをモックに置き換えることで、テスト中に任意のHTTPリクエストとレスポンスをシミュレートできます。
 
-## 実践
+#### 実践
 
 実際のテストケースでは、まず`jest-mock-extended`を使用して`express.Request`と`express.Response`のモックを作成します。
 次に、これらのモックを用いて`HttpContext`を構成し、`Object.defineProperty`を使ってテスト対象のコントローラの`httpContext`を上書きします。

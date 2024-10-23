@@ -7,11 +7,11 @@ categories:
 description: ""
 ---
 
-# ローカルでDynamoDB Streamsを使ってGoプログラムをデバッグする方法
+## ローカルでDynamoDB Streamsを使ってGoプログラムをデバッグする方法
 
 以下はDynamoDBのStreamイベントを使って、ローカルでGoプログラムをデバッグするためのステップバイステップガイドです。
 
-## コードの準備
+#### コードの準備
 
 ```go
 package main
@@ -189,7 +189,7 @@ func main() {
 }
 ```
 
-### Docker Composeで環境設定
+###### Docker Composeで環境設定
 
 ```yaml
 version: "3.8"

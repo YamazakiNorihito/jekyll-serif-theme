@@ -23,14 +23,14 @@ description: ""
 ---
 
 
-# [実行計画(EXPLAIN ステートメント)](https://dev.mysql.com/doc/refman/8.0/ja/explain.html)
+## [実行計画(EXPLAIN ステートメント)](https://dev.mysql.com/doc/refman/8.0/ja/explain.html)
 
 ```sql
 EXPLAIN select * from messages
 
 -- 実行結果
 /*
-# id, select_type, table, partitions, type, possible_keys, key, key_len, ref, rows, filtered, Extra
+## id, select_type, table, partitions, type, possible_keys, key, key_len, ref, rows, filtered, Extra
 
 '1', 'SIMPLE', 'messages', NULL, 'ALL', NULL, NULL, NULL, NULL, '997277', '100.00', NULL
 
@@ -52,7 +52,7 @@ EXPLAIN select * from messages
 | `filtered`    | テーブルの行がクエリの条件にどれだけマッチするかのパーセンテージ。 |
 | `Extra`       | クエリ実行に関する追加情報。例えば、`Using index`（インデックスのみを使用してデータを取得）、`Using where`（WHERE条件を使用する）、`Using temporary`（一時テーブルを使用する）、などがある。 |
 
-### `select_type`
+###### `select_type`
 
 - **`SIMPLE`**: 単純なSELECTクエリで、サブクエリやUNIONが使われていない場合。
 - **`PRIMARY`**: サブクエリやUNIONの最も外側のSELECT。
@@ -61,7 +61,7 @@ EXPLAIN select * from messages
 - **`UNION`**: UNIONによって結合された二番目以降のSELECTクエリ。
 - **`UNION RESULT`**: UNIONクエリの結果を含む一時テーブル。
 
-### `type`
+###### `type`
 
 - **`ALL`**: フルテーブルスキャン。テーブルの全行がスキャンされる。
 - **`index`**: インデックス全スキャン。インデックスの全エントリがスキャンされる。
@@ -71,41 +71,41 @@ EXPLAIN select * from messages
 - **`const`**: 主キーまたはユニークキーによって、単一の行が検索される。クエリ実行時に結果が定数として扱われる。
 - **`system`**: テーブルに一行のみ存在する（または空の場合）。クエリ実行時に結果が定数として扱われる。
 
-### `Extra`
+###### `Extra`
 
 - **`Using index`**: クエリがインデックスのみを使用してデータを取得し、テーブルの行を読み込む必要がない場合。
 - **`Using where`**: WHERE句を使用して、特定の行をフィルタリングする場合。
 - **`Using temporary`**: クエリの結果を格納するために一時テーブルを使用する場合。例えば、ORDER BYやGROUP BYを含むクエリで一時テーブルが必要な場合。
 - **`Using filesort`**: MySQLが結果をソートするために外部のソート操作を使用する場合。インデックスを利用できないソート処理に使われる。
 
-## [MySQL 8.0.18 では、EXPLAIN ANALYZE](https://dev.mysql.com/doc/refman/8.0/ja/explain.html)
+#### [MySQL 8.0.18 では、EXPLAIN ANALYZE](https://dev.mysql.com/doc/refman/8.0/ja/explain.html)
 
 ```sql
 EXPLAIN analyze select * from messages
 
 -- 実行結果
 /*
-# EXPLAIN
+## EXPLAIN
 '-> Table scan on messages  (cost=198 rows=1900) (actual time=4.43..23 rows=1900 loops=1)\n'
 
 */
 ```
 
-# [SHOW STATUS ステートメント](https://dev.mysql.com/doc/refman/8.0/ja/show-status.html)
+## [SHOW STATUS ステートメント](https://dev.mysql.com/doc/refman/8.0/ja/show-status.html)
 
-## MySQLサーバーに接続されているスレッドの数
+#### MySQLサーバーに接続されているスレッドの数
 
 ```sql
 SHOW STATUS WHERE `variable_name` = 'Threads_connected';
 ```
 
-## table status
+#### table status
 
 ```sql
 SHOW TABLE STATUS LIKE 'messages';
 ```
 
-# [tableのSize](https://dev.mysql.com/doc/refman/8.0/ja/information-schema-introduction.html)
+## [tableのSize](https://dev.mysql.com/doc/refman/8.0/ja/information-schema-introduction.html)
 
 ```sql
 SELECT 
@@ -120,7 +120,7 @@ ORDER BY
   (DATA_LENGTH + INDEX_LENGTH) DESC;
 ```
 
-# [統計情報更新](https://dev.mysql.com/doc/refman/8.0/ja/analyze-table.html)
+## [統計情報更新](https://dev.mysql.com/doc/refman/8.0/ja/analyze-table.html)
 
 ```sql
 ANALYZE TABLE {tableName}
@@ -129,7 +129,7 @@ ANALYZE TABLE {tableName}
 ANALYZE TABLE {tableName1},{tableName2}
 ```
 
-# [クエリキャッシュの SELECT オプション](https://dev.mysql.com/doc/refman/5.7/en/query-cache-in-select.html)
+## [クエリキャッシュの SELECT オプション](https://dev.mysql.com/doc/refman/5.7/en/query-cache-in-select.html)
 
 クエリ キャッシュは MySQL 5.7.20 で非推奨となり、MySQL 8.0 では削除されました。
 
@@ -137,7 +137,7 @@ ANALYZE TABLE {tableName1},{tableName2}
 select SQL_CACHE id from message;
 ```
 
-# エラー対応
+## エラー対応
 
 1. case1
 
@@ -156,7 +156,7 @@ Error Code: 3675. Create table/tablespace 'states' failed, as disk is full
       <details><summary>実際の調査コマンド</summary>
 
         ```bash
-            bash-4.4# du -sh /*
+            bash-4.4## du -sh /*
             0 /bin
             4.0K /boot
             0 /dev
@@ -227,8 +227,8 @@ Error Code: 3675. Create table/tablespace 'states' failed, as disk is full
 
             541M /usr
             39G /var
-            bash-4.4# 
-            bash-4.4# du -sh /var/*
+            bash-4.4## 
+            bash-4.4## du -sh /var/*
             4.0K /var/adm
             28K /var/cache
             4.0K /var/db
@@ -249,7 +249,7 @@ Error Code: 3675. Create table/tablespace 'states' failed, as disk is full
             12K /var/spool
             4.0K /var/tmp
             4.0K /var/yp
-            bash-4.4# du -sh /var/lib/*
+            bash-4.4## du -sh /var/lib/*
             16K /var/lib/alternatives
             988K /var/lib/dnf
             4.0K /var/lib/games
@@ -261,11 +261,11 @@ Error Code: 3675. Create table/tablespace 'states' failed, as disk is full
             4.0K /var/lib/rpm-state
             8.0K /var/lib/selinux
             4.0K /var/lib/supportinfo
-            bash-4.4# du -sh /var/lib/mysql/*
-            192K /var/lib/mysql/#ib_16384_0.dblwr
-            8.2M /var/lib/mysql/#ib_16384_1.dblwr
-            101M /var/lib/mysql/#innodb_redo
-            804K /var/lib/mysql/#innodb_temp
+            bash-4.4## du -sh /var/lib/mysql/*
+            192K /var/lib/mysql/##ib_16384_0.dblwr
+            8.2M /var/lib/mysql/##ib_16384_1.dblwr
+            101M /var/lib/mysql/##innodb_redo
+            804K /var/lib/mysql/##innodb_temp
             44K /var/lib/mysql/0b8459b69ac1.log
             148K /var/lib/mysql/attendances
             4.0K /var/lib/mysql/auto.cnf

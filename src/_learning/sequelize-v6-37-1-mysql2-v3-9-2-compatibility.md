@@ -1,7 +1,7 @@
 ---
 title: "sequelize v6.37.1とmysql2 v3.9.2の互換性に関する調査結果"
 date: 2024-3-4T15:13:00
-#image: "images/team/nonsap-visuals-kMJp7620W6U-unsplash.jpg"
+##image: "images/team/nonsap-visuals-kMJp7620W6U-unsplash.jpg"
 jobtitle: "Graphic Designer"
 linkedinurl: ""
 weight: 7
@@ -17,7 +17,7 @@ tags:
 description: "Sequelize v6.37.1とMySQL2 v3.9.2の間の互換性問題に関する調査結果と、DateTime型のデータに対する解決策を説明。MySQL2 v3.9でのTypeCastの変更が原因で発生するエラーの解析と、TypeCastのカスタマイズによる解決方法を解説。"
 ---
 
-# 概要
+## 概要
 
 sequelize v6.37.1とmysql2 v3.9.2の間には相性問題があります。
 解決先は、mysql2 v3.8.0までに止めるか、sequelizeのTypeCastを自前実装してください。
@@ -46,26 +46,26 @@ npm i mysql2@3.9.2
 
 ```
 
-## 背景
+#### 背景
 
 SequelizeのBindパラメータを使ってDatetime型をColumn指定でSelectすると、「invalid time value」となり困っていた。
 関連記事-> [sequelizeのfindAllちょっと調べたよ](/learning/sequelize-findall-datetime-issue/)
 
-## Mysql v3.9に関連するPR
+#### Mysql v3.9に関連するPR
 
-- [sidorares/node-mysql2/ #2398](https://github.com/sidorares/node-mysql2/pull/2398)
+- [sidorares/node-mysql2/ ##2398](https://github.com/sidorares/node-mysql2/pull/2398)
   - (v3.8とv.3.9との[差分](https://github.com/sidorares/node-mysql2/compare/v3.8.0...v3.9.0))
 
-## #2398 の変更とは?
+#### ##2398 の変更とは?
 
 `mysql2`で`execute`で取得した内容をTypeCast機能を導入した.
 
-### typeCast機能とは？
+###### typeCast機能とは？
 
 `typeCast`は、データベースからのデータをアプリケーションで使用する前に、特定の形式や型に変換するための機能.
 例えば、データベースから日付が文字列として返される場合、typeCastを使用してその文字列をJavaScriptのDateオブジェクトに変換することができます。
 
-## 早速差分を見ようじゃないか
+#### 早速差分を見ようじゃないか
 
 <details>
 <summary>executeをつかったコードでLogを出力する</summary>
@@ -124,10 +124,10 @@ SequelizeのBindパラメータを使ってDatetime型をColumn指定でSelect�
           at readableAddChunk (node:internal/streams/readable:289:9)
           at Socket.Readable.push (node:internal/streams/readable:228:10)
           at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
-      0 undefined ==> ClientHandshake#unknown name(0,,78)
+      0 undefined ==> ClientHandshake##unknown name(0,,78)
       Server hello packet: capability flags:3758096383=(long password, found rows, long flag, connect with db, no schema, compress, odbc, local files, ignore space, protocol 41, interactive, ssl, ignore sigpipe, transactions, reserved, secure connection, multi statements, multi results, ps multi results, plugin auth, connect attrs, plugin auth lenenc client data, can handle expired passwords, session track, deprecate eof, ssl verify server cert, remember options, multi factor authentication)
       Sending handshake packet: flags:280687567=(long password, found rows, long flag, connect with db, odbc, local files, ignore space, protocol 41, ignore sigpipe, transactions, reserved, secure connection, multi results, plugin auth, connect attrs, plugin auth lenenc client data, session track, multi factor authentication)
-      0 117 <== ClientHandshake#unknown name(1,,143)
+      0 117 <== ClientHandshake##unknown name(1,,143)
       0 117 <== 8b000001cff3ba1000000000e000000000000000000000000000000000000000000000006c6f63616c00144380a0b110a9015340449dc54f209400b37ded25636f6e7461637473006d7973716c5f6e61746976655f70617373776f726400300c5f636c69656e745f6e616d650c4e6f64652d4d7953514c2d320f5f636c69656e745f76657273696f6e05332e392e32
       raw: 00000002400000000b010908636f6e7461637473
       Trace
@@ -140,9 +140,9 @@ SequelizeのBindパラメータを使ってDatetime型をColumn指定でSelect�
           at readableAddChunk (node:internal/streams/readable:289:9)
           at Socket.Readable.push (node:internal/streams/readable:228:10)
           at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
-      0 117 ==> ClientHandshake#unknown name(2,maybeOK,24)
+      0 117 ==> ClientHandshake##unknown name(2,maybeOK,24)
       Add command: Prepare
-      0 117 <== Prepare#unknown name(0,,74)
+      0 117 <== Prepare##unknown name(0,,74)
       0 117 <== 460000001653454c4543542063616c6c41742046524f4d2063616c6c732057484552452074797065203d203f204f524445522042592063616c6c41742044455343204c494d495420313b
       Add command: Execute
       raw: 00010000000100010000000017000002
@@ -156,7 +156,7 @@ SequelizeのBindパラメータを使ってDatetime型をColumn指定でSelect�
           at readableAddChunk (node:internal/streams/readable:289:9)
           at Socket.Readable.push (node:internal/streams/readable:228:10)
           at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
-      0 117 ==> Prepare#unknown name(1,maybeOK,16)
+      0 117 ==> Prepare##unknown name(1,maybeOK,16)
       raw: 03646566000000013f000c3f001500000008800000000005000003
       Trace
           at Connection.handlePacket (/Users/{useName}/Documents/mystady/simple-codes/node_modules/mysql2/lib/connection.js:433:17)
@@ -168,7 +168,7 @@ SequelizeのBindパラメータを使ってDatetime型をColumn指定でSelect�
           at readableAddChunk (node:internal/streams/readable:289:9)
           at Socket.Readable.push (node:internal/streams/readable:228:10)
           at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
-      0 117 ==> Prepare#unknown name(2,,27)
+      0 117 ==> Prepare##unknown name(2,,27)
       raw: fe0000020034000004
       Trace
           at Connection.handlePacket (/Users/{useName}/Documents/mystady/simple-codes/node_modules/mysql2/lib/connection.js:433:17)
@@ -180,7 +180,7 @@ SequelizeのBindパラメータを使ってDatetime型をColumn指定でSelect�
           at readableAddChunk (node:internal/streams/readable:289:9)
           at Socket.Readable.push (node:internal/streams/readable:228:10)
           at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
-      0 117 ==> Prepare#unknown name(3,EOF,9)
+      0 117 ==> Prepare##unknown name(3,EOF,9)
       raw: 0364656608636f6e74616374730563616c6c730563616c6c730663616c6c41740663616c6c41740c3f00130000000c800000000005000005
       Trace
           at Connection.handlePacket (/Users/{useName}/Documents/mystady/simple-codes/node_modules/mysql2/lib/connection.js:433:17)
@@ -192,7 +192,7 @@ SequelizeのBindパラメータを使ってDatetime型をColumn指定でSelect�
           at readableAddChunk (node:internal/streams/readable:289:9)
           at Socket.Readable.push (node:internal/streams/readable:228:10)
           at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
-      0 117 ==> Prepare#unknown name(4,,56)
+      0 117 ==> Prepare##unknown name(4,,56)
       raw: fe00000200
       Trace
           at Connection.handlePacket (/Users/{useName}/Documents/mystady/simple-codes/node_modules/mysql2/lib/connection.js:433:17)
@@ -204,8 +204,8 @@ SequelizeのBindパラメータを使ってDatetime型をColumn指定でSelect�
           at readableAddChunk (node:internal/streams/readable:289:9)
           at Socket.Readable.push (node:internal/streams/readable:228:10)
           at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
-      0 117 ==> Prepare#unknown name(5,EOF,9)
-      0 117 <== Execute#unknown name(0,,26)
+      0 117 ==> Prepare##unknown name(5,EOF,9)
+      0 117 <== Execute##unknown name(0,,26)
       0 117 <== 160000001701000000000100000000010500000000000000f03f
       raw: 0134000002
       Trace
@@ -218,7 +218,7 @@ SequelizeのBindパラメータを使ってDatetime型をColumn指定でSelect�
           at readableAddChunk (node:internal/streams/readable:289:9)
           at Socket.Readable.push (node:internal/streams/readable:228:10)
           at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
-      0 117 ==> Execute#resultsetHeader(1,,5)
+      0 117 ==> Execute##resultsetHeader(1,,5)
               Resultset header received, expecting 1 column definition packets
       raw: 0364656608636f6e74616374730563616c6c730563616c6c730663616c6c41740663616c6c41740c3f00130000000c800000000005000003
       Trace
@@ -231,7 +231,7 @@ SequelizeのBindパラメータを使ってDatetime型をColumn指定でSelect�
           at readableAddChunk (node:internal/streams/readable:289:9)
           at Socket.Readable.push (node:internal/streams/readable:228:10)
           at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
-      0 117 ==> Execute#unknown name(2,,56)
+      0 117 ==> Execute##unknown name(2,,56)
       raw: fe000022000a000004
       Trace
           at Connection.handlePacket (/Users/{useName}/Documents/mystady/simple-codes/node_modules/mysql2/lib/connection.js:433:17)
@@ -243,7 +243,7 @@ SequelizeのBindパラメータを使ってDatetime型をColumn指定でSelect�
           at readableAddChunk (node:internal/streams/readable:289:9)
           at Socket.Readable.push (node:internal/streams/readable:228:10)
           at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
-      0 117 ==> Execute#unknown name(3,EOF,9)
+      0 117 ==> Execute##unknown name(3,EOF,9)
 
 
       Compiled binary protocol row parser:
@@ -280,7 +280,7 @@ SequelizeのBindパラメータを使ってDatetime型をColumn指定でSelect�
           at readableAddChunk (node:internal/streams/readable:289:9)
           at Socket.Readable.push (node:internal/streams/readable:228:10)
           at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
-      0 117 ==> Execute#row(4,maybeOK,14)
+      0 117 ==> Execute##row(4,maybeOK,14)
       {
         type: 'DATETIME',
         length: 19,
@@ -302,10 +302,10 @@ SequelizeのBindパラメータを使ってDatetime型をColumn指定でSelect�
           at readableAddChunk (node:internal/streams/readable:289:9)
           at Socket.Readable.push (node:internal/streams/readable:228:10)
           at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
-      0 117 ==> Execute#row(5,EOF,9)
+      0 117 ==> Execute##row(5,EOF,9)
       [ { callAt: 2024-02-20T18:05:13.000Z } ]
       Add command: Quit
-      0 117 <== Quit#unknown name(0,,5)
+      0 117 <== Quit##unknown name(0,,5)
       0 117 <== 0100000001
   ```
 
@@ -328,10 +328,10 @@ SequelizeのBindパラメータを使ってDatetime型をColumn指定でSelect�
       at readableAddChunk (node:internal/streams/readable:289:9)
       at Socket.Readable.push (node:internal/streams/readable:228:10)
       at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
-  0 undefined ==> ClientHandshake#unknown name(0,,78)
+  0 undefined ==> ClientHandshake##unknown name(0,,78)
   Server hello packet: capability flags:3758096383=(long password, found rows, long flag, connect with db, no schema, compress, odbc, local files, ignore space, protocol 41, interactive, ssl, ignore sigpipe, transactions, reserved, secure connection, multi statements, multi results, ps multi results, plugin auth, connect attrs, plugin auth lenenc client data, can handle expired passwords, session track, deprecate eof, ssl verify server cert, remember options, multi factor authentication)
   Sending handshake packet: flags:280687567=(long password, found rows, long flag, connect with db, odbc, local files, ignore space, protocol 41, ignore sigpipe, transactions, reserved, secure connection, multi results, plugin auth, connect attrs, plugin auth lenenc client data, session track, multi factor authentication)
-  0 118 <== ClientHandshake#unknown name(1,,143)
+  0 118 <== ClientHandshake##unknown name(1,,143)
   0 118 <== 8b000001cff3ba1000000000e000000000000000000000000000000000000000000000006c6f63616c0014b22b02aa249c46567efef62d365ef784b848d391636f6e7461637473006d7973716c5f6e61746976655f70617373776f726400300c5f636c69656e745f6e616d650c4e6f64652d4d7953514c2d320f5f636c69656e745f76657273696f6e05332e382e30
   raw: 00000002400000000b010908636f6e7461637473
   Trace
@@ -344,9 +344,9 @@ SequelizeのBindパラメータを使ってDatetime型をColumn指定でSelect�
       at readableAddChunk (node:internal/streams/readable:289:9)
       at Socket.Readable.push (node:internal/streams/readable:228:10)
       at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
-  0 118 ==> ClientHandshake#unknown name(2,maybeOK,24)
+  0 118 ==> ClientHandshake##unknown name(2,maybeOK,24)
   Add command: Prepare
-  0 118 <== Prepare#unknown name(0,,74)
+  0 118 <== Prepare##unknown name(0,,74)
   0 118 <== 460000001653454c4543542063616c6c41742046524f4d2063616c6c732057484552452074797065203d203f204f524445522042592063616c6c41742044455343204c494d495420313b
   Add command: Execute
   raw: 00010000000100010000000017000002
@@ -360,7 +360,7 @@ SequelizeのBindパラメータを使ってDatetime型をColumn指定でSelect�
       at readableAddChunk (node:internal/streams/readable:289:9)
       at Socket.Readable.push (node:internal/streams/readable:228:10)
       at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
-  0 118 ==> Prepare#unknown name(1,maybeOK,16)
+  0 118 ==> Prepare##unknown name(1,maybeOK,16)
   raw: 03646566000000013f000c3f001500000008800000000005000003
   Trace
       at Connection.handlePacket (/Users/{useName}/Documents/mystady/simple-codes/node_modules/mysql2/lib/connection.js:433:17)
@@ -372,7 +372,7 @@ SequelizeのBindパラメータを使ってDatetime型をColumn指定でSelect�
       at readableAddChunk (node:internal/streams/readable:289:9)
       at Socket.Readable.push (node:internal/streams/readable:228:10)
       at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
-  0 118 ==> Prepare#unknown name(2,,27)
+  0 118 ==> Prepare##unknown name(2,,27)
   raw: fe0000020034000004
   Trace
       at Connection.handlePacket (/Users/{useName}/Documents/mystady/simple-codes/node_modules/mysql2/lib/connection.js:433:17)
@@ -384,7 +384,7 @@ SequelizeのBindパラメータを使ってDatetime型をColumn指定でSelect�
       at readableAddChunk (node:internal/streams/readable:289:9)
       at Socket.Readable.push (node:internal/streams/readable:228:10)
       at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
-  0 118 ==> Prepare#unknown name(3,EOF,9)
+  0 118 ==> Prepare##unknown name(3,EOF,9)
   raw: 0364656608636f6e74616374730563616c6c730563616c6c730663616c6c41740663616c6c41740c3f00130000000c800000000005000005
   Trace
       at Connection.handlePacket (/Users/{useName}/Documents/mystady/simple-codes/node_modules/mysql2/lib/connection.js:433:17)
@@ -396,7 +396,7 @@ SequelizeのBindパラメータを使ってDatetime型をColumn指定でSelect�
       at readableAddChunk (node:internal/streams/readable:289:9)
       at Socket.Readable.push (node:internal/streams/readable:228:10)
       at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
-  0 118 ==> Prepare#unknown name(4,,56)
+  0 118 ==> Prepare##unknown name(4,,56)
   raw: fe00000200
   Trace
       at Connection.handlePacket (/Users/{useName}/Documents/mystady/simple-codes/node_modules/mysql2/lib/connection.js:433:17)
@@ -408,8 +408,8 @@ SequelizeのBindパラメータを使ってDatetime型をColumn指定でSelect�
       at readableAddChunk (node:internal/streams/readable:289:9)
       at Socket.Readable.push (node:internal/streams/readable:228:10)
       at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
-  0 118 ==> Prepare#unknown name(5,EOF,9)
-  0 118 <== Execute#unknown name(0,,26)
+  0 118 ==> Prepare##unknown name(5,EOF,9)
+  0 118 <== Execute##unknown name(0,,26)
   0 118 <== 160000001701000000000100000000010500000000000000f03f
   raw: 0134000002
   Trace
@@ -422,7 +422,7 @@ SequelizeのBindパラメータを使ってDatetime型をColumn指定でSelect�
       at readableAddChunk (node:internal/streams/readable:289:9)
       at Socket.Readable.push (node:internal/streams/readable:228:10)
       at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
-  0 118 ==> Execute#resultsetHeader(1,,5)
+  0 118 ==> Execute##resultsetHeader(1,,5)
           Resultset header received, expecting 1 column definition packets
   raw: 0364656608636f6e74616374730563616c6c730563616c6c730663616c6c41740663616c6c41740c3f00130000000c800000000005000003
   Trace
@@ -435,7 +435,7 @@ SequelizeのBindパラメータを使ってDatetime型をColumn指定でSelect�
       at readableAddChunk (node:internal/streams/readable:289:9)
       at Socket.Readable.push (node:internal/streams/readable:228:10)
       at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
-  0 118 ==> Execute#unknown name(2,,56)
+  0 118 ==> Execute##unknown name(2,,56)
   raw: fe000022000a000004
   Trace
       at Connection.handlePacket (/Users/{useName}/Documents/mystady/simple-codes/node_modules/mysql2/lib/connection.js:433:17)
@@ -447,7 +447,7 @@ SequelizeのBindパラメータを使ってDatetime型をColumn指定でSelect�
       at readableAddChunk (node:internal/streams/readable:289:9)
       at Socket.Readable.push (node:internal/streams/readable:228:10)
       at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
-  0 118 ==> Execute#unknown name(3,EOF,9)
+  0 118 ==> Execute##unknown name(3,EOF,9)
 
 
   Compiled binary protocol row parser:
@@ -482,7 +482,7 @@ SequelizeのBindパラメータを使ってDatetime型をColumn指定でSelect�
       at readableAddChunk (node:internal/streams/readable:289:9)
       at Socket.Readable.push (node:internal/streams/readable:228:10)
       at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
-  0 118 ==> Execute#row(4,maybeOK,14)
+  0 118 ==> Execute##row(4,maybeOK,14)
   raw: fe00002208
   Trace
       at Connection.handlePacket (/Users/{useName}/Documents/mystady/simple-codes/node_modules/mysql2/lib/connection.js:433:17)
@@ -494,10 +494,10 @@ SequelizeのBindパラメータを使ってDatetime型をColumn指定でSelect�
       at readableAddChunk (node:internal/streams/readable:289:9)
       at Socket.Readable.push (node:internal/streams/readable:228:10)
       at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
-  0 118 ==> Execute#row(5,EOF,9)
+  0 118 ==> Execute##row(5,EOF,9)
   [ { callAt: 2024-02-20T18:05:13.000Z } ]
   Add command: Quit
-  0 118 <== Quit#unknown name(0,,5)
+  0 118 <== Quit##unknown name(0,,5)
   0 118 <== 0100000001
   ~/Documents/mystady/simple-codes$ 
 
@@ -530,16 +530,16 @@ SequelizeのBindパラメータを使ってDatetime型をColumn指定でSelect�
   }()
 ```
 
-## じゃあなんでsequelizeのv6.37.1でエラーになんのよ
+#### じゃあなんでsequelizeのv6.37.1でエラーになんのよ
 
 MySQL2ライブラリのバージョン3.9で導入された`TypeCast`機能に関して、Sequelizeとの互換性に問題が発生しています。
-具体的には、MySQL2の`execute`メソッドを使用する際に、Sequelizeが実装している[`TypeCast`](https://github.com/sequelize/sequelize/blob/3a08dc387da094661a1e08de68fac27454548fce/packages/core/src/dialects/mysql/data-types.db.ts#L18-L19)機能が意図せずに働き、期待される動作をしない問題があります。
+具体的には、MySQL2の`execute`メソッドを使用する際に、Sequelizeが実装している[`TypeCast`](https://github.com/sequelize/sequelize/blob/3a08dc387da094661a1e08de68fac27454548fce/packages/core/src/dialects/mysql/data-types.db.ts##L18-L19)機能が意図せずに働き、期待される動作をしない問題があります。
 
 Sequelizeの`TypeCast`機能は、本来MySQL2の`query`メソッド実行時にのみ適用されることを想定していますが、`execute`メソッドにも適用されてしまうため、`DATETIME`型のデータを処理する際に「invalid time value」エラーが発生してしまいます。
 
-### 実際に見てみる
+###### 実際に見てみる
 
-Sequelizeでは、`registerDataTypeParser`の引数として渡される`value: Field`に、MySQL2の[`fieldWrapper`](https://github.com/sidorares/node-mysql2/blob/68cc3358121a88f955c0adab95a2d5f3d2b4ecb4/lib/parsers/binary_parser.js#L85)が渡されます。
+Sequelizeでは、`registerDataTypeParser`の引数として渡される`value: Field`に、MySQL2の[`fieldWrapper`](https://github.com/sidorares/node-mysql2/blob/68cc3358121a88f955c0adab95a2d5f3d2b4ecb4/lib/parsers/binary_parser.js##L85)が渡されます。
 Sequelize側の`const valueStr = value.string();`としていますので、`string()`が実際にどんな値を返すのか確認してみる.
 callAtの値が`è`と表示されました。
 
@@ -610,9 +610,9 @@ callAtの値が`è`と表示されました。
 
 </details>
 
-MySQL2のfieldWrapperの[String Function](https://github.com/sidorares/node-mysql2/blob/68cc3358121a88f955c0adab95a2d5f3d2b4ecb4/lib/parsers/binary_parser.js#L92-L93)は、DATETIMEには対応してないみたいです。
+MySQL2のfieldWrapperの[String Function](https://github.com/sidorares/node-mysql2/blob/68cc3358121a88f955c0adab95a2d5f3d2b4ecb4/lib/parsers/binary_parser.js##L92-L93)は、DATETIMEには対応してないみたいです。
 
-### んじゃどうすればいいのよ、
+###### んじゃどうすればいいのよ、
 
 結論、`field.buffer()`を呼ぼうぜ！
 `buffer()`を使って直接バイナリデータから日時情報を解析することで日時が期待通り表示されました。

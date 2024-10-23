@@ -9,39 +9,39 @@ tags:
 description: ""
 ---
 
-# REST ウェブサービス
+## REST ウェブサービス
 
 ウェブサービスは、インターネット経由で提供されるソフトウェアベースの機能です。アプリはウェブサービスにリクエストを送信することにより、データを取得できます。
 
-## REST アーキテクチャ
+#### REST アーキテクチャ
 
 一般的なウェブサービスは **REST アーキテクチャ** を使用します。REST アーキテクチャを提供するウェブサービスを **RESTful サービス** と呼びます。RESTful ウェブサービスは、標準のウェブ コンポーネントとプロトコルを使用して構築されます。REST ウェブサービスへのリクエストは、URI を介する標準的な方法で行います。
 
 アプリでウェブサービスを使用するには、ネットワーク接続を確立してサービスと通信する必要があります。アプリは、レスポンス データを受信して解析し、アプリが使用できる形式に変換する必要があります。
 
-### Retrofit ライブラリ
+###### Retrofit ライブラリ
 
 `Retrofit` ライブラリは、アプリが REST ウェブサービスにリクエストを送信することを可能にするクライアント ライブラリです。コンバータを使用して、ウェブサービスに送信するデータとウェブサービスから返されたデータをどのように処理するかを Retrofit に伝えます。たとえば、`ScalarsConverter` は、ウェブサービスのデータを String またはその他のプリミティブとして扱います。
 
 アプリがインターネットに接続できるようにするには、Android マニフェストに `"android.permission.INTERNET"` 権限を追加します。
 
-## JSON 解析
+#### JSON 解析
 
 多くの場合、ウェブサービスからのレスポンスは、構造化データを表す一般的な形式である JSON で書式設定されます。JSON オブジェクトは Key-Value ペアのコレクションです。JSON オブジェクトのコレクションは JSON 配列です。ウェブサービスからのレスポンスは JSON 配列として取得されます。
 
-### kotlinx.serialization
+###### kotlinx.serialization
 
 Kotlin では、`kotlinx.serialization` でデータのシリアル化ツールを使用できます。`kotlinx.serialization` は、JSON 文字列を Kotlin オブジェクトに変換するライブラリのセットを備えています。コミュニティで開発された Retrofit 用の Kotlin Serialization Converter ライブラリとして、`retrofit2-kotlinx-serialization-converter` があります。
 
 異なるプロパティ名をキーで使用するには、そのプロパティに `@SerialName` アノテーションを付けて JSON キー value を指定します。
 
-### サンプルコード
+###### サンプルコード
 
 <https://github.com/google-developer-training/basic-android-kotlin-compose-training-mars-photos/blob/main/app/src/main/java/com/example/marsphotos/network/MarsApiService.kt>
 
-#### ステップ1: 依存関係の追加
+######## ステップ 1: 依存関係の追加
 
-まず、Androidプロジェクトのbuild.gradleファイルにRetrofitとkotlinx.serializationライブラリの依存関係を追加します。
+まず、Android プロジェクトの build.gradle ファイルに Retrofit と kotlinx.serialization ライブラリの依存関係を追加します。
 
 ```bash
 dependencies {
@@ -55,9 +55,9 @@ dependencies {
 }
 ```
 
-#### ステップ2: Androidマニフェストの更新
+######## ステップ 2: Android マニフェストの更新
 
-AndroidManifest.xmlファイルにインターネットアクセス権限を追加します。
+AndroidManifest.xml ファイルにインターネットアクセス権限を追加します。
 
 ```xml
 <manifest>
@@ -65,9 +65,9 @@ AndroidManifest.xmlファイルにインターネットアクセス権限を追�
 </manifest>
 ```
 
-#### ステップ3: モデルクラスの定義
+######## ステップ 3: モデルクラスの定義
 
-Kotlinでデータモデルを定義し、kotlinx.serializationを使用してシリアル化します。
+Kotlin でデータモデルを定義し、kotlinx.serialization を使用してシリアル化します。
 
 ```kotlin
 import kotlinx.serialization.Serializable
@@ -80,9 +80,9 @@ data class User(
 )
 ```
 
-#### ステップ4: Retrofit インターフェースの定義
+######## ステップ 4: Retrofit インターフェースの定義
 
-Retrofit インターフェースを定義して、ウェブAPIとのコミュニケーションを設定します。
+Retrofit インターフェースを定義して、ウェブ API とのコミュニケーションを設定します。
 
 ```kotlin
 import retrofit2.http.GET
@@ -95,9 +95,9 @@ interface ApiService {
 
 ```
 
-#### ステップ5: Retrofitインスタンスの作成
+######## ステップ 5: Retrofit インスタンスの作成
 
-Retrofitインスタンスを作成し、シリアル化コンバータを設定します。
+Retrofit インスタンスを作成し、シリアル化コンバータを設定します。
 
 ```kotlin
 import retrofit2.Retrofit
@@ -115,9 +115,9 @@ val apiService = retrofit.create(ApiService::class.java)
 
 ```
 
-#### ステップ6: APIの呼び出しとデータ処理
+######## ステップ 6: API の呼び出しとデータ処理
 
-APIを呼び出し、受け取ったデータを処理します。
+API を呼び出し、受け取ったデータを処理します。
 
 ```kotlin
 apiService.getUsers().enqueue(object : Callback<List<User>> {

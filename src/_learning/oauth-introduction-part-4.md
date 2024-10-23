@@ -1,7 +1,7 @@
 ---
 title: "OAuth徹底入門(4)"
 date: 2023-10-17T17:04:00
-#image: "images/team/nonsap-visuals-kMJp7620W6U-unsplash.jpg"
+##image: "images/team/nonsap-visuals-kMJp7620W6U-unsplash.jpg"
 jobtitle: "Keycloak RestAPI"
 linkedinurl: ""
 weight: 7
@@ -17,14 +17,14 @@ tags:
 description: ""
 ---
 
-# KeycloakへRestしてみた
+## KeycloakへRestしてみた
 
-## 前提
+### 前提
 
 - [KeyCloakをDockerComposeで立ち上げる](/tech/article/keycloak-docker-compose/) でKeyCloakを立ち上げていること
 - VscodeのRestClientで実行する
 
-## 実際に投げたRequest
+### 実際に投げたRequest
 
 ```bash
 
@@ -34,35 +34,35 @@ description: ""
 @admin_password=admin
 @admin_client_id=admin-cli
 
-### get admin token
-# @name admintoken
+##### get admin token
+## @name admintoken
 POST {{baseuri}}realms/master/protocol/openid-connect/token
 Content-Type: application/x-www-form-urlencoded
 
 username={{admin_username}}&password={{admin_password}}&grant_type=password&client_id={{admin_client_id}}
 
-### set admin token
+##### set admin token
 @admin_access_token = {{admintoken.response.body.$.access_token}}
 @admin_refresh_token = {{admintoken.response.body.$.refresh_token}}
 
-### refresh_token
-# @name adminrefreshtoken
+##### refresh_token
+## @name adminrefreshtoken
 POST {{baseuri}}realms/master/protocol/openid-connect/token
 Content-Type: application/x-www-form-urlencoded
 
 grant_type=refresh_token&client_id={{admin_client_id}}&refresh_token={{admin_refresh_token}}
 
-### refresh after set admin token
+##### refresh after set admin token
 @admin_access_token = {{adminrefreshtoken.response.body.$.access_token}}
 @admin_refresh_token = {{adminrefreshtoken.response.body.$.refresh_token}}
 
-### get realm
+##### get realm
 
 GET {{baseuri}}admin/realms
 Authorization: Bearer {{admin_access_token}}
 Content-Type: application/json
 
-### create realm
+##### create realm
 
 POST {{baseuri}}admin/realms
 Authorization: Bearer {{admin_access_token}}
@@ -71,13 +71,13 @@ Content-Type: application/json
 {"realm": "new-realm", "enabled": true}
 
 
-### get users
+##### get users
 @target_reamlm = new-realm
 
 GET {{baseuri}}admin/realms/{{target_reamlm}}/users
 Authorization: Bearer {{admin_access_token}}
 
-### add user to realm
+##### add user to realm
 @target_realm = new-realm
 POST {{baseuri}}admin/realms/{{target_realm}}/users
 Authorization: Bearer {{admin_access_token}}
@@ -107,8 +107,8 @@ Content-Type: application/json
 }
 
 
-### get token from customer
-# @name customertoken
+##### get token from customer
+## @name customertoken
 
 @target_realm=new-realm
 @client_id={作成したclient_id}
@@ -120,7 +120,7 @@ Content-Type: application/x-www-form-urlencoded
 
 client_id={{client_id}}&client_secret={{client_secret}}&code={{authcode}}&redirect_uri={{redirect_uri}}&grant_type=authorization_code
 
-### set admin token
+##### set admin token
 @customer_access_token = {{customertoken.response.body.$.access_token}}
 @customer_refresh_token = {{customertoken.response.body.$.refresh_token}}
 

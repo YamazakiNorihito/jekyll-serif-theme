@@ -17,16 +17,16 @@ tags:
 description: "ngx_http_sub_moduleモジュールは、NGINXのレスポンスをフィルタリングし、指定された文字列を別の文字列に置き換える機能を提供します。設定パラメータを使って有効化する必要があり、複数の置換指令や条件付きのヘッダー保持などがサポートされています。text/htmlや他のMIMEタイプでの文字列置換を設定でき、複数のディレクティブを組み合わせて使用することで、レスポンスの内容を柔軟に変更することが可能です。"
 ---
 
-# Module ngx_http_sub_module
+## Module ngx_http_sub_module
 
 [元ページ](https://nginx.org/en/docs/http/ngx_http_sub_module.html)
 
 - [Module ngx\_http\_sub\_module](#module-ngx_http_sub_module)
-  - [Directives](#directives)
-    - [sub\_filter](#sub_filter)
-    - [sub\_filter\_last\_modified](#sub_filter_last_modified)
-    - [sub\_filter\_once](#sub_filter_once)
-    - [sub\_filter\_types](#sub_filter_types)
+    - [Directives](#directives)
+        - [sub\_filter](#sub_filter)
+        - [sub\_filter\_last\_modified](#sub_filter_last_modified)
+        - [sub\_filter\_once](#sub_filter_once)
+        - [sub\_filter\_types](#sub_filter_types)
 - [余談](#余談)
 
 > The ngx_http_sub_module module is a filter that modifies a response by replacing one specified string by another.
@@ -45,21 +45,21 @@ location / {
 }
 ```
 
-## Directives
+#### Directives
 
-### sub_filter
+###### sub_filter
 
-|         |                                    |
-| ------- | ---------------------------------- |
-| Syntax  | sub_filter _string_ _replacement_; |
-| Default | —                                  |
-| Context | http, server, location             |
+|         |                                     |
+| ------- | ----------------------------------- |
+| Syntax  | sub*filter \_string* _replacement_; |
+| Default | —                                   |
+| Context | http, server, location              |
 
 > Sets a string to replace and a replacement string. The string to replace is matched ignoring the case. The string to replace (1.9.4) and replacement string can contain variables. Several sub_filter directives can be specified on the same configuration level (1.9.4). These directives are inherited from the previous configuration level if and only if there are no sub_filter directives defined on the current leve
 
 置換対象の文字列と置換する文字列を設定します。置換対象の文字列は、大文字小文字を区別せずに一致させます。置換対象の文字列（1.9.4）と置換文字列には変数を含めることができます。同じ構成レベルで複数の sub_filter ディレクティブを指定することができます（1.9.4）。これらのディレクティブは、現在のレベルで sub_filter ディレクティブが定義されていない場合に限り、前の構成レベルから継承されます。
 
-### sub_filter_last_modified
+###### sub_filter_last_modified
 
 |         |                               |
 | ------- | ----------------------------- | ---- |
@@ -77,7 +77,7 @@ This directive appeared in version 1.5.1.
 
 デフォルトでは、処理中にレスポンスの内容が変更されるため、ヘッダーフィールドは削除されます。
 
-### sub_filter_once
+###### sub_filter_once
 
 |         |                            |
 | ------- | -------------------------- |
@@ -89,7 +89,7 @@ This directive appeared in version 1.5.1.
 
 置換する各文字列を一度だけ探すか繰り返し探すかを指定します。
 
-### sub_filter_types
+###### sub_filter_types
 
 |         |                                 |
 | ------- | ------------------------------- |
@@ -101,7 +101,7 @@ This directive appeared in version 1.5.1.
 
 "text/html" に加えて、指定された MIME タイプのレスポンスで文字列置換を有効にします。特別な値 "\* " は任意の MIME タイプに一致します（0.8.29）
 
-# 余談
+## 余談
 
 正規表現での置換はできない。
 ngx_http_substitutions_filter_module を使うと正規表現で置換ができるみたい、build が必要みたいでオラ全然わからない

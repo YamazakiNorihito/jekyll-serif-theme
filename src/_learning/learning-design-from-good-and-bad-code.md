@@ -22,13 +22,13 @@ tags:
 description: ""
 ---
 
-# 学び
+## 学び
 
-## Static メソッドの誤用
+#### Static メソッドの誤用
 
 `static`メソッドの誤用は、凝集度の低下を招くことがあります。`static`メソッドはインスタンス変数を使用できないため、データとデータを操作するロジックが乖離する可能性があります。
 
-### 問題点
+###### 問題点
 
 例えば、以下のコードでは`static`メソッドが、データクラスとは独立して存在しています。これにより、データとロジックの分離が進み、低凝集の状態になってしまいます。
 
@@ -50,7 +50,7 @@ MoneyData moneyData2 = new MoneyData { amount = 150 };
 moneyData1.amount = StaticExample.Add(moneyData1.amount, moneyData2.amount);
 ```
 
-### 正しい使用法
+###### 正しい使用法
 
 `static`メソッドは、凝集度に影響がない特定のケースで有用です。例えば、ログ出力、データのフォーマット変換、ファクトリーメソッドなど、データを直接操作しない補助的な処理に適しています。以下は、`static`メソッドの適切な使用例です。
 
@@ -65,15 +65,15 @@ class Logger {
 Logger.Log("処理を開始します。");
 ```
 
-## Tell Don't Ask
+#### Tell Don't Ask
 
 ソフトウェア設計には、「訪ねるな、命じろ」という有名な格言があります。他のオブジェクトの内部状態（変数）を問いただすのではなく、呼び出し側はメソッドを通じて直接指示を出すだけで済ませます。そして、指示を受けた側はその内部状態に基づいて適切な判断や制御を行うように設計されています。
 
-### 例
+###### 例
 
 通常、オブジェクトの状態を外部から確認し、その状態に基づいて処理を分岐するようなコードは、カプセル化の原則に反します。以下の例では、改善前と改善後のコードを示しています。
 
-#### 改善前
+######## 改善前
 
 ```csharp
 class Account {
@@ -92,7 +92,7 @@ if (account.GetBalance() > 0) {
 
 ```
 
-#### 改善後
+######## 改善後
 
 ```csharp
 class Account {
@@ -113,7 +113,7 @@ account.ProcessAccount(); // 状態を問わずに命令を出す
 
 このように、Accountクラスの内部で残高のチェックを行い、処理を分岐させることで、オブジェクトの状態が外部に露出されることなく、よりカプセル化された設計を実現できます。
 
-## Switch分岐問題
+#### Switch分岐問題
 
 各動物の音を出す処理が一つのメソッド内に集約されています。これは以下のような問題を引き起こす可能性があります:
 
@@ -164,7 +164,7 @@ class Program
 
 ```
 
-#### 改善後
+######## 改善後
 
 ```csharp
 using System;
@@ -242,7 +242,7 @@ class Program
 }
 ```
 
-## ポリシーパターン
+#### ポリシーパターン
 
 ポリシーパターンは、柔軟性を持たせた条件判断のためのデザインパターンです。ビジネスロジックの各部分が独立しているため、特定の条件やルールに基づくビジネスロジックを効率的に管理することができます。これにより、以下の利点があります：
 
@@ -393,14 +393,14 @@ class Program
 
 ```
 
-## [車輪の再発明](https://ja.wikipedia.org/wiki/%E8%BB%8A%E8%BC%AA%E3%81%AE%E5%86%8D%E7%99%BA%E6%98%8E)
+#### [車輪の再発明](https://ja.wikipedia.org/wiki/%E8%BB%8A%E8%BC%AA%E3%81%AE%E5%86%8D%E7%99%BA%E6%98%8E)
 
 「車輪の再発明」とは、すでに存在する技術や解決策を知らずに、同じものを一から再び作り上げることを指します。
 
 しかし、「車輪の再発明」が常に悪いわけではありません。
 学習目的で一から作り直すことで、技術の本質を理解し、技術力を高めることができます。
 
-## First Class Collection
+#### First Class Collection
 
 コレクション専用のクラスを作成するデザインパターンです。
 
@@ -450,7 +450,7 @@ public class Party
 
 ```
 
-## [単一責任](https://learn.microsoft.com/ja-jp/dotnet/architecture/modern-web-apps-azure/architectural-principles#single-responsibility)
+#### [単一責任](https://learn.microsoft.com/ja-jp/dotnet/architecture/modern-web-apps-azure/architectural-principles##single-responsibility)
 
 オブジェクトは１つの責任のみを持つべきです。
 
@@ -499,7 +499,7 @@ public class Product
 }
 ```
 
-## 継承
+#### 継承
 
 継承はオブジェクト指向プログラミングにおいて強力なツールですが、それには注意が必要です。継承を利用する際、基底クラスの変更が派生クラスに影響を与える可能性があります。基底クラスは派生クラスの事情を考慮せずに変更されることが多いため、これは重要なリスクとなります。
 
@@ -538,21 +538,21 @@ public class SummerDiscount : RegularDiscount
 
 ```
 
-## [YAGNI](https://ja.wikipedia.org/wiki/YAGNI)
+#### [YAGNI](https://ja.wikipedia.org/wiki/YAGNI)
 
 You ain't gonna need it
 
 将来の予測に基づいて汎用的な機能や複雑な設計をするのではなく、現在の実際のニーズに基づいて限定的かつシンプルに実装することだと理解
 
-## null問題
+#### null問題
 
 結論から言えば、nullは扱うべきではありません。「nullを返さない」「nullを渡さない」という原則が大切です。nullの発明者である[アントニー・ホーア](https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%B3%E3%83%88%E3%83%8B%E3%83%BC%E3%83%BB%E3%83%9B%E3%83%BC%E3%82%A2)さんは、nullを発明したことをとても後悔しています。
 
 nullとは未初期化状態を表し、何かを持っていない状態や未設定状態など、その状態すら存在しないのがnullなのです。nullがあるために、至る所でnullチェックをしなければならなくなります。
 
-## 開発プロセス
+#### 開発プロセス
 
-### 設計
+###### 設計
 
 - **「早く終わらせたい」心理が品質低下の罠**
   - 速やかな実装は、しばしば品質を無視したコードを生み、後に問題を引き起こす
@@ -574,17 +574,17 @@ nullとは未初期化状態を表し、何かを持っていない状態や未�
   - 設計ルールは、パフォーマンスやフレームワークの制約とのトレードオフを考慮する必要がある
   - 絶対的なルールではなく、状況に応じて妥協点や落とし所を模索することが重要
 
-### 実装
+###### 実装
 
 - **コーディング規約の利用**
   - 統一されたコードは読みやすく、保守性が向上します。
   - コーディングスタイルや命名規則など、コードの問題を未然に防ぐためのルールが定められています。
   - 主要な言語ごとにコーディング規約が存在します：
     - [Java](https://google.github.io/styleguide/javaguide.html)
-    - [C#](https://learn.microsoft.com/ja-jp/dotnet/csharp/fundamentals/coding-style/coding-conventions)
+    - [C##](https://learn.microsoft.com/ja-jp/dotnet/csharp/fundamentals/coding-style/coding-conventions)
     - [TypeScript](https://google.github.io/styleguide/tsguide.html)
 
-### レビュー
+###### レビュー
 
 - GitHubを使ってコードレビューしApproveしたからPRのみマージ可能な仕組みを利用する
 - コードを設計視点でレビュー

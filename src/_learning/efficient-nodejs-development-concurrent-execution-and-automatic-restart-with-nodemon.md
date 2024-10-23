@@ -1,7 +1,7 @@
 ---
 title: "効率的なNode.js開発: concurrentlyでの同時実行とnodemonによる自動再起動"
 date: 2023-10-09T06:27:00
-#image: "images/team/nonsap-visuals-kMJp7620W6U-unsplash.jpg"
+##image: "images/team/nonsap-visuals-kMJp7620W6U-unsplash.jpg"
 jobtitle: "Ｎodejsで複数のアプリケーションを同時に実行する方法"
 linkedinurl: ""
 weight: 7
@@ -17,7 +17,7 @@ tags:
 description: ""
 ---
 
-# Ｎodejsで複数のアプリケーションを同時に実行する方法
+## Ｎ odejs で複数のアプリケーションを同時に実行する方法
 
 クライアント、認証サーバー、プロテクトサーバーを同時に動かす方法
 [Git](https://github.com/oauthinaction/oauth-in-action-code/tree/master/exercises/ch-5-ex-3)
@@ -27,7 +27,7 @@ npm i concurrently
 npm i nodemon
 ```
 
-package.jsonのscriptsを追加する
+package.json の scripts を追加する
 
 ```json
 {
@@ -45,7 +45,7 @@ package.jsonのscriptsを追加する
   },
   "scripts": {
     "start": "concurrently \"nodemon authorizationServer.js\" \"nodemon protectedResource.js\" \"nodemon client.js\""
-  },  
+  },
   "devDependencies": {
     "concurrently": "^8.2.1",
     "nodemon": "^3.0.1"
@@ -56,5 +56,5 @@ package.jsonのscriptsを追加する
 - [concurrently](https://www.npmjs.com/package/concurrently)
   - 複数のコマンドを同時に実行します
 - [nodemon](https://www.npmjs.com/package/nodemon)
-  - ファイルの変更を監視し、変更が検出されたときに自動でNode.jsアプリケーションを再起動する
-    - file編集したら反映してくれるので、必要であればInstallする
+  - ファイルの変更を監視し、変更が検出されたときに自動で Node.js アプリケーションを再起動する
+    - file 編集したら反映してくれるので、必要であれば Install する

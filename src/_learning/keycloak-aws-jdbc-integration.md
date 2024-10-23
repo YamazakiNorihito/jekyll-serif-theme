@@ -17,11 +17,11 @@ tags:
 description: "KeycloakのJDBCドライバーをAWS Advanced JDBC Wrapperに変更する手順を解説します。Dockerを使ったローカル環境での設定方法やサンプルのDockerfile、環境変数、Docker Compose設定などを紹介し、MySQL接続の構成についても詳しく説明します。"
 ---
 
-# Keycloak の JDBC ドライバーを AWS Advanced JDBC Wrapper に変更する方法
+## Keycloak の JDBC ドライバーを AWS Advanced JDBC Wrapper に変更する方法
 
 このガイドでは、Keycloak の JDBC ドライバーを[aws-advanced-jdbc-wrapper](https://github.com/aws/aws-advanced-jdbc-wrapper)に変更して使用する方法を説明します。ローカル環境で Docker を使用した設定手順と、サンプルの環境変数について解説します。
 
-## Dockerfile の設定
+#### Dockerfile の設定
 
 まず、Keycloak の Docker イメージをカスタマイズするために、以下の Dockerfile を作成します。これは、aws-advanced-jdbc-wrapper を Keycloak に組み込むためのサンプルです。
 
@@ -44,7 +44,7 @@ COPY --from=builder /opt/keycloak/ /opt/keycloak/
 ENTRYPOINT [ "/opt/keycloak/bin/kc.sh" ]
 ```
 
-### cache-ispn-jdbc-ping-mysql.xml
+###### cache-ispn-jdbc-ping-mysql.xml
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -133,7 +133,7 @@ ENTRYPOINT [ "/opt/keycloak/bin/kc.sh" ]
 
 この Dockerfile は、AWS Advanced JDBC Wrapper を Keycloak に追加し、ビルドプロセスを実行してカスタムイメージを作成します。
 
-## Docker Compose の設定
+#### Docker Compose の設定
 
 次に、Docker Compose を使用して、Keycloak と MySQL のコンテナを設定します。以下に必要な環境変数と設定を含む Docker Compose ファイルを示します。
 
@@ -211,7 +211,7 @@ volumes:
   idp_mysql_data:
 ```
 
-### schema.sql
+###### schema.sql
 
 ```sql
 -- 使用するデータベースを選択
@@ -229,7 +229,7 @@ CREATE TABLE IF NOT EXISTS JGROUPSPING (
 );
 ```
 
-### docker/nginx/conf.d/default.conf
+###### docker/nginx/conf.d/default.conf
 
 ```conf
 upstream backend {
@@ -245,7 +245,7 @@ server {
     ssl_certificate /etc/nginx/ssl/server.crt;
     ssl_certificate_key /etc/nginx/ssl/server.key;
     ssl_session_timeout 1d;
-    ssl_session_cache shared:MozSSL:10m; # about 40000 sessions
+    ssl_session_cache shared:MozSSL:10m; ## about 40000 sessions
     ssl_session_tickets off;
 
     ssl_dhparam /etc/nginx/ssl/dhparam;
@@ -282,21 +282,21 @@ server {
 
 この設定により、Keycloak が aws-advanced-jdbc-wrapper を使用して MySQL に接続するように構成されます。
 
-## `--optimized` オプションの使用について
+#### `--optimized` オプションの使用について
 
 Keycloak を start コマンドで実行する際に、`--optimized`オプションは設定しないでください。このオプションは Keycloak のスタートアップ時間を短縮し、メモリ使用量を最適化しますが、以下の問題が報告されています:  
-[Keycloak Issue #15898](https://github.com/keycloak/keycloak/issues/15898)
+[Keycloak Issue ##15898](https://github.com/keycloak/keycloak/issues/15898)
 
-### `--optimized` の役割
+###### `--optimized` の役割
 
 1. **ビルドプロセスのスキップ**: 起動時にビルドステップをスキップし、既にビルド済みの状態で起動を開始します。
 2. **スタートアップ時間の短縮**: ビルドプロセスのスキップにより、起動時間が短縮されます。
 3. **メモリ使用量の削減**: 不要なビルドステップのスキップにより、メモリ使用量が削減されます。
 
-## 参考サイト
+#### 参考サイト
 
 この設定を行う際に参考にしたサイト：
 
-- [Amazon Aurora PostgreSQL の準備](https://www.keycloak.org/server/db#preparing-keycloak-for-amazon-aurora-postgresql)
+- [Amazon Aurora PostgreSQL の準備](https://www.keycloak.org/server/db##preparing-keycloak-for-amazon-aurora-postgresql)
 - [7.7. Amazon Aurora PostgreSQL の準備](https://docs.redhat.com/ja/documentation/red_hat_build_of_keycloak/24.0/html/server_guide/db-preparing-keycloak-for-amazon-aurora-postgresql)
 - [aws-advanced-jdbc-wrapper](https://github.com/aws/aws-advanced-jdbc-wrapper)
