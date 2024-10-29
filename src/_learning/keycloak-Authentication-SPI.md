@@ -204,14 +204,19 @@ HTTP のチャレンジ・レスポンス認証フレームワークは、サー
 <summary>詳しい説明</summary>
 
 1. サーバーからのチャレンジ:
-   • クライアントがサーバーにリクエストを送ると、サーバーはそのリクエストが認証を必要とするリソースへのアクセスであるかを確認します。
-   • 認証が必要な場合、サーバーはクライアントに「認証情報を送ってください」というチャレンジを返します。これは、HTTP レスポンスヘッダーの一部（WWW-Authenticate ヘッダー）を使って行われます。
+
+- クライアントがサーバーにリクエストを送ると、サーバーはそのリクエストが認証を必要とするリソースへのアクセスであるかを確認します。
+- 認証が必要な場合、サーバーはクライアントに「認証情報を送ってください」というチャレンジを返します。これは、HTTP レスポンスヘッダーの一部（WWW-Authenticate ヘッダー）を使って行われます。
+
 1. 認証スキームの指定:
-   • このチャレンジには「どの認証方法を使って認証するか」という情報が含まれます。たとえば、「Basic」認証や「Digest」認証といった認証スキームです。
-   • これを示すために、認証スキームを表すトークン（単語のような識別子）が使われます。このトークンは大文字・小文字を区別しません（つまり、「Basic」も「basic」も同じ意味です）。
+
+- このチャレンジには「どの認証方法を使って認証するか」という情報が含まれます。たとえば、「Basic」認証や「Digest」認証といった認証スキームです。
+- これを示すために、認証スキームを表すトークン（単語のような識別子）が使われます。このトークンは大文字・小文字を区別しません（つまり、「Basic」も「basic」も同じ意味です）。
+
 1. クライアントの応答:
-   • クライアントは、サーバーからのチャレンジを受け取ると、その指示に従って認証情報（ユーザー名とパスワードなど）を提供します。
-   • 提供された情報が正しければ、サーバーはリクエストを受け付け、リソースへのアクセスを許可します。間違っている場合は、認証が失敗し、アクセスが拒否されます。
+
+- クライアントは、サーバーからのチャレンジを受け取ると、その指示に従って認証情報（ユーザー名とパスワードなど）を提供します。
+- 提供された情報が正しければ、サーバーはリクエストを受け付け、リソースへのアクセスを許可します。間違っている場合は、認証が失敗し、アクセスが拒否されます。
 
 </details>
 
@@ -356,3 +361,23 @@ my-auth-spi/
   - [AbstractRegistrationRecaptcha](https://github.com/keycloak/keycloak/blob/902abfdae42685b68c127e309da17ec64ffd2382/services/src/main/java/org/keycloak/authentication/forms/AbstractRegistrationRecaptcha.java#L47-L48)
   - [RegistrationRecaptcha](https://github.com/keycloak/keycloak/blob/902abfdae42685b68c127e309da17ec64ffd2382/services/src/main/java/org/keycloak/authentication/forms/RegistrationRecaptcha.java#L42-L43)
   - [RegistrationRecaptchaEnterprise](https://github.com/keycloak/keycloak/blob/902abfdae42685b68c127e309da17ec64ffd2382/services/src/main/java/org/keycloak/authentication/forms/RegistrationRecaptchaEnterprise.java#L42-L43)
+
+## Modifying forgot password/credential flow
+
+- デフォルトのKeycloakの reset credential flow:
+  - ユーザー名またはメールアドレスを入力し、ユーザーにメールを送信する。
+  - メールのリンクをクリックすると、パスワードと OTP をリセット可能（OTP が設定されている場合）。
+- OTP authentication flowの無効化:
+  - フロー内の「Reset OTP」認証を無効にすることで可能。
+- フローの拡張:
+  - 追加の機能を組み込むことができる（例：秘密の質問に回答させる）。
+  - ディストリビューションに含まれる秘密の質問の例を拡張し、 reset credential flowに統合できる。
+- ユーザー名/メールアドレスの入力フォームの挙動:
+  - 最初の認証者はユーザー名またはメールアドレスを取得するためのページ。
+  - 入力されたユーザーが存在する場合、AuthenticationFlowContext.getUser() がそのユーザーを返す。
+  - 存在しない場合、null を返す。
+- セキュリティ対策:
+  - 攻撃者が有効なユーザーを推測できないようにする必要がある。
+  - AuthenticationFlowContext.getUser() が null を返しても、あたかも有効なユーザーが選択されたかのようにフローを続行する。
+- 秘密の質問を追加する場所:
+  - 「Send Reset Email」認証の後にカスタム認証を追加することを推奨。
