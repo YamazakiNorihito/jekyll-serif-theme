@@ -275,7 +275,7 @@ CredentialValidator を実装するには、以下のクラスを実装する必
 
 以下のリンクからご覧ください：
 
-[keycloak-secret-question-spi](https://github.com/YamazakiNorihito/keycloak-secret-question-spi)
+[keycloak-authentication-spi](https://github.com/YamazakiNorihito/keycloak-authentication-spi)
 
 #### 1. JAR ファイルの配置
 
@@ -332,7 +332,7 @@ my-auth-spi/
 
 #### 4. デプロイ手順
 
-デプロイ手順については、[Dockerfile](https://github.com/YamazakiNorihito/keycloak-secret-question-spi/blob/main/docker/keycloak/Dockerfile)を参照してください。
+デプロイ手順については、[Dockerfile](https://github.com/YamazakiNorihito/keycloak-authentication-spi/blob/main/docker/keycloak/Dockerfile)を参照してください。
 
 特に重要なのは以下の部分です：
 
