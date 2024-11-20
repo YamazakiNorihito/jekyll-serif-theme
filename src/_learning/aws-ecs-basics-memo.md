@@ -162,6 +162,12 @@ Resources:
     Properties:
       ClusterName: !Sub '${AWS::StackName}-cluster'
 
+  ECSLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: ecs/hello-container
+      RetentionInDays: 7
+
   ECSTaskExecutionRole:
     Type: AWS::IAM::Role
     Properties:
@@ -193,6 +199,12 @@ Resources:
       ContainerDefinitions:
         - Name: hello-container
           Image: [aws_account_id].dkr.ecr.ap-northeast-1.amazonaws.com/hello-repository
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: !Ref ECSLogGroup
+              awslogs-region: !Ref "AWS::Region"
+              awslogs-stream-prefix: ecs
           Essential: true
           PortMappings:
             - ContainerPort: 80
@@ -244,3 +256,100 @@ parameters.json
 ]
 
 ```
+
+## [Amazon ECS best practices](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-best-practices.html)
+
+### [Connect Amazon ECS applications to the internet](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/networking-outbound.html)
+
+containerized applicationsをoutbound access to the internetするarchitectureは２つある
+
+1. Public subnet and internet gateway
+   1. ECSサービス作成時にpublic subnetsを指定
+      - Amazon ECSサービスを作成する際、ネットワーキング設定でpublic subnetsを選択します。
+   2. public IPアドレスの割り当て設定
+      - “Assign public IP address” オプションを利用し、各Fargateタスクにpublic IPアドレスを割り当てます。
+   3. 各タスクが個別のpublic IPアドレスを持つ
+      - Fargateタスクはそれぞれ独自のpublic IPアドレスを持ち、インターネットと直接通信が可能です。
+2. Private subnet and NAT gateway
+   1. ECSサービスの設定
+      - Amazon ECSサービスを作成する際、ネットワーキング設定でprivate subnetsを指定します。
+   2. パブリックIPアドレスの割り当ては無効化
+      - 「Assign public IP address」オプションを有効にせず、タスクが直接public IPアドレスを持たないように設定します。
+   3. NAT Gatewayを介したアウトバウンドトラフィックのルーティング
+      - private subnet内の各Fargateタスクは、そのsubnetに関連付けられたNAT gatewayを通じてインターネットへのアウトバウンドトラフィックを処理します。
+
+### [Best practices for receiving inbound connections to Amazon ECS from the internet](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/networking-inbound.html)
+
+全ての前提としてECSはprivate subnetにlaunchさせた前提です。
+
+#### Application Load Balancer
+
+ALBはapplication層（OSIモデルの第7層）で動作するロードバランサーです。特にHTTPサービスを公開する場合に最適です。
+
+1. SSL/TLS termination: Application Load Balancer(ALB)はHTTPS通信と証明書を維持します。オプションとして、SSL接続をALBで終了させることで、application側で証明書を管理する必要がなくなります。
+2. 高度なルーティング: ALBは複数のDNSホスト名を持ち、リクエストのホスト名やパスに基づいて異なる宛先にリクエストをルーティングできます。これにより、1つのALBで複数の内部サービスやREST APIのマイクロサービスを処理可能です。
+3. gRPCとWebSocketのサポート: ALBはHTTPだけでなく、gRPCやWebSocketベースのサービスも処理可能で、HTTP/2にも対応しています。
+4. セキュリティ: ALBは悪意のあるトラフィックからアプリケーションを保護します。HTTP非同期ミティゲーションやAWS WAFとの統合により、SQLインジェクションやクロスサイトスクリプティングなどの攻撃パターンをフィルタリングします。
+
+#### Network Load Balancer
+
+NLBはtransport層（OSIモデルの第4層）で動作するロードバランサーです。HTTPを使用しないアプリケーションに最適です。
+
+1. エンドツーエンド暗号化：ネットワークロードバランサー（NLB）はOSIモデルの第4層で動作し、パケットの内容を解析しないため、エンドツーエンド暗号化された通信を負荷分散するのに適しています。
+2. TLS暗号化：NLBはTLS接続の終端も可能で、バックエンドアプリケーションで独自のTLS実装が不要になる。
+3. UDPサポート：第4層で動作するため、非HTTPワークロードやTCP以外のプロトコルに適している。
+
+#### Amazon API Gateway HTTP API
+
+Amazon API Gatewayは、要求量の突然の急増や低い要求量があるHTTPアプリケーションに適しています。
+リクエストが少ない場合やリクエストが少ない期間がある場合、API Gatewayの方がロードバランサー（ALB/NLB）よりコストを抑えることができる。
+
+1. API Gateway は、クライアント認証、使用量の階層、およびリクエスト/レスポンスの変更に関する追加機能を提供します。
+2. API Gateway は、エッジ、リージョナル、およびプライベートの API ゲートウェイエンドポイントをサポート
+3. SSL/TLS termination
+4. 異なる HTTP パスを異なるバックエンドのマイクロサービスにルーティング
+
+### [Best practices for connecting Amazon ECS to AWS services from inside your VPC](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/networking-connecting-vpc.html)
+
+AWS Serviceと通知する手段は２つある。それを紹介します。
+
+#### NAT gateway
+
+private subnetに`Application container`を配置して、public subnetに`NAT`を配置するアプローチ
+NATを通じてAWS Serviceのリソースと通信する
+
+![natgateway](https://docs.aws.amazon.com/images/AmazonECS/latest/developerguide/images/natgateway.png)
+
+このアプローチのデメリット
+
+1. NATゲートウェイの制約
+   1. NATゲートウェイ自体には通信先をフィルタリングする機能がない。
+      1. プライベートサブネットのリソースがNATゲートウェイを通じて通信できる先を直接制限することはできません。
+      2. バックエンド層（Backend tier）のみ通信を制限することは難しく、VPC全体のアウトバウンド通信に影響を与える可能性がある。
+2. NATゲートウェイの料金体系
+   1. NATゲートウェイは、データ転送量に応じて1GBごとに課金されます。
+   2. 次の操作でも課金対象になります：
+      1. Amazon S3からの大容量ファイルダウンロード
+      2. DynamoDBへの大量のデータベースクエリ
+      3. Amazon ECRからのイメージ取得
+3. NATゲートウェイの帯域幅
+   1. 5 Gbpsの帯域幅をサポートし、最大で45 Gbpsまで自動的にスケールします。
+   2. 単一のNATゲートウェイを経由する場合、非常に高い帯域幅を必要とするアプリケーションではネットワークの制約が発生する可能性があります。
+      1. ワークロードを複数のサブネットに分散し、それぞれに個別のNATゲートウェイを割り当てることで、帯域幅の制約を回避できます。
+
+#### AWS PrivateLink
+
+AWS PrivateLinkはサブネット内にElastic Network Interfaces（ENI）をプロビジョニングし、VPCのルーティングルールを使用して、サービスのホスト名への通信をENIを通じて直接目的のAWSサービスに送信します。
+[AWS PrivateLinkとVPCエンドポイントの整理](https://blog.nybeyond.com/learning/aws-privatelink-memo/)に書かれているので詳しく書くことは避ける。
+
+![endpointaccess-multiple](https://docs.aws.amazon.com/images/AmazonECS/lates…developerguide/images/endpointaccess-multiple.png)
+
+### [Fargate security best practices in Amazon ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/security-fargate.html)
+
+- `AWS KMS` または `Customer Managed Keys (CMK)` を使用して `Fargate` の `ephemeral storage` を暗号化可能。  
+- Platform version 1.4.0 以降のタスクは `20 GiB` の `ephemeral storage` を使用。
+  - `ephemeralStorage` パラメータで最大 `200 GiB` まで拡張可能。
+- 2020/5/28 以降に起動したタスクでは、`Fargate` で管理されている管理キーで `AES-256` による暗号化が適用される
+- AWS Fargateでは、SYS_PTRACE以外のLinux Capabilityはすべて無効化されます。
+- [Amazon GuardDuty](https://aws.amazon.com/jp/guardduty/)は脅威検出サービス
+  - AWS環境ないのaccounts, containers, workloads, dataを保護するのを助ける
