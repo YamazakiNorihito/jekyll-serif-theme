@@ -353,3 +353,28 @@ AWS PrivateLinkはサブネット内にElastic Network Interfaces（ENI）をプ
 - AWS Fargateでは、SYS_PTRACE以外のLinux Capabilityはすべて無効化されます。
 - [Amazon GuardDuty](https://aws.amazon.com/jp/guardduty/)は脅威検出サービス
   - AWS環境ないのaccounts, containers, workloads, dataを保護するのを助ける
+
+### [Fargate security considerations for Amazon ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-security-considerations.html)
+
+- Fargateの特性
+  - Fargateで実行されるコンテナは、isolationされた仮想環境で実行される。
+    - そのため、リソース（network interfaces, ephemeral storage, CPU, memoryなど）は他のタスクと共有されず、完全に独立している。
+  - Task内のコンテナ
+    - 1つのタスクには複数のコンテナ（application containerとsidecar container）を含むことができる。
+    - 同一タスク内のコンテナは、リソースや network namespaces(IP address and network ports)を共有する
+    - 同一タスク内のコンテナは、localhost経由で通信可能。
+- 特権containersやaccessはない
+  - Docker in Dockerを実行するユースケースに影響を与える
+- Linux capabilitiesは強く制限されている
+  - サポートされているのは CAP_SYS_PTRACE のみ
+    - コンテナ化されたアプリケーションをモニタリングするための観測ツールやセキュリティツールをタスク内で使用する際に利用できる
+- 基盤ホストへのアクセス制限
+  - 顧客も AWS オペレーターも、ワークロードを実行しているホストに直接接続することはできない。
+  - Fargate は、コンテナがホストのリソース（ファイルシステム、デバイス、ネットワーク、コンテナランタイムなど）にアクセスするのを防ぐ。
+  - デバッグ時の操作
+    - [ECS exec](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html)を使えば、コンテナ内部に入り込み、デバッグのための診断情報を取得したり、コマンドを実行したりできる。
+- Networking
+  - Security groups と network ACLs を使用して、inbound および outbound traffic を制御できます。
+  - Fargate tasks は、VPC内の設定された サブネット からIPアドレスを受け取ります。
+
+### [Linux containers on Fargate container image pull behavior for Amazon ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-pull-behavior.html)
