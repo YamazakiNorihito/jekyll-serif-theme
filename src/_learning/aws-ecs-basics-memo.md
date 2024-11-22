@@ -378,3 +378,38 @@ AWS PrivateLinkはサブネット内にElastic Network Interfaces（ENI）をプ
   - Fargate tasks は、VPC内の設定された サブネット からIPアドレスを受け取ります。
 
 ### [Linux containers on Fargate container image pull behavior for Amazon ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-pull-behavior.html)
+
+Linux containers on Fargateでは、container imageやそのcontainer image layersのキャッシュは行われません。
+そのため、Fargateタスクが起動されるたびに、タスク定義で指定されたイメージをRegistryから毎回pullし、コンテナを起動します。
+このため、コンテナの起動時間にはpullの時間も含まれ、直接的に影響を与えます。
+
+**imageのpull時間を最適化するには、次の点を考慮してください。**
+
+1. Container image proximity(近接)
+   1. Internet経由や異なるAWSリージョンからPullすると、ダウンロード時間が増加する可能性がある。
+      1. そのため、compute（Fargateタスク）とRegistry（コンテナイメージの保存場所）は、なるべく近い場所に配置するのが望ましい。
+   2. 推奨
+      1. RegistryとFargateタスクを同じリージョンで実行する。
+      2. Amazon ECRを使用する場合、VPC interface endpointを利用するとPull時間を短縮できる。
+2. Container image size reduction
+   1. container imageのSizeはダイレクトにダウンロード時間に直接影響する。
+      1. そのためcontainer imageのSizeまたはlayers数を減らすことで、ダウンロード時間を短縮できる。
+   2. 推奨
+      1. 軽量なベースイメージを使用する。
+         1. 例えば、 [minimal Amazon Linux 2023 container image](https://docs.aws.amazon.com/linux/al2023/ug/minimal-container.html)
+3. Alternative compression algorithms
+   1. コンテナイメージのレイヤーは、レジストリにプッシュされる際に圧縮される。
+      1. 圧縮により、転送データ量が削減され、ネットワークとレジストリの負荷が軽減される。
+   2. 圧縮されたレイヤーは、container runtimeによってインスタンスにダウンロードされた後に解凍される。
+      1. 解凍時間には、使用される圧縮アルゴリズムとタスクに割り当てられたvCPUの数が影響する。
+   3. 推奨
+      1. タスクサイズを増やすことで解凍速度を向上させる
+      2. より高性能なzstd圧縮アルゴリズムを活用し、解凍時間を短縮する。
+         1. [zstd](https://github.com/facebook/zstd)
+         2. [Reducing AWS Fargate Startup Times with zstd Compressed Container Images.](https://aws.amazon.com/jp/blogs/containers/reducing-aws-fargate-startup-times-with-zstd-compressed-container-images/)
+4. Lazy Loading container images
+   1. 大きなコンテナイメージ（250MB以上）の場合、すべてをダウンロードするのではなく、lazy loadingを利用する方が効率的な場合がある
+   2. 推奨
+      1. Seekable OCI (SOCI) を使用して、コンテナイメージをレジストリから必要な部分だけをロードする。
+         1. [soci-snapshotter](https://github.com/awslabs/soci-snapshotter)
+         2. [Lazy loading container images using Seekable OCI (SOCI)](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-tasks-services.html#fargate-tasks-soci-images)
