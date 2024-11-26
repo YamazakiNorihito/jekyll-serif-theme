@@ -297,9 +297,9 @@ ALBはapplication層（OSIモデルの第7層）で動作するロードバラ�
 
 NLBはtransport層（OSIモデルの第4層）で動作するロードバランサーです。HTTPを使用しないアプリケーションに最適です。
 
-1. エンドツーエンド暗号化：ネットワークロードバランサー（NLB）はOSIモデルの第4層で動作し、パケットの内容を解析しないため、エンドツーエンド暗号化された通信を負荷分散するのに適しています。
-2. TLS暗号化：NLBはTLS接続の終端も可能で、バックエンドアプリケーションで独自のTLS実装が不要になる。
-3. UDPサポート：第4層で動作するため、非HTTPワークロードやTCP以外のプロトコルに適している。
+1. エンドツーエンド暗号化:ネットワークロードバランサー（NLB）はOSIモデルの第4層で動作し、パケットの内容を解析しないため、エンドツーエンド暗号化された通信を負荷分散するのに適しています。
+2. TLS暗号化:NLBはTLS接続の終端も可能で、バックエンドアプリケーションで独自のTLS実装が不要になる。
+3. UDPサポート:第4層で動作するため、非HTTPワークロードやTCP以外のプロトコルに適している。
 
 #### Amazon API Gateway HTTP API
 
@@ -330,7 +330,7 @@ NATを通じてAWS Serviceのリソースと通信する
       2. バックエンド層（Backend tier）のみ通信を制限することは難しく、VPC全体のアウトバウンド通信に影響を与える可能性がある。
 2. NATゲートウェイの料金体系
    1. NATゲートウェイは、データ転送量に応じて1GBごとに課金されます。
-   2. 次の操作でも課金対象になります：
+   2. 次の操作でも課金対象になります:
       1. Amazon S3からの大容量ファイルダウンロード
       2. DynamoDBへの大量のデータベースクエリ
       3. Amazon ECRからのイメージ取得
@@ -415,3 +415,82 @@ Linux containers on Fargateでは、container imageやそのcontainer image laye
       1. Seekable OCI (SOCI) を使用して、コンテナイメージをレジストリから必要な部分だけをロードする。
          1. [soci-snapshotter](https://github.com/awslabs/soci-snapshotter)
          2. [Lazy loading container images using Seekable OCI (SOCI)](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-tasks-services.html#fargate-tasks-soci-images)
+
+### [Fargate task retirement](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-maintenance.html)
+
+**Task Retirementとは？**
+
+- AWS Fargateでは、Platform Versionのリビジョンを定期的に更新します。
+  - 更新内容にはFargate Runtime Software、Operating System、Container Runtimeなどの依存関係の改善が含まれる。
+- 新しいPlatform Versionのリビジョンが導入されると、古いリビジョンはリタイア（廃止）されます。
+- リビジョンがリタイアされる際、AWSは通知を送信し、該当リビジョン上で動作しているすべてのタスクが停止します。
+
+**Task Retirementへの対応**
+
+1. Service Tasksの場合
+   - 対応不要。
+   - Amazon ECS Schedulerが自動でリタイア対象タスクを新しいタスクに置き換える。
+2. Standalone Tasksの場合
+   - 対応が必要。
+   - 自動的に処理されないため、手動で新しいタスクをデプロイする必要がある。
+
+**ECSにおける`maximumPercent`の挙動**
+
+`maximumPercent`は、Serviceタスクが新旧タスクの移行時に同時に許容されるタスクの割合を制御します。
+
+1. `maximumPercent=200%`（デフォルト設定）
+   - 1. 新しいタスクを起動:
+     - リタイア対象タスクを停止する前に、新しいタスクをスケジュールし、起動。
+     - 新しいタスクが`RUNNING`状態になるまで待機。
+   - 2. 古いタスクを終了:
+     - 新しいタスクが正常に起動後、古いタスクを停止。
+
+2. `maximumPercent=100%`
+   - 1. 既存のタスクを停止:
+     - まずリタイア対象のタスクを停止。
+     - この時点で`desiredCount`が一時的に減少する。
+   - 2. 新しいタスクを起動:
+     - 停止後に新しいタスクをスケジュールして起動。
+
+**Task retirement notice overview**
+
+通知方法:
+
+1. AWS Health Dashboard
+2. 登録済みメールアドレス (AWS アカウントに関連付けられたメール)
+
+通知に含まれる内容:
+
+- リタイア日付:
+  - タスクが停止する予定の日付。
+- タスクの識別情報:
+  - スタンドアロンタスクの場合: タスクID。
+  - サービスタスクの場合: クラスターIDとサービスID。
+- 次のステップ:
+  - 必要な対応や準備手順。
+
+通知頻度:
+
+- 通常、各AWSリージョンごとに1つの通知が送信されます（サービスタスクとスタンドアロンタスクそれぞれ）。
+- ただし、タスク数が多い場合は複数回通知される場合があります。
+
+Amazon EventBridgeを活用した通知連携:
+
+- The AWS Health Dashboard
+  - AWS Healthの通知をEventBridge経由でさまざまなサービスと連携可能([Monitoring AWS Health events with Amazon EventBridge](https://docs.aws.amazon.com/health/latest/ug/cloudwatch-events-health.html)):
+    - アーカイブストレージ： Amazon S3 に保存。
+    - 自動アクション： AWS Lambda 関数を実行。
+    - 通知システム： Amazon SNS 経由で通知を配信。
+  - チーム連携ツールへの通知
+    - 以下のツールに通知を送る設定が可能（サンプル設定は[AWS Health Aware](https://github.com/aws-samples/aws-health-aware)リポジトリを参照）：
+      - Amazon Chime
+      - Slack
+      - Microsoft Teams
+
+### [Storage options for Amazon ECS tasks](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html)
+
+| Data volume | Supported launch types | Supported operating systems | Storage persistence | Features| Use cases | Link |
+| :---------- | :--------------------- | :-------------------------- | :------------------ | :-------- |:-------- |:-------- |
+| Amazon Elastic Block Store (Amazon EBS) |  Fargate, Amazon EC2 | Linux | - `Standalone Task`にattachした場合`Persisted`</br>-`Service`が管理する`Task`にattachした場合`Ephemeral` | cost-effective, durable, high-performance block storage for data-intensive|- Transactional workloads: Databases, virtual desktops, root volumes</br>- Throughput-intensive workloads: Log processing, ETL workloads | [Use Amazon EBS volumes with Amazon ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html) |
+| Amazon Elastic File System (Amazon EFS) | Fargate, Amazon EC2  | Linux | Persistent | simple, scalable,  persistent shared file storage ,Concurrency support,Low latency|Data analytics, Media processing ,Content management,Web serving |[Use Amazon EFS volumes with Amazon ECS.](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/efs-volumes.html)|
+| Bind mounts |  Fargate, Amazon EC2 | Windows, Linux | Ephemeral | - Uses files or directories from the host</br> | - Volume sharing in a task.</br> |[Use bind mounts with Amazon ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/bind-mounts.html)|
