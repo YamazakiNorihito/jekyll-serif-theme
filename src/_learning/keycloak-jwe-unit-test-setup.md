@@ -164,11 +164,16 @@ class DecryptResourceTest {
     public void setUp() throws NoSuchAlgorithmException {
 
         // BouncyCastleProviderを登録
+        // https://github.com/bcgit/bc-java/blob/d95afbf5c329d51c2a92099e8db84f7fc2028602/prov/src/main/java/org/bouncycastle/jce/provider/BouncyCastleProvider.java#L81
         if (Security.getProvider("BC") == null) {
             Security.addProvider(new BouncyCastleProvider());
         }
         // CryptoIntegrationの初期化
         CryptoIntegration.dumpSecurityProperties();
+
+        // DefaultCryptoProviderは、BouncyCastleProviderが利用している
+        // https://github.com/keycloak/keycloak/blob/0e1a62fa60166940eb2065fd7cb91862918f36eb/crypto/default/src/main/java/org/keycloak/crypto/def/DefaultCryptoProvider.java#L56
+        // https://github.com/keycloak/keycloak/blob/0e1a62fa60166940eb2065fd7cb91862918f36eb/authz/client/src/main/resources/META-INF/services/org.keycloak.common.crypto.CryptoProvider#L20
         CryptoIntegration.init(Thread.currentThread().getContextClassLoader());
 
         session = mock(KeycloakSession.class);

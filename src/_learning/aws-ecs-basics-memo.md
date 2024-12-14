@@ -494,3 +494,41 @@ Amazon EventBridgeを活用した通知連携:
 | Amazon Elastic Block Store (Amazon EBS) |  Fargate, Amazon EC2 | Linux | - `Standalone Task`にattachした場合`Persisted`</br>-`Service`が管理する`Task`にattachした場合`Ephemeral` | cost-effective, durable, high-performance block storage for data-intensive|- Transactional workloads: Databases, virtual desktops, root volumes</br>- Throughput-intensive workloads: Log processing, ETL workloads | [Use Amazon EBS volumes with Amazon ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html) |
 | Amazon Elastic File System (Amazon EFS) | Fargate, Amazon EC2  | Linux | Persistent | simple, scalable,  persistent shared file storage ,Concurrency support,Low latency|Data analytics, Media processing ,Content management,Web serving |[Use Amazon EFS volumes with Amazon ECS.](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/efs-volumes.html)|
 | Bind mounts |  Fargate, Amazon EC2 | Windows, Linux | Ephemeral | - Uses files or directories from the host</br> | - Volume sharing in a task.</br> |[Use bind mounts with Amazon ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/bind-mounts.html)|
+
+### [Best practices for Amazon ECS container images](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-considerations.html)
+
+- 完全なコンテナイメージ：アプリの全依存関係を静的ファイルとしてイメージ内に含める。
+- 1コンテナ1プロセス：コンテナには1つのアプリケーションプロセスのみ実行。
+- ライフタイム：コンテナのライフタイムはプロセスの実行期間に限る。
+- ECSの役割：クラッシュしたプロセスを自動検知・置き換えし、再起動場所を管理。
+- SIGTERMの対応
+  - アプリはSIGTERMシグナルを処理し、作業の終了または未完了作業の保存を実施。
+  - ECSの動作：停止時にまずSIGTERMを送信し、その後SIGKILLで強制終了。
+  - 対応策：アプリが新しい作業を受け付けず、現在の作業を完了または保存するよう実装。
+  - [Graceful shutdowns with ECS](https://aws.amazon.com/jp/blogs/containers/graceful-shutdowns-with-ecs/) TODOこれ後で絶対に読む
+- ログ出力：アプリのログはstdout(ログを標準出力)/stderr(標準エラー出力)に出力。
+  - 利点
+    - アプリからログ処理を分離し、柔軟なインフラ変更が可能。
+    - ECSが標準出力をキャプチャし、CloudWatch Logsなどに転送。
+- Use tags to version your container images
+  - `latest` タグの使用
+    - `latest` タグはテスト目的でのみ使用する。
+    - 本番環境では `latest` タグを使用しない。
+  - 一意のタグを使用する
+    - 各ビルドに対して一意のタグを付ける。
+    - タグにはビルドに使用した Git コミットの SHA を使用する。
+  - リリースごとにコンテナイメージをビルドする
+    - すべてのコミットに対してイメージをビルドする必要はない。
+    - 本番環境にリリースする特定のコードコミットごとに、新しいコンテナイメージをビルドする。
+    - イメージには、含まれるコードの Git コミットに対応するタグを付ける。
+  - Amazon ECR の不変タグを有効化する
+    - 不変タグを有効化すると、同じタグが異なるイメージを指すことを防止できる。
+
+- コンテナを 1つのタスク定義にまとめるか、複数のタスク定義に分けるか を判断する必要がある場合以下を判断基準にする
+  - 同じタスク定義にまとめる条件（以下の条件を全て満たす場合のみ）:
+    1. コンテナが同じライフサイクルを共有する（同時に起動・終了する）。
+    2. コンテナが同じホスト上で動作する必要がある（例: localhost通信が必要）。
+    3. コンテナがリソースを共有する。
+    4. コンテナがデータボリュームを共有する。
+  - 上記の条件を1つでも満たさない場合:
+    - 複数のタスク定義に分けることを推奨。これにより、個別のスケーリングやプロビジョニングが柔軟に行える。
