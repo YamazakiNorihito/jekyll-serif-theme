@@ -18,7 +18,7 @@ tags:
   - インフラ構成
   - ネットワークセキュリティ
   - AWSベストプラクティス
-description: "ALBを経由してプライベートなAPI Gatewayにリクエストを送信する構成を解説します。CloudFormationテンプレートを使い、VPCエンドポイントの作成、プライベートAPI Gatewayの設定、ALBとターゲットグループの関連付けを行います。ALB、VPCエンドポイント、API Gatewayの組み合わせで、セキュアかつ柔軟なリクエストルーティングを実現する方法を示します。"
+description: "ALB経由でプライベートAPI Gatewayにリクエストを送信する方法を、CloudFormationを使った構成例とともに解説。VPCエンドポイント、ALBリスナールール、ターゲットグループ設定の詳細を示します。"
 ---
 
 この記事では、ALB（Application Load Balancer）を経由して、プライベートな API Gateway にリクエストを送信する構成についてまとめています。ALB、VPC エンドポイント、プライベート API Gateway、および ListenerRule を活用して構築しました。背景として、リクエストのエントリーポイントを ALB にする必要があったため、このような設計を採用しました。

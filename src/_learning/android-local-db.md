@@ -6,7 +6,7 @@ linkedinurl: ""
 mermaid: true
 weight: 7
 tags:
-description: "AndroidアプリでRoomライブラリを使用してローカルデータベースにデータを保存する方法を解説。エンティティ、DAO、データベースクラスの作成方法と、Database Inspectorを使ったデータの検査と管理についての実践的な手順を紹介します。"
+description: "AndroidアプリでRoomライブラリを使ってローカルデータベースを作成・操作する手順を記録。エンティティ、DAO、データベースクラスの構築とDatabase Inspectorの使用方法を整理しています。"
 ---
 
 

@@ -12,7 +12,7 @@ tags:
   - エラー対応
   - バージョン管理
   - アプリ開発
-description: "Android StudioとAndroid Gradle Plugin（AGP）のバージョン間の互換性問題やエラーメッセージに対する解決策をまとめたエラー対応集。アプリ開発でのバージョン管理やエラー解決の手助けになります。"
+description: "Android StudioとAndroid Gradle Pluginのバージョン間の互換性問題やエラーメッセージの解決方法をまとめた記録。エラー原因と対応策を整理しています。"
 ---
 
 ## エラー集

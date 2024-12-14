@@ -6,7 +6,7 @@ linkedinurl: ""
 mermaid: true
 weight: 7
 tags:
-description: "Android開発におけるKotlinスタイルガイドや`uses-sdk`設定の概要、`onCreate()`と`setContent()`の役割、リソースタイプの管理方法について解説します。適切なコードプラクティスを学びましょう。"
+description: "Android開発におけるKotlinスタイルガイド、uses-sdk設定、onCreate()とsetContent()の役割、リソースタイプの管理方法、そして適切なコードプラクティスについてのメモ。プロジェクト管理と開発効率向上に関する基礎的な情報を記録しています。"
 ---
 
 ## Kotlin スタイルガイド

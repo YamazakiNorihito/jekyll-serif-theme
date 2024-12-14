@@ -16,7 +16,7 @@ tags:
   - 暗号化
   - Webパフォーマンス
   - Network Specialist
-description: ""
+description: "QUICは、TCPとUDPの利点を活かした革新的なネットワークプロトコルで、暗号化、ストリーム多重化、低遅延接続再開によりWeb通信のパフォーマンスとセキュリティを向上させます。"
 ---
 
 ## TCP vs UDP vs QUIC

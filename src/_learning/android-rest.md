@@ -6,7 +6,7 @@ linkedinurl: ""
 mermaid: true
 weight: 7
 tags:
-description: "アプリがインターネットからデータを取得するために、RESTウェブサービスと通信する方法を解説します。Retrofitライブラリを使用して、ウェブサービスにリクエストを送信し、JSON形式のレスポンスデータを解析する流れを紹介します。必要な依存関係の追加やRetrofitの設定、モデルクラスの定義、シリアル化ツールであるkotlinx.serializationの活用などをステップごとに説明します。APIから取得したデータをKotlinオブジェクトに変換して処理する手法を学びましょう。"
+description: "アプリがRESTウェブサービスを利用してインターネットからデータを取得する方法を記録。Retrofitとkotlinx.serializationを使用したAPIリクエストの送信とJSONレスポンスの解析手順を整理しています。モデルクラスの定義や依存関係の設定、データ取得の流れを確認しています。"
 ---
 
 ## REST ウェブサービス

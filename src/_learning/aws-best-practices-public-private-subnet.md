@@ -11,7 +11,7 @@ tags:
   - Networking
   - NAT Gateway
   - Best Practices
-description: "Amazon ECSでアプリケーションをPublicまたはPrivate Subnetに配置する際のベストプラクティスを紹介。セキュリティやレイテンシ、帯域幅の観点から最適な選択方法について説明します。"
+description: "Amazon ECSでアプリをPublicまたはPrivate Subnetに配置する際のベストプラクティスを解説。セキュリティ、帯域幅、レイテンシを考慮した設計を紹介。"
 ---
 
 

@@ -8,7 +8,7 @@ tags:
   - CLI
   - IAM
   - GitHub
-description: ""
+description: "GitHubからAWS CloudFormationをデプロイするための手順を解説。IAMロールの設定、GitHub Actionsによるワークフロー、VPCテンプレートのサンプルコードを提供します。"
 ---
 
 [GitHubからのAWS CloudFormationデプロイ自動化](https://aws.amazon.com/jp/blogs/news/automate-safe-aws-cloudformation-deployments-from-github-jp/) を見て、実際に試してみました。そこで学んだことやつまずいた点を書いてみます。

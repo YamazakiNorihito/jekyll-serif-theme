@@ -5,9 +5,11 @@ mermaid: true
 weight: 7
 tags:
   - AWS
-  - DynamoDB
-  - NoSQL
-description: ""
+  - CodePipeline
+  - CI/CD
+  - DevOps
+  - Pipeline
+description: "AWS CodePipelineの基本概念と構成要素を解説。パイプラインのステージ、トランジション、アクション、実行プロセスの仕組みとステータスについての詳細な情報を提供します。"
 ---
 
 ## [CodePipeline concepts](https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html)

@@ -6,7 +6,7 @@ linkedinurl: ""
 mermaid: true
 weight: 7
 tags:
-description: "Jetpack ComposeにおけるStateとMutableStateの違いと使い分けについて解説。ユーザー入力やデータの動的更新でのMutableStateの利用方法、読み取り専用データでのStateの活用例を紹介します。"
+description: "Jetpack ComposeでのStateとMutableStateの違いと使い分けについての記録。ユーザー入力や動的データ更新におけるMutableStateの使い方、読み取り専用データ表示でのStateの活用方法を整理しています。"
 ---
 
 ## Jetpack Compose の State と MutableState の理解を深めていく

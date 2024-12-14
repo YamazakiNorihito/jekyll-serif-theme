@@ -15,7 +15,7 @@ tags:
   - Hilt
   - Kotlin
   - Compose
-description: "Androidアプリのアーキテクチャガイドを通じて、モバイルアプリ開発における関心の分離、単方向データフロー、依存関係の注入などのベストプラクティスを学び、ユーザーエクスペリエンス向上を目指します。"
+description: "Androidアプリのアーキテクチャガイドをもとに、関心の分離や単方向データフロー、依存関係の注入などを学びながら、推奨される設計パターンを確認しています。"
 ---
 
 <https://developer.android.com/topic/architecture?hl=ja>
