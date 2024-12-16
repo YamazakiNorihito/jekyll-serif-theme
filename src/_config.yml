@@ -4,11 +4,11 @@ title: "だらけた日記"
 
 logo:
   mobile: "images/logo/logo-mobile.svg"
-  mobile_height: "32px"
-  mobile_width: "32px"
+  mobile_height: "32"
+  mobile_width: "32"
   desktop: "images/logo/logo.svg"
-  desktop_height: "32px"
-  desktop_width: "120px"
+  desktop_height: "32"
+  desktop_width: "120"
 
 home:
   limit_services: 6
