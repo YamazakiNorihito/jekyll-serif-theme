@@ -1,13 +1,18 @@
 ---
-title: "Amazon Elastic Container Serviceの基礎知識のメモ"
+title: "Amazon ECSの基礎知識とベストプラクティス"
 date: 2024-11-1T07:15:00
 mermaid: true
 weight: 7
 tags:
   - AWS
-  - DynamoDB
-  - NoSQL
-description: "自分用のメモとして、ECSについて整理。設計に役立つベストプラクティスも含む"
+  - ECS
+  - Fargate
+  - Docker
+  - Container Orchestration
+  - Networking
+  - Security
+  - Automation
+description: "Amazon ECSの基本構造と設計に役立つベストプラクティスを整理。FargateやDockerイメージの管理、セキュリティ設定、ネットワーキングアーキテクチャについて具体例を交えて解説します。"
 ---
 
 [What is Amazon Elastic Container Service?](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html)を順番に読んでいく

@@ -1,9 +1,6 @@
 ---
-title: "dockerを使ってHttps対応する"
+title: "DockerでHTTPS対応を実現する方法"
 date: 2023-12-13T09:00:00
-#image: "images/team/nonsap-visuals-kMJp7620W6U-unsplash.jpg"
-jobtitle: "dockerを使ってHttps対応する"
-linkedinurl: ""
 weight: 7
 tags:
   - Docker
@@ -14,7 +11,8 @@ tags:
   - SSL/TLS
   - Reverse Proxy
   - Redis
-description: "Dockerを使用して簡単にHTTPS対応を実現する手順を解説します。steveltn/https-portal Dockerイメージを利用し、Nginxをベースにしたリバースプロキシの設定でHTTPS化を実現。例として、Node.jsアプリケーションとRedisを含むシンプルなdocker-compose構成を紹介し、各コンテナのDockerfileと設定ファイルも提供しています。SSL/TLSセキュリティやWebサーバー構成の基本的な知識が学べます。"
+  - Node.js
+description: "Dockerを使用して簡単にHTTPS対応を実現する手順を紹介。steveltn/https-portal Dockerイメージを使用し、NginxベースのリバースプロキシでHTTPS化。Node.jsアプリケーションとRedisを含むdocker-compose構成を例に、SSL/TLSセキュリティと基本的なWebサーバー構成について学べる内容です。"
 ---
 
 [steveltn/https-portal:1](https://github.com/SteveLTN/https-portal) の DockerImage を使うと簡単に Https 化ができる

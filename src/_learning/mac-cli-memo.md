@@ -5,8 +5,15 @@ jobtitle: "memo"
 linkedinurl: ""
 weight: 7
 tags:
-  - 
-description: ""
+  - macOS
+  - Bash Scripting
+  - File Management
+  - Cron Jobs
+  - Automation
+  - Timezone Settings
+  - ZIP Compression
+  - Task Scheduling
+description: "macOSでのファイル操作や圧縮、定期処理設定の手順を解説。パス確認、Cronを使用したスクリプト実行、タイムゾーン設定など、日常の作業を効率化する方法を紹介します。"
 ---
 
 

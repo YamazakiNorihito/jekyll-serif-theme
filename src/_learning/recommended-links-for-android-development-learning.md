@@ -1,20 +1,19 @@
 ---
 title: "Android開発学習のための推奨リンク"
 date: 2023-10-13T07:31:00
-#image: "images/team/nonsap-visuals-kMJp7620W6U-unsplash.jpg"
 jobtitle: "Androidエンジニアになろうぜ！"
 linkedinurl: ""
 weight: 7
 tags:
   - Android
-  - Android Development
-  - Learning Resources
   - Kotlin
-  - Architecture
   - Mobile Development
+  - Android Architecture
+  - Learning Resources
   - Programming
   - Beginner Guide
-description: ""
+  - App Development
+description: "Android開発の基礎からアーキテクチャまでを学べる推奨リンク集。Kotlinのプレイグラウンドを活用して、実践的なコーディングも体験できます。"
 ---
 
 

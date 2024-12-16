@@ -10,12 +10,15 @@ tags:
   - 認証方式
   - セキュリティ
   - WPA
+  - WPA-PSK
   - EAP
   - IEEE 802.1X
   - PEAP
   - EAP-TLS
+  - Wi-Fi Security
   - Network Specialist
-description: ""
+  - Wireless Authentication
+description: "無線LANの主要な認証方式（WEP、WPA、EAPなど）を簡潔に解説し、認証プロセスをシーケンス図で視覚化。PEAPやEAP-TLSの違いと特徴についても詳述。"
 ---
 
 ## 無線LANの認証方式

@@ -1,20 +1,19 @@
 ---
-title: "HackerNewsAPIExploration探索"
+title: "Hacker News API探索ガイド"
 date: 2023-11-21T17:26:00
-#image: "images/team/nonsap-visuals-kMJp7620W6U-unsplash.jpg"
 jobtitle: ""
 linkedinurl: ""
 weight: 7
 tags:
   - Hacker News
   - API
-  - Web Development
   - Firebase
   - REST API
-  - Vscode
+  - Web Development
   - Data Retrieval
   - JavaScript
-description: ""
+  - VSCode
+description: "Hacker Newsの公開APIを使用してデータを取得する方法を紹介します。Firebaseをベースに構築されたAPIのエンドポイントを解説し、人気ストーリー、最新ストーリー、質問や共有ストーリーの取得方法をカバーします。VSCodeのREST Clientでの実践的な利用例も提供します。"
 ---
 
 Hacker NewsがAPIを公開してました。<https://hackernews.api-docs.io>

@@ -1,5 +1,5 @@
 ---
-title: "Keycloak migration"
+title: "Keycloak Migration Guide: 16.0.0 to 17.0.0"
 date: 2024-07-29T08:10:00
 jobtitle: ""
 linkedinurl: ""
@@ -14,7 +14,7 @@ tags:
   - Database Schema
   - Configuration
   - Security
-description: "Keycloakのバージョン16.0.0から17.0.0への移行に関するガイドです。主な変更点として、レガシーセキュリティサブシステムの廃止、Quarkusへのデフォルトディストリビューション変更、カスタムプロバイダーの配置方法変更などが含まれます。データベーススキーマの更新手順や新しい設定方法についても詳述しています。"
+description: "Keycloakのバージョン16.0.0から17.0.0への移行手順を徹底解説。Quarkusディストリビューションへの変更、カスタムプロバイダーの配置方法、新しい設定手法、データベーススキーマ更新など、移行に必要な情報を網羅しています。"
 ---
 
 こちらは、Keycloak のバージョン 16.0.0 から 17.0.0 への移行に関するブログ投稿のドラフトです：

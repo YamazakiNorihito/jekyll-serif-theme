@@ -6,16 +6,16 @@ linkedinurl: ""
 mermaid: true
 weight: 7
 tags:
-  - HTTP
-  - HTTP/1.x
+  - HTTP/1.1
   - HTTP/2
   - HTTP/3
   - QUIC
+  - Web通信プロトコル
   - TCP
-  - ネットワークプロトコル
-  - Web通信
+  - ネットワーク性能
+  - ネットワーク技術
   - Network Specialist
-description: ""
+description: "HTTP/1.xからHTTP/3までの進化を解説。HTTP/2の多重化やHTTP/3のQUICプロトコルによる高速化とセキュリティ強化の仕組みを図解で説明します。"
 ---
 
 ## HTTP/1.x

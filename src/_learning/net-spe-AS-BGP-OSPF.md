@@ -11,9 +11,11 @@ tags:
   - Autonomous System
   - AS
   - Network Routing
-  - Network Specialist
   - Internet Protocols
-description: ""
+  - Routing Protocols
+  - Network Design
+  - Networking Concepts
+description: "AS（自律システム）の概念、内部ルーティングプロトコルであるOSPF、異なるAS間でのルーティングを行うBGPについて、関係性と役割を詳しく解説。"
 ---
 
 ## BGP、OSPF、およびASについての簡単な説明

@@ -7,14 +7,14 @@ linkedinurl: ""
 weight: 7
 tags:
   - freee人事労務
-  - API
-  - OAuth
-  - REST API
-  - 勤怠管理
-  - プログラミング
+  - API連携
+  - OAuth認証
+  - 勤怠管理API
+  - 残業申請
   - TypeScript
-  - 連携
-description: ""
+  - REST API
+  - 勤務時間管理
+description: "freee人事労務のAPIを使って勤怠管理や残業申請の自動化を試みましたが、部門利用が原因でWeb申請に頼ることに。"
 ---
 
 勤怠管理にはfree人事労務を使っている。残業する場合、残業申請と勤務時間を両方別画面で入力するのは大変手間である。

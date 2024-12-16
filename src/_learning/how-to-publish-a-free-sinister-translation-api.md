@@ -7,14 +7,14 @@ linkedinurl: ""
 weight: 7
 tags:
   - Google Apps Script
-  - Translation API
-  - Google Translate
-  - Web API
-  - POST Request
+  - Google Translate API
+  - 無料API
+  - 翻訳ツール
   - JavaScript
-  - Free API
-  - Tutorial
-description: ""
+  - POSTリクエスト
+  - API公開
+  - チュートリアル
+description: "Google Apps Script を使って、Google 翻訳 API を無料で公開する方法を解説。POST メソッドを採用し、大量のテキスト翻訳にも対応。実装コード付きで、翻訳 API のセットアップから公開までの手順をサポートします。"
 ---
 
 参考サイトはGETメソッドで作っていましたが、

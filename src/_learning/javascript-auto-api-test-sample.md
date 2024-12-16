@@ -6,8 +6,16 @@ linkedinurl: ""
 mermaid: true
 weight: 7
 tags:
-  - 
-description: ""
+  - API Testing
+  - JavaScript
+  - SQL Optimization
+  - Automated Testing
+  - Axios
+  - Node.js
+  - Data Validation
+  - API Response Comparison
+  - Logging
+description: "SQLクエリ最適化後のAPI変更が既存のレスポンスに影響を与えないかを確認するための自動テストを作成。新旧API間でレスポンス内容を比較し、差異があればログ出力します。プロパティの値チェックや詳細な調査ログも含む具体的な実装例を紹介します。"
 ---
 
 

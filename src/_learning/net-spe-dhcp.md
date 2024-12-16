@@ -7,13 +7,14 @@ mermaid: true
 weight: 7
 tags:
   - DHCP
-  - Network Protocols
+  - Dynamic IP Allocation
+  - Network Configuration
   - IP Address Management
-  - Dynamic Host Configuration Protocol
+  - UDP Protocol
   - Network Specialist
-  - UDP
-  - DHCP Security
-description: "DHCP（Dynamic Host Configuration Protocol）の基本概念と動作を解説します。ネットワーク上のデバイスに自動でIPアドレスを割り当てるためのプロトコルで、メリット・デメリット、IP取得のシーケンス、パケット構成、UDPポート番号などを網羅します。具体的なパケットの例も示し、DHCPの仕組みをわかりやすく説明しています。"
+  - DHCP Relay
+  - Network Automation
+description: "DHCPはネットワーク上のデバイスに自動でIPアドレスを割り当てるプロトコルです。基本動作、メリット・デメリット、通信シーケンス、パケット構成、セキュリティ対策について詳しく解説します。"
 ---
 
 ## DHCP について

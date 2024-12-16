@@ -1,8 +1,6 @@
 ---
-title: "AWS Elastic BeanstalkとApplication Load Balancerを連携するCloudFormationテンプレート"
+title: "AWS Elastic BeanstalkとALBを連携するCloudFormationテンプレート"
 date: 2024-8-8T13:35:00
-jobtitle: ""
-linkedinurl: ""
 mermaid: true
 weight: 7
 tags:
@@ -10,11 +8,11 @@ tags:
   - Elastic Beanstalk
   - Application Load Balancer
   - CloudFormation
-  - Docker
-  - EC2
   - Auto Scaling
+  - Docker
   - Infrastructure as Code
-description: "このブログ記事では、AWS Elastic Beanstalk と Application Load Balancer を連携するための CloudFormation テンプレートを紹介します。Docker コンテナを利用したアプリケーションのデプロイに対応し、トラフィック管理とスケーラビリティの確保を目的とした構成です。テンプレートには必要なパラメータ、リソース、オプション設定が含まれ、Elastic Beanstalk 環境の自動設定、ALB の共有設定、Auto Scaling、セキュリティグループの設定、ログストリーミングの構成などの機能を提供します。"
+  - VPC
+description: "AWS Elastic BeanstalkとALBを連携してDockerコンテナアプリをデプロイするためのCloudFormationテンプレートを解説。スケーラビリティ、トラフィック管理、ログストリーミング設定なども詳述します。"
 ---
 
 ## AWS Elastic Beanstalk と Application Load Balancer を連携する CloudFormation テンプレート

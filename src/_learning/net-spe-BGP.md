@@ -7,14 +7,15 @@ mermaid: true
 weight: 7
 tags:
   - BGP
-  - IGP
-  - EGP
   - iBGP
   - eBGP
-  - Network Protocols
-  - Network Routing
+  - IGP
+  - EGP
+  - Routing Protocols
+  - Autonomous System
   - Network Specialist
-description: ""
+  - Border Gateway Protocol
+description: "BGP (Border Gateway Protocol) の仕組みや、iBGPとeBGPの違い、IGPとEGPとの関係について解説。インターネットルーティングの基盤を理解するための詳細なガイドです。"
 ---
 
 ## BGPとその関連プロトコルについての概要

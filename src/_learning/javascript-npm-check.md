@@ -1,13 +1,19 @@
 ---
 title: "npm-checkでNode.jsプロジェクトの依存関係を効率的に管理しよう"
-date: 2024-4-12T17:00:00
+date: 2024-04-12T17:00:00
 jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
 tags:
-  - 
-description: ""
+  - Node.js
+  - npm
+  - パッケージ管理
+  - npm-check
+  - JavaScript
+  - 開発ツール
+  - 依存関係管理
+description: "Node.jsの依存関係を効率的に管理するツール「npm-check」の使い方を解説。アップデート確認、未使用パッケージ検出、不足依存関係の特定などの便利機能を紹介します。"
 ---
 
 

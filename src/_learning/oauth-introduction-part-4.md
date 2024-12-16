@@ -14,7 +14,7 @@ tags:
   - Docker
   - Security
   - Access Token
-description: ""
+description: "KeycloakのREST APIを使用して、トークン取得やユーザー管理などの操作を実践的に学びました。Docker上で立ち上げたKeycloakに対して、リクエストを送信し、アクセストークンを取得し、リアルムやユーザーを操作する方法を解説します。"
 ---
 
 ## KeycloakへRestしてみた

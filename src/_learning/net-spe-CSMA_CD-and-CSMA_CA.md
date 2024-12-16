@@ -8,13 +8,14 @@ weight: 7
 tags:
   - CSMA/CD
   - CSMA/CA
-  - Network Protocols
   - Ethernet
   - Wi-Fi
+  - Network Protocols
+  - Media Access Control
   - Collision Detection
   - Collision Avoidance
   - Network Specialist
-description: "CSMA/CDとCSMA/CAの概要と違いを解説し、それぞれの特徴を簡単に覚えやすい方法で紹介します。CSMA/CDは有線ネットワーク（イーサネット）での衝突検出に、CSMA/CAは無線LAN（Wi-Fi）での衝突回避に使われるメディアアクセス制御方式です。動作原理を踏まえて、イメージしやすい覚え方を提示しています。"
+description: "CSMA/CDはイーサネットでの衝突検出方式、CSMA/CAはWi-Fiでの衝突回避方式を示します。両者の動作原理と違いをわかりやすく解説し、覚えやすい方法を提示します。ネットワークプロトコルの理解を深めるための参考資料です。"
 ---
 
 ## CSMA/CD と CSMA/CA の概要と覚え方

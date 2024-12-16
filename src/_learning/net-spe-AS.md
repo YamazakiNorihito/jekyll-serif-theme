@@ -5,7 +5,15 @@ jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
-description: ""
+tags:
+  - AS番号
+  - Autonomous System
+  - ネットワーク
+  - BGP
+  - インターネットアーキテクチャ
+  - ルーティング
+  - ネットワーク管理
+description: "インターネットの基盤を支えるAutonomous System (AS)の概要、AS番号の仕組みや割り当て範囲、ルーティングポリシーによるトラフィック管理の重要性について解説します。"
 ---
 
 ## Autonomous System (AS)の概要

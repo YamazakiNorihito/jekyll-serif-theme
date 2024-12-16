@@ -14,7 +14,7 @@ tags:
   - Application Settings
   - Inversify
   - Database Configuration
-description: ""
+description: "Node ConfigはNode.jsアプリケーションで環境ごとの設定を効率的に管理するライブラリです。環境変数やJSON設定ファイルを使用して、設定を簡単に切り替えることができます。"
 ---
 
 ## Node.jsとNode Configを使ったアプリケーション設定の管理

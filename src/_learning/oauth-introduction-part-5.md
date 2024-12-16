@@ -7,13 +7,13 @@ weight: 7
 tags:
   - OAuth
   - Keycloak
-  - REST API
+  - JWT Claims
+  - REST API Security
   - Authentication
   - Authorization
-  - Docker
-  - Security
   - Access Token
-description: ""
+  - Security Best Practices
+description: "Keycloak REST APIでのJWTクレーム（iss, sub, aud, exp等）の役割と構造を理解し、OAuth認証とトークン管理における実践的な使い方を学びます。"
 ---
 
 

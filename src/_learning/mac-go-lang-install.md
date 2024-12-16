@@ -1,13 +1,17 @@
 ---
-title: "MacにGoをインストール手順"
+title: "MacでのGo言語インストール手順"
 date: 2024-04-17T10:40:00
 jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
 tags:
-  - 
-description: ""
+  - Go
+  - Mac
+  - Installation Guide
+  - Development Environment
+  - Homebrew
+description: "MacにGo言語をインストールする手順を紹介。Apple Silicon（ARM64）対応の手順で、環境変数の設定や動作確認も詳しく解説しています。"
 ---
 
 

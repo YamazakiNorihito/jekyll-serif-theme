@@ -7,15 +7,16 @@ mermaid: true
 weight: 7
 tags:
   - OSPF
-  - ルーティングプロトコル
-  - ネットワーク
+  - ルーティング
   - 動的ルーティング
+  - リンクステート
+  - Dijkstra
   - LSA
   - DR
   - ABR
   - ASBR
-  - Network Specialist
-description: ""
+  - ネットワーク設計
+description: "OSPFは、最短経路を決定するためのリンクステート型の動的ルーティングプロトコルです。エリア分割やLSAを使って、効率的なルート計算を行います。"
 ---
 
 ## OSPFについてのまとめ

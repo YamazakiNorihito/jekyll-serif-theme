@@ -6,20 +6,20 @@ linkedinurl: ""
 mermaid: true
 weight: 7
 tags:
-  - Code Quality
   - Software Design
-  - Static Methods
-  - Best Practices
+  - Code Quality
   - Design Patterns
+  - Best Practices
   - Tell Don't Ask
-  - Switch Case
+  - Static Methods
   - Polymorphism
-  - Inheritance
   - YAGNI
-  - Null Handling
-  - Development Process
+  - TDD
   - Code Review
-description: ""
+  - Development Process
+  - Null Safety
+  - Inheritance
+description: "Learned software design principles from “良いコード悪いコードで学ぶ設計入門”. Covered static methods, Tell Don’t Ask, switch statements, design patterns, and effective processes like TDD and code reviews."
 ---
 
 ## 学び

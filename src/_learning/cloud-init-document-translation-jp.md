@@ -7,15 +7,14 @@ linkedinurl: ""
 weight: 7
 tags:
   - cloud-init
-  - Cloud Computing
-  - Server Configuration
-  - Virtual Machines
-  - Automation
-  - System Administration
-  - Infrastructure
-  - Boot Stages
+  - クラウド自動化
+  - サーバー設定
+  - インフラ構築
   - Linux
-description: "`cloud-init` のドキュメントを日本語に翻訳し、その一部を要約しました。`cloud-init` は、クラウド環境でのインスタンス初期設定と自動化を担うツールで、主要なパブリッククラウドやプライベートクラウドで広くサポートされています。本記事では、`cloud-init` の概要、動作フェーズ、設定方法、キャッシュの使用、ブート時の処理などについて解説しています。特に、初回起動の判定方法とその設定についても詳しく触れています。"
+  - クラウドコンピューティング
+  - 初回起動判定
+  - ネットワーク設定
+description: "cloud-init ドキュメントを日本語訳し、クラウド環境でのインスタンス初期設定ツールの動作や設定方法を解説。初回起動判定やネットワーク構成の詳細を紹介。"
 ---
 
 - [github][`cloud-init`](https://github.com/canonical/`cloud-init`)

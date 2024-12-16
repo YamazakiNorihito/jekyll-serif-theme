@@ -1,9 +1,6 @@
 ---
 title: "効率的なNode.js開発: concurrentlyでの同時実行とnodemonによる自動再起動"
 date: 2023-10-09T06:27:00
-##image: "images/team/nonsap-visuals-kMJp7620W6U-unsplash.jpg"
-jobtitle: "Ｎodejsで複数のアプリケーションを同時に実行する方法"
-linkedinurl: ""
 weight: 7
 tags:
   - Node.js
@@ -14,7 +11,8 @@ tags:
   - JavaScript
   - Code Hot Reloading
   - Multi-process Management
-description: "Node.js開発において、複数のアプリケーションを効率的に管理するためのツール、concurrentlyとnodemonの活用方法について解説します。concurrentlyで複数のプロセスを同時に実行し、nodemonでコード変更時の自動再起動を実現することで、開発効率を向上させる方法を紹介します。実際のプロジェクト設定例を通じて、クライアント、認証サーバー、保護リソースの同時起動を設定する手順も説明します。"
+  - Web Development
+description: "Node.jsでの効率的な開発手法として、複数のアプリケーションを同時実行するためのconcurrentlyと、コード変更時に自動でアプリケーションを再起動するnodemonの設定方法を紹介します。OAuthサーバー構成の例を用い、クライアント、認証サーバー、保護リソースを簡単に管理する方法を具体的に解説します。"
 ---
 
 ## Ｎ odejs で複数のアプリケーションを同時に実行する方法

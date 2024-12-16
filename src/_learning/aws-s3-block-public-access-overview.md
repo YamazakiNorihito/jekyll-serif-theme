@@ -6,14 +6,13 @@ weight: 7
 tags:
   - AWS
   - S3
-  - Access Control
   - Block Public Access
+  - Security
+  - Access Control
   - IAM Access Analyzer
-  - Security Best Practices
   - Cloud Storage
-  - Data Protection
-  - Access Management
-description: "AWSのS3セキュリティ機能であるBlock Public AccessとIAM Access Analyzerについてまとめた"
+  - Data Security
+description: "Amazon S3のBlock Public Access機能を中心に、設定方法や適用範囲、IAM Access Analyzerを活用した公開バケットの評価など、セキュリティ強化のための要点を解説します。"
 ---
 
 [Blocking public access to your Amazon S3 storage](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html?icmpid=docs_amazons3_console)のドキュメント読んだので

@@ -1,20 +1,18 @@
 ---
-title: "Amazon CloudWatch LogsによるElastic Beanstalk環境の監視とメトリクス収集"
+title: "Amazon CloudWatch LogsでElastic Beanstalk環境を監視"
 date: 2024-8-23T07:00:00
-jobtitle: ""
-linkedinurl: ""
 mermaid: true
 weight: 7
 tags:
   - AWS
   - Elastic Beanstalk
-  - CloudWatch
+  - CloudWatch Logs
   - Monitoring
-  - CloudFormation
   - Docker
-  - Logs
-  - EC2
-description: "このブログ記事では、Amazon CloudWatch Logs を使用して Elastic Beanstalk 環境を監視およびメトリクス収集する方法を紹介します。特に Docker プラットフォームを利用する場合のログストリーミング設定、CloudFormation での LogStream の有効化、メトリクスフィルターの使用、EC2 インスタンスのシステムメトリクス収集などについて詳しく解説します。また、CloudWatch エージェントの設定ファイルを使ってメトリクスのカスタマイズや高度な監視機能を実現する手順も示しています。"
+  - CloudFormation
+  - Metrics
+  - Infrastructure as Code
+description: "Amazon CloudWatch Logsを活用してElastic Beanstalk環境を効率的に監視。Docker対応のログストリーミング設定やCloudFormationでのLogStream有効化、メトリクス収集のカスタマイズ手法を詳しく解説します。"
 ---
 
 ## Elastic Beanstalk で利用可能な Amazon CloudWatch Logs の監視機能

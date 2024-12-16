@@ -1,13 +1,16 @@
 ---
 title: "JekyllでSitemapを生成する方法"
 date: 2023-10-17T08:24:00
-#image: "images/team/nonsap-visuals-kMJp7620W6U-unsplash.jpg"
-jobtitle: "jekyll-sitemap"
-linkedinurl: ""
 weight: 7
 tags:
-  - 
-description: "Jekyllで構築されたブログサイトにおいて、Googleにページをインデックスしてもらうために必要なSitemapの生成方法を紹介します。Jekyll-sitemapプラグインを利用することで、手軽にSitemapを作成でき、その手順を解説しています。Google Searchコンソールへの提出方法についても触れており、サイトのSEO対策をサポートします。"
+  - Jekyll
+  - SEO
+  - Sitemap
+  - Google Search Console
+  - Blogging
+  - Web Development
+  - Static Site Generators
+description: "Jekyllで構築されたサイトでGoogleにページをインデックスしてもらうためのSitemap生成方法を解説。Jekyll-sitemapプラグインを使い、手軽にSitemapを作成し、Google Search Consoleへの提出方法を紹介します。静的サイトのSEO対策を強化したい方におすすめの記事です。"
 ---
 
 ## Jekyll-sitemapの利用方法

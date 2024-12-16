@@ -7,12 +7,12 @@ weight: 7
 tags:
   - Docker
   - Keycloak
-  - Clustering
-  - AWS
+  - クラスタ構成
   - Elastic Beanstalk
-  - Infinispan
   - EC2
-description: "DockerでKeycloakをクラスタ運用する方法を紹介します。Elastic Beanstalkでのデプロイを前提に、EC2インスタンス間でKeycloakのトークン共有を実現するために、Infinispanの分散キャッシュを使用した設定方法を解説します。また、クラスタ構成で発生したトークンの共有問題の解決策として、`network_mode`を`host`に設定してインスタンス間通信を改善する方法や、Infinispan設定例、Dockerfileのサンプルコードも提供しています。"
+  - Infinispan
+  - 分散キャッシュ
+description: "Docker で Keycloak をクラスタ運用する方法を解説。Elastic Beanstalk を活用し、EC2 間でトークン共有を実現する設定や、Infinispan の分散キャッシュ活用、具体的な Dockerfile サンプルも紹介。"
 ---
 
 ### Docker で Keycloak をクラスタ運用する話

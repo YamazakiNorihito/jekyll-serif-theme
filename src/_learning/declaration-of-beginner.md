@@ -1,20 +1,18 @@
 ---
 title: "初心表明"
 date: 2023-10-04T07:32:00
-##image: "images/team/nonsap-visuals-kMJp7620W6U-unsplash.jpg"
 jobtitle: "Graphic Designer"
-linkedinurl: ""
 weight: 7
 tags:
   - Blogging
-  - Personal Journey
-  - Self-Expression
-  - Life Goals
-  - Motivation
-  - New Beginnings
-  - Personal Growth
-  - Philosophy
-description: "ブログを初めて始める初心者の視点から、日常の出来事、気持ち、趣味、興味について正直に書くことを目指します。完璧を求めず、自分のペースで更新し、成長していく姿勢を大切にします。指針として、人生の冒険、理想の未来、心の羅針盤を掲げます。"
+  - 初心表明
+  - 自己表現
+  - ライフゴール
+  - 自己成長
+  - モチベーション
+  - 新しい挑戦
+  - パーソナルジャーニー
+description: "初めてブログを始めるにあたり、日常の出来事や気持ちを正直に綴り、自分らしい表現を大切にする決意を表明。人生の冒険、理想の未来、心の羅針盤を指針として成長していく姿勢を示します。"
 ---
 
 ## Blog の開始について

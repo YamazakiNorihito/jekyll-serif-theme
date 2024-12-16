@@ -10,11 +10,10 @@ tags:
   - JDBC
   - AWS
   - Docker
-  - Database
   - MySQL
-  - Configuration
+  - Database Configuration
   - Identity Management
-description: "KeycloakのJDBCドライバーをAWS Advanced JDBC Wrapperに変更する手順を解説します。Dockerを使ったローカル環境での設定方法やサンプルのDockerfile、環境変数、Docker Compose設定などを紹介し、MySQL接続の構成についても詳しく説明します。"
+description: "KeycloakでAWS Advanced JDBC Wrapperを用いたカスタムJDBCドライバーの設定方法を解説。Docker環境での構成や必要な設定、MySQLとの統合手順を詳しく紹介します。"
 ---
 
 ## Keycloak の JDBC ドライバーを AWS Advanced JDBC Wrapper に変更する方法

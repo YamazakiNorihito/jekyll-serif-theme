@@ -7,7 +7,7 @@ mermaid: true
 weight: 7
 tags:
   - Python
-description: ""
+description: "Pythonの仮想環境の作成、使用方法、パッケージのインストール、無効化・削除の手順について簡潔にまとめたメモです。"
 ---
 
 ## Python仮想環境メモ

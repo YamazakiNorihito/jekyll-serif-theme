@@ -5,7 +5,14 @@ mermaid: true
 weight: 7
 tags:
   - Keycloak
-description: "KeycloakでRealmを作成する際に、JSONファイルを使用して独自のAuthentication Flowを設定する方法を解説します。"
+  - Authentication Flow
+  - JSON Import
+  - Configuration Management
+  - Identity and Access Management
+  - Realm Configuration
+  - Web Security
+  - Custom Login Flow
+description: "KeycloakでカスタムAuthentication Flowを設定する方法を解説。JSONファイルを使用してアプリ停止せずに設定をインポートする手順を紹介します。"
 ---
 
 ## はじめに

@@ -6,15 +6,17 @@ linkedinurl: ""
 mermaid: true
 weight: 7
 tags:
-  - ケロベロス
   - Kerberos
-  - 認証
+  - ケロベロス認証
   - ネットワークセキュリティ
-  - SAML
-  - KDC
   - 認証プロトコル
+  - Key Distribution Center
+  - SAML
+  - TGT
+  - ST
+  - Identity Provider
   - Network Specialist
-description: "ケロベロス認証は、安全なネットワークアクセスを提供するための認証プロトコルです。古代ギリシャ神話の三頭犬ケルベロスにちなんで名付けられ、ユーザーはチケットを利用してサービスにアクセスします。認証プロセスは、KDC（Key Distribution Center）がチケット（TGTとST）を発行し、ユーザーがそれを使ってサービスにアクセスする流れです。SAML認証との関連もあり、SAMLアサーションを使ってSP（Service Provider）へのアクセスが許可されます。Mermaidシーケンス図で認証の流れを図解します。"
+description: "ケロベロス認証は、KDCを用いた安全なネットワークアクセス認証方式。TGTとSTによるチケットベースの認証プロセスを解説し、SAMLとの関連も説明します。"
 ---
 
 ## ケロベロス認証の簡単な説明

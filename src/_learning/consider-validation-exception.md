@@ -1,12 +1,19 @@
 ---
-title: "ValidationExceptionについて考える(工事中)"
+title: "ValidationExceptionに関する考察: エラーハンドリングと例外処理の設計"
 date: 2023-10-25T06:14:00
-##image: "images/team/nonsap-visuals-kMJp7620W6U-unsplash.jpg"
-jobtitle: ""
-linkedinurl: ""
 weight: 7
 tags:
-description: "ValidationException に関する考察と未完成の記事。この記事では、エラーバリデーションと例外処理の違い、例外処理を利用したエラーハンドリングアーキテクチャの利点と欠点について触れています。エラーハンドリングのアプローチについての理解を深めるために、関連するドキュメントや参考リンクも紹介しています。"
+  - エラーハンドリング
+  - 例外処理
+  - ValidationException
+  - .NET
+  - プログラミング
+  - ソフトウェア設計
+  - API
+  - アーキテクチャ
+  - Middleware
+  - バリデーション
+description: "ValidationExceptionの役割とエラーハンドリングアーキテクチャについて考察。バリデーションエラーと例外処理の違いや、それらを活用した集中化されたエラーハンドリングの利点と課題を整理し、設計方針に関する議論を展開します。"
 ---
 
  Exceptionは適切にThrowする必要がある。

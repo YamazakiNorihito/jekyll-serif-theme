@@ -7,14 +7,14 @@ mermaid: true
 weight: 7
 tags:
   - NGINX
-  - HTTP Module
-  - Configuration
+  - HTTP Response
   - String Replacement
-  - Web Server
+  - Server Configuration
   - MIME Types
-  - Documentation Translation
+  - Web Optimization
+  - Open Source Tools
   - ngx_http_sub_module
-description: "ngx_http_sub_moduleモジュールは、NGINXのレスポンスをフィルタリングし、指定された文字列を別の文字列に置き換える機能を提供します。設定パラメータを使って有効化する必要があり、複数の置換指令や条件付きのヘッダー保持などがサポートされています。text/htmlや他のMIMEタイプでの文字列置換を設定でき、複数のディレクティブを組み合わせて使用することで、レスポンスの内容を柔軟に変更することが可能です。"
+description: "NGINXのngx_http_sub_moduleは、レスポンス内の文字列を別の文字列に置き換えるフィルターモジュールです。複数の置換指令を設定可能で、特定のMIMEタイプに適用可能。モジュールの設定例と主要なディレクティブを日本語で解説しています。"
 ---
 
 ## Module ngx_http_sub_module
@@ -51,7 +51,7 @@ location / {
 
 |         |                                     |
 | ------- | ----------------------------------- |
-| Syntax  | sub*filter \_string* _replacement_; |
+| Syntax  | sub*filter \_string* *replacement*; |
 | Default | —                                   |
 | Context | http, server, location              |
 

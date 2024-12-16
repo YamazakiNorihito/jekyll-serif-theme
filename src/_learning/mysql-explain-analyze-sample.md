@@ -1,5 +1,5 @@
 ---
-title: "mysql-explain-analyze-sample"
+title: "MySQL EXPLAIN ANALYZEを使ったクエリ最適化の例"
 date: 2024-02-27T15:27:00
 jobtitle: ""
 linkedinurl: ""
@@ -7,14 +7,13 @@ weight: 7
 tags:
   - MySQL
   - EXPLAIN ANALYZE
-  - SQL Optimization
-  - Query Performance
-  - Database Indexing
-  - Execution Plan
-  - SQL Tuning
-  - Subquery Optimization
-  - SQL Cost Analysis
-description: ""
+  - クエリ最適化
+  - パフォーマンス分析
+  - データベースインデックス
+  - 実行計画
+  - SQLコスト分析
+  - ネストクエリ
+description: "MySQLのEXPLAIN ANALYZEを用いたSQLクエリの最適化例を解説します。実行計画の詳細やコスト分析、インデックスの利用方法についても説明しています。"
 ---
 
 ### クエリの実行計画解説

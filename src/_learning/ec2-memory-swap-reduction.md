@@ -8,13 +8,13 @@ weight: 7
 tags:
   - EC2
   - AWS
-  - Memory Management
-  - Swap File
+  - メモリ管理
+  - Swapファイル
   - Linux
-  - System Performance
+  - システムパフォーマンス
   - CloudWatch
-  - Troubleshooting
-description: "EC2インスタンスで発生したメモリ不足問題の対策としてSwapファイルを導入し、その結果メモリ使用量が減少した経緯について解説します。Swapファイルの作成によるメモリ管理の改善、CloudWatchでのメモリモニタリング、LinuxシステムでのメモリおよびSwapの使用状況確認方法など、トラブルシューティングに役立つ情報を提供します。"
+  - トラブルシューティング
+description: "EC2インスタンスで発生したメモリ不足問題への対策としてSwapファイルを導入し、メモリ使用量が減少した理由を解説。Swapの活用によるメモリ管理の改善、CloudWatchでのモニタリング、Linux環境でのSwap使用状況確認手順を紹介します。"
 ---
 
 ## 背景

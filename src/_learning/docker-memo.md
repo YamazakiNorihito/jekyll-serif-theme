@@ -8,13 +8,12 @@ weight: 7
 tags:
   - Docker
   - Docker Compose
-  - Networking
-  - Docker CLI
-  - Containers
-  - Memo
-  - Tips and Tricks
-  - Image Management
-description: "Dockerに関するメモ。コンテナのネットワークの付け替え方法、使っていないイメージの削除、Docker Composeでのコンテナ、ネットワーク、ボリュームの削除など、日常的なDocker作業に役立つコマンドやヒントをまとめています。Dockerのネットワーク管理、イメージ管理、Composeの使い方を効率的に行うための基本的なコマンドを網羅しています。"
+  - ネットワーク管理
+  - イメージ管理
+  - コンテナ操作
+  - Docker Tips
+  - 開発環境
+description: "Docker 作業に役立つメモをまとめました。ネットワークの付け替え、未使用イメージの削除、Docker Compose を使ったコンテナ、ネットワーク、ボリュームの管理方法"
 ---
 
 ## container の network を付け替える

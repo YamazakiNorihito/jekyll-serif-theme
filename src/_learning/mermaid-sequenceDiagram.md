@@ -6,8 +6,14 @@ linkedinurl: ""
 mermaid: true
 weight: 7
 tags:
-  - 
-description: ""
+  - Mermaid.js
+  - Sequence Diagram
+  - Visualization
+  - Diagrams
+  - Workflow
+  - Software Documentation
+  - Programming Tools
+description: "Mermaid.jsを使ったシーケンスダイアグラムの記述方法を解説。参加者の定義、メッセージの送信、条件分岐、並行処理、リンク設定など、基本構文から高度な表現まで幅広く網羅しています。"
 ---
 
 ## Sequence diagrams

@@ -7,14 +7,14 @@ mermaid: true
 weight: 7
 tags:
   - IPSec
-  - AH
-  - ESP
-  - Network Security
-  - Authentication Header
-  - Encapsulating Security Payload
+  - AH（Authentication Header）
+  - ESP（Encapsulating Security Payload）
   - VPN
-  - Network Specialist
-description: ""
+  - データ認証
+  - データ暗号化
+  - セキュリティプロトコル
+  - ネットワークセキュリティ
+description: "IPSecのAHとESPの特徴を比較し、データの改ざん防止や秘匿性における違いを解説。VPNなどで使用されるセキュリティプロトコルの構成や利点を詳しく説明します。"
 ---
 
 ## IPSecのAHとESPの概要と比較

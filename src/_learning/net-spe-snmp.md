@@ -8,10 +8,13 @@ weight: 7
 tags:
   - SNMP
   - ネットワーク監視
+  - SNMPv3
+  - MIB
+  - パフォーマンス管理
+  - ネットワーク管理
   - RMON
   - RADIUS
-  - Network Specialist
-description: "SNMP（Simple Network Management Protocol）は、ネットワークデバイスの監視と管理を行うためのプロトコルであり、ネットワークパフォーマンスの監視、障害の診断、デバイスの設定変更を可能にします。SNMPはバージョン1から進化しており、SNMPv3では強化されたセキュリティ機能を提供しています。ネットワーク管理システム（NMS）によるSNMPマネージャと、デバイスに組み込まれたSNMPエージェントの連携により、MIB（Management Information Base）を介してネットワークデバイスの情報収集と管理が行われます。"
+description: "SNMPはネットワークデバイスの監視と管理に使用され、パフォーマンス監視や障害検出、デバイス設定変更が可能です。SNMPv3は強化されたセキュリティ機能を提供し、ネットワーク管理システムとデバイス間で効果的に情報交換を行います。"
 ---
 
 ## SNMP（Simple Network Management Protocol）

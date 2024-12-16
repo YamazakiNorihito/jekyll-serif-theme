@@ -7,13 +7,13 @@ tags:
   - Redis
   - Node.js
   - Docker
-  - Database
-  - JavaScript
-  - Data Storage
-  - Tutorial
   - Redis CLI
+  - JavaScript
+  - Database
+  - Data Storage
   - Web Development
-description: ""
+  - Tutorial
+description: "RedisをNode.jsと連携させて、データの読み書きやユーザー管理を実装する方法を学ぶチュートリアル。Dockerを使用して環境を構築し、実践的なサンプルコードを提供。"
 ---
 
 Redis初心者なのでドキュメント見ながら、データの読み書きやユーザー管理を試してみました。

@@ -6,8 +6,15 @@ linkedinurl: ""
 mermaid: true
 weight: 7
 tags:
-  -
-description: "Kotlinで範囲と進行を簡単に作成する方法について解説します。閉区間と開区間の範囲作成、forループでの使用、逆順の処理、任意のステップでの反復処理など、範囲の基本的な使い方から進行の特性までカバーしています。また、Int、Long、Charの進行についても触れ、範囲を反復処理する際の詳細なステップ計算やコレクション関数での利用方法を紹介します。"
+  - Kotlin
+  - Ranges
+  - Progressions
+  - Iteration
+  - Loops
+  - Step Function
+  - Char Ranges
+  - Java Interoperability
+description: "Provides a comprehensive guide to creating and working with ranges and progressions in Kotlin. Covers closed and open ranges, custom steps, reversed iteration, and operations with Int, Long, and Char types, with examples of their usage in loops and collection functions."
 ---
 
 元サイト：<https://kotlinlang.org/docs/ranges.html>

@@ -10,9 +10,13 @@ tags:
   - DHCP Spoofing
   - Network Security
   - Switch Security
-  - Network Specialist
   - Cybersecurity
-description: "DHCPスヌーピングを利用したネットワークセキュリティ強化技術について解説します。不正なDHCPサーバーからの攻撃を防ぐ方法として、trusted（信頼された）ポートとuntrusted（信頼されていない）ポートの役割を説明し、DHCPスプーフィング攻撃のシーケンスとそれを阻止するためのDHCPスヌーピングの流れを示します。メリットとして、不正なサーバー検出、防止、ネットワークセキュリティ向上などが含まれます。"
+  - IP Address Management
+  - Trusted Ports
+  - Untrusted Ports
+  - Network Specialist
+  - Attack Prevention
+description: "DHCPスヌーピングを活用して、不正なDHCPサーバーからの攻撃を防ぐ方法を解説。trustedポートとuntrustedポートの役割を示し、DHCPスプーフィング攻撃の流れとその防止メカニズムを詳述します。"
 ---
 
 ## DHCP スヌーピングとは

@@ -5,9 +5,12 @@ mermaid: true
 weight: 7
 tags:
   - AWS
-  - GoLang
   - SNS
-description: "GoLangでAmazon SNSのCreatePlatformEndpoint APIを使用する際に発生するエラー「already exists with the same Token, but different attributes」の原因と対処法を解説。エラーは同じデバイストークンで異なる属性を持つエンドポイントが既に存在する場合に発生します。モバイル端末の共有によるCustomUserDataの更新が必要なケースを例に、解決策と実装コードの改善方法を紹介します。"
+  - エラー対処
+  - デバイストークン
+  - GoLang
+  - モバイル通知
+description: "Amazon SNS の CreatePlatformEndpoint API で発生する「already exists with the same Token, but different attributes」エラーの原因と解決方法を解説。GoLang を使った実装例も紹介。"
 ---
 
 ## はじめに

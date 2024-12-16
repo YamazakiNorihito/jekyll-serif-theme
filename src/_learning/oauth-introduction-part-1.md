@@ -1,20 +1,19 @@
 ---
 title: "OAuth徹底入門(1)"
 date: 2023-10-05T08:19:00
-##image: "images/team/nonsap-visuals-kMJp7620W6U-unsplash.jpg"
 jobtitle: "Client Callbackのredirect_uriの役割"
 linkedinurl: ""
 weight: 7
 tags:
-  - OAuth
-  - Security
+  - OAuth 2.0
+  - Security Best Practices
   - redirect_uri
-  - Authorization
-  - Authentication
-  - Access Token
-  - Identity Management
-  - Learning Resources
-description: ""
+  - Authorization Flow
+  - Token Request
+  - Authentication Security
+  - Client Validation
+  - OAuth Specification
+description: "OAuthの認可フローにおける`redirect_uri`の重要性と、そのセキュリティ上の役割について解説します。攻撃者からの不正アクセス防止に寄与するプロセスを理解しましょう。"
 ---
 
 ## `3.2.2. Processing the authorization response`における`redirect_uri`の理解

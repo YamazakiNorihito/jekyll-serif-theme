@@ -6,20 +6,16 @@ linkedinurl: ""
 weight: 7
 tags:
   - MySQL
-  - SQL
-  - EXPLAIN
-  - Database Performance
-  - Query Optimization
-  - Database Management
-  - SQL Indexing
-  - MySQL EXPLAIN ANALYZE
-  - MySQL SHOW STATUS
-  - Disk Management
-  - Query Execution Plan
-  - MySQL Table Size
+  - Query Analysis
+  - Database Optimization
+  - EXPLAIN Statement
+  - Binary Logs
+  - Disk Usage
   - SQL Error Handling
-  - MySQL Binary Logs
-description: ""
+  - Table Management
+  - Query Performance
+  - MySQL Configuration
+description: "MySQL の EXPLAIN を使ったクエリの解析、テーブルサイズの確認、ディスク管理、バイナリログの削除など、パフォーマンス最適化や問題解決に役立つコマンドと手法を解説。"
 ---
 
 

@@ -7,12 +7,11 @@ tags:
   - AWS
   - PrivateLink
   - VPC
-  - Cloud Networking
-  - Security
-  - Interface Endpoints
-  - Gateway Endpoints
-  - AWS Architecture
-description: "AWS PrivateLinkとVPCエンドポイントの基本概念を整理したメモです。PrivateLinkを使用することで、インターネットを経由せずにVPC間やオンプレミス環境、AWSサービスへの安全な接続を実現します。エンドポイントサービスやVPCエンドポイントの種類（インターフェース、ゲートウェイロードバランサー、ゲートウェイ）について解説し、スプリットホライズンDNSやプライベート接続の活用方法も説明します。"
+  - プライベート接続
+  - セキュリティ
+  - インターフェースエンドポイント
+  - ゲートウェイエンドポイント
+description: "AWS PrivateLink と VPC エンドポイントの基本概念を解説。安全なプライベート接続の実現方法やエンドポイントの種類、スプリットホライズン DNS の活用例を紹介。"
 ---
 
 PrivateLink についてドキュメントを読んだので、自分用にメモをまとめました。

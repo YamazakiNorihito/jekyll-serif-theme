@@ -9,7 +9,7 @@ tags:
   - UnitTest
   - BouncyCastle
   - Java
-description: "KeycloakのJWEをUTで扱う際の事前準備に関するメモ"
+description: "KeycloakのJWE機能を使用した単体テスト実行時に必要な事前準備について、BouncyCastleProviderの登録方法やCryptoIntegrationの有効化手順を解説します。"
 ---
 
 誰のために役に立つのかわからないが、 KeycloakのJWEに関してUT（ユニットテスト）で使う時に、  

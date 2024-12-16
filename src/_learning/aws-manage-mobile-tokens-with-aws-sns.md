@@ -5,12 +5,13 @@ mermaid: true
 weight: 7
 tags:
   - AWS
-  - GoLang
   - SNS
   - モバイルトークン管理
   - プッシュ通知
+  - API冪等性
+  - LocalStack
   - CreatePlatformEndpoint
-description: "Amazon SNSを活用したモバイルトークン管理に関するガイドです。SNSのPlatformApplication、PlatformEndpoint、トークンの関係性を説明し、CreatePlatformEndpoint APIを使用してトークンを管理する方法を紹介します。また、冪等性の考え方、無効なトークンの再有効化手順、エンドポイントの属性の扱いについても触れます。最後に、LocalStackを用いたハンズオンでAPIの挙動を確認します。"
+description: "Amazon SNSを使用したモバイルトークンの管理手法を詳解。トークン登録の冪等性、無効トークン再有効化、エンドポイント管理を解説し、LocalStackによるハンズオンで実践的な操作も紹介します。"
 ---
 
 最近、Amazon Simple Notification Service (SNS) を使ってモバイルトークンの管理方法について学んだので、その内容をメモとして残します。

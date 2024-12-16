@@ -15,7 +15,7 @@ tags:
   - Configuration Management
   - HashiCorp
   - Infrastructure Management
-description: ""
+description: "Terraformを使用してインフラストラクチャをコードとして管理する方法を解説。クラウド環境でのリソース管理、状態管理、モジュール活用法などの基本から応用まで紹介。"
 ---
 
 <https://developer.hashicorp.com/terraform/intro>

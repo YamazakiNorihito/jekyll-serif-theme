@@ -7,15 +7,15 @@ mermaid: true
 weight: 7
 tags:
   - EAP
-  - 認証プロトコル
-  - ネットワーク
-  - セキュリティ
   - IEEE 802.1X
-  - TLS
-  - PEAP
   - 認証方式
+  - ネットワークセキュリティ
+  - EAP-TLS
+  - PEAP
+  - 無線LAN
+  - クライアント認証
   - Network Specialist
-description: "EAP（Extensible Authentication Protocol）は、ネットワーク認証における柔軟なフレームワークで、無線LANや有線ネットワークで広く利用されています。EAPは複数の認証方式（EAP-MD5、EAP-TLS、PEAPなど）をサポートし、IEEE 802.1Xを介して認証フレームワークとして機能します。認証プロセスには、Supplicant（クライアントデバイス）、Authenticator（アクセスポイント）、およびAuthentication Server（RADIUSサーバ）が関与します。シーケンス図を使ってEAP-TLSによる認証プロセスを詳しく説明します。"
+description: "EAPは柔軟な認証フレームワークで、無線LANや有線ネットワークのセキュリティを強化します。IEEE 802.1Xや主要な認証方式の概要と認証プロセスを解説します。"
 ---
 
 ## EAP についての概要

@@ -1,11 +1,15 @@
 ---
-title: "KeycloakのAuthentication SPI"
+title: "Keycloak Authentication SPIでカスタム認証を実現しよう"
 date: 2024-10-17T14:57:00
 mermaid: true
 weight: 7
 tags:
   - Keycloak
-description: "KeycloakのAuthentication SPIを用いたカスタム認証メカニズムの作成方法を解説します。認証フローの詳細や必要なクラスの実装、AuthenticatorやRequired Actionの設定などについて説明し、登録フォームのバリデーションやユーザー拡張の方法も紹介します。"
+  - SPI
+  - Authentication
+  - Required Action
+  - カスタム認証
+description: "KeycloakのAuthentication SPIを活用してカスタム認証を実装する方法を解説。認証フローの詳細、Authenticatorの作成、Required Actionの追加、登録フォームのカスタマイズなど実践的な内容を網羅します。"
 ---
 
 ## Authentication SPI について

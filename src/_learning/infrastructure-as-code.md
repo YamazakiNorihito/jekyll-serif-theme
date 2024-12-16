@@ -1,11 +1,19 @@
 ---
-title: "（工事中）Infrastructure as Code - クラウドにおけるサーバー管理の原則とプラクティスを読んで"
+title: "Infrastructure as Code: 原則・課題・ベストプラクティス"
 date: 2024-06-24T17:10:00
 linkedinurl: ""
 weight: 7
 tags:
-  - 
-description: ""
+  - Infrastructure as Code
+  - DevOps
+  - Cloud Computing
+  - IaC
+  - AWS
+  - Automation
+  - CloudFormation
+  - Infrastructure Patterns
+  - Best Practices
+description: "『Infrastructure as Code』を読んで得た知見を共有。IaCの原則や課題、クラウド管理のベストプラクティスを解説し、環境ごとのアンチパターンやダイナミックインフラ構築のポイントを探ります。"
 ---
 
 ## 1章: 課題と原則

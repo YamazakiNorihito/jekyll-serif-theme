@@ -6,8 +6,15 @@ linkedinurl: ""
 mermaid: true
 weight: 7
 tags:
-  -
-description: ""
+  - Dependency Inversion Principle
+  - SOLID原則
+  - IoCコンテナ
+  - Service Locator
+  - DI（依存性注入）
+  - ソフトウェア設計
+  - クリーンアーキテクチャ
+  - C#開発
+description: "依存性逆転の原則(DIP)を解説し、インターフェースを活用した設計の利点を紹介。IoCコンテナやService Locatorを用いた具体例を通じて、実践的な活用方法を学べます。"
 ---
 
 ## 依存関係の逆転の原則(Dependency Inversion Principle, DIP)

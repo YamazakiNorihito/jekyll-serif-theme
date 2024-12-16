@@ -7,14 +7,14 @@ mermaid: true
 weight: 7
 tags:
   - フレームアグリゲーション
-  - Wi-Fi
-  - MAC層
-  - スループット
   - A-MSDU
   - A-MPDU
-  - ネットワーク
+  - Wi-Fi高速化
+  - MAC層
+  - ネットワーク技術
+  - スループット向上
   - Network Specialist
-description: ""
+description: "Wi-Fi通信で使用されるフレームアグリゲーション技術を解説。A-MSDUとA-MPDUの仕組みを詳述し、通信効率化とスループット向上のメリットを説明します。"
 ---
 
 ## フレームアグリゲーションについて

@@ -7,13 +7,18 @@ mermaid: true
 weight: 7
 tags:
   - DNS
-  - 再帰問い合わせ
-  - 非再帰問い合わせ
-  - ネットワーク
-  - ネットワークセキュリティ
-  - ネットワークプロトコル
+  - DNS Records
+  - Zone File
+  - A Record
+  - CNAME
+  - MX Record
+  - SPF
+  - PTR Record
+  - Email Authentication
+  - Mail Security
+  - TXT Records
   - Network Specialist
-description: "DNSの再帰問い合わせと非再帰問い合わせの違いについて解説します。再帰問い合わせではリゾルバが他のDNSサーバーに対して回答を得るために問い合わせを繰り返し、クライアントに最終的な回答を返します。一方、非再帰問い合わせではリゾルバは直接回答を返すか、他のDNSサーバーへの問い合わせ情報を提供します。シーケンス図やDNSコンポーネント（クライアント、リゾルバ、ルートDNS、TLDサーバー、権威DNS）の説明を交え、これらのプロセスを詳しく説明します。"
+description: "DNSレコードの基本的な種類と用途について解説します。SOA、A、CNAME、MX、TXT、NS、PTR、SRVレコードなどの役割を具体例で示し、DNS設定の実践力を高めます。また、SPFやPTRレコードを活用した電子メールの送信元認証と、それを強化する方法について詳述します。"
 ---
 
 ## 再帰問い合わせと非再帰問い合わせ

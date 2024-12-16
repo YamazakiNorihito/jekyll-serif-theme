@@ -7,7 +7,9 @@ tags:
   - AWS
   - DynamoDB
   - BatchWriteItem
-description: "BatchWriteItemはAWS DynamoDBの機能で、複数のアイテムを1回の操作で追加または削除することができます。このガイドでは、BatchWriteItemの基本的な使用方法、利点、注意点、および実装例を紹介します。アトミック操作でないことやリトライ処理の重要性、具体的なエラー条件や制限事項についても詳しく説明します。DynamoDBを使った効率的なデータ操作のための知識を身につけましょう。"
+  - NoSQL
+  - Data Management
+description: "AWS DynamoDBのBatchWriteItemを用いて、複数アイテムを1回の操作で効率的に追加または削除する方法を紹介。利点や注意点、リトライ処理、エラー条件、制限事項も詳しく解説します。"
 ---
 
 ### BatchWriteItem概要

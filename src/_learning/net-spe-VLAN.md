@@ -11,8 +11,10 @@ tags:
   - IEEE 802.1Q
   - CoS
   - Virtual LAN
-  - Network Specialist
-description: "VLAN（Virtual Local Area Network）は、物理ネットワークを論理的に分割して、異なるネットワークセグメントを構築する技術です。これにより、セキュリティの向上やネットワークパフォーマンスの最適化が可能です。VLANは、802.1Qタグを用いてフレームを識別し、TCI（Tag Control Information）に優先度やVLAN IDを含めます。異なる種類のVLAN（ポートベース、タグベース、IPサブネットベースなど）をサポートし、VID（VLAN Identifier）の範囲は2から4094です。"
+  - VLAN Tagging
+  - ネットワーク設計
+  - トラフィック管理
+description: "VLANは物理ネットワークを論理的に分割し、セキュリティ向上とネットワークパフォーマンス最適化を実現する技術です。802.1Qタグを用いて、ネットワーク内で複数の仮想ネットワークを構築します。"
 ---
 
 ## VLAN の基本

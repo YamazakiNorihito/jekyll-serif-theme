@@ -14,11 +14,10 @@ tags:
   - Transit Gateway
   - VPC Peering
   - VPN接続
-  - AWSネットワーキング
-  - フルメッシュ構成
-  - セキュリティ
-  - クラウドネットワーク
-description: "AWS VPCの基本的な概念とネットワーク接続方法を解説。サブネットやルートテーブル、インターネット接続の基本から、VPN接続やフルメッシュ構成、Transit Gatewayを使ったVPC間接続の簡略化方法まで、AWSのネットワーク管理のポイントを整理しています。Mermaid図を用いてVPC PeeringやTransit Gatewayの構成を視覚的に説明し、クラウドネットワーク設計の基礎を学べる内容です。"
+  - AWSネットワーク設計
+  - セキュリティベストプラクティス
+  - クラウドネットワーク管理
+description: "AWS VPCの基本概念を整理し、ネットワーク接続の方法を解説。VPC PeeringやTransit Gatewayを使った構成の違いや、VPN接続、フルメッシュ構成の課題と解決方法についても触れます。クラウドネットワーク設計の基礎を学べる内容です。"
 ---
 
 [userguide/what-is-amazon-vpc](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html)を読んだので、自分なりにまとめました。

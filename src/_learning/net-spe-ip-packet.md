@@ -7,13 +7,14 @@ mermaid: true
 weight: 7
 tags:
   - IPパケット
-  - TCP
-  - UDP
+  - TCPヘッダー
+  - UDPヘッダー
   - ネットワークプロトコル
-  - ヘッダー構成
-  - Ethernet
+  - データ転送
+  - Ethernetヘッダー
+  - IPヘッダー
   - Network Specialist
-description: ""
+description: "IPパケット構成図を使用して、Ethernet、IP、TCP、UDPヘッダーの各フィールドを詳細に解説。ネットワークプロトコルの基本構造とデータ転送の仕組みを明確にします。"
 ---
 
 

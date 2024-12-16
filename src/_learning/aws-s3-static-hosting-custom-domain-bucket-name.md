@@ -5,7 +5,12 @@ mermaid: true
 weight: 7
 tags:
   - AWS
-description: ""
+  - S3
+  - 静的ウェブサイト
+  - カスタムドメイン
+  - Route 53
+  - ウェブホスティング
+description: "Amazon S3 で静的ウェブサイトをホスティングする際、バケット名とカスタムドメイン名を一致させる理由を解説。S3 の仕組みや設定手順も詳しく紹介。"
 ---
 
 Amazon S3を利用して静的なWebサイトを公開する際、Custom Domain（例: `www.example.com`）を使いたいことが多いでしょう。この場合、Route 53の特有の機能である`Alias`レコードを使って、Custom DomainからS3の公開エンドポイントに名前解決を設定することが多いと思います。

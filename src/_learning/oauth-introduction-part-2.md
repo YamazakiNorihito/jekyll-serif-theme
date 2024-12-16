@@ -14,7 +14,7 @@ tags:
   - SSO
   - Access Management
   - Security
-description: ""
+description: "Keycloakは、シングルサインオン（SSO）とアクセス管理機能を提供するオープンソースのIAMソリューションです。Dockerを使ってローカルでKeycloakをセットアップし、OAuthの流れを実践的に学びました。"
 ---
 
 ## Keycloakをローカルで試してみた: 実践記録

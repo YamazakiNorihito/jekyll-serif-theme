@@ -8,13 +8,13 @@ weight: 7
 tags:
   - Node.js
   - TypeScript
-  - npm
-  - 開発環境
-  - Inversify
-  - Express
   - プロジェクトセットアップ
-  - 開発依存
-description: "Node.js プロジェクトセットアップに関する手順で、TypeScript を使用した開発環境の構築方法を説明しています。Express、Inversify を用いた設定、開発依存の管理、npm の `--save-dev` オプションについて解説しています。"
+  - 開発環境構築
+  - Express
+  - Inversify
+  - npm
+  - 開発依存関係
+description: "Node.js プロジェクトのセットアップ手順を解説。TypeScript を活用した開発環境構築、Express や Inversify の設定、--save-dev オプションの使い方を詳しく説明します。"
 ---
 
 ```bash

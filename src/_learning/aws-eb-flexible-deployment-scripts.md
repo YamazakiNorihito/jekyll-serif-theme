@@ -1,18 +1,17 @@
 ---
-title: "AWS Elastic Beanstalkでの柔軟なデプロイスクリプトの活用"
+title: "AWS Elastic Beanstalkで柔軟なデプロイスクリプトを活用する方法"
 date: 2024-8-17T07:00:00
-jobtitle: ""
-linkedinurl: ""
 mermaid: true
 weight: 7
 tags:
   - AWS
   - Elastic Beanstalk
   - Linux
-  - Deployment
+  - Deployment Automation
   - Custom Scripts
-  - Automation
-description: "AWS Elastic Beanstalk の Linux プラットフォームを活用し、デプロイ時にカスタムスクリプトを使って柔軟な処理を自動化する方法を紹介します。インスタンスごとの設定や Nginx プロキシの調整、デプロイ前後の特定の操作を実行するスクリプトの設定など、アプリケーションに合わせた柔軟なカスタマイズが可能です。構成例や設定ファイルの使い方を通じて、デプロイ作業の効率化と環境の最適化を図る方法を解説します。"
+  - Nginx
+  - EC2
+description: "AWS Elastic BeanstalkのLinuxプラットフォームでデプロイ時にカスタムスクリプトを活用する方法を解説。Nginx設定、デプロイフック、環境変数の自動設定など柔軟なカスタマイズを可能にします。"
 ---
 
 ### AWS Elastic Beanstalk での柔軟なデプロイスクリプトの活用

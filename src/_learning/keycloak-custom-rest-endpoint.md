@@ -5,7 +5,14 @@ mermaid: true
 weight: 7
 tags:
   - Keycloak
-description: "An overview of creating a custom REST endpoint in Keycloak to retrieve user credentials using the Extension API."
+  - Custom REST API
+  - Extension API
+  - User Management
+  - Credential Management
+  - Java Development
+  - Keycloak Customization
+  - Web Security
+description: "Learn how to create a custom REST endpoint in Keycloak using the Extension API to retrieve user credentials in JSON format."
 ---
 
 KeycloakのExtension APIの実装について学びましたので、その内容をまとめます。今回の実装は、特定ユーザーのクレデンシャルデータを取得するためのカスタムREST APIの作成です。以下に、その具体的な手順とコードを紹介します。

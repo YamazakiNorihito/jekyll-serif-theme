@@ -9,10 +9,10 @@ tags:
   - Docker
   - Docker Compose
   - AWS
-  - CloudWatch
-  - Logging
-  - EC2
-description: "AWS CloudWatch Logs (`awslogs`)を使用して、Docker Compose でログを CloudWatch に送信する方法を説明します。Elastic Beanstalk 上の EC2 インスタンスに Docker Compose をデプロイした際に、ログを CloudWatch に出力するための設定例を紹介し、必要な IAM ポリシーについても言及します。サンプルとして NGINX サービスの Docker Compose 設定を示し、`awslogs` ドライバーを使用したログ出力の設定を解説します。"
+  - CloudWatch Logs
+  - ログ設定
+  - Elastic Beanstalk
+description: "Docker Compose を使用して AWS CloudWatch Logs にログを送信する設定ガイド。Elastic Beanstalk 上の EC2 で実装する際の具体例や、awslogs ドライバーの設定方法、必要な IAM ポリシーを詳しく解説。"
 ---
 
 ## Docker Compose で AWS Logs を利用するための設定ガイド

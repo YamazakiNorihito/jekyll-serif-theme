@@ -6,14 +6,13 @@ linkedinurl: ""
 mermaid: true
 weight: 7
 tags:
-  - 暗号化
-  - 無線LAN
-  - セキュリティ
+  - 無線LAN暗号化
+  - Wi-Fiセキュリティ
   - WPA2
   - WPA3
-  - WEP
-  - Network Specialist
-description: "無線LANの暗号化方式には、WEP、WPA、WPA2、WPA3の4種類があり、それぞれ異なるセキュリティレベルを提供します。WEPは最初に使用された方式ですが脆弱性が多く、WPAはその改良版ながらも脆弱性が指摘されています。WPA2はAES暗号とCCMPを使用し、現在の標準となっています。最新のWPA3はさらにセキュリティが強化され、高速で安全なデータ処理を提供します。可能であればWPA3を使用するのが推奨されます。"
+  - WEP脆弱性
+  - セキュリティプロトコル
+description: "無線LANの暗号化方式にはWEP、WPA、WPA2、WPA3があります。WEPは脆弱で、WPAは改良されましたが依然として脆弱性があります。WPA2はAES暗号を使用し安全ですが、最新のWPA3はさらに強化されており、高速で安全な通信を提供します。"
 ---
 
 ## 無線 LAN の暗号化方式について

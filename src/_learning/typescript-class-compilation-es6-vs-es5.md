@@ -14,7 +14,7 @@ tags:
   - Programming
   - Class Definition
   - Compilation
-description: ""
+description: "TypeScriptのクラス定義がES6とES5でどのようにコンパイルされるかを比較。ターゲットバージョンによる挙動の違いを学ぶ。"
 ---
 
 

@@ -1,21 +1,20 @@
 ---
-title: "ネットワークスペシャリスト　DNS Records"
-date: 2024-02-04T20:10:00
+title: "ネットワークスペシャリスト　DNS 再帰問い合わせと非再帰問い合わせ"
+date: 2024-02-05T21:25:00
 jobtitle: ""
 linkedinurl: ""
 mermaid: true
 weight: 7
 tags:
   - DNS
-  - DNS Records
-  - Zone File
-  - A Record
-  - CNAME
-  - MX Record
-  - SPF
-  - PTR Record
-  - Network Specialist
-description: "DNSレコードの基本的な種類と用途について解説します。ゾーンファイルのサンプルを通して、SOA、A、CNAME、MX、TXT、NS、PTR、SRVレコードなどの役割を説明し、DNS設定の理解を深めます。また、SPFとPTRレコードを用いた電子メールの送信元認証の仕組みを解説し、メールサーバーのセキュリティにおける重要なポイントを紹介します。"
+  - Recursive Query
+  - Non-Recursive Query
+  - ネットワーク基礎
+  - ルートDNS
+  - TLDサーバー
+  - ネットワークセキュリティ
+  - ネットワークスペシャリスト
+description: "DNSの再帰問い合わせと非再帰問い合わせの仕組みを詳しく解説。再帰問い合わせではリゾルバが他のDNSサーバーに問い合わせてクライアントに最終回答を返す一方、非再帰問い合わせはリゾルバがキャッシュまたは他のDNSサーバー情報を提供。DNSのコンポーネントやシーケンス図を用い、具体的な流れをわかりやすく説明します。"
 ---
 
 DNS レコードのリソースファイル（ゾーンファイル）は、ドメイン名とそのドメインに関連する様々なリソースレコード（RR）を定義するために使用されます。

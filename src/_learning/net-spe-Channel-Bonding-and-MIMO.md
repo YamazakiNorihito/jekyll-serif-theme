@@ -9,13 +9,16 @@ tags:
   - Wi-Fi
   - チャネルボンディング
   - MIMO
-  - IEEE 802.x
+  - IEEE 802.11
+  - IEEE 802.11n
+  - IEEE 802.11ac
+  - IEEE 802.11ax
   - 無線通信
-  - ネットワーク
   - 無線LAN
   - 高速通信
+  - ネットワーク技術
   - Network Specialist
-description: ""
+description: "Wi-Fi技術のチャネルボンディングとMIMOを解説。これらが高速で安定した無線通信を実現する仕組みを説明し、IEEE 802.x規格ごとの性能を比較。"
 ---
 
 ## 無線Wi-Fi技術：チャネルボンディングとMIMO

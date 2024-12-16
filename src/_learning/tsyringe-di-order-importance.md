@@ -4,14 +4,13 @@ date: 2023-10-28T20:47:00
 weight: 7
 tags:
   - TypeScript
-  - Dependency Injection
   - tsyringe
-  - DI
+  - 依存注入
+  - DI順序
   - Node.js
   - Express
-  - Programming
-  - Error Handling
-description: ""
+  - エラー処理
+description: "TypeScriptとtsyringeを使用した依存注入で、依存注入の順序がエラーに影響することを学び、正しい順序でのDI設定方法を紹介。"
 ---
 
 

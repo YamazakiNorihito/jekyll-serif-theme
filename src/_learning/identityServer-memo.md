@@ -1,13 +1,18 @@
 ---
-title: "identityserver のめも"
+title: "IdentityServer メモ: カスタムストレージとDIの設定"
 date: 2023-11-07T06:30:00
-#image: "images/team/nonsap-visuals-kMJp7620W6U-unsplash.jpg"
 jobtitle: ""
 linkedinurl: ""
 weight: 7
 tags:
-  - 
-description: ""
+  - IdentityServer
+  - OAuth2
+  - OpenID Connect
+  - Custom Storage
+  - Dependency Injection
+  - .NET
+  - Duende IdentityServer
+description: "IdentityServerのカスタムストレージ連携やDI設定に関する公式ドキュメントやソースコードをまとめたメモ記事です。主要なリファレンスへのリンクを掲載し、必要な情報へ素早くアクセスできる内容になっています。"
 ---
 
 

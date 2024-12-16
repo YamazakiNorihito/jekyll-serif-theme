@@ -1,20 +1,19 @@
 ---
 title: "OAuth徹底入門(3)"
 date: 2023-10-09T7:00:00
-#image: "images/team/nonsap-visuals-kMJp7620W6U-unsplash.jpg"
 jobtitle: "OAuthのコンポーネントの役割"
 linkedinurl: "/tech/article/OAuth-%20Sequence_Diagram/"
 weight: 7
 tags:
-  - OAuth
+  - OAuth 2.0
   - Authentication
-  - Authorization
-  - Security
-  - Access Token
+  - Authorization Server
+  - Security Best Practices
+  - Access Token Management
   - Identity Management
   - API Security
-  - Learning Resources
-description: ""
+  - OAuth Components
+description: "OAuthの主要コンポーネント（Client, Authorization Server, Protected Resource）の役割とそれぞれの役割を理解し、OAuth認証フローを正しく実装するための基本を学びます。"
 ---
 
 ## OAuthのコンポーネントの役割

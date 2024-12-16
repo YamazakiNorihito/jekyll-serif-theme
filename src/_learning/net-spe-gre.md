@@ -7,14 +7,15 @@ mermaid: true
 weight: 7
 tags:
   - GRE
-  - トンネリング
+  - トンネリングプロトコル
   - カプセル化
   - IPsec
   - VPN
-  - ネットワークプロトコル
-  - Network Specialist
-  - IPv6
-description: ""
+  - ネットワークトンネリング
+  - IPv4とIPv6
+  - セキュリティ
+  - マルチキャスト
+description: "GREは異なるネットワークプロトコルをカプセル化し、互換性を保ちながらデータを転送するプロトコルです。VPNやIPv4-IPv6トンネリングなどに利用され、IPsecと組み合わせることでセキュリティを強化します。"
 ---
 
 Generic Routing Encapsulation (GRE) は、異なる種類のネットワークトラフィックを他のプロトコルでカプセル化し、それをインターネットなどの異なるネットワーク上で転送するためのプロトコルです。
