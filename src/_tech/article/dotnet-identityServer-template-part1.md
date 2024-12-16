@@ -7,7 +7,15 @@ categories:
   - oauth
   - csharp
   - dotnet
-description: ""
+description: "IdentityServerのテンプレートコードに基づき、ユーザー作成と認証の流れを解説。`OnGet`および`OnPost`メソッドを通じて、認可リクエストの処理やサインインの実装方法を紹介。"
+tags:
+  - IdentityServer
+  - OAuth
+  - .NET
+  - C#
+  - Authentication
+  - Razor Pages
+  - User Creation
 ---
 
 /src/IdentityServer/Pages/Account/Create/Index.cshtml.cs を見ていく

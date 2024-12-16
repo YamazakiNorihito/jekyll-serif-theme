@@ -7,7 +7,14 @@ categories:
   - nodejs
   - typescript
   - docker
-description: ""
+description: "TypeScriptプロジェクトをDockerイメージに変換する方法を解説。ビルドからテスト、最適化されたプロダクション環境構築までを段階的に説明します。"
+tags:
+  - "TypeScript"
+  - "Docker"
+  - "CI/CD"
+  - "ユニットテスト"
+  - "Jest"
+  - "Node.js"
 ---
 
 ## TypeScriptで作成したプロジェクトをDockerイメージにする方法

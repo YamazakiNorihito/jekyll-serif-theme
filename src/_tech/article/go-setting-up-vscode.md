@@ -4,7 +4,15 @@ date: 2024-05-31T06:00:00
 weight: 4
 categories:
 - go
-description: ""
+description: "VSCodeでGo開発を効率化するための設定方法を紹介。拡張機能のインストールや、設定ファイルのカスタマイズを通じて生産性を向上させます。"
+tags:
+  - Go
+  - VSCode
+  - 開発環境
+  - コードフォーマット
+  - Linter
+  - goimports
+  - golangci-lint
 ---
 
 ## 思い

@@ -5,7 +5,16 @@ weight: 4
 categories:
   - aws
   - cloud-service
-description: ""
+description: "AWS Elastic BeanstalkでDocker環境を構築するためのCloudFormationテンプレートを紹介。複数のリソース定義をネストし、Dockerコンテナをデプロイする方法を説明。"
+tags:
+  - AWS
+  - Elastic Beanstalk
+  - Docker
+  - CloudFormation
+  - Infrastructure as Code
+  - Automation
+  - DevOps
+  - Deployment
 ---
 
 AWS Elastic BeanstalkでDocker環境を構築するためのCloudFormationテンプレートのサンプルを紹介します。

@@ -7,7 +7,14 @@ categories:
   - javascript
   - nodejs
   - typescript
-description: ""
+description: "VSCodeでTypeScriptアプリケーションのデバッグを効率化する方法を解説。自動再ビルドと再起動設定で快適な開発環境を作成します。"
+tags:
+  - "TypeScript"
+  - "VSCode"
+  - "デバッグ"
+  - "自動ビルド"
+  - "Nodemon"
+  - "Node.js"
 ---
 
 

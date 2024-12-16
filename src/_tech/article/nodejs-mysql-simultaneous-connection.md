@@ -1,12 +1,17 @@
 ---
-
 title: "NodejsでMySQL接続と同時接続する実装"
 date: 2023-11-04T07:00:00
 weight: 4
 categories:
   - javascript
   - nodejs
-description: ""
+description: "Node.jsでMySQL接続と同時接続数の管理方法を解説。接続プールを活用し、非同期クエリ実行の効率を向上させる実装方法を紹介。"
+tags:
+  - Node.js
+  - MySQL
+  - 接続プール
+  - 非同期処理
+  - データベース接続
 ---
 
 Node.jsを使用してMySQLデータベースへの非同期接続と同時接続数の実装をします。

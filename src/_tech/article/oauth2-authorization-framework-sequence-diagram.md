@@ -6,7 +6,13 @@ mermaid: true
 categories:
   - tech
   - oauth
-description: ""
+description: "OAuth 2.0 Authorization Code Grantフローをシーケンス図で示し、サードパーティアプリケーションが保護されたリソースにアクセスする流れを解説。"
+tags:
+  - "OAuth 2.0"
+  - "Authorization Code Grant"
+  - "シーケンス図"
+  - "セキュリティ"
+  - "API認証"
 ---
 
 OAuth 2.0承認フレームワークのAuthorization Code Grant を使った、

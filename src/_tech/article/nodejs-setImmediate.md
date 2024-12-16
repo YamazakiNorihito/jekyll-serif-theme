@@ -1,5 +1,4 @@
 ---
-
 title: "大量データのストリーム処理におけるsetImmediateの活用法"
 date: 2023-11-04T07:00:00
 weight: 4
@@ -7,7 +6,14 @@ categories:
   - javascript
   - nodejs
   - typescript
-description: ""
+description: "大量データのストリーム処理でメモリ使用を最小化し、イベントループの応答性を保つためにsetImmediateを活用する方法を紹介します。"
+tags:
+  - Node.js
+  - JavaScript
+  - TypeScript
+  - 非同期処理
+  - メモリ最適化
+  - パフォーマンス改善
 ---
 
 ####

@@ -7,7 +7,14 @@ categories:
   - oauth
   - csharp
   - dotnet
-description: ""
+description: "Duende IdentityServerでカスタムストアをDIする方法を実装。IClientStore、ICorsPolicyService、IResourceStore、IIdentityProviderStoreの簡易実装例と、CORS設定の注意点を解説。"
+tags:
+  - "IdentityServer"
+  - "Duende"
+  - "OAuth"
+  - "CORS"
+  - "DI"
+  - "C#"
 ---
 
 ## やったこと

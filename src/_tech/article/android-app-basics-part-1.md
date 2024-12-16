@@ -5,7 +5,15 @@ weight: 4
 categories:
   - tech
   - android
-description: ""
+description: "Android アプリ開発の基本的なコンポーネントやセキュリティ機能、アプリ間のデータ共有についてまとめた記事。"
+tags:
+  - Android
+  - アプリ開発
+  - Kotlin
+  - セキュリティ
+  - SDK
+  - Androidコンポーネント
+  - APK
 ---
 
 Android デベロッパーの[アプリの基礎](https://developer.android.com/guide/components/fundamentals?hl=ja)をつらつらと自分なりにまとめていく。

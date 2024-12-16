@@ -6,7 +6,16 @@ mermaid: true
 categories:
   - nodejs
   - javascript
-description: ""
+description: "Node.jsの`worker_threads`モジュールを使用して、マルチスレッド処理を実現し、CPU密集型タスクの処理を高速化する方法を解説します。"
+tags:
+  - Node.js
+  - worker_threads
+  - マルチスレッド
+  - パフォーマンス
+  - CPU密集型タスク
+  - 並列処理
+  - アプリケーションパフォーマンス
+  - 非同期処理
 ---
 
 ## Node.jsと`worker_threads`モジュールの概要

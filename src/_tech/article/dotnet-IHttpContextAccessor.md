@@ -6,7 +6,13 @@ categories:
   - tech
   - csharp
   - dotnet
-description: ""
+description: "IHttpContextAccessorはASP.NET CoreでHttpContextにアクセスするためのクラス。リクエストスコープ内での使用が推奨される。"
+tags:
+  - IHttpContextAccessor
+  - ASP.NET Core
+  - HttpContext
+  - C#
+  - .NET
 ---
 
 

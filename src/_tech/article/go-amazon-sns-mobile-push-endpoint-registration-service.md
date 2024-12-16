@@ -4,7 +4,14 @@ date: 2024-06-5T5:00:00
 weight: 4
 categories:
   - go
-description: ""
+description: "Goを使ってAmazon SNSでモバイルPush通知のエンドポイントを登録・更新するサービスを実装。ユーザー情報とデバイストークンに基づいてエンドポイントを管理します。"
+tags:
+  - Go
+  - Amazon SNS
+  - Push Notifications
+  - AWS SDK
+  - Goサービス
+  - モバイル通知
 ---
 
 ## はじめに

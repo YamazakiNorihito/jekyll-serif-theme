@@ -4,7 +4,14 @@ date: 2024-05-31T05:00:00
 weight: 4
 categories:
   - go
-description: ""
+description: "Goプロジェクトの構造設計におけるベストプラクティスを紹介。主要なディレクトリの役割や推奨されるレイアウトを解説します。"
+tags:
+  - Go
+  - プロジェクト構造
+  - ベストプラクティス
+  - Lambda
+  - AWS
+  - Golang-standards
 ---
 
 ## 思い

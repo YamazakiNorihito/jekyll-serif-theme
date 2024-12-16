@@ -4,7 +4,15 @@ date: 2024-06-4T7:00:00
 weight: 4
 categories:
   - go
-description: ""
+description: "ローカル環境でDynamoDB Streamsを使用してGoプログラムのデバッグ方法を紹介。ストリームのイベントをポーリングし、Lambda関数のように処理します。"
+tags:
+  - Go
+  - DynamoDB
+  - DynamoDB Streams
+  - ローカル開発
+  - デバッグ
+  - AWS SDK
+  - Lambda
 ---
 
 ## ローカルでDynamoDB Streamsを使ってGoプログラムをデバッグする方法

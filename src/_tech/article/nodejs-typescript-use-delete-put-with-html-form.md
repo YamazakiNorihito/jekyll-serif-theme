@@ -6,7 +6,17 @@ categories:
   - javascript
   - nodejs
   - typescript
-description: ""
+description: "HTMLフォームからDELETEやPUTメソッドを送信する方法を、method-overrideライブラリを使用して実現する手順を解説。API風のリクエストが簡単に送れるようになる。"
+tags:
+  - HTMLフォーム
+  - method-override
+  - Express
+  - WebAPI
+  - Node.js
+  - HTTPメソッド
+  - DELETEメソッド
+  - PUTメソッド
+  - リクエスト送信
 ---
 
 ## 目的や背景

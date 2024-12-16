@@ -7,7 +7,15 @@ categories:
   - oauth
   - csharp
   - dotnet
-description: ""
+description: "IdentityServerは、OAuth 2.0とOpenID Connectプロトコルをサポートする、.NET環境向けのセキュリティフレームワークです。API保護や認証・認可機能を提供します。"
+tags:
+  - IdentityServer
+  - OAuth 2.0
+  - OpenID Connect
+  - .NET
+  - C#
+  - セキュリティ
+  - API認証
 ---
 
 ## IdentityServerの紹介

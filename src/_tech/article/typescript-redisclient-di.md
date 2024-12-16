@@ -6,7 +6,14 @@ categories:
   - javascript
   - nodejs
   - typescript
-description: ""
+description: "TypeScriptとTSyringeを使用してRedisClientをDependency Injection (DI)する方法を紹介。Redisとの連携を効率化し、DIの活用方法を学べます。"
+tags:
+  - "Redis"
+  - "Dependency Injection"
+  - "TSyringe"
+  - "TypeScript"
+  - "Node.js"
+  - "DIコンテナ"
 ---
 
 RedisClientをDIする方法と呼び出し方を紹介します。

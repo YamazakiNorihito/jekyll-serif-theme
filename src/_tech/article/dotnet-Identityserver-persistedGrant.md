@@ -8,7 +8,15 @@ categories:
   - oauth
   - csharp
   - dotnet
-description: ""
+description: "IdentityServerの`IPersistedGrantStore`とその実装について解説。認証情報の保存、取得、削除の仕組みやカスタマイズ方法を紹介。"
+tags:
+  - IdentityServer
+  - OAuth
+  - .NET
+  - C#
+  - Authentication
+  - Persisted Grants
+  - Entity Framework
 ---
 
 [Persisted Grant Store](https://docs.duendesoftware.com/identityserver/v6/reference/stores/persisted_grant_store/)

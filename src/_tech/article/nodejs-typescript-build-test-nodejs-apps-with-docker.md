@@ -1,5 +1,4 @@
 ---
-
 title: "Dockerを使用してNode.jsアプリケーションをビルドとテストする方法"
 date: 2024-3-29T08:51:00
 weight: 4
@@ -8,7 +7,13 @@ categories:
   - nodejs
   - typescript
   - docker
-description: ""
+description: "Dockerを使用してNode.jsアプリケーションのビルド、テストを効率化。マルチステージビルドで軽量なプロダクション環境を構築する方法を紹介。"
+tags:
+  - Docker
+  - Node.js
+  - ビルド
+  - テスト
+  - マルチステージビルド
 ---
 
 ## Dockerを使用してNode.jsアプリケーションをビルドとテストする方法

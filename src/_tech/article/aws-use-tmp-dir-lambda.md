@@ -5,7 +5,16 @@ weight: 4
 categories:
   - aws
   - cloud-service
-description: ""
+description: "AWS Lambdaで/tmpディレクトリを使用する方法。S3からファイルをダウンロードし、ローカルに保存して処理する例を示します。注意点として、/tmpのサイズ制限は512MBです。"
+tags:
+  - AWS Lambda
+  - tmp directory
+  - S3
+  - File Handling
+  - Ephemeral Storage
+  - Node.js
+  - Cloud Functions
+  - AWS SDK
 ---
 
 /tmp はデフォルトサイズが512MBなので気をつけるように

@@ -8,7 +8,14 @@ categories:
   - oauth
   - csharp
   - dotnet
-description: ""
+description: "IdentityServerの`AddIdentityServer`メソッドについて、内部で呼ばれるサービスやミドルウェアを解説。認証設定や動的プロバイダの追加などを行っています。"
+tags:
+  - IdentityServer
+  - OAuth
+  - .NET
+  - C#
+  - Authentication
+  - Dependency Injection
 ---
 
 

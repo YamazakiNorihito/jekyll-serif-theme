@@ -7,7 +7,15 @@ categories:
   - javascript
   - nodejs
   - typescript
-description: ""
+description: "Semaphoreを使用して、同時実行タスク数を制御し、タスクの並行処理を制限する方法と、その実装を紹介します。"
+tags:
+  - JavaScript
+  - Node.js
+  - TypeScript
+  - 並行処理
+  - セマフォ
+  - タスク制限
+  - 非同期処理
 ---
 
 Semaphoreクラス実装してみました。

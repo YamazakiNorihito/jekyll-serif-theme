@@ -6,7 +6,16 @@ categories:
   - javascript
   - nodejs
   - typescript
-description: ""
+description: "Node.jsとTypeScriptを使用した本と作者の管理プロジェクトの依存関係、設定、データモデルについて解説。開発環境から本番環境へのデプロイまでの実践的なガイド。"
+tags: 
+  - "Node.js"
+  - "TypeScript"
+  - "Express"
+  - "Sequelize"
+  - "SQLite"
+  - "ORM"
+  - "API"
+  - "データベース設計"
 ---
 
 ## bookshelf パッケージの依存関係説明

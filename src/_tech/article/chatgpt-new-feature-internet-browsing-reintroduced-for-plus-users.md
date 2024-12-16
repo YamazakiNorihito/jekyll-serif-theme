@@ -5,7 +5,16 @@ weight: 4
 categories:
   - tech
   - openai
-description: ""
+description: "ChatGPTの新機能「インターネット閲覧」がPlusユーザーに再展開され、最新情報を取得する機能が追加されました。ブラウジング機能を有効にする方法も紹介。"
+tags:
+  - ChatGPT
+  - OpenAI
+  - AI Features
+  - Browse with Bing
+  - GPT-4
+  - Internet Browsing
+  - Plus Users
+  - AI Updates
 ---
 
 OpenAIのSeptember 27, 2023にリリースされた

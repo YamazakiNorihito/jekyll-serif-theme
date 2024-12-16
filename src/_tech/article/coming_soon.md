@@ -7,7 +7,14 @@ categories:
   - github
   - golange
   - nodesj
-description: ""
+description: "新しいテクノロジーに関する記事が近日公開予定です。"
+tags:
+  - GitHub
+  - Go
+  - Node.js
+  - Tech News
+  - Programming
+  - Software Development
 ---
 
 coming soon

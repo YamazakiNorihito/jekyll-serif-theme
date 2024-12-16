@@ -6,7 +6,16 @@ categories:
   - javascript
   - nodejs
   - typescript
-description: ""
+description: "tsyringeとnode-cronを組み合わせて、定期的にRSSフィードを取得するバッチ処理を実装し、依存性注入でモジュール化とテスタビリティを高める方法を紹介します。"
+tags:
+  - tsyringe
+  - node-cron
+  - バッチ処理
+  - 依存性注入
+  - RSSフィード
+  - タイマー処理
+  - TypeScript
+  - スケジューラ
 ---
 
 

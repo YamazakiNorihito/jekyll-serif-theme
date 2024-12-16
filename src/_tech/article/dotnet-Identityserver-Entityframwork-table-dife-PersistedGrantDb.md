@@ -1,5 +1,5 @@
 ---
-title: "IdentitySeverのER図PersistedGrantDb編"
+title: "IdentityServerのER図PersistedGrantDb編"
 date: 2023-11-11T07:15:00
 weight: 4
 mermaid: true
@@ -8,7 +8,14 @@ categories:
   - oauth
   - csharp
   - dotnet
-description: ""
+description: "IdentityServerのPersistedGrantDbに関するテーブル定義を紹介。デバイスコード、キー、永続的な認可リクエストなど、重要なテーブル構造を詳解。"
+tags:
+  - IdentityServer
+  - ER図
+  - PersistedGrantDb
+  - OAuth
+  - .NET
+  - C#
 ---
 
 [Table定義](DuendeSoftware/IdentityServer/migrations/IdentityServerDb/Migrations/PersistedGrantDb/PersistedGrantDbContextModelSnapshot.cs)を書き起こしてみた

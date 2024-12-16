@@ -5,7 +5,15 @@ weight: 4
 categories:
   - aws
   - cloud-service
-description: ""
+description: "AWS S3からEC2インスタンスにファイルをダウンロードする方法をIAMロール設定からCloudFormationまでの手順を解説します。"
+tags:
+  - AWS
+  - EC2
+  - S3
+  - ファイルダウンロード
+  - IAMロール
+  - CloudFormation
+  - 自動化
 ---
 
 ## AWS S3からEC2インスタンスへのファイルダウンロードのやり方

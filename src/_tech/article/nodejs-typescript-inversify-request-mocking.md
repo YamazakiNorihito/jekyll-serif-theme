@@ -1,5 +1,4 @@
 ---
-
 title: "Inversifyを使ったユニットテスト: Requestのモック作成"
 date: 2024-4-1T13:04:00
 weight: 4
@@ -7,7 +6,15 @@ categories:
   - javascript
   - nodejs
   - typescript
-description: ""
+description: "Inversifyを使ったユニットテストで、HTTPリクエストのモックを作成し、`BaseHttpController`のプロパティを上書きする方法を解説します。"
+tags:
+  - Inversify
+  - ユニットテスト
+  - Node.js
+  - TypeScript
+  - モック
+  - HTTPリクエスト
+  - Express
 ---
 
 ## InversifyでRequestをモックする

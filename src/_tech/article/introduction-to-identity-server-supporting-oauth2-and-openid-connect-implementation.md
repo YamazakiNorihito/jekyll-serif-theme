@@ -6,7 +6,13 @@ categories:
   - oauth
   - csharp
   - dotnet
-description: ""
+description: "IdentityServerを使用してOAuth 2.0とOpenID Connectの認証を簡単に実装。外部認証プロバイダとの統合方法とリダイレクトURIの設定方法を解説。"
+tags:
+  - OAuth 2.0
+  - OpenID Connect
+  - IdentityServer
+  - External Authentication
+  - Google Authentication
 ---
 
 最近、Duendeのドキュメントで[Add Support for External Authentication](https://docs.duendesoftware.com/identityserver/v6/quickstarts/2_interactive/#add-support-for-external-authentication)セクションを試していて、Googleの認証情報でのOAuth 2.0 クライアント IDの設定部分で困りました。具体的には、承認済みのリダイレクトURIにどの値を設定するべきかがわからなかったのです。

@@ -6,7 +6,15 @@ categories:
   - javascript
   - nodejs
   - typescript
-description: ""
+description: "jest-mock-extendedを使用して、Redisクライアントのモックを作成し、Node.js環境で外部依存関係に依存しないテストを行う方法を解説します。"
+tags:
+  - Redis
+  - モック
+  - Jest
+  - テスト
+  - Node.js
+  - TypeScript
+  - クライアント
 ---
 
 ## redisclientをmockする方法

@@ -6,7 +6,15 @@ categories:
   - javascript
   - nodejs
   - typescript
-description: ""
+description: "TypeScript と Node.js を使った簡単な WebAPI の作成方法を解説。Sequelize と SQLite を使用したデータ管理の基本を学べます。"
+tags:
+  - Node.js
+  - TypeScript
+  - WebAPI
+  - Sequelize
+  - SQLite
+  - 本と著者管理
+  - API設計
 ---
 
 この記事では、TypeScript を使用して Node.js の WebAPI を作成する手順を学びます。

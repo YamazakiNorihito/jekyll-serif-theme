@@ -8,7 +8,13 @@ categories:
   - oauth
   - csharp
   - dotnet
-description: ""
+description: "IdentityResource、ApiResource、ApiScopeの違いと役割について整理。OAuthとIdentityServerのスコープ管理における重要な概念を解説。"
+tags:
+  - OAuth
+  - IdentityServer
+  - ApiResource
+  - ApiScope
+  - IdentityResource
 ---
 
 IdentityResource/ApiResource/ApiScope それぞれの役割がわからなくなったので

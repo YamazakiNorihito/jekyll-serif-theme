@@ -7,7 +7,16 @@ categories:
   - javascript
   - nodejs
   - typescript
-description: ""
+description: "SequelizeのAssociationsを理解するために、HasOne、BelongsTo、HasMany、BelongsToManyの各関係の使い方と設定方法を解説。エラー回避のためのコツも紹介。"
+tags:
+  - Sequelize
+  - Associations
+  - Node.js
+  - TypeScript
+  - データベース設計
+  - モデル関係
+  - OneToMany
+  - ManyToMany
 ---
 
 読んだドキュメントは<https://sequelize.org/docs/v6/core-concepts/assocs/>　です。

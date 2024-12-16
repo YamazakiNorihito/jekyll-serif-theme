@@ -6,7 +6,13 @@ categories:
   - tech
   - csharp
   - dotnet
-description: ""
+description: "ASP.NET CoreでのCookieAuthenticationOptionsのDI設定方法を解説。appsettings.jsonとStartup.csでの設定例を紹介し、クッキー認証を利用したログイン・ログアウト機能の実装も解説。"
+tags:
+  - "ASP.NET Core"
+  - "Cookie Authentication"
+  - "DI"
+  - "認証"
+  - "C#"
 ---
 
 

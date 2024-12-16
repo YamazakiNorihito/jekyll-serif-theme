@@ -6,7 +6,15 @@ categories:
   - javascript
   - nodejs
   - typescript
-description: ""
+description: "Webpackでsharpライブラリをビルドする際のエラーを、node-loaderを使って解決する方法を紹介します。ネイティブモジュールの扱いに関する設定方法も解説。"
+tags:
+  - Webpack
+  - sharp
+  - node-loader
+  - ビルドエラー
+  - Node.js
+  - TypeScript
+  - ネイティブモジュール
 ---
 
 Webpackでビルドをしているのですが、sharpライブラリをinstallしたら突然Buildエラーになった。
