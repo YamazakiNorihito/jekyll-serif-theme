@@ -43,6 +43,9 @@ plugins:
   - jekyll-environment-variables
   - jekyll-sitemap
 
+include:
+  - "e7019bb5a01c4f44a471c9ee4471e030.txt"
+
 exclude:
   - Gemfile
   - Gemfile.lock
