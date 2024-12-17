@@ -1,5 +1,5 @@
 ---
-title: "Best Practices for Deploying Applications on Public or Private Subnets in Amazon ECS"
+title: "Best Practices for Deploying Applications on ECS in Public or Private Subnets"
 date: 2024-11-14T14:57:00
 mermaid: true
 weight: 7

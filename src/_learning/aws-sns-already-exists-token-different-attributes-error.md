@@ -1,5 +1,5 @@
 ---
-title: "Amazon SNS: already exists with the same Token, but different attributes エラーの原因"
+title: "Amazon SNS: Tokenが同じだが属性が異なるエラーの原因"
 date: 2024-09-24T15:35:00
 mermaid: true
 weight: 7
