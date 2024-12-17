@@ -44,7 +44,8 @@ plugins:
   - jekyll-sitemap
 
 include:
-  - "e7019bb5a01c4f44a471c9ee4471e030.txt"
+  - "e7019bb5a01c4f44a471c9ee4471e030.txt" # Bing.com内のIndexNow
+  - "56e32018243445f983c4ea33c7c87109.txt" # Bing Webmaseter Tool
 
 exclude:
   - Gemfile
