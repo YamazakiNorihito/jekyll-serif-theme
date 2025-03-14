@@ -1,6 +1,6 @@
 ---
 title: "MacでUTMを使ってWindows ARM11を簡単にインストールする方法"
-date: 2024-04-12T17:00:00
+date: 2025-03-14T17:00:00
 jobtitle: ""
 linkedinurl: ""
 mermaid: true
