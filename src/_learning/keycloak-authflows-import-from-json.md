@@ -58,7 +58,7 @@ Keycloakでユーザーのログイン体験をカスタマイズするために
 
 以下に、インポート時に使用するJSONファイルのサンプルを示します。
 
-<details><summary>JSONファイルを表示</summary>
+<details markdown="1"><summary>JSONファイルを表示</summary>
 
   ```json
 
