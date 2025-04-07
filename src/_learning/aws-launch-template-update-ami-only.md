@@ -2,7 +2,7 @@
 title: "AWS Launch Templateの設定を引き継いでImageだけ変更する方法"
 date: 2025-03-03T15:00:00
 mermaid: false
-weight: 8
+weight: 7
 tags:
   - AWS
   - EC2
