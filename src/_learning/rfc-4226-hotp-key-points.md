@@ -78,7 +78,7 @@ RFC 4226 - HOTP: An HMAC-Based One-Time Password Algorithmの主要なところ�
 - トランケーション (Truncate) により、 HMAC-SHA-1 の出力（160 ビット）から、特定のビット位置から部分的な値を取り出し、6～8桁の数値として最終的な HOTP 値が生成される。
 - キー (K)、カウンター (C)、データ値はビッグエンディアン（高位バイトから順に）でハッシュされる。
 
-<details>
+<details markdown="1">
 <summary>BigEndian とは？</summary>
 
 BigEndian（ビッグエンディアン） は、数値のバイト列の並び順の一種です。
@@ -207,7 +207,7 @@ func main() {
 
 ```
 
-<details><summary>ビットシフトで 4 バイトを 1 つの 32 ビット整数に結合する例</summary>
+<details markdown="1"><summary>ビットシフトで 4 バイトを 1 つの 32 ビット整数に結合する例</summary>
 
 以下の 4 つのバイト（各 8 ビット）を使って 1 つの 32 ビット整数を作成します。
 

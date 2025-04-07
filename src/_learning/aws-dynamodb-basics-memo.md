@@ -383,7 +383,7 @@ stream recordの有効期間は24時間で、その後自動的に削除され�
     2. これにより、データを適切にパーティション化することでI/Oキャパシティを効率的に利用できる。
     3. スケールするとは、"クエリで利用できる物理パーティションを増やし、そのパーティションにデータを分散させる"こと
 
-<details>
+<details markdown="1">
 
 <summary>DynamoDBのスケーリングとパーティションの動作</summary>
 
@@ -415,7 +415,7 @@ DynamoDBはテーブルに対して物理パーティションを自動で追加
 
 </details>
 
-<details>
+<details markdown="1">
 
 <summary>Data Velocityについての例</summary>
 
@@ -473,7 +473,7 @@ DynamoDBはテーブルに対して物理パーティションを自動で追加
    1. テーブル自体が持つキーとは異なるキーに基づいた効率的なクエリが可能になります。
    2. 非常に高速かつ比較的安価に実行できる
 
-<details>
+<details markdown="1">
 
 <summary>DynamoDBにおける反転インデックスの例</summary>
 

@@ -197,7 +197,7 @@ Androidアプリは、いくつかの基本的なアプリコンポーネント�
 - データは上位スコープから下位スコープへと流れ、イベントは下位スコープからSSOTへと流れます。
 - このパターンにより、データの整合性が保たれ、エラーの可能性が減少し、デバッグが容易になります。
 
-<details>
+<details markdown="1">
 <summary>比喩での説明</summary>
 
 ```txt
@@ -343,7 +343,7 @@ class MainActivity : AppCompatActivity() {
 - **推奨**: 限られたクラスのみAndroidフレームワークSDK APIに依存させ、他のクラスは抽象化を行います。
 - **理由**: これにより、テストが容易になり、アプリ内での結合度が低減します。
 
-<details>
+<details markdown="1">
 <summary>つまり</summary>
 
 ```txt

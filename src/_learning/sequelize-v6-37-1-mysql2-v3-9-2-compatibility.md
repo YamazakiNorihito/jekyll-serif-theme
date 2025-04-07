@@ -67,7 +67,7 @@ SequelizeのBindパラメータを使ってDatetime型をColumn指定でSelect�
 
 #### 早速差分を見ようじゃないか
 
-<details>
+<details markdown="1">
 <summary>executeをつかったコードでLogを出力する</summary>
 
 ```javascript
@@ -107,7 +107,7 @@ SequelizeのBindパラメータを使ってDatetime型をColumn指定でSelect�
 
 </details>
 
-<details>
+<details markdown="1">
 <summary>v3.9のLog</summary>
 
   ```text
@@ -311,7 +311,7 @@ SequelizeのBindパラメータを使ってDatetime型をColumn指定でSelect�
 
 </details>
 
-<details>
+<details markdown="1">
 <summary>v3.8のLog</summary>
 
 ```bash
@@ -558,7 +558,7 @@ callAtの値が`è`と表示されました。
   [ { callAt: Invalid Date } ]
 ```
 
-<details>
+<details markdown="1">
 <summary>debug code</summary>
 
 ```javascript

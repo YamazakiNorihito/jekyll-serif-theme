@@ -51,7 +51,7 @@ index.js
 ## 1. バッチ処理スクリプトの作成
 
 まず、以下の内容を持つ`archive_and_delete.sh`スクリプトを作成します。
-<details><summary>スクリプト</summary>
+<details markdown="1"><summary>スクリプト</summary>
 
 ```bash
 #!/bin/bash

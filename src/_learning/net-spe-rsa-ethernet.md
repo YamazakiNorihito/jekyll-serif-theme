@@ -48,7 +48,7 @@ description: "IEEE802.3規格に基づく物理層の通信技術やツイスト
 | Cat7     | 10 Gbps  | 100 m        | 10GBASE-T、シールドケーブル           | 0.8                   | 600 MHz  |
 | Cat8     | 40 Gbps  | 30 m         | 40GBASE-T、データセンター用           | 0.2                   | 2000 MHz |
 
-<details><summary>1GBデータ転送時間(秒) の計算式</summary><div>
+<details markdown="1"><summary>1GBデータ転送時間(秒) の計算式</summary><div>
 
 ```python
 # まず、各カテゴリの速度（Mbps）をGbpsに変換し、その後1GBファイルを転送するのに必要な時間を計算します。

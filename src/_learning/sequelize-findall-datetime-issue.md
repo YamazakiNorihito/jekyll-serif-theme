@@ -30,7 +30,7 @@ Sequelizeを使用してMySQLに接続しクエリを実行していたところ
 
 1. `Sequelizeの設定変更`: [`dialectOptions`](https://sequelize.org/docs/v6/other-topics/dialect-specific-things/##mysql)に[`debug: true`](https://sidorares.github.io/node-mysql2/docs/examples/connections/create-pool##pooloptions)を設定し、mysql2ライブラリが生成するログを観察しました。
 
-    <details>
+    <details markdown="1">
     <summary>コード</summary>
 
       ```javascript
@@ -55,7 +55,7 @@ Sequelizeを使用してMySQLに接続しクエリを実行していたところ
    1. なんでこの手法を取ったのか
       1. Replacementsは問題なくqueryが実行できたため￥
 
-    <details>
+    <details markdown="1">
     <summary>コード</summary>
 
       ```javascript
@@ -81,7 +81,7 @@ Sequelizeを使用してMySQLに接続しクエリを実行していたところ
     </details>
 
 TextとBinaryの処理における差異が明らかになり、特にBinaryRowでDateTime型のデータを扱う際に問題が発生していることがわかりました。
-<details>
+<details markdown="1">
 <summary>Log</summary>
 
   ```javascript
@@ -136,7 +136,7 @@ Mysql2に不具合があるとは思っておらず、sequelizeに不具合が�
 
 #### [model.js findAll(options)](https://github.com/sequelize/sequelize/blob/48181ced0e94577f19ed838b29a953602e631888/packages/core/src/model.js##L1343)
 
-<details>
+<details markdown="1">
 <summary>コード</summary>
 
 ```javascript
@@ -301,7 +301,7 @@ static async findAll(options) {
 
 #### [query-interface.js select(model, tableName, optionsArg)](https://github.com/sequelize/sequelize/blob/8b1f73ade0251a9ff5a9f76ddbc77dfe75003335/packages/core/src/dialects/abstract/query-interface.js##L566-L567)
 
-<details>
+<details markdown="1">
 <summary>コード</summary>
 
 ```javascript
@@ -350,7 +350,7 @@ static async findAll(options) {
 
 #### [sequelize.js queryRaw(sql, options)](https://github.com/sequelize/sequelize/blob/8b1f73ade0251a9ff5a9f76ddbc77dfe75003335/packages/core/src/sequelize.js##L638-L639)
 
-<details>
+<details markdown="1">
 <summary>コード</summary>
 
 ```javascript
@@ -426,7 +426,7 @@ static async findAll(options) {
 
 - [MysqlDialect](https://github.com/sequelize/sequelize/blob/abca55ee52d959f95c98dc7ae8b8162005536d05/packages/core/src/dialects/mysql/index.ts##L17-L18)
 
-<details>
+<details markdown="1">
 <summary>コード</summary>
 
 ```javascript
@@ -464,7 +464,7 @@ export function mapBindParameters(
 
 #### [mysql/query.js run(sql, parameters)](https://github.com/sequelize/sequelize/blob/8b1f73ade0251a9ff5a9f76ddbc77dfe75003335/packages/core/src/dialects/mysql/query.js##L26-L27)
 
-<details>
+<details markdown="1">
 <summary>コード</summary>
 
 ```javascript
@@ -532,7 +532,7 @@ export function mapBindParameters(
 
 #### [mysql connection-manager.ts connect(config: ConnectionOptions): Promise<MySqlConnection>](https://github.com/sequelize/sequelize/blob/8b1f73ade0251a9ff5a9f76ddbc77dfe75003335/packages/core/src/dialects/mysql/connection-manager.ts##L74-L75)
 
-<details>
+<details markdown="1">
 <summary>コード</summary>
 
 ```javascript

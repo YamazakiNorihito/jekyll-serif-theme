@@ -91,7 +91,7 @@ launch.jsonでは、デバッグセッションの設定を行います。Nodemo
 }
 ```
 
-<details>
+<details markdown="1">
 <summary>*launch.json*</summary>
 
 ```json
@@ -127,7 +127,7 @@ launch.jsonでは、デバッグセッションの設定を行います。Nodemo
 
 </details>
 
-<details>
+<details markdown="1">
 
 <summary>launch.json</summary>
 
@@ -163,7 +163,7 @@ launch.jsonでは、デバッグセッションの設定を行います。Nodemo
 
 </details>
 
-<details>
+<details markdown="1">
 
 <summary>package.json</summary>
 

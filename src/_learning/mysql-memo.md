@@ -149,7 +149,7 @@ Error Code: 3675. Create table/tablespace 'states' failed, as disk is full
 
   2. 使用率が高いファイルシステムの特定<参考サイト　[CentOS ディスク容量不足の原因調査＆MySQLのバイナリログ自動削除設定](https://qiita.com/myzkyy/items/53e985cf028e3c3edfe5)>
 
-      <details><summary>実際の調査コマンド</summary>
+      <details markdown="1"><summary>実際の調査コマンド</summary>
 
         ```bash
             bash-4.4## du -sh /*
