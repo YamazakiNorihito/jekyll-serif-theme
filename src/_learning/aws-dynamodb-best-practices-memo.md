@@ -7,21 +7,88 @@ tags:
   - AWS
   - DynamoDB
   - NoSQL
-description: "自分用のメモとして、DynamoDBのコアコンポーネント（テーブル、アイテム、属性）、プライマリキー、セカンダリindex、DynamoDB Streamsについて整理。設計に役立つベストプラクティスも含む"
+description: "自分用のメモとして、DynamoDBのBestプラクティスを書き留める"
 ---
 
 # Amazon DynamoDBのBest practicesのメモ
 
-## [Partition key design](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-partition-key-design.html)
+## [NoSQL design](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-general-nosql-design.html)
+
+### RDBMS と NoSQL（DynamoDB）の違い
+
+| 項目       | RDBMS                                                | NoSQL（DynamoDB）                                                                 |
+|------------|------------------------------------------------------|-----------------------------------------------------------------------------------|
+| 強み       | - クエリが柔軟（JOIN・複雑な条件に対応）             | - 限られた方法でのクエリは高速・低コスト                                        |
+| 弱み       | - クエリコストが高い<br>- 高トラフィックに弱い       | - クエリ方法が限られる<br>- それ以外の方法はコストが高く遅い   <br>- リレーション（JOIN）を使えません                 |
+| 設計方針   | - 実装や内部構造をあまり意識せず設計できる<br>- クエリ最適化はスキーマに大きな影響を与えない<br>- 正規化が重要 | - よく使うクエリを高速・低コストにするための設計が必要<br>- アクセスパターンに最適化した設計が必要 |
+
+### NoSQLを設計する上で２つの考え
+
+1. まず何を解決したいか（ビジネス課題やユースケース）をはっきりさせてから、DynamoDBのスキーマ（データ構造）を設計するべき。
+   1. 理由は、RDBMS と NoSQL（DynamoDB）の違いのデメリット
+2. 使用するテーブルの数はなるべく少なくする
+   1. そのほうがスケーラブル（拡張しやすく）、
+   2. 権限の管理も楽で、
+   3. 運用の負担が減るし、
+   4. バックアップコストも安くなる。
+
+### Approaching NoSQL design
+
+**STEP 1: クエリパターンを定義する**
+
+特に理解しておくべきアクセスパターンの3つの特性
+
+- Data size
+  - 1回のリクエストで「どのくらいの量のデータを書き込むか・読み込むか」を把握しておくこと
+- Data shape
+  - 「後で整える」のではなく「最初から整えて保存」
+    - RDBMSのように、クエリのたびに JOIN などでデータを集めて整形するのではなく
+      - NoSQL では、あらかじめ「そのクエリで必要になるデータ」を一つのアイテムにまとめて保存しておく
+- Data velocity（データアクセス頻度）
+  - アクセスの偏り（≒velocityのピーク）をあらかじめ予測して設計
+    - 単位時間(秒・分・時間単位)でどの操作どの操作が、いつ、どれくらいの頻度で行われるのか
+      - 例：1秒間にGetItemが1000回
+      - 例：毎分100回の書き込み
+      - 例：夜9時〜10時だけ急にアクセスが集中する
+    - アクセスが偏るキーはどれか
+      - 同じキーにばかりアクセスが集中しないか？
+        - 例：みんな userId = "admin" にアクセスしている
+        - 例：timestamp = "2025-04-01" だけにアクセスしてる
+
+**STEP 2: 一般原則に従ってデータを整理する**
+
+- Keep related data together
+  - 'locality of reference'の原則に従う
+    - 関連するデータは同じパーティションにまとめて保存する（DynamoDBのPartition Key設計）
+  - DynamoDBの一般的な設計ルール
+    - テーブルはできる限り1つにまとめるのが理想
+      - 単一テーブル設計では、inverted indexes（GSI/LSI）を活用して、様々なアクセスパターンに対応できる
+      - 例外もある
+        - 時系列データ
+        - アクセスパターンが大きく異なるデータ
+- Use sort order
+  - 関連するデータは同じパーティションにまとめてあり、sort key によって自動で並べられている
+  - クエリ時に順序の指定が不要なので効率が良い
+  - また、sort key は範囲検索などに使えるので、アクセスパターンに合わせて活用する
+- Distribute queries
+  - クエリが特定のパーティションキーに集中すると、I/O 制限に引っかかりパフォーマンスが低下する（ホットスポットになる）
+  - そのため、パーティションキーの設計によってアクセスをできるだけ分散させる必要がある
+  - ランダム性や日付＋識別子などを組み合わせて、複数パーティションに均等に分散するよう工夫する
+- Use global secondary indexes
+  - メインテーブルのキー構造だけでは対応できないクエリがある場合、GSIを使って別の視点からアクセスできるようにする
+  - GSIは独自のパーティションキー・ソートキーを持ち、異なるアクセスパターンに対応できる
+  - GSIを活用すれば、複数の効率的なクエリを実現しつつ、パフォーマンスとコストも抑えられる
+
+### [Partition key design](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-partition-key-design.html)
 
 - 読み取りコストの基準は **4 KB/RCU**、書き込みコストの基準は **1 KB/WCU**。
 - 各パーティションは最大 **3,000 RCU/秒** を処理できる。
 - 各パーティションは最大 **1,000 WCU/秒** を処理できる。
-- **強い整合性** で 4 KB までのアイテム 1 件を読むと **1 RCU** 消費する。
-- **結果整合性** で 4 KB までのアイテム 1 件を読むと **0.5 RCU**（課金は切り上げ）を消費する。つまり **1 RCU** で 2 件まで読める。
-- アイテムサイズが **20 KB** の場合、1 つの強い整合性 read で **5 RCU** を消費する。
+- **強い整合性** で 4 KB までのitem 1 件を読むと **1 RCU** 消費する。
+- **結果整合性** で 4 KB までのitem 1 件を読むと **0.5 RCU**（課金は切り上げ）を消費する。つまり **1 RCU** で 2 件まで読める。
+- itemサイズが **20 KB** の場合、1 つの強い整合性 read で **5 RCU** を消費する。
 - パーティションあたりの最大スループットが **3,000 RCU/秒** なので、1 パーティションにおいて **同時に 600 回の read オペレーション**（= 3000 / 5）が可能。
-- 読み取りスループットはアイテムサイズに比例して RCU を多く消費するため、**大きなアイテムはスループット制限を早く使い切る**。
+- 読み取りスループットはitemサイズに比例して RCU を多く消費するため、**大きなitemはスループット制限を早く使い切る**。
 - DynamoDB のスループットには「テーブルレベルの制限」がある。([ServiceQuotas#Read/write throughput](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ServiceQuotas.html#default-limits-throughput-capacity-modes))
   - **Provisioned モード**では、以下の2つの制限がある：
     - **Per table クォータ**：1つのテーブルで使用できる最大 RCU/WCU（例：40,000）
@@ -34,7 +101,7 @@ description: "自分用のメモとして、DynamoDBのコアコンポーネン�
 ### [Distributing workloads](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-partition-key-uniform-load.html)
 
 - "hot" partitionsとは  
-  - 並列で1つのパーティションに複数のアイテムを書き込むと、そのパーティションに割り当てられたWCU（Write Capacity Unit）を超えてスロットリングされる。
+  - 並列で1つのパーティションに複数のitemを書き込むと、そのパーティションに割り当てられたWCU（Write Capacity Unit）を超えてスロットリングされる。
     - 超えた分は ProvisionedThroughputExceededException となり、アプリ側でのリトライが必要
     - スロットリングされたリクエストはWCUを消費しない
   - 特定のパーティションに集中すると、I/Oのレイテンシーが上がり、全体として非効率になる。
@@ -161,7 +228,7 @@ Itemの更新履歴（バージョン）を保持しつつ、最新バージョ�
 
 ##### 動作の流れ
 
-1. `v0_` アイテムに、最新バージョンの Sort Key や ID を記録する。
+1. `v0_` itemに、最新バージョンの Sort Key や ID を記録する。
 2. 実際のデータは `v1_`, `v2_` などに格納。
 3. 最新データを取得するには、`v0_` を読み、指定された Sort Key を参照して取得。
 
@@ -176,7 +243,7 @@ Itemの更新履歴（バージョン）を保持しつつ、最新バージョ�
 - Local secondary index (LSI)
   - 元のテーブルと同じ partition key を持ち、sort key のみ異なる定義ができる
   - “local” とは、indexが元のテーブルのパーティション（同じ partition key を持つ範囲）に限定されていることを意味する
-  - 1つの partition key に対して、ベーステーブルおよびすべての LSI のindex対象アイテムの合計サイズが 10GB を超えてはならない
+  - 1つの partition key に対して、ベーステーブルおよびすべての LSI のindex対象itemの合計サイズが 10GB を超えてはならない
   - Provisioned throughput settings はベーステーブルと共有される
   - 1つのテーブルにつき最大 5 個まで作成できる
 
@@ -256,9 +323,9 @@ Itemの更新履歴（バージョン）を保持しつつ、最新バージョ�
 - sparse index（スパースindex） とは：
 
 DynamoDB のSecondary indexにおいて、
-Partition Key や Sort Key が一部のアイテムにしか存在しない場合に構成されるindexのことです。
+Partition Key や Sort Key が一部のitemにしか存在しない場合に構成されるindexのことです。
 
-DynamoDB は、index定義に使われるキーがアイテムに存在する場合にのみ、indexにエントリを書き込みます。
+DynamoDB は、index定義に使われるキーがitemに存在する場合にのみ、indexにエントリを書き込みます。
 
 <details markdown="1">
 <summary>例：注文管理システム（Open Orders の抽出）</summary>
@@ -272,7 +339,7 @@ DynamoDB は、index定義に使われるキーがアイテムに存在する場
 | C002       | O003    | Shipped    | ❌     | 2025-03-10  |
 | C002       | O004    | Pending    | ✅     | 2025-04-11  |
 
-- `isOpen` が **存在するアイテム = 未発送（開いている）注文**
+- `isOpen` が **存在するitem = 未発送（開いている）注文**
 
 ---
 
@@ -298,7 +365,7 @@ DynamoDB Streams + Lambda を使ってデータの変化を検知・集計し、
    → テーブルに対する書き込み操作をトリガーとしてストリームにイベントが送られる
 2. Lambda 関数が実行され、集計対象データを処理  
    → イベントごとに Lambda が起動して、例えばダウンロード数などを集計
-3. 集計結果を別のアイテムとして DynamoDB に書き込み  
+3. 集計結果を別のitemとして DynamoDB に書き込み  
    → songIDごと・月ごとのような形式で保存する
 4. 必要なクエリ用にスパースな Global Secondary Index (GSI) を作成  
    → 集計結果のみにインデックスが作られ、無駄なデータを含まないため効率的
@@ -312,3 +379,116 @@ DynamoDB Streams + Lambda を使ってデータの変化を検知・集計し、
 DynamoDBで グローバルセカンダリーインデックス（GSI）を利用して、元のテーブルと同じキー定義・同じ属性をすべて（ALL）投影（project）することにより、元のテーブルの「レプリカのような役割」を持つ別テーブルが作成できる。
 
 ただし、この方法で作成されたGSIは eventually consistent（結果整合性） であるため、ベーステーブルへの書き込みが即時に反映されるわけではありません。常に短い遅延がある点に注意が必要。
+
+## [Large items](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-use-s3-too.html)
+
+今の所扱う予定ないので読まない
+
+## [Time series data](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-time-series.html)
+
+今の所扱う予定ないので読まない
+
+## [Many-to-many relationships](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-adjacency-graphs.html)
+
+今の所扱う予定ないので読まない
+
+## [Querying and scanning](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-query-scan.html)
+
+---
+
+### データ取得の4つの方法
+
+1. [ExecuteStatement](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ExecuteStatement.html) or [BatchExecuteStatement](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_BatchExecuteStatement.html)
+   1. どちらも PartiQL（SQLライクな言語）を使って DynamoDB を操作する。
+   2. BatchExecuteStatement は複数のステートメントを一括で実行できる。
+   3. ExecuteStatement は単一のステートメントのみ実行可能。
+2. [GetItem](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_GetItem.html) or [BatchGetItem](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_BatchGetItem.html)
+   1. どちらも Primary Keyを指定して、itemに直接アクセスする方式で、非常に効率的。
+   2. BatchGetItem は複数のitem（最大100件）を一括取得できる。
+   3. GetItem は単一のitemを取得する。
+3. [Query](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Query.html)
+   1. 指定した Partition Key に一致するすべてのitemを取得する。
+   2. Sort Key に条件（Condition）を指定することで、その条件に一致する一部のitem（subset）だけを絞り込んで取得できる。
+4. [Scan](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Scan.html)
+   1. テーブル内すべてのitemを取得する。
+
+---
+
+### Scan の注意点
+
+Scanはテーブルまたはインデックス全体を順に読み取るため、DynamoDBの中で最も非効率な読み取り操作です。
+特に、対象のデータがテーブルの一部でしかない場合でも全アイテムを検査するため、スループットやレイテンシへの影響が大きくなります。
+また、`filters`処理は、Table全体をScanに対してさらに対象外の値を取り除くという余計なStepが発生します。
+
+---
+
+### PartiQL（SQLライクな言語） の注意点
+
+SELECT 文は、条件によっては Scan（全件スキャン）として実行される可能性があります。
+公式ドキュメント：[PartiQL select statements for DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ql-reference.select.html?utm_source=chatgpt.com)
+
+WHERE 句で Partition Key を使わずに、他の属性に対して = や IN を使った場合、DynamoDB は内部的に Scan を実行します。
+
+急なスパイクを回避するためにread and write capacity unit は設定すべき。
+
+---
+
+### `Scan`のパフォーマンス影響を抑えるテクニック
+
+1. ページサイズを減らす
+   1. Limit パラメータを使って 1 回の Query / Scan リクエストで取得するアイテム数（ページサイズ）を減らせる。
+   2. 小さなリクエストが分散されるため、リクエスト間に「間（pause）」ができてスロットリングのリスクが下がる。
+2. Scan用の独立したTableを使う
+   1. a "mission-critical" table, and a "shadow" table.の2つを作成する。
+      1. アプリケーションは両方のテーブルに同じデータを書き込むことで、整合性を保ちつつ、スキャンの負荷を本番トラフィックから切り離す。
+   2. スキャン処理はシャドウテーブル上で行うことで、"mission-critical" tableのパフォーマンスに影響を与えない。
+
+### スパイク対策：Exponential Backoff の導入
+
+たまに、ワークロードの一時的なスパイクによって provisioned throughput を超えてレスポンスコードが返されることがあります。
+そのような場合に備えて、アプリケーション側では exponential backoff（指数バックオフ） を用いた リトライ処理 を実装しておくと良いでしょう。
+
+詳細は公式ガイドへ →
+[Error retries and exponential backoffの実装情報](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.Errors.html#Programming.Errors.RetryAndBackoff)
+
+### parallel scanを使う条件
+
+1. 20GB以上のテーブル
+2. プロビジョンドのリードスループットがフルに使われていない
+3. Sequential Scan（直列スキャン）が遅すぎる
+
+[並列Scan](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/Scan.html#Scan.ParallelScan)するときのTotalSegmentsの値の決め方
+**TotalSegments** は、DynamoDBのテーブル全体をいくつの部分（セグメント）に分けて並列スキャンするかを決める数。
+
+- クライアント側の**同時実行できるスレッド数**などのリソース状況に応じて、TotalSegments を調整する。  
+- 調整の目安：  
+  - スループット余ってるのにスキャンが遅い → TotalSegments を**増やす**  
+  - スループット使いすぎて他に影響出る → TotalSegments を**減らす**  
+
+## [Global table design](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-global-table-design.html)
+
+そこまで頭が回らないので読まない
+
+## [Control plane](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-control-plane.html)
+
+今の所扱う予定ないので読まない
+
+## Bulk data operations
+
+今の所扱う予定ないので読まない
+
+## [Implementing version control](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/BestPractices_ImplementingVersionControl.html)
+
+今の所扱う予定ないので読まない
+
+## [Billing and Usage Reports](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-understanding-billing.html)
+
+そこまで頭が回らないので読まない
+
+## [Migrating a DynamoDB table from one account to another](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-migrating-table-between-accounts.html)
+
+今の所扱う予定ないので読まない
+
+## [DAX prescriptive guidance](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/dax-prescriptive-guidance.html)
+
+今の所扱う予定ないので読まない
