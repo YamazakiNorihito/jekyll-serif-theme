@@ -1,6 +1,6 @@
 ---
 title: "AWS SNS 配信ステータスログの設定手順【初心者向け完全ガイド】"
-date: 2024-09-24T15:35:00
+date: 2025-05-24T15:35:00
 mermaid: true
 weight: 7
 tags:
