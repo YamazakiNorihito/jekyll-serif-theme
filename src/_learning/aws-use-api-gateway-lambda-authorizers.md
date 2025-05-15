@@ -1,16 +1,18 @@
 ---
-title: "Amazon SNS モバイルプッシュ通知設定とトラブル対処メモ"
+title: "AWS API Gateway Lambda Authorizer 実践メモ：仕組み・構成・ベストプラクティス"
 date: 2025-05-24T15:35:00
 mermaid: true
 weight: 7
 tags:
   - AWS
-  - SNS
-  - エラー対処
-  - デバイストークン
-  - GoLang
-  - モバイル通知
-description: "仕事で必要になったため読んだ Amazon SNS のモバイルプッシュ通知関連ドキュメントの要点まとめ。通知フロー、エンドポイント管理、エラー対応などを実装例や推奨事項とともに整理。"
+  - APIGateway
+  - Lambda
+  - CustomAuthorizer
+  - JWT
+  - IAM
+  - ServerlessSecurity
+  - Authorization
+description: "AWS API Gateway の Lambda Authorizer について、自分の理解を深めるためにドキュメントを精読し、実装・構成・挙動・ベストプラクティスを整理。"
 ---
 
 
@@ -104,3 +106,140 @@ Action は "execute-api:Invoke" を指定する。
 ```
 
 optionで`context`にたいを設定すると後続のlambdaで伝播できる。
+
+## AWSから提供されているサンプルコード
+
+1. サンプルアプリケーション
+   1. API GatewayとFAPI準拠の外部OIDCプロバイダー、およびLambdaオーソライザーを使って、APIアクセスを保護・認可する方法をデモンストレーション
+   2. [Open Banking Brazil - Authorization Samples](https://github.com/aws-samples/openbanking-brazilian-auth-samples)
+2. Custom Authorizer Blueprints
+   1. [aws-apigateway-lambda-authorizer-blueprints](https://github.com/awslabs/aws-apigateway-lambda-authorizer-blueprints)
+
+## Configure an API Gateway Lambda authorizer
+
+設定手順については、[公式ドキュメント](https://docs.aws.amazon.com/apigateway/latest/developerguide/configure-api-gateway-lambda-authorization.html)を参照してください。
+
+注意：Lambda関数に対する実行権限（Permission）と、API Gatewayのエンドポイントに対するAuthorizerの設定を忘れずに行ってください。
+詳しくは[こちら](https://docs.aws.amazon.com/apigateway/latest/developerguide/configure-api-gateway-lambda-authorization.html#configure-api-gateway-lambda-authorization-method-cli)を参照してください。
+
+## [Input to an API Gateway Lambda authorizer](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-lambda-authorizer-input.html)
+
+`TOKEN`と`REQUEST`　authorizer　それぞれで、eventのinput formatのがそれぞれ異なる
+
+### `TOKEN`
+
+```json
+{
+    "type":"TOKEN",
+    "authorizationToken":"{caller-supplied-token}",
+    "methodArn":"arn:aws:execute-api:{regionId}:{accountId}:{apiId}/{stage}/{httpVerb}/[{resource}/[{child-resources}]]"
+}
+```
+
+### `REQUEST`
+
+```json
+{
+  "type": "REQUEST",
+  "methodArn": "arn:aws:execute-api:us-east-1:123456789012:abcdef123/test/GET/request",
+  "resource": "/request",
+  "path": "/request",
+  "httpMethod": "GET",
+  "headers": {
+    "X-AMZ-Date": "20170718T062915Z",
+    "Accept": "*/*",
+    "HeaderAuth1": "headerValue1",
+    "CloudFront-Viewer-Country": "US",
+    "CloudFront-Forwarded-Proto": "https",
+    "CloudFront-Is-Tablet-Viewer": "false",
+    "CloudFront-Is-Mobile-Viewer": "false",
+    "User-Agent": "..."
+  },
+  "queryStringParameters": {
+    "QueryString1": "queryValue1"
+  },
+  "pathParameters": {},
+  "stageVariables": {
+    "StageVar1": "stageValue1"
+  },
+  "requestContext": {
+    "path": "/request",
+    "accountId": "123456789012",
+    "resourceId": "05c7jb",
+    "stage": "test",
+    "requestId": "...",
+    "identity": {
+      "apiKey": "...",
+      "sourceIp": "...",
+      "clientCert": {
+        "clientCertPem": "CERT_CONTENT",
+        "subjectDN": "www.example.com",
+        "issuerDN": "Example issuer",
+        "serialNumber": "a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1",
+        "validity": {
+          "notBefore": "May 28 12:30:02 2019 GMT",
+          "notAfter": "Aug  5 09:36:04 2021 GMT"
+        }
+      }
+    },
+    "resourcePath": "/request",
+    "httpMethod": "GET",
+    "apiId": "abcdef123"
+  }
+}
+```
+
+## [Output from an API Gateway Lambda Authorizer](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-lambda-authorizer-output.html)
+
+Lambda authorizerの出力は、`principalId`と`policyDocument`を含むJSON形式で返す必要がある。
+
+1. principalId
+
+   1. principal identifier
+2. policyDocument
+
+   1. policy document
+   2. policy statementsは配列
+
+sample
+
+```json
+{
+  "principalId": "yyyyyyyy", // The principal user identification associated with the token sent by the client.
+  "policyDocument": {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Action": "execute-api:Invoke",
+        "Effect": "Allow|Deny",
+        "Resource": "arn:aws:execute-api:{regionId}:{accountId}:{apiId}/{stage}/{httpVerb}/[{resource}/[{child-resources}]]"
+      }
+    ]
+  },
+  "context": {
+    "stringKey": "value",
+    "numberKey": "1",
+    "booleanKey": "true"
+  },
+  "usageIdentifierKey": "{api-key}"
+}
+```
+
+`context`は任意の文字列Key-Valueペアを指定でき、後続のLambdaに伝播される。オブジェクトや配列は使用不可。
+Lambdaでは`$event.requestContext.authorizer.{key}`で参照可能（例: `stringKey` → "value"）。
+
+`usageIdentifierKey`は[Usage Plans](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html)を用いる際、対象ユーザーのAPI Keyを指定する。
+
+`Resource`の長さは最大1600バイト。超過するとクライアントに`414 Request URI too long`が返る。これは実行時にのみ判定され、デプロイ前の検出は不可。
+
+## Call an API with an API Gateway Lambda authorizer
+
+確認手順については、[公式ドキュメント](https://docs.aws.amazon.com/apigateway/latest/developerguide/call-api-with-api-gateway-lambda-authorization.html)を参照してください。
+
+## [Configure a cross-account API Gateway Lambda authorizer](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-lambda-authorizer-cross-account-lambda-authorizer.html)
+
+今のところやる予定ないから[Skip](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-lambda-authorizer-cross-account-lambda-authorizer.html)
+
+## [Control access based on an identity’s attributes with Verified Permissions](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-lambda-authorizer-verified-permissions.html)
+
+[What is Amazon Verified Permissions?](https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/what-is-avp.html)から始めないとようわからん、今度のTODOとしておく
