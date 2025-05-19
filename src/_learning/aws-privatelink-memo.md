@@ -36,7 +36,7 @@ AWS の VPC には、以下の 2 種類のサービスがあります：
    Service Providers が、サービスコンシューマに向けて提供するものです。
 
 2. **VPC エンドポイント (VPC Endpoints)**  
-   サービスコンシューマが、Service Providers の提供するサービスに接続するために使用します。VPC エンドポイントには、以下の 3 つの種類があります。
+   サービスコンシューマが、Service Providers の提供するサービスに接続するために使用します。
 
 ## Endpoint Services
 
