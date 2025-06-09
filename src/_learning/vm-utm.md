@@ -1,3 +1,22 @@
+---
+title: "MacでUTMを使ってUbuntu仮想マシンを構築する方法【初心者向け完全ガイド】"
+date: 2023-10-25T06:14:00
+#image: "images/team/nonsap-visuals-kMJp7620W6U-unsplash.jpg"
+jobtitle: ""
+linkedinurl: ""
+weight: 7
+tags:
+  - Mac
+  - Ubuntu
+  - 仮想マシン
+  - UTM
+  - Linuxインストール
+  - MacでLinux
+  - 初心者向け
+  - 技術解説
+description: "Macユーザー向けに、UTMを使ってUbuntuの仮想マシンを構築する方法をわかりやすく解説します。ISOの取得から仮想マシンの設定、インストール後の作業まで、初心者にも安心のステップバイステップガイドです。"
+---
+
 
 ## UT インストール
 
