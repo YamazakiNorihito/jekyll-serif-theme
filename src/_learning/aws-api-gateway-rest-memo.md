@@ -1,6 +1,6 @@
 ---
-title: ""
-date: 2024-8-23T07:00:00
+title: "API Gateway REST APIsのメモ"
+date: 2025-6-9T07:00:00
 jobtitle: ""
 linkedinurl: ""
 mermaid: true
