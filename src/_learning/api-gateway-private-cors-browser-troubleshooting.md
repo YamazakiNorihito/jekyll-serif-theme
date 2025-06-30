@@ -1,16 +1,16 @@
 ---
 title: "ブラウザからAPI Gateway（Private）へリクエスト時のCORSとHostヘッダ制約の対処法"
 date: 2025-6-13T10:00:00
-linkedinurl: ""
+mermaid: true
 weight: 7
 tags:
-* AWS
-* API Gateway
-* CORS
-* VPC
-* ALB
-* PrivateLink
-* Direct Connect
+  - AWS
+  - API Gateway
+  - CORS
+  - VPC
+  - ALB
+  - PrivateLink
+  - Direct Connect
 description: "AWS環境でPrivate API Gatewayを利用する際に直面するCORSとHostヘッダ制約の問題とその対処法について解説します。モバイルとブラウザクライアント両対応の構成例を紹介。"
 ---
 
