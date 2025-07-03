@@ -349,3 +349,63 @@ invoke phaseは最大１５分まで実行できるけど、Lambdaは1秒以下i
   - 他のサービスを1つのFunction内でそれぞれ呼ぶこと
     - 例えば、S3へのPutとDynamoDBへのWrite処理
       - 「S3への書き込みとDynamoDBへの書き込みを分離する」というアーキテクチャは、処理が完全に独立している場合にのみ有効な理想論な気がする
+
+----
+
+- [Best practices for working with AWS Lambda functions](https://docs.aws.amazon.com/lambda/latest/dg/best-practices.html)
+- [Code best practices for Go Lambda functions](https://docs.aws.amazon.com/lambda/latest/dg/golang-handler.html#go-best-practices)
+
+### [Reuse connections with keep-alive](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/node-reusing-connections.html)
+
+- TCPコネクションを再利用（keep-alive）することで、毎回の新規接続にかかるコスト（latency, CPU）を削減できる。
+- 毎回新しくTCPコネクションを張るのはオーバーヘッドが大きく、レイテンシ悪化の原因になる。
+- しかし、AWS Lambdaはアイドル状態のときにコネクションを自動でクローズするため、再利用前提でコードを書いていると例外が発生することがある。
+- そのため、明示的にkeep-alive有効のHTTPエージェントを設定する必要がある。
+
+```js
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { NodeHttpHandler } from "@smithy/node-http-handler";
+import { Agent } from "https";
+
+const dynamodbClient = new DynamoDBClient({
+    requestHandler: new NodeHttpHandler({
+        httpsAgent: new Agent({ keepAlive: true })
+    })
+});
+```
+
+### Performance testing your Lambda function
+
+cloudwatchでfunctionが使用したmemoryを確認できる。`Max Memory Used`
+
+```bash
+REPORT RequestId: 3604209a-e9a3-11e6-939a-754dd98c7be3 Duration: 12.34 ms Billed Duration: 100 ms Memory Size: 128 MB Max Memory Used: 18 MB
+```
+
+### Be familiar with Lambda quotas
+
+1. 実行時間（Execution Timeout）
+   - 最大 15 分（900 秒）/ 1 回の関数実行
+2. メモリ（Memory）
+   - 最小: 128 MB
+   - 最大: 10,240 MB（10 GB）
+3. ペイロードサイズ（Payload Size）
+   - 同期リクエスト／レスポンス：各 6 MB
+   - ストリームレスポンス：最大 20 MB
+   - 非同期呼び出し：256 KB
+   - リクエスト行 + ヘッダー：合計 1 MB
+4. ファイルディスクリプタ（File Descriptors）
+   - OSがファイル・ソケットを識別するための番号
+   - Lambda 実行環境では 1 プロセスあたり最大 1,024 個
+5. /tmp ストレージ
+   - 最低 512 MB、最大 10,240 MB（10 GB）
+
+公式ドキュメントリンク
+
+- [Compute and storage](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html#compute-and-storage)
+- [Function configuration and execution](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html#function-configuration-deployment-and-execution)
+- [Lambda API requests](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html#api-requests)
+
+### If you are using Amazon Simple Queue Service
+
+SQS をイベントソースとして使う場合は、Lambda の実行時間（Timeout）が SQS の Visibility Timeout を超えないように設定してね」
