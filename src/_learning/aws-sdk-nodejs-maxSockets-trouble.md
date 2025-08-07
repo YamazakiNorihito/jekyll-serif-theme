@@ -1,13 +1,17 @@
 ---
-title: ""
+title: "Node.jsのmaxSockets設定によるAPI障害の学び"
 date: 2025-8-07T09:44:00
 weight: 7
 tags:
   - AWS
-description: ""
+  - Node.js
+  - SDK
+  - パフォーマンスチューニング
+  - トラブルシューティング
+description: "AWS SDK for JavaScriptにおけるmaxSocketsの見落としにより発生したAPI障害とその対処法についての学びを共有します。"
 ---
 
-Node.jsのmaxSockets設定を見落としていたことで、APIの応答が止まるというトラブルを経験しました。
+[Node.jsのmaxSockets](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/node-configuring-maxsockets.html)設定を見落としていたことで、APIの応答が止まるというトラブルを経験しました。
 
 AWS SDK for JavaScriptを用いてAWSリソースへHTTPアクセスする際には、接続数上限であるmaxSocketsの設定が可能です。
 デフォルトは50となっており、負荷やアクセスパターンに応じて適切な値へ調整することが重要です。
