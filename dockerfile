@@ -1,17 +1,15 @@
 # Dockerfile
-# 基本イメージを選択
-FROM jekyll/jekyll:3.8.0
+FROM ruby:3.2-slim
 
-# 作業ディレクトリを設定
+# ビルドに必要なパッケージをインストール
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /srv/jekyll
 
-# Gemfileをコピー（Gemfile.lockはオプショナル）
-COPY ./src/Gemfile /srv/jekyll/
-
-RUN gem install jekyll-coffeescript
-
-# バンドルインストールを実行
+# Gemfileをコピーしてバンドルインストール
+COPY ./src/Gemfile ./src/Gemfile.lock* /srv/jekyll/
 RUN bundle install
 
-# 他のすべてのファイルとディレクトリをコピー
-COPY . /srv/jekyll
+EXPOSE 4000

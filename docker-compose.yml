@@ -1,11 +1,12 @@
 # docker-compose.yml
-version: '3.9'
 services:
   jekyll:
     build: .
-    command: >
-      bash -c "bundle exec jekyll serve --host 0.0.0.0 --force_polling --trace"
+    command: bundle exec jekyll serve --host 0.0.0.0 --force_polling --trace
     ports:
       - "4030:4000"
     volumes:
       - "./src:/srv/jekyll"
+      - bundle_cache:/usr/local/bundle
+volumes:
+  bundle_cache:
